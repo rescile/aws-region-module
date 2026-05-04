@@ -1,17 +1,16 @@
 # This model represents a third tier model of a cloud domain and defines routers where provider resources become accessible.
 # Specify the resource dependency for a router
-origin_resource = "platform"
+origin_resource = "region"
 
 # Create the resource type
 [[create_resource]]
-match_on = [ { property = "function", not = "internet" } ]
 resource_type = "router"
-name = "{{- origin_resource.name -}}_router"
+name = "{{- provider | lower -}}_{{- origin_resource.function | lower -}}_router"
 relation_type = "CONNECTS_TO"
 [create_resource.properties]
-function = "{{- origin_resource.site -}}"
+function = "cloud"
 domain = "{{- origin_resource.function -}}"
 operator = "{{- provider | lower -}}"
 network = [ "transit", "management" ]
-description = "The {{ origin_resource.function }} router is a network function, operated by {{ provider }}, that analyzes incoming data packets, determines the best path for them to travel across interconnected networks, and forwards them toward their intended destination."
+description = "The cloud router in {{ origin_resource.function | capitalize }} is a network function, operated by {{ provider }}, that analyzes incoming data packets, determines the best path for them to travel across interconnected networks, and forwards them toward their intended destination."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

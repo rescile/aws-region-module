@@ -1,5 +1,5 @@
-origin_resource = "subscription"
+origin_resource = "platform"
 
 [[link_resources]]
-with = "domain"
+with = "subscription"
 create_relation = { type = "BASELINE_TEMPLATE" }
