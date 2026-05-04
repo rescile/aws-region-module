@@ -130,16 +130,23 @@
     <main class="flex-1 flex flex-col h-full relative overflow-hidden bg-slate-50">
         <header class="h-16 bg-white shadow-sm flex items-center justify-between px-8 z-0">
             <h2 id="view-title" class="text-xl font-semibold text-slate-800">Overview</h2>
-            <button onclick="refreshCurrentView()" class="text-sm text-amber-600 hover:text-amber-800 flex items-center transition font-medium">
-                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                Sync Data
-            </button>
+            <div class="flex items-center gap-4">
+                <button onclick="refreshCurrentView()" class="text-sm text-amber-600 hover:text-amber-800 flex items-center transition font-medium">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    Sync Data
+                </button>
+            </div>
         </header>
         
         <div class="flex-1 overflow-hidden p-8 relative flex flex-col">
             <!-- Loading Indicator -->
             <div id="loader" class="hidden absolute inset-0 bg-slate-50 bg-opacity-75 flex items-center justify-center z-10">
                 <div class="loader ease-linear rounded-full border-4 border-t-4 border-slate-200 h-12 w-12 mb-4"></div>
+            </div>
+
+            <div id="readOnlyNotice" class="hidden mb-4 p-4 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg flex items-center text-sm flex-shrink-0">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                This application is currently in read only mode because of missing enterprise features.
             </div>
 
             <!-- Content Container -->
@@ -150,6 +157,24 @@
         </div>
     </main>
 
+    <!-- Build Progress Modal -->
+    <div id="buildModal" class="hidden fixed inset-0 bg-slate-900 bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col">
+            <div class="px-6 py-4 border-b border-slate-200">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-amber-500 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    Building Graph...
+                </h3>
+            </div>
+            <div class="p-6 overflow-y-auto flex-1 bg-slate-900">
+                <pre id="buildLogs" class="text-xs text-slate-300 font-mono whitespace-pre-wrap word-break-all"></pre>
+            </div>
+            <div class="px-6 py-4 border-t border-slate-200 flex justify-end bg-slate-50 rounded-b-xl">
+                <button id="buildCloseBtn" onclick="closeBuildModal()" disabled class="px-4 py-2 text-sm font-medium text-slate-400 bg-slate-100 border border-slate-200 rounded cursor-not-allowed transition">Building...</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ======================== MERMAID LIBRARY ========================
         const MERMAID_CDN = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
@@ -159,9 +184,9 @@
             providers: {
                 title: "Cloud Providers",
                 icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
-                query: `{ provider { name display_name function region { node { function } } commercial_admin technical_admin } }`,
-                node: "provider",
-                columns: ["display_name", "name", "function", "region", "commercial_admin", "technical_admin"]
+                query: `{ platform { name operator function site portfolio } }`,
+                node: "platform",
+                columns: ["name", "operator", "function", "site", "portfolio"]
             },
             subscriptions: {
                 title: "Subscriptions",
@@ -173,16 +198,16 @@
             routers: {
                 title: "Network & Transit Routers",
                 icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
-                query: `{ router { name function domain provider { node { name } } cidr } }`,
+                query: `{ router { name function domain platform { node { name } } network { node { cidr } } } }`,
                 node: "router",
-                columns: ["name", "function", "domain", "provider", "cidr"]
+                columns: ["name", "function", "domain", "platform", "network"]
             },
             regions: {
                 title: "Endpoint Regions",
                 icon: "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9",
-                query: `{ region { function service endpoint } }`,
+                query: `{ region { function uid endpoint } }`,
                 node: "region",
-                columns: ["function", "service", "endpoint"]
+                columns: ["function", "uid", "endpoint"]
             },
             logins: {
                 title: "Identities & Logins",
@@ -208,15 +233,15 @@
                 description: "Visualizes the structural transit zone bridging AWS providers, endpoint regions, subscriptions, and edge routers.",
                 buildQuery: function() {
                     return `{
-                        provider { name display_name region { node { function } } }
-                        router { name function provider { node { name } } cidr }
-                        region { function service }
+                        platform { name operator site }
+                        router { name function platform {node { name } } network { node { cidr } } }
+                        region { function uid }
                         subscription { name tenant stage }
                     }`;
                 },
                 buildDiagram: function(data) {
                     let lines = ['graph LR'];
-                    const providers = data.provider || [];
+                    const providers = data.platform || [];
                     const routers = data.router || [];
                     const regions = data.region || [];
                     const subscriptions = data.subscription || [];
@@ -224,7 +249,7 @@
                     lines.push('  subgraph AWS["☁️ Cloud Provider Ecosystem"]');
                     providers.forEach(p => {
                         const id = sanitizeId('prov_' + p.name);
-                        lines.push(`    ${id}["${esc(p.display_name)}\\n<i>${esc(p.name)}</i>"]`);
+                        lines.push(`    ${id}["${esc(p.operator)}\\n<i>${esc(p.name)}</i>"]`);
                     });
                     lines.push('  end');
 
@@ -249,7 +274,8 @@
                         lines.push('  subgraph TransitZone["🔀 Network Transit Zone"]');
                         routers.forEach(r => {
                             const id = sanitizeId('rtr_' + r.name);
-                            const cidr = r.cidr ? `\\nIP: ${esc(r.cidr)}` : '';
+                            let cidrs = r.network ? r.network.map(n => n.node && n.node.cidr).filter(Boolean).join(', ') : '';
+                            const cidr = cidrs ? `\\nIP: ${esc(cidrs)}` : '';
                             lines.push(`    ${id}{{"${esc(r.name)}\\nFn: ${esc(r.function)}${cidr}"}}`);
                         });
                         lines.push('  end');
@@ -257,8 +283,8 @@
                         routers.forEach(r => {
                             const rId = sanitizeId('rtr_' + r.name);
                             // Link router to provider
-                            if (r.provider) {
-                                lines.push(`  ${sanitizeId('prov_' + r.provider[0].node.name)} -->|PROVIDED_BY| ${rId}`);
+                             if (r.platform && r.platform.length > 0) {
+                                lines.push(`  ${sanitizeId('prov_' + r.platform[0].node.name)} -->|PROVIDED_BY| ${rId}`);
                             } else {
                                 // Fallback
                                 providers.forEach(p => lines.push(`  ${sanitizeId('prov_' + p.name)} -->|PROVIDED_BY| ${rId}`));
@@ -269,8 +295,8 @@
                     if (regions.length > 0) {
                         lines.push('  subgraph Endpoints["🌍 Region Endpoints"]');
                         regions.forEach(r => {
-                            const id = sanitizeId('reg_' + r.function);
-                            lines.push(`    ${id}[/"Region: ${esc(r.function)}"\\]`);
+                            const id = sanitizeId('reg_' + r.uid);
+                            lines.push(`    ${id}[/"Region: ${esc(r.uid)}"\\]`);
                         });
                         lines.push('  end');
 
@@ -278,7 +304,7 @@
                             const pId = sanitizeId('prov_' + p.name);
                             regions.forEach(r => {
                                 // Optional logic to match provider region, fallback to generic
-                                lines.push(`  ${pId} -->|MANAGED_BY| ${sanitizeId('reg_' + r.function)}`);
+                                lines.push(`  ${pId} -->|MANAGED_BY| ${sanitizeId('reg_' + r.uid)}`);
                             });
                         });
                     }
@@ -292,7 +318,7 @@
                     providers.forEach(p => lines.push(`  class ${sanitizeId('prov_' + p.name)} provStyle`));
                     subscriptions.forEach(s => lines.push(`  class ${sanitizeId('sub_' + s.name)} subStyle`));
                     routers.forEach(r => lines.push(`  class ${sanitizeId('rtr_' + r.name)} routerStyle`));
-                    regions.forEach(r => lines.push(`  class ${sanitizeId('reg_' + r.function)} regStyle`));
+                    regions.forEach(r => lines.push(`  class ${sanitizeId('reg_' + r.uid)} regStyle`));
 
                     return lines.join('\n');
                 }
@@ -305,14 +331,14 @@
                     return `{
                         account { name function }
                         login { name function role }
-                        provider { name display_name commercial_admin technical_admin }
+                        platform { name operator commercial_contact technical_contact }
                     }`;
                 },
                 buildDiagram: function(data) {
                     let lines = ['graph TB'];
                     const accounts = data.account || [];
                     const logins = data.login || [];
-                    const providers = data.provider || [];
+                    const providers = data.platform || [];
 
                     lines.push('  subgraph Orgs["🏢 Base Accounts"]');
                     accounts.forEach(a => {
@@ -331,7 +357,7 @@
                     lines.push('  subgraph Provs["☁️ Managed Providers"]');
                     providers.forEach(p => {
                         const id = sanitizeId('prov_' + p.name);
-                        lines.push(`    ${id}{{"${esc(p.display_name)}\\n(${esc(p.name)})"}}`);
+                        lines.push(`    ${id}{{"${esc(p.operator)}\\n(${esc(p.name)})"}}`);
                     });
                     lines.push('  end');
 
@@ -354,11 +380,11 @@
                             // Loose matching since the data might format strings differently
                             const lFullName = `${l.function}_${l.role}`;
                             
-                            if (p.commercial_admin === l.name || p.commercial_admin === l.function || p.commercial_admin === lFullName || l.role === 'account') {
+                            if (p.commercial_contact === l.name || p.commercial_contact === l.function || p.commercial_contact === lFullName || l.role === 'account') {
                                 lines.push(`  ${lId} -.->|RESPONSIBLE_FOR| ${pId}`);
                                 linked = true;
                             }
-                            if (p.technical_admin === l.name || p.technical_admin === l.function || p.technical_admin === lFullName || l.role === 'cloud') {
+                            if (p.technical_contact === l.name || p.technical_contact === l.function || p.technical_contact === lFullName || l.role === 'cloud') {
                                 lines.push(`  ${lId} -.->|MANAGED_BY| ${pId}`);
                                 linked = true;
                             }
@@ -428,6 +454,29 @@
         let currentViewKey = null;
         let currentTopoKey = null;
 
+        let isEnterprise = false;
+        let originalParams = {};
+
+        async function checkEnterpriseFeatures() {
+            try {
+                const res = await fetch('/api/features');
+                if (res.ok) {
+                    const features = await res.json();
+                    if (features.includes('admin_assets')) {
+                        isEnterprise = true;
+                        document.getElementById('nav-settings').classList.remove('hidden');
+                    } else {
+                        document.getElementById('readOnlyNotice').classList.remove('hidden');
+                    }
+                } else {
+                    document.getElementById('readOnlyNotice').classList.remove('hidden');
+                }
+            } catch (err) {
+                console.error('Failed to fetch features:', err);
+                document.getElementById('readOnlyNotice').classList.remove('hidden');
+            }
+        }
+
         // Core GraphQL fetch utility
         async function fetchGraphQL(query) {
             try {
@@ -451,6 +500,17 @@
         // Setup the navigation sidebar
         function setupNavigation() {
             const navMenu = document.getElementById('nav-menu');
+
+            const settingsBtn = document.createElement('button');
+            settingsBtn.className = `w-full text-left px-6 py-3 flex items-center text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white text-slate-300 nav-btn hidden`;
+            settingsBtn.id = `nav-settings`;
+            settingsBtn.innerHTML = `
+                <svg class="w-5 h-5 mr-3 text-slate-500 group-hover:text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Settings
+            `;
+            settingsBtn.onclick = () => loadSettingsView();
+            navMenu.appendChild(settingsBtn);
+
             Object.keys(VIEWS).forEach(key => {
                 const view = VIEWS[key];
                 const btn = document.createElement('button');
@@ -506,7 +566,7 @@
                 if (value.length === 0) return '<span class="text-slate-300">-</span>';
                 if (typeof value[0] === 'object' && value[0] !== null) {
                     if ('node' in value[0]) {
-                        return value.map(v => v.node && (v.node.name || v.node.function || v.node.id) ? (v.node.name || v.node.function || v.node.id) : '').filter(Boolean).join(', ');
+                        return value.map(v => v.node && (v.node.name || v.node.function || v.node.id || v.node.cidr) ? (v.node.name || v.node.function || v.node.id || v.node.cidr) : '').filter(Boolean).join(', ');
                     }
                     return value.map(v => JSON.stringify(v)).join(', ');
                 }
@@ -654,6 +714,72 @@
         let currentPanX = 0;
         let currentPanY = 0;
 
+        let identityHeaders = [];
+        let identityData = [];
+
+        function parseCSV(text) {
+            const lines = text.trim().split('\n');
+            if (lines.length === 0 || lines[0] === '') return { headers: [], rows: [] };
+            const headers = lines[0].split(',').map(h => h.trim());
+            const rows = lines.slice(1).filter(l => l.trim() !== '').map(line => line.split(',').map(c => c.trim()));
+            return { headers, rows };
+        }
+
+        function serializeCSV(headers, rows) {
+            const h = headers.join(',');
+            const r = rows.map(row => row.join(',')).join('\n');
+            return h + (r ? '\n' + r : '');
+        }
+
+        function renderIdentityTable() {
+            const thead = document.getElementById('identityThead');
+            const tbody = document.getElementById('identityTbody');
+            
+            if (identityHeaders.length === 0) {
+                thead.innerHTML = '';
+                tbody.innerHTML = '<tr><td class="p-4 text-center text-slate-500">No data</td></tr>';
+                return;
+            }
+
+            let thHtml = '<tr>';
+            identityHeaders.forEach(h => {
+                thHtml += `<th class="px-3 py-2 text-left font-medium text-slate-600">${esc(h)}</th>`;
+            });
+            thHtml += `<th class="px-3 py-2 text-right font-medium text-slate-600 w-16">Actions</th></tr>`;
+            thead.innerHTML = thHtml;
+
+            let tbHtml = '';
+            if (identityData.length === 0) {
+                tbHtml = `<tr><td colspan="${identityHeaders.length + 1}" class="p-4 text-center text-slate-500">No identities found. Add a row to start.</td></tr>`;
+            } else {
+                identityData.forEach((row, rowIndex) => {
+                    tbHtml += '<tr class="hover:bg-slate-50">';
+                    identityHeaders.forEach((_, colIndex) => {
+                        tbHtml += `<td class="px-2 py-1"><input type="text" value="${esc(row[colIndex] || '')}" onchange="updateIdentityData(${rowIndex}, ${colIndex}, this.value)" class="w-full text-xs p-1.5 border border-transparent hover:border-slate-300 focus:border-amber-500 rounded bg-transparent focus:bg-white transition-colors"></td>`;
+                    });
+                    tbHtml += `<td class="px-2 py-1 text-right"><button type="button" onclick="deleteIdentityRow(${rowIndex})" class="text-red-400 hover:text-red-600 p-1.5 rounded hover:bg-red-50 transition" title="Delete"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button></td></tr>`;
+                });
+            }
+            tbody.innerHTML = tbHtml;
+        }
+
+        function updateIdentityData(row, col, value) {
+            identityData[row][col] = value;
+        }
+
+        function addIdentityRow() {
+            if (identityHeaders.length === 0) {
+                identityHeaders = ['type', 'name', 'function', 'role'];
+            }
+            identityData.push(new Array(identityHeaders.length).fill(''));
+            renderIdentityTable();
+        }
+
+        function deleteIdentityRow(index) {
+            identityData.splice(index, 1);
+            renderIdentityTable();
+        }
+
         function switchDiagramTab(tab) {
             const diagramEl = document.getElementById('diagram-content');
             const codeEl = document.getElementById('diagram-code-content');
@@ -743,7 +869,9 @@
         }
 
         function refreshCurrentView() {
-            if (currentViewKey) {
+            if (currentViewKey === 'settings') {
+                loadSettingsView();
+            } else if (currentViewKey) {
                 loadView(currentViewKey);
             } else if (currentTopoKey) {
                 loadTopologyView(currentTopoKey);
@@ -760,9 +888,183 @@
             }
         }
 
+        async function loadSettingsView() {
+            currentViewKey = 'settings';
+            currentTopoKey = null;
+            document.getElementById('view-title').innerText = "Settings";
+            setActiveNav('nav-settings');
+
+            const container = document.getElementById('content-container');
+            container.innerHTML = `
+                <div class="p-8 overflow-y-auto flex-1 bg-white">
+                    <div class="mb-6">
+                        <h4 class="text-sm font-semibold text-slate-700 mb-3 border-b pb-2">Module Parameters</h4>
+                        <form id="paramsForm" class="space-y-4">
+                            <div id="paramsContainer" class="space-y-3">
+                                <div class="text-sm text-slate-500">Loading parameters...</div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-3 border-b pb-2">
+                            <h4 class="text-sm font-semibold text-slate-700">Identities (identity.csv)</h4>
+                            <button type="button" onclick="addIdentityRow()" class="text-xs bg-amber-100 text-amber-700 hover:bg-amber-200 px-2 py-1 rounded font-medium flex items-center transition">
+                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                Add Row
+                            </button>
+                        </div>
+                        <div class="overflow-x-auto border border-slate-200 rounded-lg max-h-60 overflow-y-auto">
+                            <table class="min-w-full divide-y divide-slate-200 text-xs" id="identityTable">
+                                <thead class="bg-slate-50 sticky top-0 z-10" id="identityThead">
+                                </thead>
+                                <tbody class="bg-white divide-y divide-slate-100" id="identityTbody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-slate-200 flex justify-end gap-3">
+                        <button onclick="saveConfig()" class="px-4 py-2 text-sm font-medium text-white bg-amber-600 rounded hover:bg-amber-700 transition flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Save & Rebuild
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Fetch params
+            try {
+                const pRes = await fetch('/api/module-params');
+                if (pRes.ok) {
+                    const fetchedParams = await pRes.json();
+                    originalParams = {};
+                    const container = document.getElementById('paramsContainer');
+                    container.innerHTML = '';
+                    for (const [key, paramData] of Object.entries(fetchedParams)) {
+                        let val = paramData.value !== undefined ? paramData.value : paramData;
+                        let allowed = paramData.allowed_values || [];
+                        originalParams[key] = val;
+                        
+                        let inputHtml = '';
+                        if (allowed.length > 0) {
+                            let options = allowed.map(opt => `<option value="${esc(opt)}" ${opt === val ? 'selected' : ''}>${esc(opt)}</option>`).join('');
+                            inputHtml = `<select id="param_${key}" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-amber-500 focus:border-amber-500 bg-white">${options}</select>`;
+                        } else {
+                            inputHtml = `<input type="text" id="param_${key}" value="${esc(val)}" class="w-full text-sm p-2 border border-slate-300 rounded focus:ring-amber-500 focus:border-amber-500">`;
+                        }
+                        container.innerHTML += `
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">${esc(key)}</label>
+                                ${inputHtml}
+                            </div>
+                        `;
+                    }
+                }
+            } catch (err) {
+                console.error('Failed to fetch module params:', err);
+            }
+
+            // Fetch identity.csv
+            try {
+                const aRes = await fetch('/api/assets/identity.csv');
+                if (aRes.ok) {
+                    const csvContent = await aRes.text();
+                    const parsed = parseCSV(csvContent);
+                    identityHeaders = parsed.headers;
+                    identityData = parsed.rows;
+                    renderIdentityTable();
+                }
+            } catch (err) {
+                console.error('Failed to fetch identity.csv:', err);
+            }
+        }
+
+        async function saveConfig() {
+            const btn = document.querySelector('#content-container button.bg-amber-600');
+            const origHtml = btn.innerHTML;
+            btn.innerHTML = 'Saving...';
+            btn.disabled = true;
+
+            try {
+                // Save params
+                const newParams = { ...originalParams };
+                for (const key of Object.keys(originalParams)) {
+                    const el = document.getElementById(`param_${key}`);
+                    if (el) newParams[key] = el.value;
+                }
+                
+                await fetch('/api/module-params', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newParams)
+                });
+
+                // Save assets
+                const csvData = serializeCSV(identityHeaders, identityData);
+                const formData = new FormData();
+                formData.append('update', csvData);
+                await fetch('/api/assets/identity.csv', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                showBuildModal();
+            } catch (err) {
+                console.error('Failed to save config:', err);
+                alert('Failed to save configuration');
+            } finally {
+                btn.innerHTML = origHtml;
+                btn.disabled = false;
+            }
+        }
+
+        let buildEventSource = null;
+
+        function showBuildModal() {
+            const logsEl = document.getElementById('buildLogs');
+            logsEl.textContent = '';
+            const closeBtn = document.getElementById('buildCloseBtn');
+            closeBtn.disabled = true;
+            closeBtn.textContent = 'Building...';
+            closeBtn.classList.remove('text-white', 'bg-amber-600', 'hover:bg-amber-700', 'cursor-pointer');
+            closeBtn.classList.add('text-slate-400', 'bg-slate-100', 'cursor-not-allowed');
+
+            document.getElementById('buildModal').classList.remove('hidden');
+
+            if (buildEventSource) buildEventSource.close();
+            buildEventSource = new EventSource('/api/build/stream');
+
+            buildEventSource.onmessage = function (event) {
+                const msg = event.data;
+                if (msg === 'BUILD_COMPLETE') {
+                    buildEventSource.close();
+                    closeBtn.disabled = false;
+                    closeBtn.textContent = 'Close & Refresh';
+                    closeBtn.classList.remove('text-slate-400', 'bg-slate-100', 'cursor-not-allowed');
+                    closeBtn.classList.add('text-white', 'bg-amber-600', 'hover:bg-amber-700', 'cursor-pointer');
+                } else {
+                    logsEl.textContent += msg + '\n';
+                    logsEl.scrollTop = logsEl.scrollHeight;
+                }
+            };
+
+            buildEventSource.onerror = function () {
+                buildEventSource.close();
+                closeBtn.disabled = false;
+                closeBtn.textContent = 'Close (Error)';
+                closeBtn.classList.remove('text-slate-400', 'bg-slate-100', 'cursor-not-allowed');
+                closeBtn.classList.add('text-white', 'bg-red-600', 'hover:bg-red-700', 'cursor-pointer');
+            };
+        }
+
+        function closeBuildModal() {
+            document.getElementById('buildModal').classList.add('hidden');
+            refreshCurrentView();
+        }
+
         // Initialize App
         window.onload = () => {
             setupNavigation();
+            checkEnterpriseFeatures();
             updateGraphStats();
             // Default load the first view
             loadView('providers');
