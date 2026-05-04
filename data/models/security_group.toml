@@ -1,0 +1,13 @@
+# This model represents a third tier model of a cloud network.
+# Specify the resource dependency for a network
+origin_resource = "network"
+
+# Create the resource type
+[[create_resource]]
+resource_type = "security_group"
+relation_type = "PROTECTS"
+name = "{{- origin_resource.function -}}_network_security"
+[create_resource.properties]
+function = "portfilter"
+description = "Inbound HTTPS from internal application CIDR"
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
