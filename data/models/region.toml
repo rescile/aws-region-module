@@ -22,9 +22,11 @@ service_portfolio = { "function!" = '''
 # Create the resource type
 [[create_resource]]
 create_from = { property = "region" }
-relation_type = "MANAGED_BY"
+relation_type = "HOSTED_ON"
+name = "{{- origin_resource.name -}}_region"
 [create_resource.properties]
 function = "{{- origin_resource.site -}}"
+uid = "{{- property.value -}}"
 endpoint = "{{- service_portfolio -}}"
-description = "The region describes a {{ origin_resource.name }} managed, physical, geographical location of where infrastructure resides, data is stored, and applications run."
+description = "The region describes a physical, geographical location where data is stored, and applications run, managed by {{ provider }}."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

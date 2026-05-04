@@ -1,0 +1,22 @@
+origin_resource = "login"
+
+[[link_resources]]
+with = "platform"
+match_on = [ { property = "name", value = "provider_management" } ]
+copy_properties = [
+  { from = "name", as = "commercial_contact" }
+]
+create_relation = { type = "RESPONSIBLE_FOR" }
+
+[[link_resources]]
+with = "platform"
+match_on = [ { property = "name", value = "cloud_administration" } ]
+copy_properties = [
+  { from = "name", as = "technical_contact" }
+]
+create_relation = { type = "RESPONSIBLE_FOR" }
+
+[[link_resources]]
+with = "platform"
+match_on = [ { property = "name", not = "cloud_administration" }, { property = "name", not = "provider_management" } ]
+create_relation = { type = "MANAGED_BY" }
