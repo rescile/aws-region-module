@@ -1,12 +1,15 @@
 # A cloud provider owns and operates data centers to "rent out" computing power, storage, and/or software.
 
+regions = { "json!" = "aws_region_service.json" }
+city = "{{- location | regexp(expr='s/.*\\((.*)\\)/\\1/') | lower | replace(from=' ', to='') -}}"
+
 [[create_resource]]
 resource_type = "platform"
-name = "{{- provider | lower -}}_{{- location | lower -}}"
+name = "{{- provider | lower -}}_{{- city -}}"
 [create_resource.properties]
 function = "cloud"
 operator = "{{- provider | lower -}}"
-location = "{{- location | lower -}}"
-region = "eu-central-2"
-description = "Amazon Web Services (AWS) is a cloud provider that specializes in providing an ecosystem of scalable and integrated services. AWS distinguishes itself from competitors primarily through the breadth and maturity of its portfolio—ranging from serverless architectures to hardware accelerators."
+region = "{{ regions[location].region_code }}"
+portfolio = "{{ regions[location].services }}"
+description = "Amazon Web Services (AWS) provides an ecosystem of scalable and integrated services in {{ city | capitalize }}. The AWS cloud platform distinguishes itself from competitors primarily through the breadth and maturity of its portfolio—ranging from serverless architectures to hardware accelerators."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

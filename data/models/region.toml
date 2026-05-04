@@ -23,7 +23,6 @@ aws_endpoints = { "function!" = '''
 # Create the resource type
 [[create_resource]]
 create_from = { property = "region" }
-name = "{{- origin_resource.name | lower -}}_{{- origin_resource.location | lower -}}_region"
 relation_type = "MANAGED_BY"
 [create_resource.properties]
 function = "{{- origin_resource.location | lower -}}"

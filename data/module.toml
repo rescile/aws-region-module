@@ -19,12 +19,12 @@ default = "AWS"
 [params.location]
 description = "The regions to deploy the solution in."
 required = true
-default = "Zurich"
+default = "Europe (Zurich)"
 
 [params.solution]
 description = "The solution describes the service footprint."
 required = true
-default = "TransitNetwork"
+default = "NetworkHub"
 
 [params.stage]
 description = "The lifecycle stage of the solution."
@@ -35,7 +35,7 @@ allowed_values = ["DEV", "TEST", "PROD"]
 [params.tenant]
 description = "The tenant name identifiers the organization that uses the service."
 required = true
-default = "YourName"
+default = "YourOrganization"
 
 [assets."identity.csv"]
 resource_type = "identity"
