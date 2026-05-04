@@ -1,8 +1,8 @@
 [module]
 name = "AWS Network Hub"
-url = "https://github.com/rescile/oci_landing_zone"
+url = "https://github.com/rescile/aws_network_hub"
 version = "0.0.1"
-description = "A network hub acts as a centralized Transit Gateway for SaaS provider and simplifies connectivity by routing traffic between multiple application VPCs and customer networks through a single, scalable point. This architecture creates a hub-and-spoke model that allows the provider to efficiently manage security inspections and inter-service communication without the complexity of individual peering connections."
+description = "The AWS Network Hub deploys a transit network for SaaS provider in an AWS region to enable private connectivity to an onprem location. The transit network routes traffic between application VPCs and customer networks to allow operators creating a wide area cross-connect and manage security inspections and inter-service communication without the complexity of individual peering connections."
 rescile_version = ">=0.1.138"
 
 # dependencies: Optional list of other modules this module depends on.
@@ -12,12 +12,12 @@ graml-module =  "https://github.com/rescile/graphml-module"
 rescile-graphiql-module = "https://github.com/rescile/rescile-graphiql-module/releases/download/v0.0.3/graphiql-module-offline.zip"
 
 [params.provider]
-description = "The opertor for the solution."
+description = "The entity operating the platform."
 required = true
 default = "AWS"
 
 [params.location]
-description = "The regions to deploy the solution in."
+description = "The geographical region where solutions are deployed."
 required = true
 default = "Europe (Zurich)"
 

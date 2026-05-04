@@ -1,13 +1,12 @@
 # This model represents a third tier model of a cloud domain and defines locations where provider resources can be consumed.
 origin_resource = "platform"
 
-aws_region_services = { "json!" = "aws_region_service.json" }
-aws_region_endpoint = { "json!" = "aws_region_endpoint.json" }
-aws_endpoints = { "function!" = '''
+region_endpoints = { "json!" = "aws_region_endpoint.json" }
+service_portfolio = { "function!" = '''
     {% set unique_services = [] %}
-    {% set loc = origin_resource.region %}
-    {% for e in aws_region_endpoint.prefixes %}
-        {% if e.region == loc %}
+    {% set regionid = origin_resource.region %}
+    {% for e in region_endpoints.prefixes %}
+        {% if e.region == regionid %}
             {# Check if the service is already in the list #}
             {% if e.service in unique_services %}
                 {# Do nothing #}
@@ -25,8 +24,7 @@ aws_endpoints = { "function!" = '''
 create_from = { property = "region" }
 relation_type = "MANAGED_BY"
 [create_resource.properties]
-function = "{{- origin_resource.location | lower -}}"
-service = "{{ aws_region_services[origin_resource.region].service }}"
-endpoint = "{{ aws_endpoints }}"
+function = "{{- origin_resource.site -}}"
+endpoint = "{{- service_portfolio -}}"
 description = "The region describes a {{ origin_resource.name }} managed, physical, geographical location of where infrastructure resides, data is stored, and applications run."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
