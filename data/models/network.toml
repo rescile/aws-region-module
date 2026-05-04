@@ -1,0 +1,25 @@
+# This model represents a second tier model of a cloud platform that is defined based on a router.
+# Specify the resource dependency for a network
+origin_resource = "router"
+
+cidr_block = { "template!" = '''
+    {%- if property.value == "management" -%}
+        {%- set_global segment = "172.16.0.0/16" -%}
+    {%- else -%}
+        {%- set_global segment = "10.0.0.0/24" -%}
+    {%- endif -%}
+    {{- segment -}}
+'''}
+
+# Create the resource type
+[[create_resource]]
+create_from = { property = "network" }
+relation_type = "CONNECTED_TO"
+name = "{{- property.value -}}_vpc"
+[create_resource.properties]
+function = "{{- property.value -}}"
+cidr = "{{- cidr_block -}}"
+enable_dns_support = true
+enable_dns_hostnames = true
+description = "The {{ property.value }} network is a virtualized network infrastructure that connects compute resources and services at {{ provider }}."
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

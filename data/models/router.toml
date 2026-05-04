@@ -12,6 +12,6 @@ relation_type = "CONNECTS_TO"
 function = "{{- origin_resource.site -}}"
 domain = "{{- origin_resource.function -}}"
 operator = "{{- provider | lower -}}"
-network = "{{- origin_resource.cidr | default(value='192.168.0.0/16') -}}"
+network = [ "transit", "management" ]
 description = "The {{ origin_resource.function }} router is a network function, operated by {{ provider }}, that analyzes incoming data packets, determines the best path for them to travel across interconnected networks, and forwards them toward their intended destination."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
