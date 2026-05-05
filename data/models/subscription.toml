@@ -1,10 +1,12 @@
 # A subscription is an active contract that grants permission to use the resources at a cloud provider. It acts as the bridge between an identity and a provider's billing system.
 origin_resource = "platform"
 
+solution = '{{- module.name | split(pat=" ") | slice(start=1) | join(sep="") | lower -}}'
+
 [[create_resource]]
 resource_type = "subscription"
 relation_type = "BASELINE_TEMPLATE"
-name = "{{- tenant | lower -}}_{{- solution | lower -}}_{{- stage | lower -}}"
+name = "{{- tenant | lower -}}_{{- solution -}}_{{- stage | lower -}}"
 [create_resource.properties]
 tenant = "{{- tenant | lower -}}"
 description = "This subscription defines the cloud environment for the resident rescile and captures the dependencies for the solution deployment."

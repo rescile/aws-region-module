@@ -21,11 +21,6 @@ description = "The geographical region where solutions are deployed."
 required = true
 default = "Europe (Zurich)"
 
-[params.solution]
-description = "The solution describes the service footprint."
-required = true
-default = "NetworkHub"
-
 [params.stage]
 description = "The lifecycle stage of the solution."
 required = true
@@ -35,7 +30,7 @@ allowed_values = ["DEV", "TEST", "PROD"]
 [params.tenant]
 description = "The tenant name identifiers the organization that uses the service."
 required = true
-default = "YourOrganization"
+default = "tenant"
 
 [assets."identity.csv"]
 resource_type = "identity"
@@ -54,10 +49,10 @@ method = "GET"
 url = "https://ip-ranges.amazonaws.com/ip-ranges.json"
 abort_on_failure = true
 
-[generator.aws_service_index]
+[generator.aws_price_index]
 description = "Get AWS service index from AWS Pricing API."
 runner = "http"
-target_input = "aws_service_index.json"
+target_input = "aws_price_index.json"
 method = "GET"
 url = "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/index.json"
 abort_on_failure = false

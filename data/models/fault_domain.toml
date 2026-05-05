@@ -1,0 +1,14 @@
+# This model represents a third tier model of a cloud domain and defines locations where provider resources can be consumed.
+origin_resource = "region"
+
+# Create the resource type
+[[create_resource]]
+create_from = { property = "fault_domain" }
+relation_type = "CONNECTED_TO"
+name = "{{- origin_resource.function | lower -}}_availability_zone"
+[create_resource.properties]
+function = "failover"
+uid = "{{- origin_resource.uid -}}{{- property.value -}}"
+site = "{{- origin_resource.site -}}"
+description = "AWS's availability zones spread your resources across AZs to achieve high availability. These are geographically separated but close enough for low-latency connections between them, each has independent power, cooling, and networking."
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

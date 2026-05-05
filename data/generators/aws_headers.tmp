@@ -1,15 +1,15 @@
 HTTP/2 304 
-date: Mon, 04 May 2026 07:43:10 GMT
+date: Tue, 05 May 2026 05:33:37 GMT
 via: 1.1 varnish
 cache-control: max-age=300
 etag: "56dd42de67c9597f225d92479af23e2c870bde581949de5ae086241b743e9662"
-x-served-by: cache-vie6350-VIE
-x-cache: HIT
+x-served-by: cache-fra-eddf8230187-FRA
+x-cache: MISS
 x-cache-hits: 0
-x-timer: S1777880591.820811,VS0,VE1
+x-timer: S1777959218.691521,VS0,VE153
 vary: Authorization,Accept-Encoding
 access-control-allow-origin: *
 cross-origin-resource-policy: cross-origin
-x-fastly-request-id: 7285a321d3e95b8632a96421fb5919d06fac7cf3
-expires: Mon, 04 May 2026 07:48:10 GMT
+x-fastly-request-id: 58840d88a993b4056308f2af072a90b3e0a692a2
+expires: Tue, 05 May 2026 05:38:37 GMT
 
