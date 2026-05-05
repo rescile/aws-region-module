@@ -39,7 +39,7 @@ default = "YourOrganization"
 
 [assets."identity.csv"]
 resource_type = "identity"
-description = "The main asset file defining virtual identities."
+description = "The asset file defining virtual identities with access to AWS services."
 name_template = "{{- scope | lower -}}_{{- name  | lower -}}_{{- function | lower -}}"
 [assets."identity.csv".columns]
 name = { type = "string", required = true }
@@ -47,6 +47,7 @@ function = { type = "string", required = true }
 scope = { type = "string", required = false }
 
 [generator.aws_region_endpoints]
+description = "Get AWS regional endpoints from AWS IP Ranges API."
 runner = "http"
 target_input = "aws_region_endpoint.json"
 method = "GET"
@@ -54,6 +55,7 @@ url = "https://ip-ranges.amazonaws.com/ip-ranges.json"
 abort_on_failure = true
 
 [generator.aws_service_index]
+description = "Get AWS service index from AWS Pricing API."
 runner = "http"
 target_input = "aws_service_index.json"
 method = "GET"

@@ -28,5 +28,6 @@ name = "{{- origin_resource.name -}}_region"
 function = "{{- origin_resource.site -}}"
 uid = "{{- property.value -}}"
 endpoint = "{{- service_portfolio -}}"
+availability_zone = ["a", "b", "c"]
 description = "The region describes a physical, geographical location where data is stored, and applications run, managed by {{ provider }}."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
