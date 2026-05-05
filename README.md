@@ -1,15 +1,15 @@
-# AWS Network Hub
-A Network Hub is a small AWS account designed that connects SaaS hosted on amazon (e.g. Salesforce, Databricks) via private gateways and under a governed security model. While a VPC in an existing account lacks inherent guardrails, this purpose build landing zone ensures that the network environment is pre-configured for compliance, centralized logging, and identity management before external services are connected. This transit zone serves as the administrative and technical boundary where the AWS network meets the service provider endpoint. 
+# AWS Transit Hub
+A Transit Hub is a small AWS account designed that connects SaaS hosted on amazon (e.g. Salesforce, Databricks) via private gateways and under a governed security model. While a VPC in an existing account lacks inherent guardrails, this purpose build landing zone ensures that the network environment is pre-configured for compliance, centralized logging, and identity management before external services are connected. This transit zone serves as the administrative and technical boundary where the AWS network meets the service provider endpoint. 
 
 ## Technical Components
 
 | Category | Resource Name | Purpose |
 | :--- | :--- | :--- |
-| **Compute** | Elastic Network Interface (ENI) | The physical "landing" point for private IPs in your subnets. |
-| **Load Balancing**| Network Load Balancer (NLB) | Necessary for "Outbound" connections (Salesforce → AWS). |
-| **Security** | Security Groups | Controls which internal resources can "talk" to Salesforce. |
+| **Compute** | Elastic Network Interface (ENI) | The physical "landing zone" for private IPs in your subnets. |
+| **Load Balancing**| Network Load Balancer (NLB) | Necessary for "Outbound" connections (Provider → AWS). |
+| **Security** | Security Groups | Controls which internal resources can "talk" to the service provider. |
 | **Identity** | IAM Role / Endpoint Policy | Governs permissions for the PrivateLink connection. |
-| **DNS** | Route 53 PHZ | Redirects Salesforce traffic to the private network. |
+| **DNS** | Route 53 PHZ | Redirects service provider traffic to the private network. |
 
 
 ### Networking Foundation (VPC)
@@ -18,12 +18,12 @@ A Network Hub is a small AWS account designed that connects SaaS hosted on amazo
 *   *Route Tables:* Specifically configured to route internal traffic within the VPC and through the VPC endpoints rather than out to the public internet.
 
 ### Connectivity Resources (PrivateLink)
-The specific resource depends on whether the traffic is coming *from* Salesforce or going *to* Salesforce:
+The specific resource depends on whether the traffic is coming *from* the service provider or going *to* the service provider:
 
-*   Inbound (AWS to Salesforce):
-    *   *Interface VPC Endpoint:* This resource is created using the service name provided by Salesforce. It generates *Elastic Network Interfaces (ENIs)* in your private subnets with private IP addresses that represent the Salesforce API.
-*   Outbound (Salesforce to AWS):
-    *   *VPC Endpoint Service:* This exposes your internal AWS service (like an API Gateway or a private application) to the Salesforce network.
+*   Inbound
+    *   *Interface VPC Endpoint:* This resource is created using the service name provided by the service provider. It generates *Elastic Network Interfaces (ENIs)* in your private subnets with private IP addresses that represent the service provider API.
+*   Outbound
+    *   *VPC Endpoint Service:* This exposes your internal AWS service (like an API Gateway or a private application) to the service provider network.
     *   *Network Load Balancer (NLB):* Required to sit in front of your application. The Endpoint Service points to this NLB, which then distributes traffic to your backend resources (EC2, Lambda, or ALB).
 
 ### Security & Governance
@@ -32,4 +32,4 @@ The specific resource depends on whether the traffic is coming *from* Salesforce
 *   *VPC Flow Logs:* For auditability, logs should be enabled to capture all IP traffic directed toward the Salesforce termination point.
 
 ### Name Resolution
-*   *Route 53 Private Hosted Zone (PHZ):* This allows your AWS resources to resolve the Salesforce DNS name (e.g., `your-org.my.salesforce.com`) to the *private IP addresses* of your VPC Endpoint instead of the public internet IPs.
+*   *Route 53 Private Hosted Zone (PHZ):* This allows your AWS resources to resolve the service provider DNS name (e.g., `your-org.my.salesforce.com`) to the *private IP addresses* of your VPC Endpoint instead of the public internet IPs.
