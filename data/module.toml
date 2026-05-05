@@ -1,8 +1,8 @@
 [module]
-name = "AWS Network Hub"
+name = "AWS Transit Hub"
 url = "https://github.com/rescile/aws_network_hub"
 version = "0.0.1"
-description = "The AWS Network Hub deploys a transit network for SaaS provider in an AWS region to enable private connectivity to an onprem location. The transit network routes traffic between application VPCs and customer networks to allow operators creating a wide area cross-connect and manage security inspections and inter-service communication without the complexity of individual peering connections."
+description = "The AWS Transit Hub deploys a transit network for SaaS provider in an AWS region to enable private connectivity to an onprem location. The transit network routes traffic between application VPCs and customer networks to allow operators creating a wide area cross-connect and manage security inspections and inter-service communication without the complexity of individual peering connections."
 rescile_version = ">=0.1.138"
 
 # dependencies: Optional list of other modules this module depends on.
@@ -30,7 +30,7 @@ allowed_values = ["DEV", "TEST", "PROD"]
 [params.tenant]
 description = "The tenant name identifiers the organization that uses the service."
 required = true
-default = "tenant"
+default = "Org"
 
 [assets."identity.csv"]
 resource_type = "identity"
