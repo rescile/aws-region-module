@@ -9,10 +9,6 @@ subnet_list = { "function!" = '''
   {{- range | json_encode | safe -}}
 ''' }
 
-netcount = { "function!" = '''
-  {{- counter(key=origin_resource.cidr) | int -}}
-''' }
-
 # Create the resource type
 [[create_resource]]
 create_from = { property = "fault_domain", as = "subnet" }
@@ -21,8 +17,8 @@ name = "{{- origin_resource.function -}}_subnet_{{- property.value | lower-}}"
 [create_resource.properties]
 function = "failover"
 original_name = "{{ property.value }}"
-cidr = "{% set list = subnet_list | replace(from='[', to='') | replace(from=']', to='') | replace(from='\"', to='') | split(pat=',') %}{{ list | nth(n=netcount | int) | trim }}"
-net_count = "{{- netcount -}}"
+cidr = "{{ subnet_list | nth(n=property.index) }}"
+net_count = "{{- property.index -}}"
 public = false
 fault_domain = "{{- provider | lower -}}_{{- origin_resource.site | lower -}}_{{- property.value | lower -}}"
 description = "Subnet {{ property.value }} is a logical partition of the {{ origin_resource.function }} network — it carves up the cloud network into smaller blocks, each with its own IP range and running in a different availability zone."
