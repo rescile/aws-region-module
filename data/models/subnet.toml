@@ -6,12 +6,11 @@ origin_resource = "network"
 subnet_list = { "function!" = '''
   {% set count = origin_resource.fault_domain | length %}
   {% set range = origin_resource.cidr | default(value="10.0.0.0/8") | cidr_split_n(n=count) %}
-  {% set index = counter(key=origin_resource.cidr) | int %}
   {{- range | json_encode | safe -}}
 ''' }
 
 netcount = { "function!" = '''
-  {{- counter(key=origin_resource.cidr) -}}
+  {{- counter(key=origin_resource.cidr) | int -}}
 ''' }
 
 # Create the resource type
@@ -26,5 +25,5 @@ cidr = "{% set list = subnet_list | replace(from='[', to='') | replace(from=']',
 net_count = "{{- netcount -}}"
 public = false
 fault_domain = "{{- provider | lower -}}_{{- origin_resource.site | lower -}}_{{- property.value | lower -}}"
-description = "The {{ property.value }} subnet is a logical partition of the {{ origin_resource.function }} network — it carves up the cloud network into smaller blocks, each with its own IP range and running in a different availability zone."
+description = "Subnet {{ property.value }} is a logical partition of the {{ origin_resource.function }} network — it carves up the cloud network into smaller blocks, each with its own IP range and running in a different availability zone."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
