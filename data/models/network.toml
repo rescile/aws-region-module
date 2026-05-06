@@ -15,10 +15,11 @@ cidr_block = { "template!" = '''
 [[create_resource]]
 create_from = { property = "network" }
 relation_type = "CONNECTED_TO"
-name = "{{- property.value -}}_vpc"
+name = "{{- origin_resource.site -}}_{{- property.value -}}"
 [create_resource.properties]
 function = "{{- property.value -}}"
 cidr = "{{- cidr_block -}}"
+site = "{{- origin_resource.site -}}"
 fault_domain = ["a", "b"]
 enable_dns_support = true
 enable_dns_hostnames = true
