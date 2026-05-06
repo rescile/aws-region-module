@@ -5,8 +5,11 @@ origin_resource = "network"
 # Evaluated LOCALLY per iteration — origin_resource is the current network
 cidrs = { "function!" = '''
   {% set range = origin_resource.cidr | default(value="10.0.0.0/8") %}
-  {% set count = origin_resource.subnet | length %}
-  {{- range | cidr_split_n(n=count) | json_encode -}}
+  {% set count = origin_resource.fault_domain | length %}
+  {% set subnets = range | cidr_split_n(n=count) %}
+  {% set index = counter(key=origin_resource.cidr) %}
+  {% set i = index | int %}
+  {{- subnets[i] | json_encode -}}
 ''' }
 
 netcount = { "function!" = '''
@@ -15,15 +18,30 @@ netcount = { "function!" = '''
 
 # Create the resource type
 [[create_resource]]
-create_from = { property = "subnet" }
+create_from = { property = "fault_domain", as = "subnet" }
 relation_type = "CONNECTED_TO"
 name = "{{- origin_resource.function -}}_subnet_{{- property.value | lower-}}"
 [create_resource.properties]
-function = "{{- property.value -}}"
-cidr = "{{ cidrs | replace(from='[', to='') | replace(from=']', to='') | replace(from='\"', to='') | split(pat=',') | first | trim }}"
-subnet_cidr = "{{ origin_resource.cidr | cidr_nth_subnet(prefix=24, nth=counter(key=origin_resource.subnet)) }}"
+function = "failover"
+original_name = "{{ property.value }}"
+#cidr = '''
+#    {% if property.value | lower == 'a' %}
+#        {{ cidrs | replace(from='[', to='') | replace(from=']', to='') | replace(from='\"', to='') | split(pat=',') | first | trim }}
+#    {% elif property.value | lower == 'b' %}
+#        {{ cidrs | replace(from='[', to='') | replace(from=']', to='') | replace(from='\"', to='') | split(pat=',') | last | trim }}
+#    {% endif %}
+#'''
+cidr = "{{- cidrs -}}"
+#subnet_cidr = "{{ origin_resource.cidr | cidr_nth_subnet(prefix=24, nth=counter(key=origin_resource.subnet)) }}"
 net_count = "{{- netcount -}}"
-availability_zone = "us-east-1b"
 public = false
 description = "The {{ property.value }} subnet is a logical partition of the {{ origin_resource.function }} network — it carves up the cloud network into smaller blocks, each with its own IP range and running in a different availability zone."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+# Join the login to the platform using the identity credentials.
+origin_resource = "subnet"
+
+[[link_resources]]
+with = "fault_domain"
+match_on = [ { property = "original_name" } ]
+create_relation = { type = "HOSTED_ON" }

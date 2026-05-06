@@ -8,7 +8,6 @@ resource_type = "platform"
 name = "{{- provider | lower -}}_{{- city -}}"
 [create_resource.properties]
 function = "cloud"
-operator = "{{- provider | lower -}}"
 region = "{{ regions[location].region_code }}"
 site = "{{- city -}}"
 portfolio = "{{ regions[location].services }}"

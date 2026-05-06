@@ -19,7 +19,7 @@ name = "{{- property.value -}}_vpc"
 [create_resource.properties]
 function = "{{- property.value -}}"
 cidr = "{{- cidr_block -}}"
-subnet = ["a", "b"]
+fault_domain = ["a", "b"]
 enable_dns_support = true
 enable_dns_hostnames = true
 description = "The {{ property.value }} network is a virtualized network infrastructure that connects compute resources and services at {{ provider }}."
