@@ -1,0 +1,9194 @@
+[
+  {
+    "service": "tcpmux",
+    "port": 1,
+    "protocol": "tcp",
+    "description": "TCP Port Service Multiplexer"
+  },
+  {
+    "service": "tcpmux",
+    "port": 1,
+    "protocol": "udp",
+    "description": "TCP Port Service Multiplexer"
+  },
+  {
+    "service": "",
+    "port": 2,
+    "protocol": "tcp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 2,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 3,
+    "protocol": "tcp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 3,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 4,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 4,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "rje",
+    "port": 5,
+    "protocol": "tcp",
+    "description": "Remote Job Entry"
+  },
+  {
+    "service": "rje",
+    "port": 5,
+    "protocol": "udp",
+    "description": "Remote Job Entry"
+  },
+  {
+    "service": "",
+    "port": 6,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 6,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "echo",
+    "port": 7,
+    "protocol": "tcp",
+    "description": "Echo"
+  },
+  {
+    "service": "echo",
+    "port": 7,
+    "protocol": "udp",
+    "description": "Echo"
+  },
+  {
+    "service": "",
+    "port": 8,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 8,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "discard",
+    "port": 9,
+    "protocol": "tcp",
+    "description": "Discard"
+  },
+  {
+    "service": "discard",
+    "port": 9,
+    "protocol": "udp",
+    "description": "Discard"
+  },
+  {
+    "service": "discard",
+    "port": 9,
+    "protocol": "sctp",
+    "description": "Discard"
+  },
+  {
+    "service": "discard",
+    "port": 9,
+    "protocol": "dccp",
+    "description": "Discard"
+  },
+  {
+    "service": "",
+    "port": 10,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 10,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "systat",
+    "port": 11,
+    "protocol": "tcp",
+    "description": "Active Users"
+  },
+  {
+    "service": "systat",
+    "port": 11,
+    "protocol": "udp",
+    "description": "Active Users"
+  },
+  {
+    "service": "",
+    "port": 12,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 12,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "daytime",
+    "port": 13,
+    "protocol": "tcp",
+    "description": "Daytime"
+  },
+  {
+    "service": "daytime",
+    "port": 13,
+    "protocol": "udp",
+    "description": "Daytime"
+  },
+  {
+    "service": "",
+    "port": 14,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 14,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 15,
+    "protocol": "tcp",
+    "description": "Unassigned [was netstat]"
+  },
+  {
+    "service": "",
+    "port": 15,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 16,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 16,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "qotd",
+    "port": 17,
+    "protocol": "tcp",
+    "description": "Quote of the Day"
+  },
+  {
+    "service": "qotd",
+    "port": 17,
+    "protocol": "udp",
+    "description": "Quote of the Day"
+  },
+  {
+    "service": "msp",
+    "port": 18,
+    "protocol": "tcp",
+    "description": "Message Send Protocol (historic)"
+  },
+  {
+    "service": "msp",
+    "port": 18,
+    "protocol": "udp",
+    "description": "Message Send Protocol (historic)"
+  },
+  {
+    "service": "chargen",
+    "port": 19,
+    "protocol": "tcp",
+    "description": "Character Generator"
+  },
+  {
+    "service": "chargen",
+    "port": 19,
+    "protocol": "udp",
+    "description": "Character Generator"
+  },
+  {
+    "service": "ftp-data",
+    "port": 20,
+    "protocol": "tcp",
+    "description": "File Transfer [Default Data]"
+  },
+  {
+    "service": "ftp-data",
+    "port": 20,
+    "protocol": "udp",
+    "description": "File Transfer [Default Data]"
+  },
+  {
+    "service": "ftp-data",
+    "port": 20,
+    "protocol": "sctp",
+    "description": "FTP"
+  },
+  {
+    "service": "ftp",
+    "port": 21,
+    "protocol": "tcp",
+    "description": "File Transfer Protocol [Control]"
+  },
+  {
+    "service": "ftp",
+    "port": 21,
+    "protocol": "udp",
+    "description": "File Transfer Protocol [Control]"
+  },
+  {
+    "service": "ftp",
+    "port": 21,
+    "protocol": "sctp",
+    "description": "FTP"
+  },
+  {
+    "service": "ssh",
+    "port": 22,
+    "protocol": "tcp",
+    "description": "The Secure Shell (SSH) Protocol"
+  },
+  {
+    "service": "ssh",
+    "port": 22,
+    "protocol": "udp",
+    "description": "The Secure Shell (SSH) Protocol"
+  },
+  {
+    "service": "ssh",
+    "port": 22,
+    "protocol": "sctp",
+    "description": "SSH"
+  },
+  {
+    "service": "telnet",
+    "port": 23,
+    "protocol": "tcp",
+    "description": "Telnet"
+  },
+  {
+    "service": "telnet",
+    "port": 23,
+    "protocol": "udp",
+    "description": "Telnet"
+  },
+  {
+    "service": "",
+    "port": 24,
+    "protocol": "tcp",
+    "description": "any private mail system"
+  },
+  {
+    "service": "",
+    "port": 24,
+    "protocol": "udp",
+    "description": "any private mail system"
+  },
+  {
+    "service": "smtp",
+    "port": 25,
+    "protocol": "tcp",
+    "description": "Simple Mail Transfer"
+  },
+  {
+    "service": "smtp",
+    "port": 25,
+    "protocol": "udp",
+    "description": "Simple Mail Transfer"
+  },
+  {
+    "service": "",
+    "port": 26,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 26,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "nsw-fe",
+    "port": 27,
+    "protocol": "tcp",
+    "description": "NSW User System FE"
+  },
+  {
+    "service": "nsw-fe",
+    "port": 27,
+    "protocol": "udp",
+    "description": "NSW User System FE"
+  },
+  {
+    "service": "",
+    "port": 28,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 28,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "msg-icp",
+    "port": 29,
+    "protocol": "tcp",
+    "description": "MSG ICP"
+  },
+  {
+    "service": "msg-icp",
+    "port": 29,
+    "protocol": "udp",
+    "description": "MSG ICP"
+  },
+  {
+    "service": "",
+    "port": 30,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 30,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "msg-auth",
+    "port": 31,
+    "protocol": "tcp",
+    "description": "MSG Authentication"
+  },
+  {
+    "service": "msg-auth",
+    "port": 31,
+    "protocol": "udp",
+    "description": "MSG Authentication"
+  },
+  {
+    "service": "",
+    "port": 32,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 32,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "dsp",
+    "port": 33,
+    "protocol": "tcp",
+    "description": "Display Support Protocol"
+  },
+  {
+    "service": "dsp",
+    "port": 33,
+    "protocol": "udp",
+    "description": "Display Support Protocol"
+  },
+  {
+    "service": "",
+    "port": 34,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 34,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 35,
+    "protocol": "tcp",
+    "description": "any private printer server"
+  },
+  {
+    "service": "",
+    "port": 35,
+    "protocol": "udp",
+    "description": "any private printer server"
+  },
+  {
+    "service": "",
+    "port": 36,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 36,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "time",
+    "port": 37,
+    "protocol": "tcp",
+    "description": "Time"
+  },
+  {
+    "service": "time",
+    "port": 37,
+    "protocol": "udp",
+    "description": "Time"
+  },
+  {
+    "service": "rap",
+    "port": 38,
+    "protocol": "tcp",
+    "description": "Route Access Protocol"
+  },
+  {
+    "service": "rap",
+    "port": 38,
+    "protocol": "udp",
+    "description": "Route Access Protocol"
+  },
+  {
+    "service": "rlp",
+    "port": 39,
+    "protocol": "tcp",
+    "description": "Resource Location Protocol"
+  },
+  {
+    "service": "rlp",
+    "port": 39,
+    "protocol": "udp",
+    "description": "Resource Location Protocol"
+  },
+  {
+    "service": "",
+    "port": 40,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 40,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "graphics",
+    "port": 41,
+    "protocol": "tcp",
+    "description": "Graphics"
+  },
+  {
+    "service": "graphics",
+    "port": 41,
+    "protocol": "udp",
+    "description": "Graphics"
+  },
+  {
+    "service": "name",
+    "port": 42,
+    "protocol": "tcp",
+    "description": "Host Name Server"
+  },
+  {
+    "service": "name",
+    "port": 42,
+    "protocol": "udp",
+    "description": "Host Name Server"
+  },
+  {
+    "service": "nameserver",
+    "port": 42,
+    "protocol": "tcp",
+    "description": "Host Name Server"
+  },
+  {
+    "service": "nameserver",
+    "port": 42,
+    "protocol": "udp",
+    "description": "Host Name Server"
+  },
+  {
+    "service": "nicname",
+    "port": 43,
+    "protocol": "tcp",
+    "description": "Who Is"
+  },
+  {
+    "service": "nicname",
+    "port": 43,
+    "protocol": "udp",
+    "description": "Who Is"
+  },
+  {
+    "service": "mpm-flags",
+    "port": 44,
+    "protocol": "tcp",
+    "description": "MPM FLAGS Protocol"
+  },
+  {
+    "service": "mpm-flags",
+    "port": 44,
+    "protocol": "udp",
+    "description": "MPM FLAGS Protocol"
+  },
+  {
+    "service": "mpm",
+    "port": 45,
+    "protocol": "tcp",
+    "description": "Message Processing Module [recv]"
+  },
+  {
+    "service": "mpm",
+    "port": 45,
+    "protocol": "udp",
+    "description": "Message Processing Module [recv]"
+  },
+  {
+    "service": "mpm-snd",
+    "port": 46,
+    "protocol": "tcp",
+    "description": "MPM [default send]"
+  },
+  {
+    "service": "mpm-snd",
+    "port": 46,
+    "protocol": "udp",
+    "description": "MPM [default send]"
+  },
+  {
+    "service": "",
+    "port": 47,
+    "protocol": "tcp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 47,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "auditd",
+    "port": 48,
+    "protocol": "tcp",
+    "description": "Digital Audit Daemon"
+  },
+  {
+    "service": "auditd",
+    "port": 48,
+    "protocol": "udp",
+    "description": "Digital Audit Daemon"
+  },
+  {
+    "service": "tacacs",
+    "port": 49,
+    "protocol": "tcp",
+    "description": "Login Host Protocol (TACACS)"
+  },
+  {
+    "service": "tacacs",
+    "port": 49,
+    "protocol": "udp",
+    "description": "Login Host Protocol (TACACS)"
+  },
+  {
+    "service": "re-mail-ck",
+    "port": 50,
+    "protocol": "tcp",
+    "description": "Remote Mail Checking Protocol"
+  },
+  {
+    "service": "re-mail-ck",
+    "port": 50,
+    "protocol": "udp",
+    "description": "Remote Mail Checking Protocol"
+  },
+  {
+    "service": "",
+    "port": 51,
+    "protocol": "",
+    "description": "Reserved"
+  },
+  {
+    "service": "xns-time",
+    "port": 52,
+    "protocol": "tcp",
+    "description": "XNS Time Protocol"
+  },
+  {
+    "service": "xns-time",
+    "port": 52,
+    "protocol": "udp",
+    "description": "XNS Time Protocol"
+  },
+  {
+    "service": "domain",
+    "port": 53,
+    "protocol": "tcp",
+    "description": "Domain Name Server"
+  },
+  {
+    "service": "domain",
+    "port": 53,
+    "protocol": "udp",
+    "description": "Domain Name Server"
+  },
+  {
+    "service": "xns-ch",
+    "port": 54,
+    "protocol": "tcp",
+    "description": "XNS Clearinghouse"
+  },
+  {
+    "service": "xns-ch",
+    "port": 54,
+    "protocol": "udp",
+    "description": "XNS Clearinghouse"
+  },
+  {
+    "service": "isi-gl",
+    "port": 55,
+    "protocol": "tcp",
+    "description": "ISI Graphics Language"
+  },
+  {
+    "service": "isi-gl",
+    "port": 55,
+    "protocol": "udp",
+    "description": "ISI Graphics Language"
+  },
+  {
+    "service": "xns-auth",
+    "port": 56,
+    "protocol": "tcp",
+    "description": "XNS Authentication"
+  },
+  {
+    "service": "xns-auth",
+    "port": 56,
+    "protocol": "udp",
+    "description": "XNS Authentication"
+  },
+  {
+    "service": "",
+    "port": 57,
+    "protocol": "tcp",
+    "description": "any private terminal access"
+  },
+  {
+    "service": "",
+    "port": 57,
+    "protocol": "udp",
+    "description": "any private terminal access"
+  },
+  {
+    "service": "xns-mail",
+    "port": 58,
+    "protocol": "tcp",
+    "description": "XNS Mail"
+  },
+  {
+    "service": "xns-mail",
+    "port": 58,
+    "protocol": "udp",
+    "description": "XNS Mail"
+  },
+  {
+    "service": "",
+    "port": 59,
+    "protocol": "tcp",
+    "description": "any private file service"
+  },
+  {
+    "service": "",
+    "port": 59,
+    "protocol": "udp",
+    "description": "any private file service"
+  },
+  {
+    "service": "",
+    "port": 60,
+    "protocol": "tcp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 60,
+    "protocol": "udp",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 61,
+    "protocol": "tcp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 61,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "acas",
+    "port": 62,
+    "protocol": "tcp",
+    "description": "ACA Services"
+  },
+  {
+    "service": "acas",
+    "port": 62,
+    "protocol": "udp",
+    "description": "ACA Services"
+  },
+  {
+    "service": "whoispp",
+    "port": 63,
+    "protocol": "tcp",
+    "description": "whois++"
+  },
+  {
+    "service": "whois++",
+    "port": 63,
+    "protocol": "tcp",
+    "description": "whois++"
+  },
+  {
+    "service": "whoispp",
+    "port": 63,
+    "protocol": "udp",
+    "description": "whois++"
+  },
+  {
+    "service": "whois++",
+    "port": 63,
+    "protocol": "udp",
+    "description": "whois++"
+  },
+  {
+    "service": "covia",
+    "port": 64,
+    "protocol": "tcp",
+    "description": "Communications Integrator (CI)"
+  },
+  {
+    "service": "covia",
+    "port": 64,
+    "protocol": "udp",
+    "description": "Communications Integrator (CI)"
+  },
+  {
+    "service": "tacacs-ds",
+    "port": 65,
+    "protocol": "tcp",
+    "description": "TACACS-Database Service"
+  },
+  {
+    "service": "tacacs-ds",
+    "port": 65,
+    "protocol": "udp",
+    "description": "TACACS-Database Service"
+  },
+  {
+    "service": "sql-net",
+    "port": 66,
+    "protocol": "tcp",
+    "description": "Oracle SQL*NET"
+  },
+  {
+    "service": "sql*net",
+    "port": 66,
+    "protocol": "tcp",
+    "description": "Oracle SQL*NET"
+  },
+  {
+    "service": "sql-net",
+    "port": 66,
+    "protocol": "udp",
+    "description": "Oracle SQL*NET"
+  },
+  {
+    "service": "sql*net",
+    "port": 66,
+    "protocol": "udp",
+    "description": "Oracle SQL*NET"
+  },
+  {
+    "service": "bootps",
+    "port": 67,
+    "protocol": "tcp",
+    "description": "Bootstrap Protocol Server"
+  },
+  {
+    "service": "bootps",
+    "port": 67,
+    "protocol": "udp",
+    "description": "Bootstrap Protocol Server"
+  },
+  {
+    "service": "bootpc",
+    "port": 68,
+    "protocol": "tcp",
+    "description": "Bootstrap Protocol Client"
+  },
+  {
+    "service": "bootpc",
+    "port": 68,
+    "protocol": "udp",
+    "description": "Bootstrap Protocol Client"
+  },
+  {
+    "service": "tftp",
+    "port": 69,
+    "protocol": "tcp",
+    "description": "Trivial File Transfer"
+  },
+  {
+    "service": "tftp",
+    "port": 69,
+    "protocol": "udp",
+    "description": "Trivial File Transfer"
+  },
+  {
+    "service": "gopher",
+    "port": 70,
+    "protocol": "tcp",
+    "description": "Gopher"
+  },
+  {
+    "service": "gopher",
+    "port": 70,
+    "protocol": "udp",
+    "description": "Gopher"
+  },
+  {
+    "service": "netrjs-1",
+    "port": 71,
+    "protocol": "tcp",
+    "description": "Remote Job Service"
+  },
+  {
+    "service": "netrjs-1",
+    "port": 71,
+    "protocol": "udp",
+    "description": "Remote Job Service"
+  },
+  {
+    "service": "netrjs-2",
+    "port": 72,
+    "protocol": "tcp",
+    "description": "Remote Job Service"
+  },
+  {
+    "service": "netrjs-2",
+    "port": 72,
+    "protocol": "udp",
+    "description": "Remote Job Service"
+  },
+  {
+    "service": "netrjs-3",
+    "port": 73,
+    "protocol": "tcp",
+    "description": "Remote Job Service"
+  },
+  {
+    "service": "netrjs-3",
+    "port": 73,
+    "protocol": "udp",
+    "description": "Remote Job Service"
+  },
+  {
+    "service": "netrjs-4",
+    "port": 74,
+    "protocol": "tcp",
+    "description": "Remote Job Service"
+  },
+  {
+    "service": "netrjs-4",
+    "port": 74,
+    "protocol": "udp",
+    "description": "Remote Job Service"
+  },
+  {
+    "service": "",
+    "port": 75,
+    "protocol": "tcp",
+    "description": "any private dial out service"
+  },
+  {
+    "service": "",
+    "port": 75,
+    "protocol": "udp",
+    "description": "any private dial out service"
+  },
+  {
+    "service": "deos",
+    "port": 76,
+    "protocol": "tcp",
+    "description": "Distributed External Object Store"
+  },
+  {
+    "service": "deos",
+    "port": 76,
+    "protocol": "udp",
+    "description": "Distributed External Object Store"
+  },
+  {
+    "service": "",
+    "port": 77,
+    "protocol": "tcp",
+    "description": "any private RJE service"
+  },
+  {
+    "service": "",
+    "port": 77,
+    "protocol": "udp",
+    "description": "any private RJE service"
+  },
+  {
+    "service": "vettcp",
+    "port": 78,
+    "protocol": "tcp",
+    "description": "vettcp"
+  },
+  {
+    "service": "vettcp",
+    "port": 78,
+    "protocol": "udp",
+    "description": "vettcp"
+  },
+  {
+    "service": "finger",
+    "port": 79,
+    "protocol": "tcp",
+    "description": "Finger"
+  },
+  {
+    "service": "finger",
+    "port": 79,
+    "protocol": "udp",
+    "description": "Finger"
+  },
+  {
+    "service": "http",
+    "port": 80,
+    "protocol": "tcp",
+    "description": "World Wide Web HTTP"
+  },
+  {
+    "service": "http",
+    "port": 80,
+    "protocol": "udp",
+    "description": "World Wide Web HTTP"
+  },
+  {
+    "service": "www",
+    "port": 80,
+    "protocol": "tcp",
+    "description": "World Wide Web HTTP"
+  },
+  {
+    "service": "www",
+    "port": 80,
+    "protocol": "udp",
+    "description": "World Wide Web HTTP"
+  },
+  {
+    "service": "www-http",
+    "port": 80,
+    "protocol": "tcp",
+    "description": "World Wide Web HTTP"
+  },
+  {
+    "service": "www-http",
+    "port": 80,
+    "protocol": "udp",
+    "description": "World Wide Web HTTP"
+  },
+  {
+    "service": "http",
+    "port": 80,
+    "protocol": "sctp",
+    "description": "HTTP"
+  },
+  {
+    "service": "",
+    "port": 81,
+    "protocol": "",
+    "description": "Unassigned"
+  },
+  {
+    "service": "xfer",
+    "port": 82,
+    "protocol": "tcp",
+    "description": "XFER Utility"
+  },
+  {
+    "service": "xfer",
+    "port": 82,
+    "protocol": "udp",
+    "description": "XFER Utility"
+  },
+  {
+    "service": "mit-ml-dev",
+    "port": 83,
+    "protocol": "tcp",
+    "description": "MIT ML Device"
+  },
+  {
+    "service": "mit-ml-dev",
+    "port": 83,
+    "protocol": "udp",
+    "description": "MIT ML Device"
+  },
+  {
+    "service": "ctf",
+    "port": 84,
+    "protocol": "tcp",
+    "description": "Common Trace Facility"
+  },
+  {
+    "service": "ctf",
+    "port": 84,
+    "protocol": "udp",
+    "description": "Common Trace Facility"
+  },
+  {
+    "service": "mit-ml-dev",
+    "port": 85,
+    "protocol": "tcp",
+    "description": "MIT ML Device"
+  },
+  {
+    "service": "mit-ml-dev",
+    "port": 85,
+    "protocol": "udp",
+    "description": "MIT ML Device"
+  },
+  {
+    "service": "mfcobol",
+    "port": 86,
+    "protocol": "tcp",
+    "description": "Micro Focus Cobol"
+  },
+  {
+    "service": "mfcobol",
+    "port": 86,
+    "protocol": "udp",
+    "description": "Micro Focus Cobol"
+  },
+  {
+    "service": "",
+    "port": 87,
+    "protocol": "tcp",
+    "description": "any private terminal link"
+  },
+  {
+    "service": "",
+    "port": 87,
+    "protocol": "udp",
+    "description": "any private terminal link"
+  },
+  {
+    "service": "kerberos",
+    "port": 88,
+    "protocol": "tcp",
+    "description": "Kerberos"
+  },
+  {
+    "service": "kerberos",
+    "port": 88,
+    "protocol": "udp",
+    "description": "Kerberos"
+  },
+  {
+    "service": "su-mit-tg",
+    "port": 89,
+    "protocol": "tcp",
+    "description": "SU/MIT Telnet Gateway"
+  },
+  {
+    "service": "su-mit-tg",
+    "port": 89,
+    "protocol": "udp",
+    "description": "SU/MIT Telnet Gateway"
+  },
+  {
+    "service": "dnsix",
+    "port": 90,
+    "protocol": "tcp",
+    "description": "DNSIX Securit Attribute Token Map"
+  },
+  {
+    "service": "dnsix",
+    "port": 90,
+    "protocol": "udp",
+    "description": "DNSIX Securit Attribute Token Map"
+  },
+  {
+    "service": "mit-dov",
+    "port": 91,
+    "protocol": "tcp",
+    "description": "MIT Dover Spooler"
+  },
+  {
+    "service": "mit-dov",
+    "port": 91,
+    "protocol": "udp",
+    "description": "MIT Dover Spooler"
+  },
+  {
+    "service": "npp",
+    "port": 92,
+    "protocol": "tcp",
+    "description": "Network Printing Protocol"
+  },
+  {
+    "service": "npp",
+    "port": 92,
+    "protocol": "udp",
+    "description": "Network Printing Protocol"
+  },
+  {
+    "service": "dcp",
+    "port": 93,
+    "protocol": "tcp",
+    "description": "Device Control Protocol"
+  },
+  {
+    "service": "dcp",
+    "port": 93,
+    "protocol": "udp",
+    "description": "Device Control Protocol"
+  },
+  {
+    "service": "objcall",
+    "port": 94,
+    "protocol": "tcp",
+    "description": "Tivoli Object Dispatcher"
+  },
+  {
+    "service": "objcall",
+    "port": 94,
+    "protocol": "udp",
+    "description": "Tivoli Object Dispatcher"
+  },
+  {
+    "service": "supdup",
+    "port": 95,
+    "protocol": "tcp",
+    "description": "SUPDUP"
+  },
+  {
+    "service": "supdup",
+    "port": 95,
+    "protocol": "udp",
+    "description": "SUPDUP"
+  },
+  {
+    "service": "dixie",
+    "port": 96,
+    "protocol": "tcp",
+    "description": "DIXIE Protocol Specification"
+  },
+  {
+    "service": "dixie",
+    "port": 96,
+    "protocol": "udp",
+    "description": "DIXIE Protocol Specification"
+  },
+  {
+    "service": "swift-rvf",
+    "port": 97,
+    "protocol": "tcp",
+    "description": "Swift Remote Virtural File Protocol"
+  },
+  {
+    "service": "swift-rvf",
+    "port": 97,
+    "protocol": "udp",
+    "description": "Swift Remote Virtural File Protocol"
+  },
+  {
+    "service": "tacnews",
+    "port": 98,
+    "protocol": "tcp",
+    "description": "TAC News"
+  },
+  {
+    "service": "tacnews",
+    "port": 98,
+    "protocol": "udp",
+    "description": "TAC News"
+  },
+  {
+    "service": "metagram",
+    "port": 99,
+    "protocol": "tcp",
+    "description": "Metagram Relay"
+  },
+  {
+    "service": "metagram",
+    "port": 99,
+    "protocol": "udp",
+    "description": "Metagram Relay"
+  },
+  {
+    "service": "",
+    "port": 100,
+    "protocol": "",
+    "description": "Unassigned"
+  },
+  {
+    "service": "hostname",
+    "port": 101,
+    "protocol": "tcp",
+    "description": "NIC Host Name Server"
+  },
+  {
+    "service": "hostname",
+    "port": 101,
+    "protocol": "udp",
+    "description": "NIC Host Name Server"
+  },
+  {
+    "service": "iso-tsap",
+    "port": 102,
+    "protocol": "tcp",
+    "description": "ISO-TSAP Class 0"
+  },
+  {
+    "service": "iso-tsap",
+    "port": 102,
+    "protocol": "udp",
+    "description": "ISO-TSAP Class 0"
+  },
+  {
+    "service": "gppitnp",
+    "port": 103,
+    "protocol": "tcp",
+    "description": "Genesis Point-to-Point Trans Net"
+  },
+  {
+    "service": "gppitnp",
+    "port": 103,
+    "protocol": "udp",
+    "description": "Genesis Point-to-Point Trans Net"
+  },
+  {
+    "service": "acr-nema",
+    "port": 104,
+    "protocol": "tcp",
+    "description": "ACR-NEMA Digital Imag. & Comm. 300"
+  },
+  {
+    "service": "acr-nema",
+    "port": 104,
+    "protocol": "udp",
+    "description": "ACR-NEMA Digital Imag. & Comm. 300"
+  },
+  {
+    "service": "cso",
+    "port": 105,
+    "protocol": "tcp",
+    "description": "CCSO name server protocol"
+  },
+  {
+    "service": "cso",
+    "port": 105,
+    "protocol": "udp",
+    "description": "CCSO name server protocol"
+  },
+  {
+    "service": "csnet-ns",
+    "port": 105,
+    "protocol": "tcp",
+    "description": "Mailbox Name Nameserver"
+  },
+  {
+    "service": "csnet-ns",
+    "port": 105,
+    "protocol": "udp",
+    "description": "Mailbox Name Nameserver"
+  },
+  {
+    "service": "3com-tsmux",
+    "port": 106,
+    "protocol": "tcp",
+    "description": "3COM-TSMUX"
+  },
+  {
+    "service": "3com-tsmux",
+    "port": 106,
+    "protocol": "udp",
+    "description": "3COM-TSMUX"
+  },
+  {
+    "service": "rtelnet",
+    "port": 107,
+    "protocol": "tcp",
+    "description": "Remote Telnet Service"
+  },
+  {
+    "service": "rtelnet",
+    "port": 107,
+    "protocol": "udp",
+    "description": "Remote Telnet Service"
+  },
+  {
+    "service": "snagas",
+    "port": 108,
+    "protocol": "tcp",
+    "description": "SNA Gateway Access Server"
+  },
+  {
+    "service": "snagas",
+    "port": 108,
+    "protocol": "udp",
+    "description": "SNA Gateway Access Server"
+  },
+  {
+    "service": "pop2",
+    "port": 109,
+    "protocol": "tcp",
+    "description": "Post Office Protocol - Version 2"
+  },
+  {
+    "service": "pop2",
+    "port": 109,
+    "protocol": "udp",
+    "description": "Post Office Protocol - Version 2"
+  },
+  {
+    "service": "pop3",
+    "port": 110,
+    "protocol": "tcp",
+    "description": "Post Office Protocol - Version 3"
+  },
+  {
+    "service": "pop3",
+    "port": 110,
+    "protocol": "udp",
+    "description": "Post Office Protocol - Version 3"
+  },
+  {
+    "service": "sunrpc",
+    "port": 111,
+    "protocol": "tcp",
+    "description": "SUN Remote Procedure Call"
+  },
+  {
+    "service": "sunrpc",
+    "port": 111,
+    "protocol": "udp",
+    "description": "SUN Remote Procedure Call"
+  },
+  {
+    "service": "mcidas",
+    "port": 112,
+    "protocol": "tcp",
+    "description": "McIDAS Data Transmission Protocol"
+  },
+  {
+    "service": "mcidas",
+    "port": 112,
+    "protocol": "udp",
+    "description": "McIDAS Data Transmission Protocol"
+  },
+  {
+    "service": "ident",
+    "port": 113,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "auth",
+    "port": 113,
+    "protocol": "tcp",
+    "description": "Authentication Service"
+  },
+  {
+    "service": "auth",
+    "port": 113,
+    "protocol": "udp",
+    "description": "Authentication Service"
+  },
+  {
+    "service": "",
+    "port": 114,
+    "protocol": "",
+    "description": "unassigned"
+  },
+  {
+    "service": "sftp",
+    "port": 115,
+    "protocol": "tcp",
+    "description": "Simple File Transfer Protocol"
+  },
+  {
+    "service": "sftp",
+    "port": 115,
+    "protocol": "udp",
+    "description": "Simple File Transfer Protocol"
+  },
+  {
+    "service": "ansanotify",
+    "port": 116,
+    "protocol": "tcp",
+    "description": "ANSA REX Notify"
+  },
+  {
+    "service": "ansanotify",
+    "port": 116,
+    "protocol": "udp",
+    "description": "ANSA REX Notify"
+  },
+  {
+    "service": "uucp-path",
+    "port": 117,
+    "protocol": "tcp",
+    "description": "UUCP Path Service"
+  },
+  {
+    "service": "uucp-path",
+    "port": 117,
+    "protocol": "udp",
+    "description": "UUCP Path Service"
+  },
+  {
+    "service": "sqlserv",
+    "port": 118,
+    "protocol": "tcp",
+    "description": "SQL Services"
+  },
+  {
+    "service": "sqlserv",
+    "port": 118,
+    "protocol": "udp",
+    "description": "SQL Services"
+  },
+  {
+    "service": "nntp",
+    "port": 119,
+    "protocol": "tcp",
+    "description": "Network News Transfer Protocol"
+  },
+  {
+    "service": "nntp",
+    "port": 119,
+    "protocol": "udp",
+    "description": "Network News Transfer Protocol"
+  },
+  {
+    "service": "cfdptkt",
+    "port": 120,
+    "protocol": "tcp",
+    "description": "CFDPTKT"
+  },
+  {
+    "service": "cfdptkt",
+    "port": 120,
+    "protocol": "udp",
+    "description": "CFDPTKT"
+  },
+  {
+    "service": "erpc",
+    "port": 121,
+    "protocol": "tcp",
+    "description": "Encore Expedited Remote Pro.Call"
+  },
+  {
+    "service": "erpc",
+    "port": 121,
+    "protocol": "udp",
+    "description": "Encore Expedited Remote Pro.Call"
+  },
+  {
+    "service": "smakynet",
+    "port": 122,
+    "protocol": "tcp",
+    "description": "SMAKYNET"
+  },
+  {
+    "service": "smakynet",
+    "port": 122,
+    "protocol": "udp",
+    "description": "SMAKYNET"
+  },
+  {
+    "service": "ntp",
+    "port": 123,
+    "protocol": "tcp",
+    "description": "Network Time Protocol"
+  },
+  {
+    "service": "ntp",
+    "port": 123,
+    "protocol": "udp",
+    "description": "Network Time Protocol"
+  },
+  {
+    "service": "ansatrader",
+    "port": 124,
+    "protocol": "tcp",
+    "description": "ANSA REX Trader"
+  },
+  {
+    "service": "ansatrader",
+    "port": 124,
+    "protocol": "udp",
+    "description": "ANSA REX Trader"
+  },
+  {
+    "service": "locus-map",
+    "port": 125,
+    "protocol": "tcp",
+    "description": "Locus PC-Interface Net Map Ser"
+  },
+  {
+    "service": "locus-map",
+    "port": 125,
+    "protocol": "udp",
+    "description": "Locus PC-Interface Net Map Ser"
+  },
+  {
+    "service": "nxedit",
+    "port": 126,
+    "protocol": "tcp",
+    "description": "NXEdit"
+  },
+  {
+    "service": "nxedit",
+    "port": 126,
+    "protocol": "udp",
+    "description": "NXEdit"
+  },
+  {
+    "service": "locus-con",
+    "port": 127,
+    "protocol": "tcp",
+    "description": "Locus PC-Interface Conn Server"
+  },
+  {
+    "service": "locus-con",
+    "port": 127,
+    "protocol": "udp",
+    "description": "Locus PC-Interface Conn Server"
+  },
+  {
+    "service": "gss-xlicen",
+    "port": 128,
+    "protocol": "tcp",
+    "description": "GSS X License Verification"
+  },
+  {
+    "service": "gss-xlicen",
+    "port": 128,
+    "protocol": "udp",
+    "description": "GSS X License Verification"
+  },
+  {
+    "service": "pwdgen",
+    "port": 129,
+    "protocol": "tcp",
+    "description": "Password Generator Protocol"
+  },
+  {
+    "service": "pwdgen",
+    "port": 129,
+    "protocol": "udp",
+    "description": "Password Generator Protocol"
+  },
+  {
+    "service": "cisco-fna",
+    "port": 130,
+    "protocol": "tcp",
+    "description": "cisco FNATIVE"
+  },
+  {
+    "service": "cisco-fna",
+    "port": 130,
+    "protocol": "udp",
+    "description": "cisco FNATIVE"
+  },
+  {
+    "service": "cisco-tna",
+    "port": 131,
+    "protocol": "tcp",
+    "description": "cisco TNATIVE"
+  },
+  {
+    "service": "cisco-tna",
+    "port": 131,
+    "protocol": "udp",
+    "description": "cisco TNATIVE"
+  },
+  {
+    "service": "cisco-sys",
+    "port": 132,
+    "protocol": "tcp",
+    "description": "cisco SYSMAINT"
+  },
+  {
+    "service": "cisco-sys",
+    "port": 132,
+    "protocol": "udp",
+    "description": "cisco SYSMAINT"
+  },
+  {
+    "service": "statsrv",
+    "port": 133,
+    "protocol": "tcp",
+    "description": "Statistics Service"
+  },
+  {
+    "service": "statsrv",
+    "port": 133,
+    "protocol": "udp",
+    "description": "Statistics Service"
+  },
+  {
+    "service": "ingres-net",
+    "port": 134,
+    "protocol": "tcp",
+    "description": "INGRES-NET Service"
+  },
+  {
+    "service": "ingres-net",
+    "port": 134,
+    "protocol": "udp",
+    "description": "INGRES-NET Service"
+  },
+  {
+    "service": "epmap",
+    "port": 135,
+    "protocol": "tcp",
+    "description": "DCE endpoint resolution"
+  },
+  {
+    "service": "epmap",
+    "port": 135,
+    "protocol": "udp",
+    "description": "DCE endpoint resolution"
+  },
+  {
+    "service": "profile",
+    "port": 136,
+    "protocol": "tcp",
+    "description": "PROFILE Naming System"
+  },
+  {
+    "service": "profile",
+    "port": 136,
+    "protocol": "udp",
+    "description": "PROFILE Naming System"
+  },
+  {
+    "service": "netbios-ns",
+    "port": 137,
+    "protocol": "tcp",
+    "description": "NETBIOS Name Service"
+  },
+  {
+    "service": "netbios-ns",
+    "port": 137,
+    "protocol": "udp",
+    "description": "NETBIOS Name Service"
+  },
+  {
+    "service": "netbios-dgm",
+    "port": 138,
+    "protocol": "tcp",
+    "description": "NETBIOS Datagram Service"
+  },
+  {
+    "service": "netbios-dgm",
+    "port": 138,
+    "protocol": "udp",
+    "description": "NETBIOS Datagram Service"
+  },
+  {
+    "service": "netbios-ssn",
+    "port": 139,
+    "protocol": "tcp",
+    "description": "NETBIOS Session Service"
+  },
+  {
+    "service": "netbios-ssn",
+    "port": 139,
+    "protocol": "udp",
+    "description": "NETBIOS Session Service"
+  },
+  {
+    "service": "emfis-data",
+    "port": 140,
+    "protocol": "tcp",
+    "description": "EMFIS Data Service"
+  },
+  {
+    "service": "emfis-data",
+    "port": 140,
+    "protocol": "udp",
+    "description": "EMFIS Data Service"
+  },
+  {
+    "service": "emfis-cntl",
+    "port": 141,
+    "protocol": "tcp",
+    "description": "EMFIS Control Service"
+  },
+  {
+    "service": "emfis-cntl",
+    "port": 141,
+    "protocol": "udp",
+    "description": "EMFIS Control Service"
+  },
+  {
+    "service": "bl-idm",
+    "port": 142,
+    "protocol": "tcp",
+    "description": "Britton-Lee IDM"
+  },
+  {
+    "service": "bl-idm",
+    "port": 142,
+    "protocol": "udp",
+    "description": "Britton-Lee IDM"
+  },
+  {
+    "service": "imap",
+    "port": 143,
+    "protocol": "tcp",
+    "description": "Internet Message Access Protocol"
+  },
+  {
+    "service": "",
+    "port": 143,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "uma",
+    "port": 144,
+    "protocol": "tcp",
+    "description": "Universal Management Architecture"
+  },
+  {
+    "service": "uma",
+    "port": 144,
+    "protocol": "udp",
+    "description": "Universal Management Architecture"
+  },
+  {
+    "service": "uaac",
+    "port": 145,
+    "protocol": "tcp",
+    "description": "UAAC Protocol"
+  },
+  {
+    "service": "uaac",
+    "port": 145,
+    "protocol": "udp",
+    "description": "UAAC Protocol"
+  },
+  {
+    "service": "iso-tp0",
+    "port": 146,
+    "protocol": "tcp",
+    "description": "ISO-IP0"
+  },
+  {
+    "service": "iso-tp0",
+    "port": 146,
+    "protocol": "udp",
+    "description": "ISO-IP0"
+  },
+  {
+    "service": "iso-ip",
+    "port": 147,
+    "protocol": "tcp",
+    "description": "ISO-IP"
+  },
+  {
+    "service": "iso-ip",
+    "port": 147,
+    "protocol": "udp",
+    "description": "ISO-IP"
+  },
+  {
+    "service": "jargon",
+    "port": 148,
+    "protocol": "tcp",
+    "description": "Jargon"
+  },
+  {
+    "service": "jargon",
+    "port": 148,
+    "protocol": "udp",
+    "description": "Jargon"
+  },
+  {
+    "service": "aed-512",
+    "port": 149,
+    "protocol": "tcp",
+    "description": "AED 512 Emulation Service"
+  },
+  {
+    "service": "aed-512",
+    "port": 149,
+    "protocol": "udp",
+    "description": "AED 512 Emulation Service"
+  },
+  {
+    "service": "sql-net",
+    "port": 150,
+    "protocol": "tcp",
+    "description": "SQL-NET"
+  },
+  {
+    "service": "sql-net",
+    "port": 150,
+    "protocol": "udp",
+    "description": "SQL-NET"
+  },
+  {
+    "service": "hems",
+    "port": 151,
+    "protocol": "tcp",
+    "description": "HEMS"
+  },
+  {
+    "service": "hems",
+    "port": 151,
+    "protocol": "udp",
+    "description": "HEMS"
+  },
+  {
+    "service": "bftp",
+    "port": 152,
+    "protocol": "tcp",
+    "description": "Background File Transfer Program"
+  },
+  {
+    "service": "bftp",
+    "port": 152,
+    "protocol": "udp",
+    "description": "Background File Transfer Program"
+  },
+  {
+    "service": "sgmp",
+    "port": 153,
+    "protocol": "tcp",
+    "description": "SGMP"
+  },
+  {
+    "service": "sgmp",
+    "port": 153,
+    "protocol": "udp",
+    "description": "SGMP"
+  },
+  {
+    "service": "netsc-prod",
+    "port": 154,
+    "protocol": "tcp",
+    "description": "NETSC"
+  },
+  {
+    "service": "netsc-prod",
+    "port": 154,
+    "protocol": "udp",
+    "description": "NETSC"
+  },
+  {
+    "service": "netsc-dev",
+    "port": 155,
+    "protocol": "tcp",
+    "description": "NETSC"
+  },
+  {
+    "service": "netsc-dev",
+    "port": 155,
+    "protocol": "udp",
+    "description": "NETSC"
+  },
+  {
+    "service": "sqlsrv",
+    "port": 156,
+    "protocol": "tcp",
+    "description": "SQL Service"
+  },
+  {
+    "service": "sqlsrv",
+    "port": 156,
+    "protocol": "udp",
+    "description": "SQL Service"
+  },
+  {
+    "service": "knet-cmp",
+    "port": 157,
+    "protocol": "tcp",
+    "description": "KNET/VM Command/Message Protocol"
+  },
+  {
+    "service": "knet-cmp",
+    "port": 157,
+    "protocol": "udp",
+    "description": "KNET/VM Command/Message Protocol"
+  },
+  {
+    "service": "pcmail-srv",
+    "port": 158,
+    "protocol": "tcp",
+    "description": "PCMail Server"
+  },
+  {
+    "service": "pcmail-srv",
+    "port": 158,
+    "protocol": "udp",
+    "description": "PCMail Server"
+  },
+  {
+    "service": "nss-routing",
+    "port": 159,
+    "protocol": "tcp",
+    "description": "NSS-Routing"
+  },
+  {
+    "service": "nss-routing",
+    "port": 159,
+    "protocol": "udp",
+    "description": "NSS-Routing"
+  },
+  {
+    "service": "sgmp-traps",
+    "port": 160,
+    "protocol": "tcp",
+    "description": "SGMP-TRAPS"
+  },
+  {
+    "service": "sgmp-traps",
+    "port": 160,
+    "protocol": "udp",
+    "description": "SGMP-TRAPS"
+  },
+  {
+    "service": "snmp",
+    "port": 161,
+    "protocol": "tcp",
+    "description": "SNMP"
+  },
+  {
+    "service": "snmp",
+    "port": 161,
+    "protocol": "udp",
+    "description": "SNMP"
+  },
+  {
+    "service": "snmptrap",
+    "port": 162,
+    "protocol": "tcp",
+    "description": "SNMPTRAP"
+  },
+  {
+    "service": "snmptrap",
+    "port": 162,
+    "protocol": "udp",
+    "description": "SNMPTRAP"
+  },
+  {
+    "service": "cmip-man",
+    "port": 163,
+    "protocol": "tcp",
+    "description": "CMIP/TCP Manager"
+  },
+  {
+    "service": "cmip-man",
+    "port": 163,
+    "protocol": "udp",
+    "description": "CMIP/TCP Manager"
+  },
+  {
+    "service": "cmip-agent",
+    "port": 164,
+    "protocol": "tcp",
+    "description": "CMIP/TCP Agent"
+  },
+  {
+    "service": "cmip-agent",
+    "port": 164,
+    "protocol": "udp",
+    "description": "CMIP/TCP Agent"
+  },
+  {
+    "service": "xns-courier",
+    "port": 165,
+    "protocol": "tcp",
+    "description": "Xerox"
+  },
+  {
+    "service": "xns-courier",
+    "port": 165,
+    "protocol": "udp",
+    "description": "Xerox"
+  },
+  {
+    "service": "s-net",
+    "port": 166,
+    "protocol": "tcp",
+    "description": "Sirius Systems"
+  },
+  {
+    "service": "s-net",
+    "port": 166,
+    "protocol": "udp",
+    "description": "Sirius Systems"
+  },
+  {
+    "service": "namp",
+    "port": 167,
+    "protocol": "tcp",
+    "description": "NAMP"
+  },
+  {
+    "service": "namp",
+    "port": 167,
+    "protocol": "udp",
+    "description": "NAMP"
+  },
+  {
+    "service": "rsvd",
+    "port": 168,
+    "protocol": "tcp",
+    "description": "RSVD"
+  },
+  {
+    "service": "rsvd",
+    "port": 168,
+    "protocol": "udp",
+    "description": "RSVD"
+  },
+  {
+    "service": "send",
+    "port": 169,
+    "protocol": "tcp",
+    "description": "SEND"
+  },
+  {
+    "service": "send",
+    "port": 169,
+    "protocol": "udp",
+    "description": "SEND"
+  },
+  {
+    "service": "print-srv",
+    "port": 170,
+    "protocol": "tcp",
+    "description": "Network PostScript"
+  },
+  {
+    "service": "print-srv",
+    "port": 170,
+    "protocol": "udp",
+    "description": "Network PostScript"
+  },
+  {
+    "service": "multiplex",
+    "port": 171,
+    "protocol": "tcp",
+    "description": "Network Innovations Multiplex"
+  },
+  {
+    "service": "multiplex",
+    "port": 171,
+    "protocol": "udp",
+    "description": "Network Innovations Multiplex"
+  },
+  {
+    "service": "cl-1",
+    "port": 172,
+    "protocol": "tcp",
+    "description": "Network Innovations CL/1"
+  },
+  {
+    "service": "cl/1",
+    "port": 172,
+    "protocol": "tcp",
+    "description": "Network Innovations CL/1"
+  },
+  {
+    "service": "cl-1",
+    "port": 172,
+    "protocol": "udp",
+    "description": "Network Innovations CL/1"
+  },
+  {
+    "service": "cl/1",
+    "port": 172,
+    "protocol": "udp",
+    "description": "Network Innovations CL/1"
+  },
+  {
+    "service": "xyplex-mux",
+    "port": 173,
+    "protocol": "tcp",
+    "description": "Xyplex"
+  },
+  {
+    "service": "xyplex-mux",
+    "port": 173,
+    "protocol": "udp",
+    "description": "Xyplex"
+  },
+  {
+    "service": "mailq",
+    "port": 174,
+    "protocol": "tcp",
+    "description": "MAILQ"
+  },
+  {
+    "service": "mailq",
+    "port": 174,
+    "protocol": "udp",
+    "description": "MAILQ"
+  },
+  {
+    "service": "vmnet",
+    "port": 175,
+    "protocol": "tcp",
+    "description": "VMNET"
+  },
+  {
+    "service": "vmnet",
+    "port": 175,
+    "protocol": "udp",
+    "description": "VMNET"
+  },
+  {
+    "service": "genrad-mux",
+    "port": 176,
+    "protocol": "tcp",
+    "description": "GENRAD-MUX"
+  },
+  {
+    "service": "genrad-mux",
+    "port": 176,
+    "protocol": "udp",
+    "description": "GENRAD-MUX"
+  },
+  {
+    "service": "xdmcp",
+    "port": 177,
+    "protocol": "tcp",
+    "description": "X Display Manager Control Protocol"
+  },
+  {
+    "service": "xdmcp",
+    "port": 177,
+    "protocol": "udp",
+    "description": "X Display Manager Control Protocol"
+  },
+  {
+    "service": "nextstep",
+    "port": 178,
+    "protocol": "tcp",
+    "description": "NextStep Window Server"
+  },
+  {
+    "service": "nextstep",
+    "port": 178,
+    "protocol": "udp",
+    "description": "NextStep Window Server"
+  },
+  {
+    "service": "bgp",
+    "port": 179,
+    "protocol": "tcp",
+    "description": "Border Gateway Protocol"
+  },
+  {
+    "service": "bgp",
+    "port": 179,
+    "protocol": "udp",
+    "description": "Border Gateway Protocol"
+  },
+  {
+    "service": "bgp",
+    "port": 179,
+    "protocol": "sctp",
+    "description": "BGP"
+  },
+  {
+    "service": "ris",
+    "port": 180,
+    "protocol": "tcp",
+    "description": "Intergraph"
+  },
+  {
+    "service": "ris",
+    "port": 180,
+    "protocol": "udp",
+    "description": "Intergraph"
+  },
+  {
+    "service": "unify",
+    "port": 181,
+    "protocol": "tcp",
+    "description": "Unify"
+  },
+  {
+    "service": "unify",
+    "port": 181,
+    "protocol": "udp",
+    "description": "Unify"
+  },
+  {
+    "service": "audit",
+    "port": 182,
+    "protocol": "tcp",
+    "description": "Unisys Audit SITP"
+  },
+  {
+    "service": "audit",
+    "port": 182,
+    "protocol": "udp",
+    "description": "Unisys Audit SITP"
+  },
+  {
+    "service": "ocbinder",
+    "port": 183,
+    "protocol": "tcp",
+    "description": "OCBinder"
+  },
+  {
+    "service": "ocbinder",
+    "port": 183,
+    "protocol": "udp",
+    "description": "OCBinder"
+  },
+  {
+    "service": "ocserver",
+    "port": 184,
+    "protocol": "tcp",
+    "description": "OCServer"
+  },
+  {
+    "service": "ocserver",
+    "port": 184,
+    "protocol": "udp",
+    "description": "OCServer"
+  },
+  {
+    "service": "remote-kis",
+    "port": 185,
+    "protocol": "tcp",
+    "description": "Remote-KIS"
+  },
+  {
+    "service": "remote-kis",
+    "port": 185,
+    "protocol": "udp",
+    "description": "Remote-KIS"
+  },
+  {
+    "service": "kis",
+    "port": 186,
+    "protocol": "tcp",
+    "description": "KIS Protocol"
+  },
+  {
+    "service": "kis",
+    "port": 186,
+    "protocol": "udp",
+    "description": "KIS Protocol"
+  },
+  {
+    "service": "aci",
+    "port": 187,
+    "protocol": "tcp",
+    "description": "Application Communication Interface"
+  },
+  {
+    "service": "aci",
+    "port": 187,
+    "protocol": "udp",
+    "description": "Application Communication Interface"
+  },
+  {
+    "service": "mumps",
+    "port": 188,
+    "protocol": "tcp",
+    "description": "Plus Five's MUMPS"
+  },
+  {
+    "service": "mumps",
+    "port": 188,
+    "protocol": "udp",
+    "description": "Plus Five's MUMPS"
+  },
+  {
+    "service": "qft",
+    "port": 189,
+    "protocol": "tcp",
+    "description": "Queued File Transport"
+  },
+  {
+    "service": "qft",
+    "port": 189,
+    "protocol": "udp",
+    "description": "Queued File Transport"
+  },
+  {
+    "service": "gacp",
+    "port": 190,
+    "protocol": "tcp",
+    "description": "Gateway Access Control Protocol"
+  },
+  {
+    "service": "gacp",
+    "port": 190,
+    "protocol": "udp",
+    "description": "Gateway Access Control Protocol"
+  },
+  {
+    "service": "prospero",
+    "port": 191,
+    "protocol": "tcp",
+    "description": "Prospero Directory Service"
+  },
+  {
+    "service": "prospero",
+    "port": 191,
+    "protocol": "udp",
+    "description": "Prospero Directory Service"
+  },
+  {
+    "service": "osu-nms",
+    "port": 192,
+    "protocol": "tcp",
+    "description": "OSU Network Monitoring System"
+  },
+  {
+    "service": "osu-nms",
+    "port": 192,
+    "protocol": "udp",
+    "description": "OSU Network Monitoring System"
+  },
+  {
+    "service": "srmp",
+    "port": 193,
+    "protocol": "tcp",
+    "description": "Spider Remote Monitoring Protocol"
+  },
+  {
+    "service": "srmp",
+    "port": 193,
+    "protocol": "udp",
+    "description": "Spider Remote Monitoring Protocol"
+  },
+  {
+    "service": "irc",
+    "port": 194,
+    "protocol": "tcp",
+    "description": "Internet Relay Chat Protocol"
+  },
+  {
+    "service": "irc",
+    "port": 194,
+    "protocol": "udp",
+    "description": "Internet Relay Chat Protocol"
+  },
+  {
+    "service": "dn6-nlm-aud",
+    "port": 195,
+    "protocol": "tcp",
+    "description": "DNSIX Network Level Module Audit"
+  },
+  {
+    "service": "dn6-nlm-aud",
+    "port": 195,
+    "protocol": "udp",
+    "description": "DNSIX Network Level Module Audit"
+  },
+  {
+    "service": "dn6-smm-red",
+    "port": 196,
+    "protocol": "tcp",
+    "description": "DNSIX Session Mgt Module Audit Redir"
+  },
+  {
+    "service": "dn6-smm-red",
+    "port": 196,
+    "protocol": "udp",
+    "description": "DNSIX Session Mgt Module Audit Redir"
+  },
+  {
+    "service": "dls",
+    "port": 197,
+    "protocol": "tcp",
+    "description": "Directory Location Service"
+  },
+  {
+    "service": "dls",
+    "port": 197,
+    "protocol": "udp",
+    "description": "Directory Location Service"
+  },
+  {
+    "service": "dls-mon",
+    "port": 198,
+    "protocol": "tcp",
+    "description": "Directory Location Service Monitor"
+  },
+  {
+    "service": "dls-mon",
+    "port": 198,
+    "protocol": "udp",
+    "description": "Directory Location Service Monitor"
+  },
+  {
+    "service": "smux",
+    "port": 199,
+    "protocol": "tcp",
+    "description": "SMUX"
+  },
+  {
+    "service": "smux",
+    "port": 199,
+    "protocol": "udp",
+    "description": "SMUX"
+  },
+  {
+    "service": "src",
+    "port": 200,
+    "protocol": "tcp",
+    "description": "IBM System Resource Controller"
+  },
+  {
+    "service": "src",
+    "port": 200,
+    "protocol": "udp",
+    "description": "IBM System Resource Controller"
+  },
+  {
+    "service": "at-rtmp",
+    "port": 201,
+    "protocol": "tcp",
+    "description": "AppleTalk Routing Maintenance"
+  },
+  {
+    "service": "at-rtmp",
+    "port": 201,
+    "protocol": "udp",
+    "description": "AppleTalk Routing Maintenance"
+  },
+  {
+    "service": "at-nbp",
+    "port": 202,
+    "protocol": "tcp",
+    "description": "AppleTalk Name Binding"
+  },
+  {
+    "service": "at-nbp",
+    "port": 202,
+    "protocol": "udp",
+    "description": "AppleTalk Name Binding"
+  },
+  {
+    "service": "at-3",
+    "port": 203,
+    "protocol": "tcp",
+    "description": "AppleTalk Unused"
+  },
+  {
+    "service": "at-3",
+    "port": 203,
+    "protocol": "udp",
+    "description": "AppleTalk Unused"
+  },
+  {
+    "service": "at-echo",
+    "port": 204,
+    "protocol": "tcp",
+    "description": "AppleTalk Echo"
+  },
+  {
+    "service": "at-echo",
+    "port": 204,
+    "protocol": "udp",
+    "description": "AppleTalk Echo"
+  },
+  {
+    "service": "at-5",
+    "port": 205,
+    "protocol": "tcp",
+    "description": "AppleTalk Unused"
+  },
+  {
+    "service": "at-5",
+    "port": 205,
+    "protocol": "udp",
+    "description": "AppleTalk Unused"
+  },
+  {
+    "service": "at-zis",
+    "port": 206,
+    "protocol": "tcp",
+    "description": "AppleTalk Zone Information"
+  },
+  {
+    "service": "at-zis",
+    "port": 206,
+    "protocol": "udp",
+    "description": "AppleTalk Zone Information"
+  },
+  {
+    "service": "at-7",
+    "port": 207,
+    "protocol": "tcp",
+    "description": "AppleTalk Unused"
+  },
+  {
+    "service": "at-7",
+    "port": 207,
+    "protocol": "udp",
+    "description": "AppleTalk Unused"
+  },
+  {
+    "service": "at-8",
+    "port": 208,
+    "protocol": "tcp",
+    "description": "AppleTalk Unused"
+  },
+  {
+    "service": "at-8",
+    "port": 208,
+    "protocol": "udp",
+    "description": "AppleTalk Unused"
+  },
+  {
+    "service": "qmtp",
+    "port": 209,
+    "protocol": "tcp",
+    "description": "The Quick Mail Transfer Protocol"
+  },
+  {
+    "service": "qmtp",
+    "port": 209,
+    "protocol": "udp",
+    "description": "The Quick Mail Transfer Protocol"
+  },
+  {
+    "service": "z39-50",
+    "port": 210,
+    "protocol": "tcp",
+    "description": "ANSI Z39.50"
+  },
+  {
+    "service": "z39.50",
+    "port": 210,
+    "protocol": "tcp",
+    "description": "ANSI Z39.50"
+  },
+  {
+    "service": "z39-50",
+    "port": 210,
+    "protocol": "udp",
+    "description": "ANSI Z39.50"
+  },
+  {
+    "service": "z39.50",
+    "port": 210,
+    "protocol": "udp",
+    "description": "ANSI Z39.50"
+  },
+  {
+    "service": "914c-g",
+    "port": 211,
+    "protocol": "tcp",
+    "description": "Texas Instruments 914C/G Terminal"
+  },
+  {
+    "service": "914c/g",
+    "port": 211,
+    "protocol": "tcp",
+    "description": "Texas Instruments 914C/G Terminal"
+  },
+  {
+    "service": "914c-g",
+    "port": 211,
+    "protocol": "udp",
+    "description": "Texas Instruments 914C/G Terminal"
+  },
+  {
+    "service": "914c/g",
+    "port": 211,
+    "protocol": "udp",
+    "description": "Texas Instruments 914C/G Terminal"
+  },
+  {
+    "service": "anet",
+    "port": 212,
+    "protocol": "tcp",
+    "description": "ATEXSSTR"
+  },
+  {
+    "service": "anet",
+    "port": 212,
+    "protocol": "udp",
+    "description": "ATEXSSTR"
+  },
+  {
+    "service": "ipx",
+    "port": 213,
+    "protocol": "tcp",
+    "description": "IPX"
+  },
+  {
+    "service": "ipx",
+    "port": 213,
+    "protocol": "udp",
+    "description": "IPX"
+  },
+  {
+    "service": "vmpwscs",
+    "port": 214,
+    "protocol": "tcp",
+    "description": "VM PWSCS"
+  },
+  {
+    "service": "vmpwscs",
+    "port": 214,
+    "protocol": "udp",
+    "description": "VM PWSCS"
+  },
+  {
+    "service": "softpc",
+    "port": 215,
+    "protocol": "tcp",
+    "description": "Insignia Solutions"
+  },
+  {
+    "service": "softpc",
+    "port": 215,
+    "protocol": "udp",
+    "description": "Insignia Solutions"
+  },
+  {
+    "service": "CAIlic",
+    "port": 216,
+    "protocol": "tcp",
+    "description": "Computer Associates Int'l License Server"
+  },
+  {
+    "service": "CAIlic",
+    "port": 216,
+    "protocol": "udp",
+    "description": "Computer Associates Int'l License Server"
+  },
+  {
+    "service": "dbase",
+    "port": 217,
+    "protocol": "tcp",
+    "description": "dBASE Unix"
+  },
+  {
+    "service": "dbase",
+    "port": 217,
+    "protocol": "udp",
+    "description": "dBASE Unix"
+  },
+  {
+    "service": "mpp",
+    "port": 218,
+    "protocol": "tcp",
+    "description": "Netix Message Posting Protocol"
+  },
+  {
+    "service": "mpp",
+    "port": 218,
+    "protocol": "udp",
+    "description": "Netix Message Posting Protocol"
+  },
+  {
+    "service": "uarps",
+    "port": 219,
+    "protocol": "tcp",
+    "description": "Unisys ARPs"
+  },
+  {
+    "service": "uarps",
+    "port": 219,
+    "protocol": "udp",
+    "description": "Unisys ARPs"
+  },
+  {
+    "service": "imap3",
+    "port": 220,
+    "protocol": "tcp",
+    "description": "Interactive Mail Access Protocol v3"
+  },
+  {
+    "service": "imap3",
+    "port": 220,
+    "protocol": "udp",
+    "description": "Interactive Mail Access Protocol v3"
+  },
+  {
+    "service": "fln-spx",
+    "port": 221,
+    "protocol": "tcp",
+    "description": "Berkeley rlogind with SPX auth"
+  },
+  {
+    "service": "fln-spx",
+    "port": 221,
+    "protocol": "udp",
+    "description": "Berkeley rlogind with SPX auth"
+  },
+  {
+    "service": "rsh-spx",
+    "port": 222,
+    "protocol": "tcp",
+    "description": "Berkeley rshd with SPX auth"
+  },
+  {
+    "service": "rsh-spx",
+    "port": 222,
+    "protocol": "udp",
+    "description": "Berkeley rshd with SPX auth"
+  },
+  {
+    "service": "cdc",
+    "port": 223,
+    "protocol": "tcp",
+    "description": "Certificate Distribution Center"
+  },
+  {
+    "service": "cdc",
+    "port": 223,
+    "protocol": "udp",
+    "description": "Certificate Distribution Center"
+  },
+  {
+    "service": "masqdialer",
+    "port": 224,
+    "protocol": "tcp",
+    "description": "masqdialer"
+  },
+  {
+    "service": "masqdialer",
+    "port": 224,
+    "protocol": "udp",
+    "description": "masqdialer"
+  },
+  {
+    "service": "direct",
+    "port": 242,
+    "protocol": "tcp",
+    "description": "Direct"
+  },
+  {
+    "service": "direct",
+    "port": 242,
+    "protocol": "udp",
+    "description": "Direct"
+  },
+  {
+    "service": "sur-meas",
+    "port": 243,
+    "protocol": "tcp",
+    "description": "Survey Measurement"
+  },
+  {
+    "service": "sur-meas",
+    "port": 243,
+    "protocol": "udp",
+    "description": "Survey Measurement"
+  },
+  {
+    "service": "inbusiness",
+    "port": 244,
+    "protocol": "tcp",
+    "description": "inbusiness"
+  },
+  {
+    "service": "inbusiness",
+    "port": 244,
+    "protocol": "udp",
+    "description": "inbusiness"
+  },
+  {
+    "service": "link",
+    "port": 245,
+    "protocol": "tcp",
+    "description": "LINK"
+  },
+  {
+    "service": "link",
+    "port": 245,
+    "protocol": "udp",
+    "description": "LINK"
+  },
+  {
+    "service": "dsp3270",
+    "port": 246,
+    "protocol": "tcp",
+    "description": "Display Systems Protocol"
+  },
+  {
+    "service": "dsp3270",
+    "port": 246,
+    "protocol": "udp",
+    "description": "Display Systems Protocol"
+  },
+  {
+    "service": "subntbcst-tftp",
+    "port": 247,
+    "protocol": "tcp",
+    "description": "SUBNTBCST_TFTP"
+  },
+  {
+    "service": "subntbcst_tftp",
+    "port": 247,
+    "protocol": "tcp",
+    "description": "SUBNTBCST_TFTP"
+  },
+  {
+    "service": "subntbcst-tftp",
+    "port": 247,
+    "protocol": "udp",
+    "description": "SUBNTBCST_TFTP"
+  },
+  {
+    "service": "subntbcst_tftp",
+    "port": 247,
+    "protocol": "udp",
+    "description": "SUBNTBCST_TFTP"
+  },
+  {
+    "service": "bhfhs",
+    "port": 248,
+    "protocol": "tcp",
+    "description": "bhfhs"
+  },
+  {
+    "service": "bhfhs",
+    "port": 248,
+    "protocol": "udp",
+    "description": "bhfhs"
+  },
+  {
+    "service": "rap",
+    "port": 256,
+    "protocol": "tcp",
+    "description": "RAP"
+  },
+  {
+    "service": "rap",
+    "port": 256,
+    "protocol": "udp",
+    "description": "RAP"
+  },
+  {
+    "service": "set",
+    "port": 257,
+    "protocol": "tcp",
+    "description": "Secure Electronic Transaction"
+  },
+  {
+    "service": "set",
+    "port": 257,
+    "protocol": "udp",
+    "description": "Secure Electronic Transaction"
+  },
+  {
+    "service": "",
+    "port": 258,
+    "protocol": "",
+    "description": "Unassigned"
+  },
+  {
+    "service": "esro-gen",
+    "port": 259,
+    "protocol": "tcp",
+    "description": "Efficient Short Remote Operations"
+  },
+  {
+    "service": "esro-gen",
+    "port": 259,
+    "protocol": "udp",
+    "description": "Efficient Short Remote Operations"
+  },
+  {
+    "service": "openport",
+    "port": 260,
+    "protocol": "tcp",
+    "description": "Openport"
+  },
+  {
+    "service": "openport",
+    "port": 260,
+    "protocol": "udp",
+    "description": "Openport"
+  },
+  {
+    "service": "nsiiops",
+    "port": 261,
+    "protocol": "tcp",
+    "description": "IIOP Name Service over TLS/SSL"
+  },
+  {
+    "service": "nsiiops",
+    "port": 261,
+    "protocol": "udp",
+    "description": "IIOP Name Service over TLS/SSL"
+  },
+  {
+    "service": "arcisdms",
+    "port": 262,
+    "protocol": "tcp",
+    "description": "Arcisdms"
+  },
+  {
+    "service": "arcisdms",
+    "port": 262,
+    "protocol": "udp",
+    "description": "Arcisdms"
+  },
+  {
+    "service": "hdap",
+    "port": 263,
+    "protocol": "tcp",
+    "description": "HDAP"
+  },
+  {
+    "service": "hdap",
+    "port": 263,
+    "protocol": "udp",
+    "description": "HDAP"
+  },
+  {
+    "service": "bgmp",
+    "port": 264,
+    "protocol": "tcp",
+    "description": "BGMP"
+  },
+  {
+    "service": "bgmp",
+    "port": 264,
+    "protocol": "udp",
+    "description": "BGMP"
+  },
+  {
+    "service": "x-bone-ctl",
+    "port": 265,
+    "protocol": "tcp",
+    "description": "X-Bone CTL"
+  },
+  {
+    "service": "x-bone-ctl",
+    "port": 265,
+    "protocol": "udp",
+    "description": "X-Bone CTL"
+  },
+  {
+    "service": "sst",
+    "port": 266,
+    "protocol": "tcp",
+    "description": "SCSI on ST"
+  },
+  {
+    "service": "sst",
+    "port": 266,
+    "protocol": "udp",
+    "description": "SCSI on ST"
+  },
+  {
+    "service": "td-service",
+    "port": 267,
+    "protocol": "tcp",
+    "description": "Tobit David Service Layer"
+  },
+  {
+    "service": "td-service",
+    "port": 267,
+    "protocol": "udp",
+    "description": "Tobit David Service Layer"
+  },
+  {
+    "service": "td-replica",
+    "port": 268,
+    "protocol": "tcp",
+    "description": "Tobit David Replica"
+  },
+  {
+    "service": "td-replica",
+    "port": 268,
+    "protocol": "udp",
+    "description": "Tobit David Replica"
+  },
+  {
+    "service": "manet",
+    "port": 269,
+    "protocol": "tcp",
+    "description": "MANET Protocols"
+  },
+  {
+    "service": "manet",
+    "port": 269,
+    "protocol": "udp",
+    "description": "MANET Protocols"
+  },
+  {
+    "service": "",
+    "port": 270,
+    "protocol": "tcp",
+    "description": "Reserved"
+  },
+  {
+    "service": "gist",
+    "port": 270,
+    "protocol": "udp",
+    "description": "Q-mode encapsulation for GIST messages"
+  },
+  {
+    "service": "pt-tls",
+    "port": 271,
+    "protocol": "tcp",
+    "description": "IETF Network Endpoint Assessment (NEA) Posture Transport Protocol over TLS (PT-TLS)"
+  },
+  {
+    "service": "",
+    "port": 271,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "http-mgmt",
+    "port": 280,
+    "protocol": "tcp",
+    "description": "http-mgmt"
+  },
+  {
+    "service": "http-mgmt",
+    "port": 280,
+    "protocol": "udp",
+    "description": "http-mgmt"
+  },
+  {
+    "service": "personal-link",
+    "port": 281,
+    "protocol": "tcp",
+    "description": "Personal Link"
+  },
+  {
+    "service": "personal-link",
+    "port": 281,
+    "protocol": "udp",
+    "description": "Personal Link"
+  },
+  {
+    "service": "cableport-ax",
+    "port": 282,
+    "protocol": "tcp",
+    "description": "Cable Port A/X"
+  },
+  {
+    "service": "cableport-ax",
+    "port": 282,
+    "protocol": "udp",
+    "description": "Cable Port A/X"
+  },
+  {
+    "service": "rescap",
+    "port": 283,
+    "protocol": "tcp",
+    "description": "rescap"
+  },
+  {
+    "service": "rescap",
+    "port": 283,
+    "protocol": "udp",
+    "description": "rescap"
+  },
+  {
+    "service": "corerjd",
+    "port": 284,
+    "protocol": "tcp",
+    "description": "corerjd"
+  },
+  {
+    "service": "corerjd",
+    "port": 284,
+    "protocol": "udp",
+    "description": "corerjd"
+  },
+  {
+    "service": "",
+    "port": 285,
+    "protocol": "",
+    "description": "Unassigned"
+  },
+  {
+    "service": "fxp",
+    "port": 286,
+    "protocol": "tcp",
+    "description": "FXP Communication"
+  },
+  {
+    "service": "fxp",
+    "port": 286,
+    "protocol": "udp",
+    "description": "FXP Communication"
+  },
+  {
+    "service": "k-block",
+    "port": 287,
+    "protocol": "tcp",
+    "description": "K-BLOCK"
+  },
+  {
+    "service": "k-block",
+    "port": 287,
+    "protocol": "udp",
+    "description": "K-BLOCK"
+  },
+  {
+    "service": "tacacss",
+    "port": 300,
+    "protocol": "tcp",
+    "description": "TLS Secure Login Host Protocol (TACACSS)"
+  },
+  {
+    "service": "",
+    "port": 300,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "novastorbakcup",
+    "port": 308,
+    "protocol": "tcp",
+    "description": "Novastor Backup"
+  },
+  {
+    "service": "novastorbakcup",
+    "port": 308,
+    "protocol": "udp",
+    "description": "Novastor Backup"
+  },
+  {
+    "service": "entrusttime",
+    "port": 309,
+    "protocol": "tcp",
+    "description": "EntrustTime"
+  },
+  {
+    "service": "entrusttime",
+    "port": 309,
+    "protocol": "udp",
+    "description": "EntrustTime"
+  },
+  {
+    "service": "bhmds",
+    "port": 310,
+    "protocol": "tcp",
+    "description": "bhmds"
+  },
+  {
+    "service": "bhmds",
+    "port": 310,
+    "protocol": "udp",
+    "description": "bhmds"
+  },
+  {
+    "service": "asip-webadmin",
+    "port": 311,
+    "protocol": "tcp",
+    "description": "AppleShare IP WebAdmin"
+  },
+  {
+    "service": "asip-webadmin",
+    "port": 311,
+    "protocol": "udp",
+    "description": "AppleShare IP WebAdmin"
+  },
+  {
+    "service": "vslmp",
+    "port": 312,
+    "protocol": "tcp",
+    "description": "VSLMP"
+  },
+  {
+    "service": "vslmp",
+    "port": 312,
+    "protocol": "udp",
+    "description": "VSLMP"
+  },
+  {
+    "service": "magenta-logic",
+    "port": 313,
+    "protocol": "tcp",
+    "description": "Magenta Logic"
+  },
+  {
+    "service": "magenta-logic",
+    "port": 313,
+    "protocol": "udp",
+    "description": "Magenta Logic"
+  },
+  {
+    "service": "opalis-robot",
+    "port": 314,
+    "protocol": "tcp",
+    "description": "Opalis Robot"
+  },
+  {
+    "service": "opalis-robot",
+    "port": 314,
+    "protocol": "udp",
+    "description": "Opalis Robot"
+  },
+  {
+    "service": "dpsi",
+    "port": 315,
+    "protocol": "tcp",
+    "description": "DPSI"
+  },
+  {
+    "service": "dpsi",
+    "port": 315,
+    "protocol": "udp",
+    "description": "DPSI"
+  },
+  {
+    "service": "decauth",
+    "port": 316,
+    "protocol": "tcp",
+    "description": "decAuth"
+  },
+  {
+    "service": "decauth",
+    "port": 316,
+    "protocol": "udp",
+    "description": "decAuth"
+  },
+  {
+    "service": "zannet",
+    "port": 317,
+    "protocol": "tcp",
+    "description": "Zannet"
+  },
+  {
+    "service": "zannet",
+    "port": 317,
+    "protocol": "udp",
+    "description": "Zannet"
+  },
+  {
+    "service": "pkix-timestamp",
+    "port": 318,
+    "protocol": "tcp",
+    "description": "PKIX TimeStamp"
+  },
+  {
+    "service": "pkix-timestamp",
+    "port": 318,
+    "protocol": "udp",
+    "description": "PKIX TimeStamp"
+  },
+  {
+    "service": "ptp-event",
+    "port": 319,
+    "protocol": "tcp",
+    "description": "PTP Event"
+  },
+  {
+    "service": "ptp-event",
+    "port": 319,
+    "protocol": "udp",
+    "description": "PTP Event"
+  },
+  {
+    "service": "ptp-general",
+    "port": 320,
+    "protocol": "tcp",
+    "description": "PTP General"
+  },
+  {
+    "service": "ptp-general",
+    "port": 320,
+    "protocol": "udp",
+    "description": "PTP General"
+  },
+  {
+    "service": "pip",
+    "port": 321,
+    "protocol": "tcp",
+    "description": "PIP"
+  },
+  {
+    "service": "pip",
+    "port": 321,
+    "protocol": "udp",
+    "description": "PIP"
+  },
+  {
+    "service": "rtsps",
+    "port": 322,
+    "protocol": "tcp",
+    "description": "RTSPS"
+  },
+  {
+    "service": "rtsps",
+    "port": 322,
+    "protocol": "udp",
+    "description": "RTSPS"
+  },
+  {
+    "service": "rpki-rtr",
+    "port": 323,
+    "protocol": "tcp",
+    "description": "Resource PKI to Router Protocol"
+  },
+  {
+    "service": "",
+    "port": 323,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "rpki-rtr-tls",
+    "port": 324,
+    "protocol": "tcp",
+    "description": "Resource PKI to Router Protocol over TLS"
+  },
+  {
+    "service": "",
+    "port": 324,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "texar",
+    "port": 333,
+    "protocol": "tcp",
+    "description": "Texar Security Port"
+  },
+  {
+    "service": "texar",
+    "port": 333,
+    "protocol": "udp",
+    "description": "Texar Security Port"
+  },
+  {
+    "service": "pdap",
+    "port": 344,
+    "protocol": "tcp",
+    "description": "Prospero Data Access Protocol"
+  },
+  {
+    "service": "pdap",
+    "port": 344,
+    "protocol": "udp",
+    "description": "Prospero Data Access Protocol"
+  },
+  {
+    "service": "pawserv",
+    "port": 345,
+    "protocol": "tcp",
+    "description": "Perf Analysis Workbench"
+  },
+  {
+    "service": "pawserv",
+    "port": 345,
+    "protocol": "udp",
+    "description": "Perf Analysis Workbench"
+  },
+  {
+    "service": "zserv",
+    "port": 346,
+    "protocol": "tcp",
+    "description": "Zebra server"
+  },
+  {
+    "service": "zserv",
+    "port": 346,
+    "protocol": "udp",
+    "description": "Zebra server"
+  },
+  {
+    "service": "fatserv",
+    "port": 347,
+    "protocol": "tcp",
+    "description": "Fatmen Server"
+  },
+  {
+    "service": "fatserv",
+    "port": 347,
+    "protocol": "udp",
+    "description": "Fatmen Server"
+  },
+  {
+    "service": "csi-sgwp",
+    "port": 348,
+    "protocol": "tcp",
+    "description": "Cabletron Management Protocol"
+  },
+  {
+    "service": "csi-sgwp",
+    "port": 348,
+    "protocol": "udp",
+    "description": "Cabletron Management Protocol"
+  },
+  {
+    "service": "mftp",
+    "port": 349,
+    "protocol": "tcp",
+    "description": "mftp"
+  },
+  {
+    "service": "mftp",
+    "port": 349,
+    "protocol": "udp",
+    "description": "mftp"
+  },
+  {
+    "service": "matip-type-a",
+    "port": 350,
+    "protocol": "tcp",
+    "description": "MATIP Type A"
+  },
+  {
+    "service": "matip-type-a",
+    "port": 350,
+    "protocol": "udp",
+    "description": "MATIP Type A"
+  },
+  {
+    "service": "matip-type-b",
+    "port": 351,
+    "protocol": "tcp",
+    "description": "MATIP Type B"
+  },
+  {
+    "service": "matip-type-b",
+    "port": 351,
+    "protocol": "udp",
+    "description": "MATIP Type B"
+  },
+  {
+    "service": "bhoetty",
+    "port": 351,
+    "protocol": "tcp",
+    "description": "bhoetty"
+  },
+  {
+    "service": "bhoetty",
+    "port": 351,
+    "protocol": "udp",
+    "description": "bhoetty"
+  },
+  {
+    "service": "dtag-ste-sb",
+    "port": 352,
+    "protocol": "tcp",
+    "description": "DTAG"
+  },
+  {
+    "service": "dtag-ste-sb",
+    "port": 352,
+    "protocol": "udp",
+    "description": "DTAG"
+  },
+  {
+    "service": "bhoedap4",
+    "port": 352,
+    "protocol": "tcp",
+    "description": "bhoedap4"
+  },
+  {
+    "service": "bhoedap4",
+    "port": 352,
+    "protocol": "udp",
+    "description": "bhoedap4"
+  },
+  {
+    "service": "ndsauth",
+    "port": 353,
+    "protocol": "tcp",
+    "description": "NDSAUTH"
+  },
+  {
+    "service": "ndsauth",
+    "port": 353,
+    "protocol": "udp",
+    "description": "NDSAUTH"
+  },
+  {
+    "service": "bh611",
+    "port": 354,
+    "protocol": "tcp",
+    "description": "bh611"
+  },
+  {
+    "service": "bh611",
+    "port": 354,
+    "protocol": "udp",
+    "description": "bh611"
+  },
+  {
+    "service": "datex-asn",
+    "port": 355,
+    "protocol": "tcp",
+    "description": "DATEX-ASN"
+  },
+  {
+    "service": "datex-asn",
+    "port": 355,
+    "protocol": "udp",
+    "description": "DATEX-ASN"
+  },
+  {
+    "service": "cloanto-net-1",
+    "port": 356,
+    "protocol": "tcp",
+    "description": "Cloanto Net 1"
+  },
+  {
+    "service": "cloanto-net-1",
+    "port": 356,
+    "protocol": "udp",
+    "description": "Cloanto Net 1"
+  },
+  {
+    "service": "bhevent",
+    "port": 357,
+    "protocol": "tcp",
+    "description": "bhevent"
+  },
+  {
+    "service": "bhevent",
+    "port": 357,
+    "protocol": "udp",
+    "description": "bhevent"
+  },
+  {
+    "service": "shrinkwrap",
+    "port": 358,
+    "protocol": "tcp",
+    "description": "Shrinkwrap"
+  },
+  {
+    "service": "shrinkwrap",
+    "port": 358,
+    "protocol": "udp",
+    "description": "Shrinkwrap"
+  },
+  {
+    "service": "",
+    "port": 359,
+    "protocol": "tcp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 359,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "scoi2odialog",
+    "port": 360,
+    "protocol": "tcp",
+    "description": "scoi2odialog"
+  },
+  {
+    "service": "scoi2odialog",
+    "port": 360,
+    "protocol": "udp",
+    "description": "scoi2odialog"
+  },
+  {
+    "service": "semantix",
+    "port": 361,
+    "protocol": "tcp",
+    "description": "Semantix"
+  },
+  {
+    "service": "semantix",
+    "port": 361,
+    "protocol": "udp",
+    "description": "Semantix"
+  },
+  {
+    "service": "srssend",
+    "port": 362,
+    "protocol": "tcp",
+    "description": "SRS Send"
+  },
+  {
+    "service": "srssend",
+    "port": 362,
+    "protocol": "udp",
+    "description": "SRS Send"
+  },
+  {
+    "service": "rsvp-tunnel",
+    "port": 363,
+    "protocol": "tcp",
+    "description": "RSVP Tunnel"
+  },
+  {
+    "service": "rsvp_tunnel",
+    "port": 363,
+    "protocol": "tcp",
+    "description": "RSVP Tunnel"
+  },
+  {
+    "service": "rsvp-tunnel",
+    "port": 363,
+    "protocol": "udp",
+    "description": "RSVP Tunnel"
+  },
+  {
+    "service": "rsvp_tunnel",
+    "port": 363,
+    "protocol": "udp",
+    "description": "RSVP Tunnel"
+  },
+  {
+    "service": "aurora-cmgr",
+    "port": 364,
+    "protocol": "tcp",
+    "description": "Aurora CMGR"
+  },
+  {
+    "service": "aurora-cmgr",
+    "port": 364,
+    "protocol": "udp",
+    "description": "Aurora CMGR"
+  },
+  {
+    "service": "dtk",
+    "port": 365,
+    "protocol": "tcp",
+    "description": "DTK"
+  },
+  {
+    "service": "dtk",
+    "port": 365,
+    "protocol": "udp",
+    "description": "DTK"
+  },
+  {
+    "service": "odmr",
+    "port": 366,
+    "protocol": "tcp",
+    "description": "ODMR"
+  },
+  {
+    "service": "odmr",
+    "port": 366,
+    "protocol": "udp",
+    "description": "ODMR"
+  },
+  {
+    "service": "mortgageware",
+    "port": 367,
+    "protocol": "tcp",
+    "description": "MortgageWare"
+  },
+  {
+    "service": "mortgageware",
+    "port": 367,
+    "protocol": "udp",
+    "description": "MortgageWare"
+  },
+  {
+    "service": "qbikgdp",
+    "port": 368,
+    "protocol": "tcp",
+    "description": "QbikGDP"
+  },
+  {
+    "service": "qbikgdp",
+    "port": 368,
+    "protocol": "udp",
+    "description": "QbikGDP"
+  },
+  {
+    "service": "rpc2portmap",
+    "port": 369,
+    "protocol": "tcp",
+    "description": "rpc2portmap"
+  },
+  {
+    "service": "rpc2portmap",
+    "port": 369,
+    "protocol": "udp",
+    "description": "rpc2portmap"
+  },
+  {
+    "service": "codaauth2",
+    "port": 370,
+    "protocol": "tcp",
+    "description": "codaauth2"
+  },
+  {
+    "service": "codaauth2",
+    "port": 370,
+    "protocol": "udp",
+    "description": "codaauth2"
+  },
+  {
+    "service": "clearcase",
+    "port": 371,
+    "protocol": "tcp",
+    "description": "Clearcase"
+  },
+  {
+    "service": "clearcase",
+    "port": 371,
+    "protocol": "udp",
+    "description": "Clearcase"
+  },
+  {
+    "service": "ulistproc",
+    "port": 372,
+    "protocol": "tcp",
+    "description": "ListProcessor"
+  },
+  {
+    "service": "ulistproc",
+    "port": 372,
+    "protocol": "udp",
+    "description": "ListProcessor"
+  },
+  {
+    "service": "legent-1",
+    "port": 373,
+    "protocol": "tcp",
+    "description": "Legent Corporation"
+  },
+  {
+    "service": "legent-1",
+    "port": 373,
+    "protocol": "udp",
+    "description": "Legent Corporation"
+  },
+  {
+    "service": "legent-2",
+    "port": 374,
+    "protocol": "tcp",
+    "description": "Legent Corporation"
+  },
+  {
+    "service": "legent-2",
+    "port": 374,
+    "protocol": "udp",
+    "description": "Legent Corporation"
+  },
+  {
+    "service": "hassle",
+    "port": 375,
+    "protocol": "tcp",
+    "description": "Hassle"
+  },
+  {
+    "service": "hassle",
+    "port": 375,
+    "protocol": "udp",
+    "description": "Hassle"
+  },
+  {
+    "service": "nip",
+    "port": 376,
+    "protocol": "tcp",
+    "description": "Amiga Envoy Network Inquiry Protocol"
+  },
+  {
+    "service": "nip",
+    "port": 376,
+    "protocol": "udp",
+    "description": "Amiga Envoy Network Inquiry Protocol"
+  },
+  {
+    "service": "tnETOS",
+    "port": 377,
+    "protocol": "tcp",
+    "description": "NEC Corporation"
+  },
+  {
+    "service": "tnETOS",
+    "port": 377,
+    "protocol": "udp",
+    "description": "NEC Corporation"
+  },
+  {
+    "service": "dsETOS",
+    "port": 378,
+    "protocol": "tcp",
+    "description": "NEC Corporation"
+  },
+  {
+    "service": "dsETOS",
+    "port": 378,
+    "protocol": "udp",
+    "description": "NEC Corporation"
+  },
+  {
+    "service": "is99c",
+    "port": 379,
+    "protocol": "tcp",
+    "description": "TIA/EIA/IS-99 modem client"
+  },
+  {
+    "service": "is99c",
+    "port": 379,
+    "protocol": "udp",
+    "description": "TIA/EIA/IS-99 modem client"
+  },
+  {
+    "service": "is99s",
+    "port": 380,
+    "protocol": "tcp",
+    "description": "TIA/EIA/IS-99 modem server"
+  },
+  {
+    "service": "is99s",
+    "port": 380,
+    "protocol": "udp",
+    "description": "TIA/EIA/IS-99 modem server"
+  },
+  {
+    "service": "hp-collector",
+    "port": 381,
+    "protocol": "tcp",
+    "description": "hp performance data collector"
+  },
+  {
+    "service": "hp-collector",
+    "port": 381,
+    "protocol": "udp",
+    "description": "hp performance data collector"
+  },
+  {
+    "service": "hp-managed-node",
+    "port": 382,
+    "protocol": "tcp",
+    "description": "hp performance data managed node"
+  },
+  {
+    "service": "hp-managed-node",
+    "port": 382,
+    "protocol": "udp",
+    "description": "hp performance data managed node"
+  },
+  {
+    "service": "hp-alarm-mgr",
+    "port": 383,
+    "protocol": "tcp",
+    "description": "hp performance data alarm manager"
+  },
+  {
+    "service": "hp-alarm-mgr",
+    "port": 383,
+    "protocol": "udp",
+    "description": "hp performance data alarm manager"
+  },
+  {
+    "service": "arns",
+    "port": 384,
+    "protocol": "tcp",
+    "description": "A Remote Network Server System"
+  },
+  {
+    "service": "arns",
+    "port": 384,
+    "protocol": "udp",
+    "description": "A Remote Network Server System"
+  },
+  {
+    "service": "ibm-app",
+    "port": 385,
+    "protocol": "tcp",
+    "description": "IBM Application"
+  },
+  {
+    "service": "ibm-app",
+    "port": 385,
+    "protocol": "udp",
+    "description": "IBM Application"
+  },
+  {
+    "service": "asa",
+    "port": 386,
+    "protocol": "tcp",
+    "description": "ASA Message Router Object Def."
+  },
+  {
+    "service": "asa",
+    "port": 386,
+    "protocol": "udp",
+    "description": "ASA Message Router Object Def."
+  },
+  {
+    "service": "aurp",
+    "port": 387,
+    "protocol": "tcp",
+    "description": "Appletalk Update-Based Routing Pro."
+  },
+  {
+    "service": "aurp",
+    "port": 387,
+    "protocol": "udp",
+    "description": "Appletalk Update-Based Routing Pro."
+  },
+  {
+    "service": "unidata-ldm",
+    "port": 388,
+    "protocol": "tcp",
+    "description": "Unidata LDM"
+  },
+  {
+    "service": "unidata-ldm",
+    "port": 388,
+    "protocol": "udp",
+    "description": "Unidata LDM"
+  },
+  {
+    "service": "ldap",
+    "port": 389,
+    "protocol": "tcp",
+    "description": "Lightweight Directory Access Protocol"
+  },
+  {
+    "service": "ldap",
+    "port": 389,
+    "protocol": "udp",
+    "description": "Lightweight Directory Access Protocol"
+  },
+  {
+    "service": "uis",
+    "port": 390,
+    "protocol": "tcp",
+    "description": "UIS"
+  },
+  {
+    "service": "uis",
+    "port": 390,
+    "protocol": "udp",
+    "description": "UIS"
+  },
+  {
+    "service": "synotics-relay",
+    "port": 391,
+    "protocol": "tcp",
+    "description": "SynOptics SNMP Relay Port"
+  },
+  {
+    "service": "synotics-relay",
+    "port": 391,
+    "protocol": "udp",
+    "description": "SynOptics SNMP Relay Port"
+  },
+  {
+    "service": "synotics-broker",
+    "port": 392,
+    "protocol": "tcp",
+    "description": "SynOptics Port Broker Port"
+  },
+  {
+    "service": "synotics-broker",
+    "port": 392,
+    "protocol": "udp",
+    "description": "SynOptics Port Broker Port"
+  },
+  {
+    "service": "meta5",
+    "port": 393,
+    "protocol": "tcp",
+    "description": "Meta5"
+  },
+  {
+    "service": "meta5",
+    "port": 393,
+    "protocol": "udp",
+    "description": "Meta5"
+  },
+  {
+    "service": "embl-ndt",
+    "port": 394,
+    "protocol": "tcp",
+    "description": "EMBL Nucleic Data Transfer"
+  },
+  {
+    "service": "embl-ndt",
+    "port": 394,
+    "protocol": "udp",
+    "description": "EMBL Nucleic Data Transfer"
+  },
+  {
+    "service": "netcp",
+    "port": 395,
+    "protocol": "tcp",
+    "description": "NetScout Control Protocol"
+  },
+  {
+    "service": "netcp",
+    "port": 395,
+    "protocol": "udp",
+    "description": "NetScout Control Protocol"
+  },
+  {
+    "service": "netware-ip",
+    "port": 396,
+    "protocol": "tcp",
+    "description": "Novell Netware over IP"
+  },
+  {
+    "service": "netware-ip",
+    "port": 396,
+    "protocol": "udp",
+    "description": "Novell Netware over IP"
+  },
+  {
+    "service": "mptn",
+    "port": 397,
+    "protocol": "tcp",
+    "description": "Multi Protocol Trans. Net."
+  },
+  {
+    "service": "mptn",
+    "port": 397,
+    "protocol": "udp",
+    "description": "Multi Protocol Trans. Net."
+  },
+  {
+    "service": "kryptolan",
+    "port": 398,
+    "protocol": "tcp",
+    "description": "Kryptolan"
+  },
+  {
+    "service": "kryptolan",
+    "port": 398,
+    "protocol": "udp",
+    "description": "Kryptolan"
+  },
+  {
+    "service": "iso-tsap-c2",
+    "port": 399,
+    "protocol": "tcp",
+    "description": "ISO Transport Class 2 Non-Control over TCP"
+  },
+  {
+    "service": "iso-tsap-c2",
+    "port": 399,
+    "protocol": "udp",
+    "description": "ISO Transport Class 2 Non-Control over UDP"
+  },
+  {
+    "service": "osb-sd",
+    "port": 400,
+    "protocol": "tcp",
+    "description": "Oracle Secure Backup"
+  },
+  {
+    "service": "osb-sd",
+    "port": 400,
+    "protocol": "udp",
+    "description": "Oracle Secure Backup"
+  },
+  {
+    "service": "ups",
+    "port": 401,
+    "protocol": "tcp",
+    "description": "Uninterruptible Power Supply"
+  },
+  {
+    "service": "ups",
+    "port": 401,
+    "protocol": "udp",
+    "description": "Uninterruptible Power Supply"
+  },
+  {
+    "service": "genie",
+    "port": 402,
+    "protocol": "tcp",
+    "description": "Genie Protocol"
+  },
+  {
+    "service": "genie",
+    "port": 402,
+    "protocol": "udp",
+    "description": "Genie Protocol"
+  },
+  {
+    "service": "decap",
+    "port": 403,
+    "protocol": "tcp",
+    "description": "decap"
+  },
+  {
+    "service": "decap",
+    "port": 403,
+    "protocol": "udp",
+    "description": "decap"
+  },
+  {
+    "service": "nced",
+    "port": 404,
+    "protocol": "tcp",
+    "description": "nced"
+  },
+  {
+    "service": "nced",
+    "port": 404,
+    "protocol": "udp",
+    "description": "nced"
+  },
+  {
+    "service": "ncld",
+    "port": 405,
+    "protocol": "tcp",
+    "description": "ncld"
+  },
+  {
+    "service": "ncld",
+    "port": 405,
+    "protocol": "udp",
+    "description": "ncld"
+  },
+  {
+    "service": "imsp",
+    "port": 406,
+    "protocol": "tcp",
+    "description": "Interactive Mail Support Protocol"
+  },
+  {
+    "service": "imsp",
+    "port": 406,
+    "protocol": "udp",
+    "description": "Interactive Mail Support Protocol"
+  },
+  {
+    "service": "timbuktu",
+    "port": 407,
+    "protocol": "tcp",
+    "description": "Timbuktu"
+  },
+  {
+    "service": "timbuktu",
+    "port": 407,
+    "protocol": "udp",
+    "description": "Timbuktu"
+  },
+  {
+    "service": "prm-sm",
+    "port": 408,
+    "protocol": "tcp",
+    "description": "Prospero Resource Manager Sys. Man."
+  },
+  {
+    "service": "prm-sm",
+    "port": 408,
+    "protocol": "udp",
+    "description": "Prospero Resource Manager Sys. Man."
+  },
+  {
+    "service": "prm-nm",
+    "port": 409,
+    "protocol": "tcp",
+    "description": "Prospero Resource Manager Node Man."
+  },
+  {
+    "service": "prm-nm",
+    "port": 409,
+    "protocol": "udp",
+    "description": "Prospero Resource Manager Node Man."
+  },
+  {
+    "service": "decladebug",
+    "port": 410,
+    "protocol": "tcp",
+    "description": "DECLadebug Remote Debug Protocol"
+  },
+  {
+    "service": "decladebug",
+    "port": 410,
+    "protocol": "udp",
+    "description": "DECLadebug Remote Debug Protocol"
+  },
+  {
+    "service": "rmt",
+    "port": 411,
+    "protocol": "tcp",
+    "description": "Remote MT Protocol"
+  },
+  {
+    "service": "rmt",
+    "port": 411,
+    "protocol": "udp",
+    "description": "Remote MT Protocol"
+  },
+  {
+    "service": "synoptics-trap",
+    "port": 412,
+    "protocol": "tcp",
+    "description": "Trap Convention Port"
+  },
+  {
+    "service": "synoptics-trap",
+    "port": 412,
+    "protocol": "udp",
+    "description": "Trap Convention Port"
+  },
+  {
+    "service": "smsp",
+    "port": 413,
+    "protocol": "tcp",
+    "description": "Storage Management Services Protocol"
+  },
+  {
+    "service": "smsp",
+    "port": 413,
+    "protocol": "udp",
+    "description": "Storage Management Services Protocol"
+  },
+  {
+    "service": "infoseek",
+    "port": 414,
+    "protocol": "tcp",
+    "description": "InfoSeek"
+  },
+  {
+    "service": "infoseek",
+    "port": 414,
+    "protocol": "udp",
+    "description": "InfoSeek"
+  },
+  {
+    "service": "bnet",
+    "port": 415,
+    "protocol": "tcp",
+    "description": "BNet"
+  },
+  {
+    "service": "bnet",
+    "port": 415,
+    "protocol": "udp",
+    "description": "BNet"
+  },
+  {
+    "service": "silverplatter",
+    "port": 416,
+    "protocol": "tcp",
+    "description": "Silverplatter"
+  },
+  {
+    "service": "silverplatter",
+    "port": 416,
+    "protocol": "udp",
+    "description": "Silverplatter"
+  },
+  {
+    "service": "onmux",
+    "port": 417,
+    "protocol": "tcp",
+    "description": "Onmux"
+  },
+  {
+    "service": "onmux",
+    "port": 417,
+    "protocol": "udp",
+    "description": "Onmux"
+  },
+  {
+    "service": "hyper-g",
+    "port": 418,
+    "protocol": "tcp",
+    "description": "Hyper-G"
+  },
+  {
+    "service": "hyper-g",
+    "port": 418,
+    "protocol": "udp",
+    "description": "Hyper-G"
+  },
+  {
+    "service": "ariel1",
+    "port": 419,
+    "protocol": "tcp",
+    "description": "Ariel 1"
+  },
+  {
+    "service": "ariel1",
+    "port": 419,
+    "protocol": "udp",
+    "description": "Ariel 1"
+  },
+  {
+    "service": "smpte",
+    "port": 420,
+    "protocol": "tcp",
+    "description": "SMPTE"
+  },
+  {
+    "service": "smpte",
+    "port": 420,
+    "protocol": "udp",
+    "description": "SMPTE"
+  },
+  {
+    "service": "ariel2",
+    "port": 421,
+    "protocol": "tcp",
+    "description": "Ariel 2"
+  },
+  {
+    "service": "ariel2",
+    "port": 421,
+    "protocol": "udp",
+    "description": "Ariel 2"
+  },
+  {
+    "service": "ariel3",
+    "port": 422,
+    "protocol": "tcp",
+    "description": "Ariel 3"
+  },
+  {
+    "service": "ariel3",
+    "port": 422,
+    "protocol": "udp",
+    "description": "Ariel 3"
+  },
+  {
+    "service": "opc-job-start",
+    "port": 423,
+    "protocol": "tcp",
+    "description": "IBM Operations Planning and Control Start"
+  },
+  {
+    "service": "opc-job-start",
+    "port": 423,
+    "protocol": "udp",
+    "description": "IBM Operations Planning and Control Start"
+  },
+  {
+    "service": "opc-job-track",
+    "port": 424,
+    "protocol": "tcp",
+    "description": "IBM Operations Planning and Control Track"
+  },
+  {
+    "service": "opc-job-track",
+    "port": 424,
+    "protocol": "udp",
+    "description": "IBM Operations Planning and Control Track"
+  },
+  {
+    "service": "icad-el",
+    "port": 425,
+    "protocol": "tcp",
+    "description": "ICAD"
+  },
+  {
+    "service": "icad-el",
+    "port": 425,
+    "protocol": "udp",
+    "description": "ICAD"
+  },
+  {
+    "service": "smartsdp",
+    "port": 426,
+    "protocol": "tcp",
+    "description": "smartsdp"
+  },
+  {
+    "service": "smartsdp",
+    "port": 426,
+    "protocol": "udp",
+    "description": "smartsdp"
+  },
+  {
+    "service": "svrloc",
+    "port": 427,
+    "protocol": "tcp",
+    "description": "Server Location"
+  },
+  {
+    "service": "svrloc",
+    "port": 427,
+    "protocol": "udp",
+    "description": "Server Location"
+  },
+  {
+    "service": "ocs-cmu",
+    "port": 428,
+    "protocol": "tcp",
+    "description": "OCS_CMU"
+  },
+  {
+    "service": "ocs_cmu",
+    "port": 428,
+    "protocol": "tcp",
+    "description": "OCS_CMU"
+  },
+  {
+    "service": "ocs-cmu",
+    "port": 428,
+    "protocol": "udp",
+    "description": "OCS_CMU"
+  },
+  {
+    "service": "ocs_cmu",
+    "port": 428,
+    "protocol": "udp",
+    "description": "OCS_CMU"
+  },
+  {
+    "service": "ocs-amu",
+    "port": 429,
+    "protocol": "tcp",
+    "description": "OCS_AMU"
+  },
+  {
+    "service": "ocs_amu",
+    "port": 429,
+    "protocol": "tcp",
+    "description": "OCS_AMU"
+  },
+  {
+    "service": "ocs-amu",
+    "port": 429,
+    "protocol": "udp",
+    "description": "OCS_AMU"
+  },
+  {
+    "service": "ocs_amu",
+    "port": 429,
+    "protocol": "udp",
+    "description": "OCS_AMU"
+  },
+  {
+    "service": "utmpsd",
+    "port": 430,
+    "protocol": "tcp",
+    "description": "UTMPSD"
+  },
+  {
+    "service": "utmpsd",
+    "port": 430,
+    "protocol": "udp",
+    "description": "UTMPSD"
+  },
+  {
+    "service": "utmpcd",
+    "port": 431,
+    "protocol": "tcp",
+    "description": "UTMPCD"
+  },
+  {
+    "service": "utmpcd",
+    "port": 431,
+    "protocol": "udp",
+    "description": "UTMPCD"
+  },
+  {
+    "service": "iasd",
+    "port": 432,
+    "protocol": "tcp",
+    "description": "IASD"
+  },
+  {
+    "service": "iasd",
+    "port": 432,
+    "protocol": "udp",
+    "description": "IASD"
+  },
+  {
+    "service": "nnsp",
+    "port": 433,
+    "protocol": "tcp",
+    "description": "NNTP for transit servers (NNSP)"
+  },
+  {
+    "service": "nnsp",
+    "port": 433,
+    "protocol": "udp",
+    "description": "NNTP for transit servers (NNSP)"
+  },
+  {
+    "service": "mobileip-agent",
+    "port": 434,
+    "protocol": "tcp",
+    "description": "MobileIP-Agent"
+  },
+  {
+    "service": "mobileip-agent",
+    "port": 434,
+    "protocol": "udp",
+    "description": "MobileIP-Agent"
+  },
+  {
+    "service": "mobilip-mn",
+    "port": 435,
+    "protocol": "tcp",
+    "description": "MobilIP-MN"
+  },
+  {
+    "service": "mobilip-mn",
+    "port": 435,
+    "protocol": "udp",
+    "description": "MobilIP-MN"
+  },
+  {
+    "service": "dna-cml",
+    "port": 436,
+    "protocol": "tcp",
+    "description": "DNA-CML"
+  },
+  {
+    "service": "dna-cml",
+    "port": 436,
+    "protocol": "udp",
+    "description": "DNA-CML"
+  },
+  {
+    "service": "comscm",
+    "port": 437,
+    "protocol": "tcp",
+    "description": "comscm"
+  },
+  {
+    "service": "comscm",
+    "port": 437,
+    "protocol": "udp",
+    "description": "comscm"
+  },
+  {
+    "service": "dsfgw",
+    "port": 438,
+    "protocol": "tcp",
+    "description": "dsfgw"
+  },
+  {
+    "service": "dsfgw",
+    "port": 438,
+    "protocol": "udp",
+    "description": "dsfgw"
+  },
+  {
+    "service": "dasp",
+    "port": 439,
+    "protocol": "tcp",
+    "description": "dasp"
+  },
+  {
+    "service": "dasp",
+    "port": 439,
+    "protocol": "udp",
+    "description": "dasp"
+  },
+  {
+    "service": "sgcp",
+    "port": 440,
+    "protocol": "tcp",
+    "description": "sgcp"
+  },
+  {
+    "service": "sgcp",
+    "port": 440,
+    "protocol": "udp",
+    "description": "sgcp"
+  },
+  {
+    "service": "decvms-sysmgt",
+    "port": 441,
+    "protocol": "tcp",
+    "description": "decvms-sysmgt"
+  },
+  {
+    "service": "decvms-sysmgt",
+    "port": 441,
+    "protocol": "udp",
+    "description": "decvms-sysmgt"
+  },
+  {
+    "service": "cvc-hostd",
+    "port": 442,
+    "protocol": "tcp",
+    "description": "cvc_hostd"
+  },
+  {
+    "service": "cvc_hostd",
+    "port": 442,
+    "protocol": "tcp",
+    "description": "cvc_hostd"
+  },
+  {
+    "service": "cvc-hostd",
+    "port": 442,
+    "protocol": "udp",
+    "description": "cvc_hostd"
+  },
+  {
+    "service": "cvc_hostd",
+    "port": 442,
+    "protocol": "udp",
+    "description": "cvc_hostd"
+  },
+  {
+    "service": "https",
+    "port": 443,
+    "protocol": "tcp",
+    "description": "http protocol over TLS/SSL"
+  },
+  {
+    "service": "https",
+    "port": 443,
+    "protocol": "udp",
+    "description": "http protocol over TLS/SSL"
+  },
+  {
+    "service": "https",
+    "port": 443,
+    "protocol": "sctp",
+    "description": "HTTPS"
+  },
+  {
+    "service": "snpp",
+    "port": 444,
+    "protocol": "tcp",
+    "description": "Simple Network Paging Protocol"
+  },
+  {
+    "service": "snpp",
+    "port": 444,
+    "protocol": "udp",
+    "description": "Simple Network Paging Protocol"
+  },
+  {
+    "service": "microsoft-ds",
+    "port": 445,
+    "protocol": "tcp",
+    "description": "Microsoft-DS"
+  },
+  {
+    "service": "microsoft-ds",
+    "port": 445,
+    "protocol": "udp",
+    "description": "Microsoft-DS"
+  },
+  {
+    "service": "ddm-rdb",
+    "port": 446,
+    "protocol": "tcp",
+    "description": "DDM-Remote Relational Database Access"
+  },
+  {
+    "service": "ddm-rdb",
+    "port": 446,
+    "protocol": "udp",
+    "description": "DDM-Remote Relational Database Access"
+  },
+  {
+    "service": "ddm-dfm",
+    "port": 447,
+    "protocol": "tcp",
+    "description": "DDM-Distributed File Management"
+  },
+  {
+    "service": "ddm-dfm",
+    "port": 447,
+    "protocol": "udp",
+    "description": "DDM-Distributed File Management"
+  },
+  {
+    "service": "ddm-ssl",
+    "port": 448,
+    "protocol": "tcp",
+    "description": "DDM-Remote DB Access Using Secure Sockets"
+  },
+  {
+    "service": "ddm-ssl",
+    "port": 448,
+    "protocol": "udp",
+    "description": "DDM-Remote DB Access Using Secure Sockets"
+  },
+  {
+    "service": "as-servermap",
+    "port": 449,
+    "protocol": "tcp",
+    "description": "AS Server Mapper"
+  },
+  {
+    "service": "as-servermap",
+    "port": 449,
+    "protocol": "udp",
+    "description": "AS Server Mapper"
+  },
+  {
+    "service": "tserver",
+    "port": 450,
+    "protocol": "tcp",
+    "description": "Computer Supported Telecomunication Applications"
+  },
+  {
+    "service": "tserver",
+    "port": 450,
+    "protocol": "udp",
+    "description": "Computer Supported Telecomunication Applications"
+  },
+  {
+    "service": "sfs-smp-net",
+    "port": 451,
+    "protocol": "tcp",
+    "description": "Cray Network Semaphore server"
+  },
+  {
+    "service": "sfs-smp-net",
+    "port": 451,
+    "protocol": "udp",
+    "description": "Cray Network Semaphore server"
+  },
+  {
+    "service": "sfs-config",
+    "port": 452,
+    "protocol": "tcp",
+    "description": "Cray SFS config server"
+  },
+  {
+    "service": "sfs-config",
+    "port": 452,
+    "protocol": "udp",
+    "description": "Cray SFS config server"
+  },
+  {
+    "service": "creativeserver",
+    "port": 453,
+    "protocol": "tcp",
+    "description": "CreativeServer"
+  },
+  {
+    "service": "creativeserver",
+    "port": 453,
+    "protocol": "udp",
+    "description": "CreativeServer"
+  },
+  {
+    "service": "contentserver",
+    "port": 454,
+    "protocol": "tcp",
+    "description": "ContentServer"
+  },
+  {
+    "service": "contentserver",
+    "port": 454,
+    "protocol": "udp",
+    "description": "ContentServer"
+  },
+  {
+    "service": "creativepartnr",
+    "port": 455,
+    "protocol": "tcp",
+    "description": "CreativePartnr"
+  },
+  {
+    "service": "creativepartnr",
+    "port": 455,
+    "protocol": "udp",
+    "description": "CreativePartnr"
+  },
+  {
+    "service": "macon-tcp",
+    "port": 456,
+    "protocol": "tcp",
+    "description": "macon-tcp"
+  },
+  {
+    "service": "macon-udp",
+    "port": 456,
+    "protocol": "udp",
+    "description": "macon-udp"
+  },
+  {
+    "service": "scohelp",
+    "port": 457,
+    "protocol": "tcp",
+    "description": "scohelp"
+  },
+  {
+    "service": "scohelp",
+    "port": 457,
+    "protocol": "udp",
+    "description": "scohelp"
+  },
+  {
+    "service": "appleqtc",
+    "port": 458,
+    "protocol": "tcp",
+    "description": "apple quick time"
+  },
+  {
+    "service": "appleqtc",
+    "port": 458,
+    "protocol": "udp",
+    "description": "apple quick time"
+  },
+  {
+    "service": "ampr-rcmd",
+    "port": 459,
+    "protocol": "tcp",
+    "description": "ampr-rcmd"
+  },
+  {
+    "service": "ampr-rcmd",
+    "port": 459,
+    "protocol": "udp",
+    "description": "ampr-rcmd"
+  },
+  {
+    "service": "skronk",
+    "port": 460,
+    "protocol": "tcp",
+    "description": "skronk"
+  },
+  {
+    "service": "skronk",
+    "port": 460,
+    "protocol": "udp",
+    "description": "skronk"
+  },
+  {
+    "service": "datasurfsrv",
+    "port": 461,
+    "protocol": "tcp",
+    "description": "DataRampSrv"
+  },
+  {
+    "service": "datasurfsrv",
+    "port": 461,
+    "protocol": "udp",
+    "description": "DataRampSrv"
+  },
+  {
+    "service": "datasurfsrvsec",
+    "port": 462,
+    "protocol": "tcp",
+    "description": "DataRampSrvSec"
+  },
+  {
+    "service": "datasurfsrvsec",
+    "port": 462,
+    "protocol": "udp",
+    "description": "DataRampSrvSec"
+  },
+  {
+    "service": "alpes",
+    "port": 463,
+    "protocol": "tcp",
+    "description": "alpes"
+  },
+  {
+    "service": "alpes",
+    "port": 463,
+    "protocol": "udp",
+    "description": "alpes"
+  },
+  {
+    "service": "kpasswd",
+    "port": 464,
+    "protocol": "tcp",
+    "description": "kpasswd"
+  },
+  {
+    "service": "kpasswd",
+    "port": 464,
+    "protocol": "udp",
+    "description": "kpasswd"
+  },
+  {
+    "service": "urd",
+    "port": 465,
+    "protocol": "tcp",
+    "description": "URL Rendezvous Directory for SSM"
+  },
+  {
+    "service": "submissions",
+    "port": 465,
+    "protocol": "tcp",
+    "description": "Message Submission over TLS protocol"
+  },
+  {
+    "service": "igmpv3lite",
+    "port": 465,
+    "protocol": "udp",
+    "description": "IGMP over UDP for SSM"
+  },
+  {
+    "service": "digital-vrc",
+    "port": 466,
+    "protocol": "tcp",
+    "description": "digital-vrc"
+  },
+  {
+    "service": "digital-vrc",
+    "port": 466,
+    "protocol": "udp",
+    "description": "digital-vrc"
+  },
+  {
+    "service": "mylex-mapd",
+    "port": 467,
+    "protocol": "tcp",
+    "description": "mylex-mapd"
+  },
+  {
+    "service": "mylex-mapd",
+    "port": 467,
+    "protocol": "udp",
+    "description": "mylex-mapd"
+  },
+  {
+    "service": "photuris",
+    "port": 468,
+    "protocol": "tcp",
+    "description": "proturis"
+  },
+  {
+    "service": "photuris",
+    "port": 468,
+    "protocol": "udp",
+    "description": "proturis"
+  },
+  {
+    "service": "rcp",
+    "port": 469,
+    "protocol": "tcp",
+    "description": "Radio Control Protocol"
+  },
+  {
+    "service": "rcp",
+    "port": 469,
+    "protocol": "udp",
+    "description": "Radio Control Protocol"
+  },
+  {
+    "service": "scx-proxy",
+    "port": 470,
+    "protocol": "tcp",
+    "description": "scx-proxy"
+  },
+  {
+    "service": "scx-proxy",
+    "port": 470,
+    "protocol": "udp",
+    "description": "scx-proxy"
+  },
+  {
+    "service": "mondex",
+    "port": 471,
+    "protocol": "tcp",
+    "description": "Mondex"
+  },
+  {
+    "service": "mondex",
+    "port": 471,
+    "protocol": "udp",
+    "description": "Mondex"
+  },
+  {
+    "service": "ljk-login",
+    "port": 472,
+    "protocol": "tcp",
+    "description": "ljk-login"
+  },
+  {
+    "service": "ljk-login",
+    "port": 472,
+    "protocol": "udp",
+    "description": "ljk-login"
+  },
+  {
+    "service": "hybrid-pop",
+    "port": 473,
+    "protocol": "tcp",
+    "description": "hybrid-pop"
+  },
+  {
+    "service": "hybrid-pop",
+    "port": 473,
+    "protocol": "udp",
+    "description": "hybrid-pop"
+  },
+  {
+    "service": "tn-tl-w1",
+    "port": 474,
+    "protocol": "tcp",
+    "description": "tn-tl-w1"
+  },
+  {
+    "service": "tn-tl-w2",
+    "port": 474,
+    "protocol": "udp",
+    "description": "tn-tl-w2"
+  },
+  {
+    "service": "tcpnethaspsrv",
+    "port": 475,
+    "protocol": "tcp",
+    "description": "tcpnethaspsrv"
+  },
+  {
+    "service": "tcpnethaspsrv",
+    "port": 475,
+    "protocol": "udp",
+    "description": "tcpnethaspsrv"
+  },
+  {
+    "service": "tn-tl-fd1",
+    "port": 476,
+    "protocol": "tcp",
+    "description": "tn-tl-fd1"
+  },
+  {
+    "service": "tn-tl-fd1",
+    "port": 476,
+    "protocol": "udp",
+    "description": "tn-tl-fd1"
+  },
+  {
+    "service": "ss7ns",
+    "port": 477,
+    "protocol": "tcp",
+    "description": "ss7ns"
+  },
+  {
+    "service": "ss7ns",
+    "port": 477,
+    "protocol": "udp",
+    "description": "ss7ns"
+  },
+  {
+    "service": "spsc",
+    "port": 478,
+    "protocol": "tcp",
+    "description": "spsc"
+  },
+  {
+    "service": "spsc",
+    "port": 478,
+    "protocol": "udp",
+    "description": "spsc"
+  },
+  {
+    "service": "iafserver",
+    "port": 479,
+    "protocol": "tcp",
+    "description": "iafserver"
+  },
+  {
+    "service": "iafserver",
+    "port": 479,
+    "protocol": "udp",
+    "description": "iafserver"
+  },
+  {
+    "service": "iafdbase",
+    "port": 480,
+    "protocol": "tcp",
+    "description": "iafdbase"
+  },
+  {
+    "service": "iafdbase",
+    "port": 480,
+    "protocol": "udp",
+    "description": "iafdbase"
+  },
+  {
+    "service": "ph",
+    "port": 481,
+    "protocol": "tcp",
+    "description": "Ph service"
+  },
+  {
+    "service": "ph",
+    "port": 481,
+    "protocol": "udp",
+    "description": "Ph service"
+  },
+  {
+    "service": "bgs-nsi",
+    "port": 482,
+    "protocol": "tcp",
+    "description": "bgs-nsi"
+  },
+  {
+    "service": "bgs-nsi",
+    "port": 482,
+    "protocol": "udp",
+    "description": "bgs-nsi"
+  },
+  {
+    "service": "ulpnet",
+    "port": 483,
+    "protocol": "tcp",
+    "description": "ulpnet"
+  },
+  {
+    "service": "ulpnet",
+    "port": 483,
+    "protocol": "udp",
+    "description": "ulpnet"
+  },
+  {
+    "service": "integra-sme",
+    "port": 484,
+    "protocol": "tcp",
+    "description": "Integra Software Management Environment"
+  },
+  {
+    "service": "integra-sme",
+    "port": 484,
+    "protocol": "udp",
+    "description": "Integra Software Management Environment"
+  },
+  {
+    "service": "powerburst",
+    "port": 485,
+    "protocol": "tcp",
+    "description": "Air Soft Power Burst"
+  },
+  {
+    "service": "powerburst",
+    "port": 485,
+    "protocol": "udp",
+    "description": "Air Soft Power Burst"
+  },
+  {
+    "service": "avian",
+    "port": 486,
+    "protocol": "tcp",
+    "description": "avian"
+  },
+  {
+    "service": "avian",
+    "port": 486,
+    "protocol": "udp",
+    "description": "avian"
+  },
+  {
+    "service": "saft",
+    "port": 487,
+    "protocol": "tcp",
+    "description": "saft Simple Asynchronous File Transfer"
+  },
+  {
+    "service": "saft",
+    "port": 487,
+    "protocol": "udp",
+    "description": "saft Simple Asynchronous File Transfer"
+  },
+  {
+    "service": "gss-http",
+    "port": 488,
+    "protocol": "tcp",
+    "description": "gss-http"
+  },
+  {
+    "service": "gss-http",
+    "port": 488,
+    "protocol": "udp",
+    "description": "gss-http"
+  },
+  {
+    "service": "nest-protocol",
+    "port": 489,
+    "protocol": "tcp",
+    "description": "nest-protocol"
+  },
+  {
+    "service": "nest-protocol",
+    "port": 489,
+    "protocol": "udp",
+    "description": "nest-protocol"
+  },
+  {
+    "service": "micom-pfs",
+    "port": 490,
+    "protocol": "tcp",
+    "description": "micom-pfs"
+  },
+  {
+    "service": "micom-pfs",
+    "port": 490,
+    "protocol": "udp",
+    "description": "micom-pfs"
+  },
+  {
+    "service": "go-login",
+    "port": 491,
+    "protocol": "tcp",
+    "description": "go-login"
+  },
+  {
+    "service": "go-login",
+    "port": 491,
+    "protocol": "udp",
+    "description": "go-login"
+  },
+  {
+    "service": "ticf-1",
+    "port": 492,
+    "protocol": "tcp",
+    "description": "Transport Independent Convergence for FNA"
+  },
+  {
+    "service": "ticf-1",
+    "port": 492,
+    "protocol": "udp",
+    "description": "Transport Independent Convergence for FNA"
+  },
+  {
+    "service": "ticf-2",
+    "port": 493,
+    "protocol": "tcp",
+    "description": "Transport Independent Convergence for FNA"
+  },
+  {
+    "service": "ticf-2",
+    "port": 493,
+    "protocol": "udp",
+    "description": "Transport Independent Convergence for FNA"
+  },
+  {
+    "service": "pov-ray",
+    "port": 494,
+    "protocol": "tcp",
+    "description": "POV-Ray"
+  },
+  {
+    "service": "pov-ray",
+    "port": 494,
+    "protocol": "udp",
+    "description": "POV-Ray"
+  },
+  {
+    "service": "intecourier",
+    "port": 495,
+    "protocol": "tcp",
+    "description": "intecourier"
+  },
+  {
+    "service": "intecourier",
+    "port": 495,
+    "protocol": "udp",
+    "description": "intecourier"
+  },
+  {
+    "service": "pim-rp-disc",
+    "port": 496,
+    "protocol": "tcp",
+    "description": "PIM-RP-DISC"
+  },
+  {
+    "service": "pim-rp-disc",
+    "port": 496,
+    "protocol": "udp",
+    "description": "PIM-RP-DISC"
+  },
+  {
+    "service": "retrospect",
+    "port": 497,
+    "protocol": "tcp",
+    "description": "Retrospect backup and restore service"
+  },
+  {
+    "service": "retrospect",
+    "port": 497,
+    "protocol": "udp",
+    "description": "Retrospect backup and restore service"
+  },
+  {
+    "service": "siam",
+    "port": 498,
+    "protocol": "tcp",
+    "description": "siam"
+  },
+  {
+    "service": "siam",
+    "port": 498,
+    "protocol": "udp",
+    "description": "siam"
+  },
+  {
+    "service": "iso-ill",
+    "port": 499,
+    "protocol": "tcp",
+    "description": "ISO ILL Protocol"
+  },
+  {
+    "service": "iso-ill",
+    "port": 499,
+    "protocol": "udp",
+    "description": "ISO ILL Protocol"
+  },
+  {
+    "service": "isakmp",
+    "port": 500,
+    "protocol": "tcp",
+    "description": "isakmp"
+  },
+  {
+    "service": "isakmp",
+    "port": 500,
+    "protocol": "udp",
+    "description": "isakmp"
+  },
+  {
+    "service": "stmf",
+    "port": 501,
+    "protocol": "tcp",
+    "description": "STMF"
+  },
+  {
+    "service": "stmf",
+    "port": 501,
+    "protocol": "udp",
+    "description": "STMF"
+  },
+  {
+    "service": "mbap",
+    "port": 502,
+    "protocol": "tcp",
+    "description": "Modbus Application Protocol"
+  },
+  {
+    "service": "mbap",
+    "port": 502,
+    "protocol": "udp",
+    "description": "Modbus Application Protocol"
+  },
+  {
+    "service": "intrinsa",
+    "port": 503,
+    "protocol": "tcp",
+    "description": "Intrinsa"
+  },
+  {
+    "service": "intrinsa",
+    "port": 503,
+    "protocol": "udp",
+    "description": "Intrinsa"
+  },
+  {
+    "service": "citadel",
+    "port": 504,
+    "protocol": "tcp",
+    "description": "citadel"
+  },
+  {
+    "service": "citadel",
+    "port": 504,
+    "protocol": "udp",
+    "description": "citadel"
+  },
+  {
+    "service": "mailbox-lm",
+    "port": 505,
+    "protocol": "tcp",
+    "description": "mailbox-lm"
+  },
+  {
+    "service": "mailbox-lm",
+    "port": 505,
+    "protocol": "udp",
+    "description": "mailbox-lm"
+  },
+  {
+    "service": "ohimsrv",
+    "port": 506,
+    "protocol": "tcp",
+    "description": "ohimsrv"
+  },
+  {
+    "service": "ohimsrv",
+    "port": 506,
+    "protocol": "udp",
+    "description": "ohimsrv"
+  },
+  {
+    "service": "crs",
+    "port": 507,
+    "protocol": "tcp",
+    "description": "crs"
+  },
+  {
+    "service": "crs",
+    "port": 507,
+    "protocol": "udp",
+    "description": "crs"
+  },
+  {
+    "service": "xvttp",
+    "port": 508,
+    "protocol": "tcp",
+    "description": "xvttp"
+  },
+  {
+    "service": "xvttp",
+    "port": 508,
+    "protocol": "udp",
+    "description": "xvttp"
+  },
+  {
+    "service": "snare",
+    "port": 509,
+    "protocol": "tcp",
+    "description": "snare"
+  },
+  {
+    "service": "snare",
+    "port": 509,
+    "protocol": "udp",
+    "description": "snare"
+  },
+  {
+    "service": "fcp",
+    "port": 510,
+    "protocol": "tcp",
+    "description": "FirstClass Protocol"
+  },
+  {
+    "service": "fcp",
+    "port": 510,
+    "protocol": "udp",
+    "description": "FirstClass Protocol"
+  },
+  {
+    "service": "passgo",
+    "port": 511,
+    "protocol": "tcp",
+    "description": "PassGo"
+  },
+  {
+    "service": "passgo",
+    "port": 511,
+    "protocol": "udp",
+    "description": "PassGo"
+  },
+  {
+    "service": "exec",
+    "port": 512,
+    "protocol": "tcp",
+    "description": "remote process execution; authentication performed using passwords and UNIX login names"
+  },
+  {
+    "service": "comsat",
+    "port": 512,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "biff",
+    "port": 512,
+    "protocol": "udp",
+    "description": "used by mail system to notify users of new mail received; currently receives messages only from processes on the same machine"
+  },
+  {
+    "service": "login",
+    "port": 513,
+    "protocol": "tcp",
+    "description": "remote login a la telnet; automatic authentication performed based on priviledged port numbers and distributed data bases which identify authentication domains"
+  },
+  {
+    "service": "who",
+    "port": 513,
+    "protocol": "udp",
+    "description": "maintains data bases showing who's logged in to machines on a local net and the load average of the machine"
+  },
+  {
+    "service": "shell",
+    "port": 514,
+    "protocol": "tcp",
+    "description": "cmd like exec  but automatic authentication is performed as for login server"
+  },
+  {
+    "service": "syslog",
+    "port": 514,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "printer",
+    "port": 515,
+    "protocol": "tcp",
+    "description": "spooler"
+  },
+  {
+    "service": "printer",
+    "port": 515,
+    "protocol": "udp",
+    "description": "spooler"
+  },
+  {
+    "service": "videotex",
+    "port": 516,
+    "protocol": "tcp",
+    "description": "videotex"
+  },
+  {
+    "service": "videotex",
+    "port": 516,
+    "protocol": "udp",
+    "description": "videotex"
+  },
+  {
+    "service": "talk",
+    "port": 517,
+    "protocol": "tcp",
+    "description": "like tenex link  but across machine - unfortunately"
+  },
+  {
+    "service": "talk",
+    "port": 517,
+    "protocol": "udp",
+    "description": "like tenex link  but across machine - unfortunately"
+  },
+  {
+    "service": "ntalk",
+    "port": 518,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "ntalk",
+    "port": 518,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "utime",
+    "port": 519,
+    "protocol": "tcp",
+    "description": "unixtime"
+  },
+  {
+    "service": "utime",
+    "port": 519,
+    "protocol": "udp",
+    "description": "unixtime"
+  },
+  {
+    "service": "efs",
+    "port": 520,
+    "protocol": "tcp",
+    "description": "extended file name server"
+  },
+  {
+    "service": "router",
+    "port": 520,
+    "protocol": "udp",
+    "description": "local routing process (on site); uses variant of Xerox NS routing information protocol - RIP"
+  },
+  {
+    "service": "ripng",
+    "port": 521,
+    "protocol": "tcp",
+    "description": "ripng"
+  },
+  {
+    "service": "ripng",
+    "port": 521,
+    "protocol": "udp",
+    "description": "ripng"
+  },
+  {
+    "service": "ulp",
+    "port": 522,
+    "protocol": "tcp",
+    "description": "ULP"
+  },
+  {
+    "service": "ulp",
+    "port": 522,
+    "protocol": "udp",
+    "description": "ULP"
+  },
+  {
+    "service": "ibm-db2",
+    "port": 523,
+    "protocol": "tcp",
+    "description": "IBM-DB2"
+  },
+  {
+    "service": "ibm-db2",
+    "port": 523,
+    "protocol": "udp",
+    "description": "IBM-DB2"
+  },
+  {
+    "service": "ncp",
+    "port": 524,
+    "protocol": "tcp",
+    "description": "NCP"
+  },
+  {
+    "service": "ncp",
+    "port": 524,
+    "protocol": "udp",
+    "description": "NCP"
+  },
+  {
+    "service": "timed",
+    "port": 525,
+    "protocol": "tcp",
+    "description": "timeserver"
+  },
+  {
+    "service": "timed",
+    "port": 525,
+    "protocol": "udp",
+    "description": "timeserver"
+  },
+  {
+    "service": "tempo",
+    "port": 526,
+    "protocol": "tcp",
+    "description": "newdate"
+  },
+  {
+    "service": "tempo",
+    "port": 526,
+    "protocol": "udp",
+    "description": "newdate"
+  },
+  {
+    "service": "stx",
+    "port": 527,
+    "protocol": "tcp",
+    "description": "Stock IXChange"
+  },
+  {
+    "service": "stx",
+    "port": 527,
+    "protocol": "udp",
+    "description": "Stock IXChange"
+  },
+  {
+    "service": "custix",
+    "port": 528,
+    "protocol": "tcp",
+    "description": "Customer IXChange"
+  },
+  {
+    "service": "custix",
+    "port": 528,
+    "protocol": "udp",
+    "description": "Customer IXChange"
+  },
+  {
+    "service": "irc-serv",
+    "port": 529,
+    "protocol": "tcp",
+    "description": "IRC-SERV"
+  },
+  {
+    "service": "irc-serv",
+    "port": 529,
+    "protocol": "udp",
+    "description": "IRC-SERV"
+  },
+  {
+    "service": "courier",
+    "port": 530,
+    "protocol": "tcp",
+    "description": "rpc"
+  },
+  {
+    "service": "courier",
+    "port": 530,
+    "protocol": "udp",
+    "description": "rpc"
+  },
+  {
+    "service": "conference",
+    "port": 531,
+    "protocol": "tcp",
+    "description": "chat"
+  },
+  {
+    "service": "conference",
+    "port": 531,
+    "protocol": "udp",
+    "description": "chat"
+  },
+  {
+    "service": "netnews",
+    "port": 532,
+    "protocol": "tcp",
+    "description": "readnews"
+  },
+  {
+    "service": "netnews",
+    "port": 532,
+    "protocol": "udp",
+    "description": "readnews"
+  },
+  {
+    "service": "netwall",
+    "port": 533,
+    "protocol": "tcp",
+    "description": "for emergency broadcasts"
+  },
+  {
+    "service": "netwall",
+    "port": 533,
+    "protocol": "udp",
+    "description": "for emergency broadcasts"
+  },
+  {
+    "service": "windream",
+    "port": 534,
+    "protocol": "tcp",
+    "description": "windream Admin"
+  },
+  {
+    "service": "windream",
+    "port": 534,
+    "protocol": "udp",
+    "description": "windream Admin"
+  },
+  {
+    "service": "iiop",
+    "port": 535,
+    "protocol": "tcp",
+    "description": "iiop"
+  },
+  {
+    "service": "iiop",
+    "port": 535,
+    "protocol": "udp",
+    "description": "iiop"
+  },
+  {
+    "service": "opalis-rdv",
+    "port": 536,
+    "protocol": "tcp",
+    "description": "opalis-rdv"
+  },
+  {
+    "service": "opalis-rdv",
+    "port": 536,
+    "protocol": "udp",
+    "description": "opalis-rdv"
+  },
+  {
+    "service": "nmsp",
+    "port": 537,
+    "protocol": "tcp",
+    "description": "Networked Media Streaming Protocol"
+  },
+  {
+    "service": "nmsp",
+    "port": 537,
+    "protocol": "udp",
+    "description": "Networked Media Streaming Protocol"
+  },
+  {
+    "service": "gdomap",
+    "port": 538,
+    "protocol": "tcp",
+    "description": "gdomap"
+  },
+  {
+    "service": "gdomap",
+    "port": 538,
+    "protocol": "udp",
+    "description": "gdomap"
+  },
+  {
+    "service": "apertus-ldp",
+    "port": 539,
+    "protocol": "tcp",
+    "description": "Apertus Technologies Load Determination"
+  },
+  {
+    "service": "apertus-ldp",
+    "port": 539,
+    "protocol": "udp",
+    "description": "Apertus Technologies Load Determination"
+  },
+  {
+    "service": "uucp",
+    "port": 540,
+    "protocol": "tcp",
+    "description": "uucpd"
+  },
+  {
+    "service": "uucp",
+    "port": 540,
+    "protocol": "udp",
+    "description": "uucpd"
+  },
+  {
+    "service": "uucp-rlogin",
+    "port": 541,
+    "protocol": "tcp",
+    "description": "uucp-rlogin"
+  },
+  {
+    "service": "uucp-rlogin",
+    "port": 541,
+    "protocol": "udp",
+    "description": "uucp-rlogin"
+  },
+  {
+    "service": "commerce",
+    "port": 542,
+    "protocol": "tcp",
+    "description": "commerce"
+  },
+  {
+    "service": "commerce",
+    "port": 542,
+    "protocol": "udp",
+    "description": "commerce"
+  },
+  {
+    "service": "klogin",
+    "port": 543,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "klogin",
+    "port": 543,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "kshell",
+    "port": 544,
+    "protocol": "tcp",
+    "description": "krcmd"
+  },
+  {
+    "service": "kshell",
+    "port": 544,
+    "protocol": "udp",
+    "description": "krcmd"
+  },
+  {
+    "service": "appleqtcsrvr",
+    "port": 545,
+    "protocol": "tcp",
+    "description": "appleqtcsrvr"
+  },
+  {
+    "service": "appleqtcsrvr",
+    "port": 545,
+    "protocol": "udp",
+    "description": "appleqtcsrvr"
+  },
+  {
+    "service": "dhcpv6-client",
+    "port": 546,
+    "protocol": "tcp",
+    "description": "DHCPv6 Client"
+  },
+  {
+    "service": "dhcpv6-client",
+    "port": 546,
+    "protocol": "udp",
+    "description": "DHCPv6 Client"
+  },
+  {
+    "service": "dhcpv6-server",
+    "port": 547,
+    "protocol": "tcp",
+    "description": "DHCPv6 Server"
+  },
+  {
+    "service": "dhcpv6-server",
+    "port": 547,
+    "protocol": "udp",
+    "description": "DHCPv6 Server"
+  },
+  {
+    "service": "afpovertcp",
+    "port": 548,
+    "protocol": "tcp",
+    "description": "AFP over TCP"
+  },
+  {
+    "service": "afpovertcp",
+    "port": 548,
+    "protocol": "udp",
+    "description": "AFP over TCP"
+  },
+  {
+    "service": "idfp",
+    "port": 549,
+    "protocol": "tcp",
+    "description": "IDFP"
+  },
+  {
+    "service": "idfp",
+    "port": 549,
+    "protocol": "udp",
+    "description": "IDFP"
+  },
+  {
+    "service": "new-rwho",
+    "port": 550,
+    "protocol": "tcp",
+    "description": "new-who"
+  },
+  {
+    "service": "new-rwho",
+    "port": 550,
+    "protocol": "udp",
+    "description": "new-who"
+  },
+  {
+    "service": "cybercash",
+    "port": 551,
+    "protocol": "tcp",
+    "description": "cybercash"
+  },
+  {
+    "service": "cybercash",
+    "port": 551,
+    "protocol": "udp",
+    "description": "cybercash"
+  },
+  {
+    "service": "devshr-nts",
+    "port": 552,
+    "protocol": "tcp",
+    "description": "DeviceShare"
+  },
+  {
+    "service": "devshr-nts",
+    "port": 552,
+    "protocol": "udp",
+    "description": "DeviceShare"
+  },
+  {
+    "service": "pirp",
+    "port": 553,
+    "protocol": "tcp",
+    "description": "pirp"
+  },
+  {
+    "service": "pirp",
+    "port": 553,
+    "protocol": "udp",
+    "description": "pirp"
+  },
+  {
+    "service": "rtsp",
+    "port": 554,
+    "protocol": "tcp",
+    "description": "Real Time Streaming Protocol (RTSP)"
+  },
+  {
+    "service": "rtsp",
+    "port": 554,
+    "protocol": "udp",
+    "description": "Real Time Streaming Protocol (RTSP)"
+  },
+  {
+    "service": "dsf",
+    "port": 555,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "dsf",
+    "port": 555,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "remotefs",
+    "port": 556,
+    "protocol": "tcp",
+    "description": "rfs server"
+  },
+  {
+    "service": "remotefs",
+    "port": 556,
+    "protocol": "udp",
+    "description": "rfs server"
+  },
+  {
+    "service": "openvms-sysipc",
+    "port": 557,
+    "protocol": "tcp",
+    "description": "openvms-sysipc"
+  },
+  {
+    "service": "openvms-sysipc",
+    "port": 557,
+    "protocol": "udp",
+    "description": "openvms-sysipc"
+  },
+  {
+    "service": "sdnskmp",
+    "port": 558,
+    "protocol": "tcp",
+    "description": "SDNSKMP"
+  },
+  {
+    "service": "sdnskmp",
+    "port": 558,
+    "protocol": "udp",
+    "description": "SDNSKMP"
+  },
+  {
+    "service": "teedtap",
+    "port": 559,
+    "protocol": "tcp",
+    "description": "TEEDTAP"
+  },
+  {
+    "service": "teedtap",
+    "port": 559,
+    "protocol": "udp",
+    "description": "TEEDTAP"
+  },
+  {
+    "service": "rmonitor",
+    "port": 560,
+    "protocol": "tcp",
+    "description": "rmonitord"
+  },
+  {
+    "service": "rmonitor",
+    "port": 560,
+    "protocol": "udp",
+    "description": "rmonitord"
+  },
+  {
+    "service": "monitor",
+    "port": 561,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "monitor",
+    "port": 561,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "chshell",
+    "port": 562,
+    "protocol": "tcp",
+    "description": "chcmd"
+  },
+  {
+    "service": "chshell",
+    "port": 562,
+    "protocol": "udp",
+    "description": "chcmd"
+  },
+  {
+    "service": "nntps",
+    "port": 563,
+    "protocol": "tcp",
+    "description": "nntp protocol over TLS/SSL (was snntp)"
+  },
+  {
+    "service": "nntps",
+    "port": 563,
+    "protocol": "udp",
+    "description": "nntp protocol over TLS/SSL (was snntp)"
+  },
+  {
+    "service": "9pfs",
+    "port": 564,
+    "protocol": "tcp",
+    "description": "plan 9 file service"
+  },
+  {
+    "service": "9pfs",
+    "port": 564,
+    "protocol": "udp",
+    "description": "plan 9 file service"
+  },
+  {
+    "service": "whoami",
+    "port": 565,
+    "protocol": "tcp",
+    "description": "whoami"
+  },
+  {
+    "service": "whoami",
+    "port": 565,
+    "protocol": "udp",
+    "description": "whoami"
+  },
+  {
+    "service": "streettalk",
+    "port": 566,
+    "protocol": "tcp",
+    "description": "streettalk"
+  },
+  {
+    "service": "streettalk",
+    "port": 566,
+    "protocol": "udp",
+    "description": "streettalk"
+  },
+  {
+    "service": "banyan-rpc",
+    "port": 567,
+    "protocol": "tcp",
+    "description": "banyan-rpc"
+  },
+  {
+    "service": "banyan-rpc",
+    "port": 567,
+    "protocol": "udp",
+    "description": "banyan-rpc"
+  },
+  {
+    "service": "ms-shuttle",
+    "port": 568,
+    "protocol": "tcp",
+    "description": "microsoft shuttle"
+  },
+  {
+    "service": "ms-shuttle",
+    "port": 568,
+    "protocol": "udp",
+    "description": "microsoft shuttle"
+  },
+  {
+    "service": "ms-rome",
+    "port": 569,
+    "protocol": "tcp",
+    "description": "microsoft rome"
+  },
+  {
+    "service": "ms-rome",
+    "port": 569,
+    "protocol": "udp",
+    "description": "microsoft rome"
+  },
+  {
+    "service": "meter",
+    "port": 570,
+    "protocol": "tcp",
+    "description": "demon"
+  },
+  {
+    "service": "meter",
+    "port": 570,
+    "protocol": "udp",
+    "description": "demon"
+  },
+  {
+    "service": "meter",
+    "port": 571,
+    "protocol": "tcp",
+    "description": "udemon"
+  },
+  {
+    "service": "meter",
+    "port": 571,
+    "protocol": "udp",
+    "description": "udemon"
+  },
+  {
+    "service": "sonar",
+    "port": 572,
+    "protocol": "tcp",
+    "description": "sonar"
+  },
+  {
+    "service": "sonar",
+    "port": 572,
+    "protocol": "udp",
+    "description": "sonar"
+  },
+  {
+    "service": "banyan-vip",
+    "port": 573,
+    "protocol": "tcp",
+    "description": "banyan-vip"
+  },
+  {
+    "service": "banyan-vip",
+    "port": 573,
+    "protocol": "udp",
+    "description": "banyan-vip"
+  },
+  {
+    "service": "ftp-agent",
+    "port": 574,
+    "protocol": "tcp",
+    "description": "FTP Software Agent System"
+  },
+  {
+    "service": "ftp-agent",
+    "port": 574,
+    "protocol": "udp",
+    "description": "FTP Software Agent System"
+  },
+  {
+    "service": "vemmi",
+    "port": 575,
+    "protocol": "tcp",
+    "description": "VEMMI"
+  },
+  {
+    "service": "vemmi",
+    "port": 575,
+    "protocol": "udp",
+    "description": "VEMMI"
+  },
+  {
+    "service": "ipcd",
+    "port": 576,
+    "protocol": "tcp",
+    "description": "ipcd"
+  },
+  {
+    "service": "ipcd",
+    "port": 576,
+    "protocol": "udp",
+    "description": "ipcd"
+  },
+  {
+    "service": "vnas",
+    "port": 577,
+    "protocol": "tcp",
+    "description": "vnas"
+  },
+  {
+    "service": "vnas",
+    "port": 577,
+    "protocol": "udp",
+    "description": "vnas"
+  },
+  {
+    "service": "ipdd",
+    "port": 578,
+    "protocol": "tcp",
+    "description": "ipdd"
+  },
+  {
+    "service": "ipdd",
+    "port": 578,
+    "protocol": "udp",
+    "description": "ipdd"
+  },
+  {
+    "service": "decbsrv",
+    "port": 579,
+    "protocol": "tcp",
+    "description": "decbsrv"
+  },
+  {
+    "service": "decbsrv",
+    "port": 579,
+    "protocol": "udp",
+    "description": "decbsrv"
+  },
+  {
+    "service": "sntp-heartbeat",
+    "port": 580,
+    "protocol": "tcp",
+    "description": "SNTP HEARTBEAT"
+  },
+  {
+    "service": "sntp-heartbeat",
+    "port": 580,
+    "protocol": "udp",
+    "description": "SNTP HEARTBEAT"
+  },
+  {
+    "service": "bdp",
+    "port": 581,
+    "protocol": "tcp",
+    "description": "Bundle Discovery Protocol"
+  },
+  {
+    "service": "bdp",
+    "port": 581,
+    "protocol": "udp",
+    "description": "Bundle Discovery Protocol"
+  },
+  {
+    "service": "scc-security",
+    "port": 582,
+    "protocol": "tcp",
+    "description": "SCC Security"
+  },
+  {
+    "service": "scc-security",
+    "port": 582,
+    "protocol": "udp",
+    "description": "SCC Security"
+  },
+  {
+    "service": "philips-vc",
+    "port": 583,
+    "protocol": "tcp",
+    "description": "Philips Video-Conferencing"
+  },
+  {
+    "service": "philips-vc",
+    "port": 583,
+    "protocol": "udp",
+    "description": "Philips Video-Conferencing"
+  },
+  {
+    "service": "keyserver",
+    "port": 584,
+    "protocol": "tcp",
+    "description": "Key Server"
+  },
+  {
+    "service": "keyserver",
+    "port": 584,
+    "protocol": "udp",
+    "description": "Key Server"
+  },
+  {
+    "service": "",
+    "port": 585,
+    "protocol": "",
+    "description": "De-registered"
+  },
+  {
+    "service": "password-chg",
+    "port": 586,
+    "protocol": "tcp",
+    "description": "Password Change"
+  },
+  {
+    "service": "password-chg",
+    "port": 586,
+    "protocol": "udp",
+    "description": "Password Change"
+  },
+  {
+    "service": "submission",
+    "port": 587,
+    "protocol": "tcp",
+    "description": "Message Submission"
+  },
+  {
+    "service": "submission",
+    "port": 587,
+    "protocol": "udp",
+    "description": "Message Submission"
+  },
+  {
+    "service": "cal",
+    "port": 588,
+    "protocol": "tcp",
+    "description": "CAL"
+  },
+  {
+    "service": "cal",
+    "port": 588,
+    "protocol": "udp",
+    "description": "CAL"
+  },
+  {
+    "service": "eyelink",
+    "port": 589,
+    "protocol": "tcp",
+    "description": "EyeLink"
+  },
+  {
+    "service": "eyelink",
+    "port": 589,
+    "protocol": "udp",
+    "description": "EyeLink"
+  },
+  {
+    "service": "tns-cml",
+    "port": 590,
+    "protocol": "tcp",
+    "description": "TNS CML"
+  },
+  {
+    "service": "tns-cml",
+    "port": 590,
+    "protocol": "udp",
+    "description": "TNS CML"
+  },
+  {
+    "service": "http-alt",
+    "port": 591,
+    "protocol": "tcp",
+    "description": "FileMaker  Inc. - HTTP Alternate (see Port 80)"
+  },
+  {
+    "service": "http-alt",
+    "port": 591,
+    "protocol": "udp",
+    "description": "FileMaker  Inc. - HTTP Alternate (see Port 80)"
+  },
+  {
+    "service": "eudora-set",
+    "port": 592,
+    "protocol": "tcp",
+    "description": "Eudora Set"
+  },
+  {
+    "service": "eudora-set",
+    "port": 592,
+    "protocol": "udp",
+    "description": "Eudora Set"
+  },
+  {
+    "service": "http-rpc-epmap",
+    "port": 593,
+    "protocol": "tcp",
+    "description": "HTTP RPC Ep Map"
+  },
+  {
+    "service": "http-rpc-epmap",
+    "port": 593,
+    "protocol": "udp",
+    "description": "HTTP RPC Ep Map"
+  },
+  {
+    "service": "tpip",
+    "port": 594,
+    "protocol": "tcp",
+    "description": "TPIP"
+  },
+  {
+    "service": "tpip",
+    "port": 594,
+    "protocol": "udp",
+    "description": "TPIP"
+  },
+  {
+    "service": "cab-protocol",
+    "port": 595,
+    "protocol": "tcp",
+    "description": "CAB Protocol"
+  },
+  {
+    "service": "cab-protocol",
+    "port": 595,
+    "protocol": "udp",
+    "description": "CAB Protocol"
+  },
+  {
+    "service": "smsd",
+    "port": 596,
+    "protocol": "tcp",
+    "description": "SMSD"
+  },
+  {
+    "service": "smsd",
+    "port": 596,
+    "protocol": "udp",
+    "description": "SMSD"
+  },
+  {
+    "service": "ptcnameservice",
+    "port": 597,
+    "protocol": "tcp",
+    "description": "PTC Name Service"
+  },
+  {
+    "service": "ptcnameservice",
+    "port": 597,
+    "protocol": "udp",
+    "description": "PTC Name Service"
+  },
+  {
+    "service": "sco-websrvrmg3",
+    "port": 598,
+    "protocol": "tcp",
+    "description": "SCO Web Server Manager 3"
+  },
+  {
+    "service": "sco-websrvrmg3",
+    "port": 598,
+    "protocol": "udp",
+    "description": "SCO Web Server Manager 3"
+  },
+  {
+    "service": "acp",
+    "port": 599,
+    "protocol": "tcp",
+    "description": "Aeolon Core Protocol"
+  },
+  {
+    "service": "acp",
+    "port": 599,
+    "protocol": "udp",
+    "description": "Aeolon Core Protocol"
+  },
+  {
+    "service": "ipcserver",
+    "port": 600,
+    "protocol": "tcp",
+    "description": "Sun IPC server"
+  },
+  {
+    "service": "ipcserver",
+    "port": 600,
+    "protocol": "udp",
+    "description": "Sun IPC server"
+  },
+  {
+    "service": "syslog-conn",
+    "port": 601,
+    "protocol": "tcp",
+    "description": "Reliable Syslog Service"
+  },
+  {
+    "service": "syslog-conn",
+    "port": 601,
+    "protocol": "udp",
+    "description": "Reliable Syslog Service"
+  },
+  {
+    "service": "xmlrpc-beep",
+    "port": 602,
+    "protocol": "tcp",
+    "description": "XML-RPC over BEEP"
+  },
+  {
+    "service": "xmlrpc-beep",
+    "port": 602,
+    "protocol": "udp",
+    "description": "XML-RPC over BEEP"
+  },
+  {
+    "service": "idxp",
+    "port": 603,
+    "protocol": "tcp",
+    "description": "IDXP"
+  },
+  {
+    "service": "idxp",
+    "port": 603,
+    "protocol": "udp",
+    "description": "IDXP"
+  },
+  {
+    "service": "tunnel",
+    "port": 604,
+    "protocol": "tcp",
+    "description": "TUNNEL"
+  },
+  {
+    "service": "tunnel",
+    "port": 604,
+    "protocol": "udp",
+    "description": "TUNNEL"
+  },
+  {
+    "service": "soap-beep",
+    "port": 605,
+    "protocol": "tcp",
+    "description": "SOAP over BEEP"
+  },
+  {
+    "service": "soap-beep",
+    "port": 605,
+    "protocol": "udp",
+    "description": "SOAP over BEEP"
+  },
+  {
+    "service": "urm",
+    "port": 606,
+    "protocol": "tcp",
+    "description": "Cray Unified Resource Manager"
+  },
+  {
+    "service": "urm",
+    "port": 606,
+    "protocol": "udp",
+    "description": "Cray Unified Resource Manager"
+  },
+  {
+    "service": "nqs",
+    "port": 607,
+    "protocol": "tcp",
+    "description": "nqs"
+  },
+  {
+    "service": "nqs",
+    "port": 607,
+    "protocol": "udp",
+    "description": "nqs"
+  },
+  {
+    "service": "sift-uft",
+    "port": 608,
+    "protocol": "tcp",
+    "description": "Sender-Initiated/Unsolicited File Transfer"
+  },
+  {
+    "service": "sift-uft",
+    "port": 608,
+    "protocol": "udp",
+    "description": "Sender-Initiated/Unsolicited File Transfer"
+  },
+  {
+    "service": "npmp-trap",
+    "port": 609,
+    "protocol": "tcp",
+    "description": "npmp-trap"
+  },
+  {
+    "service": "npmp-trap",
+    "port": 609,
+    "protocol": "udp",
+    "description": "npmp-trap"
+  },
+  {
+    "service": "npmp-local",
+    "port": 610,
+    "protocol": "tcp",
+    "description": "npmp-local"
+  },
+  {
+    "service": "npmp-local",
+    "port": 610,
+    "protocol": "udp",
+    "description": "npmp-local"
+  },
+  {
+    "service": "npmp-gui",
+    "port": 611,
+    "protocol": "tcp",
+    "description": "npmp-gui"
+  },
+  {
+    "service": "npmp-gui",
+    "port": 611,
+    "protocol": "udp",
+    "description": "npmp-gui"
+  },
+  {
+    "service": "hmmp-ind",
+    "port": 612,
+    "protocol": "tcp",
+    "description": "HMMP Indication"
+  },
+  {
+    "service": "hmmp-ind",
+    "port": 612,
+    "protocol": "udp",
+    "description": "HMMP Indication"
+  },
+  {
+    "service": "hmmp-op",
+    "port": 613,
+    "protocol": "tcp",
+    "description": "HMMP Operation"
+  },
+  {
+    "service": "hmmp-op",
+    "port": 613,
+    "protocol": "udp",
+    "description": "HMMP Operation"
+  },
+  {
+    "service": "sshell",
+    "port": 614,
+    "protocol": "tcp",
+    "description": "SSLshell"
+  },
+  {
+    "service": "sshell",
+    "port": 614,
+    "protocol": "udp",
+    "description": "SSLshell"
+  },
+  {
+    "service": "sco-inetmgr",
+    "port": 615,
+    "protocol": "tcp",
+    "description": "Internet Configuration Manager"
+  },
+  {
+    "service": "sco-inetmgr",
+    "port": 615,
+    "protocol": "udp",
+    "description": "Internet Configuration Manager"
+  },
+  {
+    "service": "sco-sysmgr",
+    "port": 616,
+    "protocol": "tcp",
+    "description": "SCO System Administration Server"
+  },
+  {
+    "service": "sco-sysmgr",
+    "port": 616,
+    "protocol": "udp",
+    "description": "SCO System Administration Server"
+  },
+  {
+    "service": "sco-dtmgr",
+    "port": 617,
+    "protocol": "tcp",
+    "description": "SCO Desktop Administration Server"
+  },
+  {
+    "service": "sco-dtmgr",
+    "port": 617,
+    "protocol": "udp",
+    "description": "SCO Desktop Administration Server"
+  },
+  {
+    "service": "dei-icda",
+    "port": 618,
+    "protocol": "tcp",
+    "description": "DEI-ICDA"
+  },
+  {
+    "service": "dei-icda",
+    "port": 618,
+    "protocol": "udp",
+    "description": "DEI-ICDA"
+  },
+  {
+    "service": "compaq-evm",
+    "port": 619,
+    "protocol": "tcp",
+    "description": "Compaq EVM"
+  },
+  {
+    "service": "compaq-evm",
+    "port": 619,
+    "protocol": "udp",
+    "description": "Compaq EVM"
+  },
+  {
+    "service": "sco-websrvrmgr",
+    "port": 620,
+    "protocol": "tcp",
+    "description": "SCO WebServer Manager"
+  },
+  {
+    "service": "sco-websrvrmgr",
+    "port": 620,
+    "protocol": "udp",
+    "description": "SCO WebServer Manager"
+  },
+  {
+    "service": "escp-ip",
+    "port": 621,
+    "protocol": "tcp",
+    "description": "ESCP"
+  },
+  {
+    "service": "escp-ip",
+    "port": 621,
+    "protocol": "udp",
+    "description": "ESCP"
+  },
+  {
+    "service": "collaborator",
+    "port": 622,
+    "protocol": "tcp",
+    "description": "Collaborator"
+  },
+  {
+    "service": "collaborator",
+    "port": 622,
+    "protocol": "udp",
+    "description": "Collaborator"
+  },
+  {
+    "service": "oob-ws-http",
+    "port": 623,
+    "protocol": "tcp",
+    "description": "DMTF out-of-band web services management protocol"
+  },
+  {
+    "service": "asf-rmcp",
+    "port": 623,
+    "protocol": "udp",
+    "description": "ASF Remote Management and Control Protocol"
+  },
+  {
+    "service": "cryptoadmin",
+    "port": 624,
+    "protocol": "tcp",
+    "description": "Crypto Admin"
+  },
+  {
+    "service": "cryptoadmin",
+    "port": 624,
+    "protocol": "udp",
+    "description": "Crypto Admin"
+  },
+  {
+    "service": "dec-dlm",
+    "port": 625,
+    "protocol": "tcp",
+    "description": "DEC DLM"
+  },
+  {
+    "service": "dec_dlm",
+    "port": 625,
+    "protocol": "tcp",
+    "description": "DEC DLM"
+  },
+  {
+    "service": "dec-dlm",
+    "port": 625,
+    "protocol": "udp",
+    "description": "DEC DLM"
+  },
+  {
+    "service": "dec_dlm",
+    "port": 625,
+    "protocol": "udp",
+    "description": "DEC DLM"
+  },
+  {
+    "service": "asia",
+    "port": 626,
+    "protocol": "tcp",
+    "description": "ASIA"
+  },
+  {
+    "service": "asia",
+    "port": 626,
+    "protocol": "udp",
+    "description": "ASIA"
+  },
+  {
+    "service": "passgo-tivoli",
+    "port": 627,
+    "protocol": "tcp",
+    "description": "PassGo Tivoli"
+  },
+  {
+    "service": "passgo-tivoli",
+    "port": 627,
+    "protocol": "udp",
+    "description": "PassGo Tivoli"
+  },
+  {
+    "service": "qmqp",
+    "port": 628,
+    "protocol": "tcp",
+    "description": "QMQP"
+  },
+  {
+    "service": "qmqp",
+    "port": 628,
+    "protocol": "udp",
+    "description": "QMQP"
+  },
+  {
+    "service": "3com-amp3",
+    "port": 629,
+    "protocol": "tcp",
+    "description": "3Com AMP3"
+  },
+  {
+    "service": "3com-amp3",
+    "port": 629,
+    "protocol": "udp",
+    "description": "3Com AMP3"
+  },
+  {
+    "service": "rda",
+    "port": 630,
+    "protocol": "tcp",
+    "description": "RDA"
+  },
+  {
+    "service": "rda",
+    "port": 630,
+    "protocol": "udp",
+    "description": "RDA"
+  },
+  {
+    "service": "ipp",
+    "port": 631,
+    "protocol": "tcp",
+    "description": "IPP (Internet Printing Protocol)"
+  },
+  {
+    "service": "ipp",
+    "port": 631,
+    "protocol": "udp",
+    "description": "IPP (Internet Printing Protocol)"
+  },
+  {
+    "service": "ipps",
+    "port": 631,
+    "protocol": "tcp",
+    "description": "Internet Printing Protocol over HTTPS"
+  },
+  {
+    "service": "bmpp",
+    "port": 632,
+    "protocol": "tcp",
+    "description": "bmpp"
+  },
+  {
+    "service": "bmpp",
+    "port": 632,
+    "protocol": "udp",
+    "description": "bmpp"
+  },
+  {
+    "service": "servstat",
+    "port": 633,
+    "protocol": "tcp",
+    "description": "Service Status update (Sterling Software)"
+  },
+  {
+    "service": "servstat",
+    "port": 633,
+    "protocol": "udp",
+    "description": "Service Status update (Sterling Software)"
+  },
+  {
+    "service": "ginad",
+    "port": 634,
+    "protocol": "tcp",
+    "description": "ginad"
+  },
+  {
+    "service": "ginad",
+    "port": 634,
+    "protocol": "udp",
+    "description": "ginad"
+  },
+  {
+    "service": "rlzdbase",
+    "port": 635,
+    "protocol": "tcp",
+    "description": "RLZ DBase"
+  },
+  {
+    "service": "rlzdbase",
+    "port": 635,
+    "protocol": "udp",
+    "description": "RLZ DBase"
+  },
+  {
+    "service": "ldaps",
+    "port": 636,
+    "protocol": "tcp",
+    "description": "ldap protocol over TLS/SSL (was sldap)"
+  },
+  {
+    "service": "ldaps",
+    "port": 636,
+    "protocol": "udp",
+    "description": "ldap protocol over TLS/SSL (was sldap)"
+  },
+  {
+    "service": "lanserver",
+    "port": 637,
+    "protocol": "tcp",
+    "description": "lanserver"
+  },
+  {
+    "service": "lanserver",
+    "port": 637,
+    "protocol": "udp",
+    "description": "lanserver"
+  },
+  {
+    "service": "mcns-sec",
+    "port": 638,
+    "protocol": "tcp",
+    "description": "mcns-sec"
+  },
+  {
+    "service": "mcns-sec",
+    "port": 638,
+    "protocol": "udp",
+    "description": "mcns-sec"
+  },
+  {
+    "service": "msdp",
+    "port": 639,
+    "protocol": "tcp",
+    "description": "MSDP"
+  },
+  {
+    "service": "msdp",
+    "port": 639,
+    "protocol": "udp",
+    "description": "MSDP"
+  },
+  {
+    "service": "entrust-sps",
+    "port": 640,
+    "protocol": "tcp",
+    "description": "entrust-sps"
+  },
+  {
+    "service": "entrust-sps",
+    "port": 640,
+    "protocol": "udp",
+    "description": "entrust-sps"
+  },
+  {
+    "service": "repcmd",
+    "port": 641,
+    "protocol": "tcp",
+    "description": "repcmd"
+  },
+  {
+    "service": "repcmd",
+    "port": 641,
+    "protocol": "udp",
+    "description": "repcmd"
+  },
+  {
+    "service": "esro-emsdp",
+    "port": 642,
+    "protocol": "tcp",
+    "description": "ESRO-EMSDP V1.3"
+  },
+  {
+    "service": "esro-emsdp",
+    "port": 642,
+    "protocol": "udp",
+    "description": "ESRO-EMSDP V1.3"
+  },
+  {
+    "service": "sanity",
+    "port": 643,
+    "protocol": "tcp",
+    "description": "SANity"
+  },
+  {
+    "service": "sanity",
+    "port": 643,
+    "protocol": "udp",
+    "description": "SANity"
+  },
+  {
+    "service": "dwr",
+    "port": 644,
+    "protocol": "tcp",
+    "description": "dwr"
+  },
+  {
+    "service": "dwr",
+    "port": 644,
+    "protocol": "udp",
+    "description": "dwr"
+  },
+  {
+    "service": "pssc",
+    "port": 645,
+    "protocol": "tcp",
+    "description": "PSSC"
+  },
+  {
+    "service": "pssc",
+    "port": 645,
+    "protocol": "udp",
+    "description": "PSSC"
+  },
+  {
+    "service": "ldp",
+    "port": 646,
+    "protocol": "tcp",
+    "description": "LDP"
+  },
+  {
+    "service": "ldp",
+    "port": 646,
+    "protocol": "udp",
+    "description": "LDP"
+  },
+  {
+    "service": "dhcp-failover",
+    "port": 647,
+    "protocol": "tcp",
+    "description": "DHCP Failover"
+  },
+  {
+    "service": "dhcp-failover",
+    "port": 647,
+    "protocol": "udp",
+    "description": "DHCP Failover"
+  },
+  {
+    "service": "rrp",
+    "port": 648,
+    "protocol": "tcp",
+    "description": "Registry Registrar Protocol (RRP)"
+  },
+  {
+    "service": "rrp",
+    "port": 648,
+    "protocol": "udp",
+    "description": "Registry Registrar Protocol (RRP)"
+  },
+  {
+    "service": "cadview-3d",
+    "port": 649,
+    "protocol": "tcp",
+    "description": "Cadview-3d - streaming 3d models over the internet"
+  },
+  {
+    "service": "cadview-3d",
+    "port": 649,
+    "protocol": "udp",
+    "description": "Cadview-3d - streaming 3d models over the internet"
+  },
+  {
+    "service": "obex",
+    "port": 650,
+    "protocol": "tcp",
+    "description": "OBEX"
+  },
+  {
+    "service": "obex",
+    "port": 650,
+    "protocol": "udp",
+    "description": "OBEX"
+  },
+  {
+    "service": "ieee-mms",
+    "port": 651,
+    "protocol": "tcp",
+    "description": "IEEE MMS"
+  },
+  {
+    "service": "ieee-mms",
+    "port": 651,
+    "protocol": "udp",
+    "description": "IEEE MMS"
+  },
+  {
+    "service": "hello-port",
+    "port": 652,
+    "protocol": "tcp",
+    "description": "HELLO_PORT"
+  },
+  {
+    "service": "hello-port",
+    "port": 652,
+    "protocol": "udp",
+    "description": "HELLO_PORT"
+  },
+  {
+    "service": "repscmd",
+    "port": 653,
+    "protocol": "tcp",
+    "description": "RepCmd"
+  },
+  {
+    "service": "repscmd",
+    "port": 653,
+    "protocol": "udp",
+    "description": "RepCmd"
+  },
+  {
+    "service": "aodv",
+    "port": 654,
+    "protocol": "tcp",
+    "description": "AODV"
+  },
+  {
+    "service": "aodv",
+    "port": 654,
+    "protocol": "udp",
+    "description": "AODV"
+  },
+  {
+    "service": "tinc",
+    "port": 655,
+    "protocol": "tcp",
+    "description": "TINC"
+  },
+  {
+    "service": "tinc",
+    "port": 655,
+    "protocol": "udp",
+    "description": "TINC"
+  },
+  {
+    "service": "spmp",
+    "port": 656,
+    "protocol": "tcp",
+    "description": "SPMP"
+  },
+  {
+    "service": "spmp",
+    "port": 656,
+    "protocol": "udp",
+    "description": "SPMP"
+  },
+  {
+    "service": "rmc",
+    "port": 657,
+    "protocol": "tcp",
+    "description": "RMC"
+  },
+  {
+    "service": "rmc",
+    "port": 657,
+    "protocol": "udp",
+    "description": "RMC"
+  },
+  {
+    "service": "tenfold",
+    "port": 658,
+    "protocol": "tcp",
+    "description": "TenFold"
+  },
+  {
+    "service": "tenfold",
+    "port": 658,
+    "protocol": "udp",
+    "description": "TenFold"
+  },
+  {
+    "service": "",
+    "port": 659,
+    "protocol": "",
+    "description": "Removed"
+  },
+  {
+    "service": "mac-srvr-admin",
+    "port": 660,
+    "protocol": "tcp",
+    "description": "MacOS Server Admin"
+  },
+  {
+    "service": "mac-srvr-admin",
+    "port": 660,
+    "protocol": "udp",
+    "description": "MacOS Server Admin"
+  },
+  {
+    "service": "hap",
+    "port": 661,
+    "protocol": "tcp",
+    "description": "HAP"
+  },
+  {
+    "service": "hap",
+    "port": 661,
+    "protocol": "udp",
+    "description": "HAP"
+  },
+  {
+    "service": "pftp",
+    "port": 662,
+    "protocol": "tcp",
+    "description": "PFTP"
+  },
+  {
+    "service": "pftp",
+    "port": 662,
+    "protocol": "udp",
+    "description": "PFTP"
+  },
+  {
+    "service": "purenoise",
+    "port": 663,
+    "protocol": "tcp",
+    "description": "PureNoise"
+  },
+  {
+    "service": "purenoise",
+    "port": 663,
+    "protocol": "udp",
+    "description": "PureNoise"
+  },
+  {
+    "service": "oob-ws-https",
+    "port": 664,
+    "protocol": "tcp",
+    "description": "DMTF out-of-band secure web services management protocol"
+  },
+  {
+    "service": "asf-secure-rmcp",
+    "port": 664,
+    "protocol": "udp",
+    "description": "ASF Secure Remote Management and Control Protocol"
+  },
+  {
+    "service": "sun-dr",
+    "port": 665,
+    "protocol": "tcp",
+    "description": "Sun DR"
+  },
+  {
+    "service": "sun-dr",
+    "port": 665,
+    "protocol": "udp",
+    "description": "Sun DR"
+  },
+  {
+    "service": "mdqs",
+    "port": 666,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "mdqs",
+    "port": 666,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "doom",
+    "port": 666,
+    "protocol": "tcp",
+    "description": "doom Id Software"
+  },
+  {
+    "service": "doom",
+    "port": 666,
+    "protocol": "udp",
+    "description": "doom Id Software"
+  },
+  {
+    "service": "disclose",
+    "port": 667,
+    "protocol": "tcp",
+    "description": "campaign contribution disclosures - SDR Technologies"
+  },
+  {
+    "service": "disclose",
+    "port": 667,
+    "protocol": "udp",
+    "description": "campaign contribution disclosures - SDR Technologies"
+  },
+  {
+    "service": "mecomm",
+    "port": 668,
+    "protocol": "tcp",
+    "description": "MeComm"
+  },
+  {
+    "service": "mecomm",
+    "port": 668,
+    "protocol": "udp",
+    "description": "MeComm"
+  },
+  {
+    "service": "meregister",
+    "port": 669,
+    "protocol": "tcp",
+    "description": "MeRegister"
+  },
+  {
+    "service": "meregister",
+    "port": 669,
+    "protocol": "udp",
+    "description": "MeRegister"
+  },
+  {
+    "service": "vacdsm-sws",
+    "port": 670,
+    "protocol": "tcp",
+    "description": "VACDSM-SWS"
+  },
+  {
+    "service": "vacdsm-sws",
+    "port": 670,
+    "protocol": "udp",
+    "description": "VACDSM-SWS"
+  },
+  {
+    "service": "vacdsm-app",
+    "port": 671,
+    "protocol": "tcp",
+    "description": "VACDSM-APP"
+  },
+  {
+    "service": "vacdsm-app",
+    "port": 671,
+    "protocol": "udp",
+    "description": "VACDSM-APP"
+  },
+  {
+    "service": "vpps-qua",
+    "port": 672,
+    "protocol": "tcp",
+    "description": "VPPS-QUA"
+  },
+  {
+    "service": "vpps-qua",
+    "port": 672,
+    "protocol": "udp",
+    "description": "VPPS-QUA"
+  },
+  {
+    "service": "cimplex",
+    "port": 673,
+    "protocol": "tcp",
+    "description": "CIMPLEX"
+  },
+  {
+    "service": "cimplex",
+    "port": 673,
+    "protocol": "udp",
+    "description": "CIMPLEX"
+  },
+  {
+    "service": "acap",
+    "port": 674,
+    "protocol": "tcp",
+    "description": "ACAP"
+  },
+  {
+    "service": "acap",
+    "port": 674,
+    "protocol": "udp",
+    "description": "ACAP"
+  },
+  {
+    "service": "dctp",
+    "port": 675,
+    "protocol": "tcp",
+    "description": "DCTP"
+  },
+  {
+    "service": "dctp",
+    "port": 675,
+    "protocol": "udp",
+    "description": "DCTP"
+  },
+  {
+    "service": "vpps-via",
+    "port": 676,
+    "protocol": "tcp",
+    "description": "VPPS Via"
+  },
+  {
+    "service": "vpps-via",
+    "port": 676,
+    "protocol": "udp",
+    "description": "VPPS Via"
+  },
+  {
+    "service": "vpp",
+    "port": 677,
+    "protocol": "tcp",
+    "description": "Virtual Presence Protocol"
+  },
+  {
+    "service": "vpp",
+    "port": 677,
+    "protocol": "udp",
+    "description": "Virtual Presence Protocol"
+  },
+  {
+    "service": "ggf-ncp",
+    "port": 678,
+    "protocol": "tcp",
+    "description": "GNU Generation Foundation NCP"
+  },
+  {
+    "service": "ggf-ncp",
+    "port": 678,
+    "protocol": "udp",
+    "description": "GNU Generation Foundation NCP"
+  },
+  {
+    "service": "mrm",
+    "port": 679,
+    "protocol": "tcp",
+    "description": "MRM"
+  },
+  {
+    "service": "mrm",
+    "port": 679,
+    "protocol": "udp",
+    "description": "MRM"
+  },
+  {
+    "service": "entrust-aaas",
+    "port": 680,
+    "protocol": "tcp",
+    "description": "entrust-aaas"
+  },
+  {
+    "service": "entrust-aaas",
+    "port": 680,
+    "protocol": "udp",
+    "description": "entrust-aaas"
+  },
+  {
+    "service": "entrust-aams",
+    "port": 681,
+    "protocol": "tcp",
+    "description": "entrust-aams"
+  },
+  {
+    "service": "entrust-aams",
+    "port": 681,
+    "protocol": "udp",
+    "description": "entrust-aams"
+  },
+  {
+    "service": "xfr",
+    "port": 682,
+    "protocol": "tcp",
+    "description": "XFR"
+  },
+  {
+    "service": "xfr",
+    "port": 682,
+    "protocol": "udp",
+    "description": "XFR"
+  },
+  {
+    "service": "corba-iiop",
+    "port": 683,
+    "protocol": "tcp",
+    "description": "CORBA IIOP"
+  },
+  {
+    "service": "corba-iiop",
+    "port": 683,
+    "protocol": "udp",
+    "description": "CORBA IIOP"
+  },
+  {
+    "service": "corba-iiop-ssl",
+    "port": 684,
+    "protocol": "tcp",
+    "description": "CORBA IIOP SSL"
+  },
+  {
+    "service": "corba-iiop-ssl",
+    "port": 684,
+    "protocol": "udp",
+    "description": "CORBA IIOP SSL"
+  },
+  {
+    "service": "mdc-portmapper",
+    "port": 685,
+    "protocol": "tcp",
+    "description": "MDC Port Mapper"
+  },
+  {
+    "service": "mdc-portmapper",
+    "port": 685,
+    "protocol": "udp",
+    "description": "MDC Port Mapper"
+  },
+  {
+    "service": "hcp-wismar",
+    "port": 686,
+    "protocol": "tcp",
+    "description": "Hardware Control Protocol Wismar"
+  },
+  {
+    "service": "hcp-wismar",
+    "port": 686,
+    "protocol": "udp",
+    "description": "Hardware Control Protocol Wismar"
+  },
+  {
+    "service": "asipregistry",
+    "port": 687,
+    "protocol": "tcp",
+    "description": "asipregistry"
+  },
+  {
+    "service": "asipregistry",
+    "port": 687,
+    "protocol": "udp",
+    "description": "asipregistry"
+  },
+  {
+    "service": "realm-rusd",
+    "port": 688,
+    "protocol": "tcp",
+    "description": "ApplianceWare managment protocol"
+  },
+  {
+    "service": "realm-rusd",
+    "port": 688,
+    "protocol": "udp",
+    "description": "ApplianceWare managment protocol"
+  },
+  {
+    "service": "nmap",
+    "port": 689,
+    "protocol": "tcp",
+    "description": "NMAP"
+  },
+  {
+    "service": "nmap",
+    "port": 689,
+    "protocol": "udp",
+    "description": "NMAP"
+  },
+  {
+    "service": "vatp",
+    "port": 690,
+    "protocol": "tcp",
+    "description": "Velneo Application Transfer Protocol"
+  },
+  {
+    "service": "vatp",
+    "port": 690,
+    "protocol": "udp",
+    "description": "Velneo Application Transfer Protocol"
+  },
+  {
+    "service": "msexch-routing",
+    "port": 691,
+    "protocol": "tcp",
+    "description": "MS Exchange Routing"
+  },
+  {
+    "service": "msexch-routing",
+    "port": 691,
+    "protocol": "udp",
+    "description": "MS Exchange Routing"
+  },
+  {
+    "service": "hyperwave-isp",
+    "port": 692,
+    "protocol": "tcp",
+    "description": "Hyperwave-ISP"
+  },
+  {
+    "service": "hyperwave-isp",
+    "port": 692,
+    "protocol": "udp",
+    "description": "Hyperwave-ISP"
+  },
+  {
+    "service": "connendp",
+    "port": 693,
+    "protocol": "tcp",
+    "description": "almanid Connection Endpoint"
+  },
+  {
+    "service": "connendp",
+    "port": 693,
+    "protocol": "udp",
+    "description": "almanid Connection Endpoint"
+  },
+  {
+    "service": "ha-cluster",
+    "port": 694,
+    "protocol": "tcp",
+    "description": "ha-cluster"
+  },
+  {
+    "service": "ha-cluster",
+    "port": 694,
+    "protocol": "udp",
+    "description": "ha-cluster"
+  },
+  {
+    "service": "ieee-mms-ssl",
+    "port": 695,
+    "protocol": "tcp",
+    "description": "IEEE-MMS-SSL"
+  },
+  {
+    "service": "ieee-mms-ssl",
+    "port": 695,
+    "protocol": "udp",
+    "description": "IEEE-MMS-SSL"
+  },
+  {
+    "service": "rushd",
+    "port": 696,
+    "protocol": "tcp",
+    "description": "RUSHD"
+  },
+  {
+    "service": "rushd",
+    "port": 696,
+    "protocol": "udp",
+    "description": "RUSHD"
+  },
+  {
+    "service": "uuidgen",
+    "port": 697,
+    "protocol": "tcp",
+    "description": "UUIDGEN"
+  },
+  {
+    "service": "uuidgen",
+    "port": 697,
+    "protocol": "udp",
+    "description": "UUIDGEN"
+  },
+  {
+    "service": "olsr",
+    "port": 698,
+    "protocol": "tcp",
+    "description": "OLSR"
+  },
+  {
+    "service": "olsr",
+    "port": 698,
+    "protocol": "udp",
+    "description": "OLSR"
+  },
+  {
+    "service": "accessnetwork",
+    "port": 699,
+    "protocol": "tcp",
+    "description": "Access Network"
+  },
+  {
+    "service": "accessnetwork",
+    "port": 699,
+    "protocol": "udp",
+    "description": "Access Network"
+  },
+  {
+    "service": "epp",
+    "port": 700,
+    "protocol": "tcp",
+    "description": "Extensible Provisioning Protocol"
+  },
+  {
+    "service": "epp",
+    "port": 700,
+    "protocol": "udp",
+    "description": "Extensible Provisioning Protocol"
+  },
+  {
+    "service": "lmp",
+    "port": 701,
+    "protocol": "tcp",
+    "description": "Link Management Protocol (LMP)"
+  },
+  {
+    "service": "lmp",
+    "port": 701,
+    "protocol": "udp",
+    "description": "Link Management Protocol (LMP)"
+  },
+  {
+    "service": "iris-beep",
+    "port": 702,
+    "protocol": "tcp",
+    "description": "IRIS over BEEP"
+  },
+  {
+    "service": "iris-beep",
+    "port": 702,
+    "protocol": "udp",
+    "description": "IRIS over BEEP"
+  },
+  {
+    "service": "",
+    "port": 703,
+    "protocol": "",
+    "description": "Unassigned"
+  },
+  {
+    "service": "elcsd",
+    "port": 704,
+    "protocol": "tcp",
+    "description": "errlog copy/server daemon"
+  },
+  {
+    "service": "elcsd",
+    "port": 704,
+    "protocol": "udp",
+    "description": "errlog copy/server daemon"
+  },
+  {
+    "service": "agentx",
+    "port": 705,
+    "protocol": "tcp",
+    "description": "AgentX"
+  },
+  {
+    "service": "agentx",
+    "port": 705,
+    "protocol": "udp",
+    "description": "AgentX"
+  },
+  {
+    "service": "silc",
+    "port": 706,
+    "protocol": "tcp",
+    "description": "SILC"
+  },
+  {
+    "service": "silc",
+    "port": 706,
+    "protocol": "udp",
+    "description": "SILC"
+  },
+  {
+    "service": "borland-dsj",
+    "port": 707,
+    "protocol": "tcp",
+    "description": "Borland DSJ"
+  },
+  {
+    "service": "borland-dsj",
+    "port": 707,
+    "protocol": "udp",
+    "description": "Borland DSJ"
+  },
+  {
+    "service": "",
+    "port": 708,
+    "protocol": "",
+    "description": "Unassigned"
+  },
+  {
+    "service": "entrust-kmsh",
+    "port": 709,
+    "protocol": "tcp",
+    "description": "Entrust Key Management Service Handler"
+  },
+  {
+    "service": "entrust-kmsh",
+    "port": 709,
+    "protocol": "udp",
+    "description": "Entrust Key Management Service Handler"
+  },
+  {
+    "service": "entrust-ash",
+    "port": 710,
+    "protocol": "tcp",
+    "description": "Entrust Administration Service Handler"
+  },
+  {
+    "service": "entrust-ash",
+    "port": 710,
+    "protocol": "udp",
+    "description": "Entrust Administration Service Handler"
+  },
+  {
+    "service": "cisco-tdp",
+    "port": 711,
+    "protocol": "tcp",
+    "description": "Cisco TDP"
+  },
+  {
+    "service": "cisco-tdp",
+    "port": 711,
+    "protocol": "udp",
+    "description": "Cisco TDP"
+  },
+  {
+    "service": "tbrpf",
+    "port": 712,
+    "protocol": "tcp",
+    "description": "TBRPF"
+  },
+  {
+    "service": "tbrpf",
+    "port": 712,
+    "protocol": "udp",
+    "description": "TBRPF"
+  },
+  {
+    "service": "iris-xpc",
+    "port": 713,
+    "protocol": "tcp",
+    "description": "IRIS over XPC"
+  },
+  {
+    "service": "iris-xpc",
+    "port": 713,
+    "protocol": "udp",
+    "description": "IRIS over XPC"
+  },
+  {
+    "service": "iris-xpcs",
+    "port": 714,
+    "protocol": "tcp",
+    "description": "IRIS over XPCS"
+  },
+  {
+    "service": "iris-xpcs",
+    "port": 714,
+    "protocol": "udp",
+    "description": "IRIS over XPCS"
+  },
+  {
+    "service": "iris-lwz",
+    "port": 715,
+    "protocol": "tcp",
+    "description": "IRIS-LWZ"
+  },
+  {
+    "service": "iris-lwz",
+    "port": 715,
+    "protocol": "udp",
+    "description": "IRIS-LWZ"
+  },
+  {
+    "service": "pana",
+    "port": 716,
+    "protocol": "udp",
+    "description": "PANA Messages"
+  },
+  {
+    "service": "netviewdm1",
+    "port": 729,
+    "protocol": "tcp",
+    "description": "IBM NetView DM/6000 Server/Client"
+  },
+  {
+    "service": "netviewdm1",
+    "port": 729,
+    "protocol": "udp",
+    "description": "IBM NetView DM/6000 Server/Client"
+  },
+  {
+    "service": "netviewdm2",
+    "port": 730,
+    "protocol": "tcp",
+    "description": "IBM NetView DM/6000 send/tcp"
+  },
+  {
+    "service": "netviewdm2",
+    "port": 730,
+    "protocol": "udp",
+    "description": "IBM NetView DM/6000 send/tcp"
+  },
+  {
+    "service": "netviewdm3",
+    "port": 731,
+    "protocol": "tcp",
+    "description": "IBM NetView DM/6000 receive/tcp"
+  },
+  {
+    "service": "netviewdm3",
+    "port": 731,
+    "protocol": "udp",
+    "description": "IBM NetView DM/6000 receive/tcp"
+  },
+  {
+    "service": "netgw",
+    "port": 741,
+    "protocol": "tcp",
+    "description": "netGW"
+  },
+  {
+    "service": "netgw",
+    "port": 741,
+    "protocol": "udp",
+    "description": "netGW"
+  },
+  {
+    "service": "netrcs",
+    "port": 742,
+    "protocol": "tcp",
+    "description": "Network based Rev. Cont. Sys."
+  },
+  {
+    "service": "netrcs",
+    "port": 742,
+    "protocol": "udp",
+    "description": "Network based Rev. Cont. Sys."
+  },
+  {
+    "service": "",
+    "port": 743,
+    "protocol": "",
+    "description": "Unassigned"
+  },
+  {
+    "service": "flexlm",
+    "port": 744,
+    "protocol": "tcp",
+    "description": "Flexible License Manager"
+  },
+  {
+    "service": "flexlm",
+    "port": 744,
+    "protocol": "udp",
+    "description": "Flexible License Manager"
+  },
+  {
+    "service": "fujitsu-dev",
+    "port": 747,
+    "protocol": "tcp",
+    "description": "Fujitsu Device Control"
+  },
+  {
+    "service": "fujitsu-dev",
+    "port": 747,
+    "protocol": "udp",
+    "description": "Fujitsu Device Control"
+  },
+  {
+    "service": "ris-cm",
+    "port": 748,
+    "protocol": "tcp",
+    "description": "Russell Info Sci Calendar Manager"
+  },
+  {
+    "service": "ris-cm",
+    "port": 748,
+    "protocol": "udp",
+    "description": "Russell Info Sci Calendar Manager"
+  },
+  {
+    "service": "kerberos-adm",
+    "port": 749,
+    "protocol": "tcp",
+    "description": "kerberos administration"
+  },
+  {
+    "service": "kerberos-adm",
+    "port": 749,
+    "protocol": "udp",
+    "description": "kerberos administration"
+  },
+  {
+    "service": "rfile",
+    "port": 750,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "loadav",
+    "port": 750,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "kerberos-iv",
+    "port": 750,
+    "protocol": "udp",
+    "description": "kerberos version iv"
+  },
+  {
+    "service": "pump",
+    "port": 751,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "pump",
+    "port": 751,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "qrh",
+    "port": 752,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "qrh",
+    "port": 752,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "rrh",
+    "port": 753,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "rrh",
+    "port": 753,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "tell",
+    "port": 754,
+    "protocol": "tcp",
+    "description": "send"
+  },
+  {
+    "service": "tell",
+    "port": 754,
+    "protocol": "udp",
+    "description": "send"
+  },
+  {
+    "service": "nlogin",
+    "port": 758,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "nlogin",
+    "port": 758,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "con",
+    "port": 759,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "con",
+    "port": 759,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "ns",
+    "port": 760,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "ns",
+    "port": 760,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "rxe",
+    "port": 761,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "rxe",
+    "port": 761,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "quotad",
+    "port": 762,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "quotad",
+    "port": 762,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "cycleserv",
+    "port": 763,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "cycleserv",
+    "port": 763,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "omserv",
+    "port": 764,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "omserv",
+    "port": 764,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "webster",
+    "port": 765,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "webster",
+    "port": 765,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "",
+    "port": 766,
+    "protocol": "",
+    "description": "Unassigned"
+  },
+  {
+    "service": "phonebook",
+    "port": 767,
+    "protocol": "tcp",
+    "description": "phone"
+  },
+  {
+    "service": "phonebook",
+    "port": 767,
+    "protocol": "udp",
+    "description": "phone"
+  },
+  {
+    "service": "",
+    "port": 768,
+    "protocol": "",
+    "description": "Unassigned"
+  },
+  {
+    "service": "vid",
+    "port": 769,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "vid",
+    "port": 769,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "cadlock",
+    "port": 770,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "cadlock",
+    "port": 770,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "rtip",
+    "port": 771,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "rtip",
+    "port": 771,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "cycleserv2",
+    "port": 772,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "cycleserv2",
+    "port": 772,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "submit",
+    "port": 773,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "notify",
+    "port": 773,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "rpasswd",
+    "port": 774,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "acmaint-dbd",
+    "port": 774,
+    "protocol": "udp",
+    "description": "IANA assigned this well-formed service name as a replacement for acmaint_dbd."
+  },
+  {
+    "service": "acmaint_dbd",
+    "port": 774,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "entomb",
+    "port": 775,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "acmaint-transd",
+    "port": 775,
+    "protocol": "udp",
+    "description": "IANA assigned this well-formed service name as a replacement for acmaint_transd."
+  },
+  {
+    "service": "acmaint_transd",
+    "port": 775,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "wpages",
+    "port": 776,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "wpages",
+    "port": 776,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "multiling-http",
+    "port": 777,
+    "protocol": "tcp",
+    "description": "Multiling HTTP"
+  },
+  {
+    "service": "multiling-http",
+    "port": 777,
+    "protocol": "udp",
+    "description": "Multiling HTTP"
+  },
+  {
+    "service": "wpgs",
+    "port": 780,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "wpgs",
+    "port": 780,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "",
+    "port": 786,
+    "protocol": "",
+    "description": "Unassigned"
+  },
+  {
+    "service": "",
+    "port": 787,
+    "protocol": "",
+    "description": "Unassigned"
+  },
+  {
+    "service": "mdbs-daemon",
+    "port": 800,
+    "protocol": "tcp",
+    "description": "IANA assigned this well-formed service name as a replacement for mdbs_daemon."
+  },
+  {
+    "service": "mdbs_daemon",
+    "port": 800,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "mdbs-daemon",
+    "port": 800,
+    "protocol": "udp",
+    "description": "IANA assigned this well-formed service name as a replacement for mdbs_daemon."
+  },
+  {
+    "service": "mdbs_daemon",
+    "port": 800,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "device",
+    "port": 801,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "device",
+    "port": 801,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "mbap-s",
+    "port": 802,
+    "protocol": "tcp",
+    "description": "Modbus Application Protocol Secure"
+  },
+  {
+    "service": "mbap-s",
+    "port": 802,
+    "protocol": "udp",
+    "description": "Modbus Application Protocol Secure"
+  },
+  {
+    "service": "fcp-udp",
+    "port": 810,
+    "protocol": "tcp",
+    "description": "FCP"
+  },
+  {
+    "service": "fcp-udp",
+    "port": 810,
+    "protocol": "udp",
+    "description": "FCP Datagram"
+  },
+  {
+    "service": "itm-mcell-s",
+    "port": 828,
+    "protocol": "tcp",
+    "description": "itm-mcell-s"
+  },
+  {
+    "service": "itm-mcell-s",
+    "port": 828,
+    "protocol": "udp",
+    "description": "itm-mcell-s"
+  },
+  {
+    "service": "pkix-3-ca-ra",
+    "port": 829,
+    "protocol": "tcp",
+    "description": "PKIX-3 CA/RA"
+  },
+  {
+    "service": "pkix-3-ca-ra",
+    "port": 829,
+    "protocol": "udp",
+    "description": "PKIX-3 CA/RA"
+  },
+  {
+    "service": "netconf-ssh",
+    "port": 830,
+    "protocol": "tcp",
+    "description": "NETCONF over SSH"
+  },
+  {
+    "service": "netconf-ssh",
+    "port": 830,
+    "protocol": "udp",
+    "description": "NETCONF over SSH"
+  },
+  {
+    "service": "",
+    "port": 831,
+    "protocol": "tcp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 831,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 832,
+    "protocol": "tcp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 832,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 833,
+    "protocol": "tcp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 833,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "dhcp-failover2",
+    "port": 847,
+    "protocol": "tcp",
+    "description": "dhcp-failover 2"
+  },
+  {
+    "service": "dhcp-failover2",
+    "port": 847,
+    "protocol": "udp",
+    "description": "dhcp-failover 2"
+  },
+  {
+    "service": "gdoi",
+    "port": 848,
+    "protocol": "tcp",
+    "description": "GDOI"
+  },
+  {
+    "service": "gdoi",
+    "port": 848,
+    "protocol": "udp",
+    "description": "GDOI"
+  },
+  {
+    "service": "domain-s",
+    "port": 853,
+    "protocol": "tcp",
+    "description": "DNS query-response protocol run over TLS"
+  },
+  {
+    "service": "domain-s",
+    "port": 853,
+    "protocol": "udp",
+    "description": "DNS query-response protocol run over DTLS or QUIC"
+  },
+  {
+    "service": "dlep",
+    "port": 854,
+    "protocol": "tcp",
+    "description": "Dynamic Link Exchange Protocol (DLEP)"
+  },
+  {
+    "service": "dlep",
+    "port": 854,
+    "protocol": "udp",
+    "description": "Dynamic Link Exchange Protocol (DLEP)"
+  },
+  {
+    "service": "iscsi",
+    "port": 860,
+    "protocol": "tcp",
+    "description": "iSCSI"
+  },
+  {
+    "service": "iscsi",
+    "port": 860,
+    "protocol": "udp",
+    "description": "iSCSI"
+  },
+  {
+    "service": "owamp-control",
+    "port": 861,
+    "protocol": "tcp",
+    "description": "OWAMP-Control"
+  },
+  {
+    "service": "owamp-test",
+    "port": 861,
+    "protocol": "udp",
+    "description": "OWAMP-Test"
+  },
+  {
+    "service": "twamp-control",
+    "port": 862,
+    "protocol": "tcp",
+    "description": "TWAMP-Control"
+  },
+  {
+    "service": "twamp-test",
+    "port": 862,
+    "protocol": "udp",
+    "description": "TWAMP-Test Receiver Port"
+  },
+  {
+    "service": "rsync",
+    "port": 873,
+    "protocol": "tcp",
+    "description": "rsync"
+  },
+  {
+    "service": "rsync",
+    "port": 873,
+    "protocol": "udp",
+    "description": "rsync"
+  },
+  {
+    "service": "iclcnet-locate",
+    "port": 886,
+    "protocol": "tcp",
+    "description": "ICL coNETion locate server"
+  },
+  {
+    "service": "iclcnet-locate",
+    "port": 886,
+    "protocol": "udp",
+    "description": "ICL coNETion locate server"
+  },
+  {
+    "service": "iclcnet-svinfo",
+    "port": 887,
+    "protocol": "tcp",
+    "description": "ICL coNETion server info"
+  },
+  {
+    "service": "iclcnet_svinfo",
+    "port": 887,
+    "protocol": "tcp",
+    "description": "ICL coNETion server info"
+  },
+  {
+    "service": "iclcnet-svinfo",
+    "port": 887,
+    "protocol": "udp",
+    "description": "ICL coNETion server info"
+  },
+  {
+    "service": "iclcnet_svinfo",
+    "port": 887,
+    "protocol": "udp",
+    "description": "ICL coNETion server info"
+  },
+  {
+    "service": "accessbuilder",
+    "port": 888,
+    "protocol": "tcp",
+    "description": "AccessBuilder"
+  },
+  {
+    "service": "accessbuilder",
+    "port": 888,
+    "protocol": "udp",
+    "description": "AccessBuilder"
+  },
+  {
+    "service": "cddbp",
+    "port": 888,
+    "protocol": "tcp",
+    "description": "CD Database Protocol"
+  },
+  {
+    "service": "omginitialrefs",
+    "port": 900,
+    "protocol": "tcp",
+    "description": "OMG Initial Refs"
+  },
+  {
+    "service": "omginitialrefs",
+    "port": 900,
+    "protocol": "udp",
+    "description": "OMG Initial Refs"
+  },
+  {
+    "service": "smpnameres",
+    "port": 901,
+    "protocol": "tcp",
+    "description": "SMPNAMERES"
+  },
+  {
+    "service": "smpnameres",
+    "port": 901,
+    "protocol": "udp",
+    "description": "SMPNAMERES"
+  },
+  {
+    "service": "ideafarm-door",
+    "port": 902,
+    "protocol": "tcp",
+    "description": "self documenting Telnet Door"
+  },
+  {
+    "service": "ideafarm-door",
+    "port": 902,
+    "protocol": "udp",
+    "description": "self documenting Door: send 0x00 for info"
+  },
+  {
+    "service": "ideafarm-panic",
+    "port": 903,
+    "protocol": "tcp",
+    "description": "self documenting Telnet Panic Door"
+  },
+  {
+    "service": "ideafarm-panic",
+    "port": 903,
+    "protocol": "udp",
+    "description": "self documenting Panic Door: send 0x00 for info"
+  },
+  {
+    "service": "kink",
+    "port": 910,
+    "protocol": "tcp",
+    "description": "Kerberized Internet Negotiation of Keys (KINK)"
+  },
+  {
+    "service": "kink",
+    "port": 910,
+    "protocol": "udp",
+    "description": "Kerberized Internet Negotiation of Keys (KINK)"
+  },
+  {
+    "service": "xact-backup",
+    "port": 911,
+    "protocol": "tcp",
+    "description": "xact-backup"
+  },
+  {
+    "service": "xact-backup",
+    "port": 911,
+    "protocol": "udp",
+    "description": "xact-backup"
+  },
+  {
+    "service": "apex-mesh",
+    "port": 912,
+    "protocol": "tcp",
+    "description": "APEX relay-relay service"
+  },
+  {
+    "service": "apex-mesh",
+    "port": 912,
+    "protocol": "udp",
+    "description": "APEX relay-relay service"
+  },
+  {
+    "service": "apex-edge",
+    "port": 913,
+    "protocol": "tcp",
+    "description": "APEX endpoint-relay service"
+  },
+  {
+    "service": "apex-edge",
+    "port": 913,
+    "protocol": "udp",
+    "description": "APEX endpoint-relay service"
+  },
+  {
+    "service": "",
+    "port": 914,
+    "protocol": "tcp",
+    "description": "Reserved"
+  },
+  {
+    "service": "rift-lies",
+    "port": 914,
+    "protocol": "udp",
+    "description": "Routing in Fat Trees Link Information Element"
+  },
+  {
+    "service": "",
+    "port": 915,
+    "protocol": "tcp",
+    "description": "Reserved"
+  },
+  {
+    "service": "rift-ties",
+    "port": 915,
+    "protocol": "udp",
+    "description": "Routing in Fat Trees Topology Information Element"
+  },
+  {
+    "service": "rndc",
+    "port": 953,
+    "protocol": "tcp",
+    "description": "BIND9 remote name daemon controller"
+  },
+  {
+    "service": "",
+    "port": 953,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "ftps-data",
+    "port": 989,
+    "protocol": "tcp",
+    "description": "ftp protocol  data"
+  },
+  {
+    "service": "ftps-data",
+    "port": 989,
+    "protocol": "udp",
+    "description": "ftp protocol  data"
+  },
+  {
+    "service": "ftps",
+    "port": 990,
+    "protocol": "tcp",
+    "description": "ftp protocol  control"
+  },
+  {
+    "service": "ftps",
+    "port": 990,
+    "protocol": "udp",
+    "description": "ftp protocol  control"
+  },
+  {
+    "service": "nas",
+    "port": 991,
+    "protocol": "tcp",
+    "description": "Netnews Administration System"
+  },
+  {
+    "service": "nas",
+    "port": 991,
+    "protocol": "udp",
+    "description": "Netnews Administration System"
+  },
+  {
+    "service": "telnets",
+    "port": 992,
+    "protocol": "tcp",
+    "description": "telnet protocol over TLS/SSL"
+  },
+  {
+    "service": "telnets",
+    "port": 992,
+    "protocol": "udp",
+    "description": "telnet protocol over TLS/SSL"
+  },
+  {
+    "service": "imaps",
+    "port": 993,
+    "protocol": "tcp",
+    "description": "IMAP over TLS protocol"
+  },
+  {
+    "service": "",
+    "port": 993,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 994,
+    "protocol": "tcp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 994,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "pop3s",
+    "port": 995,
+    "protocol": "tcp",
+    "description": "POP3 over TLS protocol"
+  },
+  {
+    "service": "pop3s",
+    "port": 995,
+    "protocol": "udp",
+    "description": "pop3 protocol over TLS/SSL (was spop3)"
+  },
+  {
+    "service": "vsinet",
+    "port": 996,
+    "protocol": "tcp",
+    "description": "vsinet"
+  },
+  {
+    "service": "vsinet",
+    "port": 996,
+    "protocol": "udp",
+    "description": "vsinet"
+  },
+  {
+    "service": "maitrd",
+    "port": 997,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "maitrd",
+    "port": 997,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "busboy",
+    "port": 998,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "puparp",
+    "port": 998,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "garcon",
+    "port": 999,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "applix",
+    "port": 999,
+    "protocol": "udp",
+    "description": "Applix ac"
+  },
+  {
+    "service": "puprouter",
+    "port": 999,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "puprouter",
+    "port": 999,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "cadlock2",
+    "port": 1000,
+    "protocol": "tcp",
+    "description": ""
+  },
+  {
+    "service": "cadlock2",
+    "port": 1000,
+    "protocol": "udp",
+    "description": ""
+  },
+  {
+    "service": "webpush",
+    "port": 1001,
+    "protocol": "tcp",
+    "description": "HTTP Web Push"
+  },
+  {
+    "service": "",
+    "port": 1001,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 1008,
+    "protocol": "udp",
+    "description": "Possibly used by Sun Solaris????"
+  },
+  {
+    "service": "",
+    "port": 1009,
+    "protocol": "",
+    "description": "Unassigned"
+  },
+  {
+    "service": "surf",
+    "port": 1010,
+    "protocol": "tcp",
+    "description": "surf"
+  },
+  {
+    "service": "surf",
+    "port": 1010,
+    "protocol": "udp",
+    "description": "surf"
+  },
+  {
+    "service": "exp1",
+    "port": 1021,
+    "protocol": "tcp",
+    "description": "RFC3692-style Experiment 1"
+  },
+  {
+    "service": "exp1",
+    "port": 1021,
+    "protocol": "udp",
+    "description": "RFC3692-style Experiment 1"
+  },
+  {
+    "service": "exp1",
+    "port": 1021,
+    "protocol": "sctp",
+    "description": "RFC3692-style Experiment 1"
+  },
+  {
+    "service": "exp1",
+    "port": 1021,
+    "protocol": "dccp",
+    "description": "RFC3692-style Experiment 1"
+  },
+  {
+    "service": "exp2",
+    "port": 1022,
+    "protocol": "tcp",
+    "description": "RFC3692-style Experiment 2"
+  },
+  {
+    "service": "exp2",
+    "port": 1022,
+    "protocol": "udp",
+    "description": "RFC3692-style Experiment 2"
+  },
+  {
+    "service": "exp2",
+    "port": 1022,
+    "protocol": "sctp",
+    "description": "RFC3692-style Experiment 2"
+  },
+  {
+    "service": "exp2",
+    "port": 1022,
+    "protocol": "dccp",
+    "description": "RFC3692-style Experiment 2"
+  },
+  {
+    "service": "",
+    "port": 1023,
+    "protocol": "tcp",
+    "description": "Reserved"
+  },
+  {
+    "service": "",
+    "port": 1023,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "ms-sql-s",
+    "port": 1433,
+    "protocol": "tcp",
+    "description": "Microsoft-SQL-Server"
+  },
+  {
+    "service": "ms-sql-s",
+    "port": 1433,
+    "protocol": "udp",
+    "description": "Microsoft-SQL-Server"
+  },
+  {
+    "service": "hbci",
+    "port": 3000,
+    "protocol": "tcp",
+    "description": "HBCI"
+  },
+  {
+    "service": "hbci",
+    "port": 3000,
+    "protocol": "udp",
+    "description": "HBCI"
+  },
+  {
+    "service": "remoteware-cl",
+    "port": 3000,
+    "protocol": "tcp",
+    "description": "RemoteWare Client"
+  },
+  {
+    "service": "remoteware-cl",
+    "port": 3000,
+    "protocol": "udp",
+    "description": "RemoteWare Client"
+  },
+  {
+    "service": "mysql",
+    "port": 3306,
+    "protocol": "tcp",
+    "description": "MySQL"
+  },
+  {
+    "service": "mysql",
+    "port": 3306,
+    "protocol": "udp",
+    "description": "MySQL"
+  },
+  {
+    "service": "postgresql",
+    "port": 5432,
+    "protocol": "tcp",
+    "description": "PostgreSQL Database"
+  },
+  {
+    "service": "postgresql",
+    "port": 5432,
+    "protocol": "udp",
+    "description": "PostgreSQL Database"
+  },
+  {
+    "service": "redis",
+    "port": 6379,
+    "protocol": "tcp",
+    "description": "An advanced key-value cache and store"
+  },
+  {
+    "service": "",
+    "port": 6379,
+    "protocol": "udp",
+    "description": "Reserved"
+  },
+  {
+    "service": "http-alt",
+    "port": 8080,
+    "protocol": "tcp",
+    "description": "HTTP Alternate (see port 80)"
+  },
+  {
+    "service": "http-alt",
+    "port": 8080,
+    "protocol": "udp",
+    "description": "HTTP Alternate (see port 80)"
+  },
+  {
+    "service": "mongodb",
+    "port": 27017,
+    "protocol": "tcp",
+    "description": "Mongo database system"
+  },
+  {
+    "service": "",
+    "port": 27017,
+    "protocol": "udp",
+    "description": "Reserved"
+  }
+]

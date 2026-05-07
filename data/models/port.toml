@@ -1,0 +1,17 @@
+# This model represents a third tier model of a cloud network.
+# Specify the resource dependency for a network
+origin_resource = "filter"
+
+ports = { "json!" = "iana_port_registry.json" }
+
+# Create the resource type
+[[create_resource]]
+create_from = { property = "port" }
+relation_type = "COMPOSED_OF"
+name = "{{- property.value -}}_tcp_port"
+[create_resource.properties]
+function = "tcp"
+port = "{{- property.value -}}"
+service = "{{- service[property.value] -}}"
+description = "{{- description[property.value] -}}"
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

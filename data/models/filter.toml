@@ -4,10 +4,11 @@ origin_resource = "network"
 
 # Create the resource type
 [[create_resource]]
-resource_type = "portfilter"
+resource_type = "filter"
 relation_type = "PROTECTS"
 name = "https_ingress_filter"
 [create_resource.properties]
 function = "security"
+port = [443]
 description = "Inbound HTTPS from internal application CIDR"
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

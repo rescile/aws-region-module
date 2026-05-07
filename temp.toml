@@ -1,0 +1,43 @@
+
+[security.security_group]
+name = "salesforce-endpoint-sg"
+description = "Inbound HTTPS from internal application CIDR"
+
+[[security.security_group.ingress]]
+protocol = "tcp"
+from_port = 443
+to_port = 443
+cidr_blocks = ["10.0.0.0/16"] # Adjust to match internal app range
+
+[connectivity]
+[connectivity.privatelink]
+service_name = "com.amazonaws.vpce.us-east-1.vpce-svc-xxxxxxxxxxxxxxxxx" # Provided by Salesforce
+endpoint_type = "Interface"
+private_dns_enabled = true
+
+[dns]
+[dns.route53_private_zone]
+domain_name = "my.salesforce.com"
+comment = "Intercepts Salesforce traffic for private routing"
+
+[[dns.route53_private_zone.records]]
+name = "your-org-instance"
+type = "A"
+alias_target = "vpce-xxxxxxxxxxxx-xxxxx.vpce.us-east-1.vpce.amazonaws.com"
+
+[governance]
+[governance.vpc_flow_logs]
+traffic_type = "ALL"
+log_destination_type = "cloudwatch-logs"
+retention_in_days = 90
+
+[governance.endpoint_policy]
+version = "2012-10-17"
+statement = [
+    {
+        Action = "*",
+        Effect = "Allow",
+        Principal = "*",
+        Resource = "*"
+    }
+]
