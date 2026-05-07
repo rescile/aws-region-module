@@ -7,7 +7,7 @@ relation_type = "DEFINED_BY"
 name = "{{- provider | lower -}}_{{- origin_resource.function | lower -}}_account"
 [create_resource.properties]
 function = "{{- origin_resource.function | lower -}}"
-uid = "{{- provider | lower -}}_id"
+pid = "{{- provider | lower -}}_id"
 key = "{{- provider | lower -}}_key"
 description = "The {{ origin_resource.function }} account represents a secure digital identity that grants authorized access to {{ provider }}'s cloud resources. It enables a centralized management hub to automate {{ origin_resource.function }} service deployments and configurations."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

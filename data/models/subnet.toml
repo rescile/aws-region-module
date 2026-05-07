@@ -18,8 +18,15 @@ name = "{{- origin_resource.function -}}_subnet_{{- property.value | lower-}}"
 function = "failover"
 original_name = "{{ property.value }}"
 cidr = "{{ subnet_list | nth(n=property.index) }}"
-net_count = "{{- property.index -}}"
 public = false
-fault_domain = "{{- provider | lower -}}_{{- origin_resource.site | lower -}}_{{- property.value | lower -}}"
+#fault_domain = "{{- provider | lower -}}_{{- origin_resource.site | lower -}}_{{- property.value | lower -}}"
 description = "Subnet {{ property.value }} is a logical partition of the {{ origin_resource.function }} network — it carves up the cloud network into smaller blocks, each with its own IP range and running in a different availability zone."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+# Join the login to the platform using the identity credentials.
+origin_resource = "subnet"
+
+[[link_resources]]
+with = "fault_domain"
+match_with = { property = "original_name", value = "{{ origin_resource.original_name }}" }
+create_relation = { type = "DEPENDS_ON" }

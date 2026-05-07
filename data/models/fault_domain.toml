@@ -9,7 +9,7 @@ name = "{{ provider | lower }}_{{- origin_resource.function | lower -}}_{{- prop
 [create_resource.properties]
 function = "availability_zone"
 original_name = "{{- property.value -}}"
-uid = "{{- origin_resource.uid -}}{{- property.value -}}"
+pid = "{{- origin_resource.pid -}}{{- property.value -}}"
 site = "{{- origin_resource.function -}}"
 description = "AWS's availability zones spread your resources across AZs to achieve high availability. These are geographically separated but close enough for low-latency connections between them, each has independent power, cooling, and networking."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

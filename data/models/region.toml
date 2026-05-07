@@ -26,7 +26,7 @@ relation_type = "HOSTED_ON"
 name = "{{- origin_resource.name -}}_region"
 [create_resource.properties]
 function = "{{- origin_resource.site -}}"
-uid = "{{- property.value -}}"
+pid = "{{- property.value -}}"
 endpoint = "{{- service_portfolio -}}"
 availability_zone = ["a", "b", "c", "d", "e", "f"]
 description = "The region describes a physical, geographical location where data is stored, and applications run, managed by {{ provider }}."
