@@ -2449,6 +2449,7 @@
       "events",
       "firehose",
       "fms",
+      "fsx",
       "gameliftstreams",
       "globalaccelerator",
       "glue",

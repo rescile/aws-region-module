@@ -11,6 +11,16 @@ cidr_block = { "template!" = '''
     {{- segment -}}
 '''}
 
+gateways = { "template!" = '''
+    {%- if property.value == "transit" -%}
+        {%- set_global interface = ["Salesforce"] -%}
+    {%- else -%}
+        {#- Fixed the typo from .vaule to .value -#}
+        {%- set_global interface = [property.value] -%}
+    {%- endif -%}
+    {{- interface | json_encode | safe -}}
+'''}
+
 # Create the resource type
 [[create_resource]]
 create_from = { property = "network" }
@@ -21,6 +31,7 @@ function = "{{- property.value -}}"
 cidr = "{{- cidr_block -}}"
 site = "{{- origin_resource.site -}}"
 fault_domain = ["a", "b"]
+gateway = "{{- gateways -}}"
 enable_dns_support = true
 enable_dns_hostnames = true
 description = "The {{ property.value }} network is a virtualized network infrastructure that connects compute resources and services at {{ provider }}."

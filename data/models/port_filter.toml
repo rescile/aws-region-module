@@ -1,14 +1,21 @@
 # This model represents a third tier model of a cloud network.
-# Specify the resource dependency for a network
-origin_resource = "network"
 
-# Create the resource type
 [[create_resource]]
-resource_type = "filter"
-relation_type = "PROTECTS"
+resource_type = "port_filter"
 name = "https_ingress_filter"
 [create_resource.properties]
 function = "security"
 port = [443]
 description = "Inbound HTTPS from internal application CIDR"
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+# Specify the resource dependency for a network
+origin_resource = "port_filter"
+
+[[link_resources]]
+with = "network"
+create_relation = { type = "PROTECTS" }
+
+[[link_resources]]
+with = "subnet"
+create_relation = { type = "PROTECTS" }
