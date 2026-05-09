@@ -18,8 +18,16 @@ created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 origin_resource = "provider"
 
 [[link_resources]]
-with = "account"
+with = "subscription"
 copy_properties = [
   { from = "name", as = "provider" }
 ]
-create_relation = { type = "GOVERNED_BY" }
+create_relation = { type = "PROVIDED_BY" }
+
+[[link_resources]]
+with = "login"
+match_with = [ { "property" = "function", "value" = "account" } ]
+copy_properties = [
+  { from = "name", as = "login" }
+]
+create_relation = { type = "MANAGED_BY" }

@@ -3,8 +3,33 @@ origin_resource = "identity"
 
 [[create_resource]]
 resource_type = "login"
-name = "{{- origin_resource.original_name | lower -}}_{{- origin_resource.function | lower -}}"
+name = "{{- origin_resource.original_name | lower -}}_{{- origin_resource.role | lower -}}"
 [create_resource.properties]
 function = "{{- origin_resource.function | lower -}}"
 description = "{{- origin_resource.description -}}"
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+
+# Join the login to the provider using the identity credentials.
+origin_resource = "login"
+
+[[link_resources]]
+with = "account"
+match_on = [ { property = "name", value = "contract_manager" } ]
+copy_properties = [
+  { from = "name", as = "commercial_contact" }
+]
+create_relation = { type = "RESPONSIBLE_FOR" }
+
+[[link_resources]]
+with = "account"
+match_on = [ { property = "name", value = "cloud_administrator" } ]
+copy_properties = [
+  { from = "name", as = "technical_contact" }
+]
+create_relation = { type = "RESPONSIBLE_FOR" }
+
+[[link_resources]]
+with = "account"
+match_on = [ { property = "name", not = "cloud_administrator" }, { property = "name", not = "contract_manager" } ]
+create_relation = { type = "GOVERNED_BY" }

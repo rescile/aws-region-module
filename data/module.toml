@@ -35,11 +35,11 @@ default = "Org"
 [assets."identity.csv"]
 resource_type = "identity"
 description = "The asset file defining virtual identities with access to AWS services."
-name_template = "{% if scope == 'account' %}{{- scope  | lower -}}_{{- name  | lower -}}_{{- function | lower -}}{% else %}{{- name  | lower -}}_{{- scope  | lower -}}_{{- function | lower -}}{% endif %}"
+name_template = "{% if function == 'account' %}{{- function  | lower -}}_{{- name  | lower -}}_{{- role | lower -}}{% else %}{{- name  | lower -}}_{{- function  | lower -}}_{{- role | lower -}}{% endif %}"
 [assets."identity.csv".columns]
 name = { type = "string", required = true }
 function = { type = "string", required = true }
-scope = { type = "string", required = true }
+role = { type = "string", required = true }
 
 [generator.aws_region_endpoints]
 description = "Get AWS regional endpoints from AWS IP Ranges API."
