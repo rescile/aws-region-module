@@ -12,7 +12,7 @@ key = "{{- provider | lower -}}_key"
 description = "The {{ provider }} account is a secure digital identity that grants authorized access to the {{ provider }} cloud platform. It enables a centralized management hub to automate cloud service deployments and configurations."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
-# Join the login to the platform using the identity credentials.
+# Join the login to the provider using the identity credentials.
 origin_resource = "account"
 
 [[link_resources]]

@@ -13,7 +13,7 @@ stage = "{{- stage | lower -}}"
 #cost_center = "{{- solutions[solution].cost_center -}}"
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
-# Join the subscription to the platform using the baseline template.
+# Join the subscription to the acccount using the baseline template.
 origin_resource = "subscription"
 
 [[link_resources]]

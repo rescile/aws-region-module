@@ -4,7 +4,7 @@ regions = { "json!" = "aws_region_service.json" }
 city = "{{- location | regexp(expr='s/.*\\((.*)\\)/\\1/') | lower | replace(from=' ', to='') -}}"
 
 [[create_resource]]
-resource_type = "platform"
+resource_type = "provider"
 name = "{{- provider | lower -}}"
 [create_resource.properties]
 function = "cloud"
@@ -14,8 +14,8 @@ portfolio = "{{ regions[location].services }}"
 description = "Amazon Web Services (AWS) operates numberous scalable and integrated cloud services in {{ city | capitalize }}. The AWS platform distinguishes itself primarily through the breadth of its service portfolio, ranging from serverless functions to hardware accelerators."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
-# Join the login to the platform using the identity credentials.
-origin_resource = "platform"
+# Join the login to the provider using the identity credentials.
+origin_resource = "provider"
 
 [[link_resources]]
 with = "account"

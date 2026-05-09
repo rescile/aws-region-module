@@ -1,5 +1,5 @@
 # This model represents a third tier model of a cloud domain and defines locations where provider resources can be consumed.
-origin_resource = "platform"
+origin_resource = "provider"
 
 region_endpoints = { "json!" = "aws_region_endpoint.json" }
 service_portfolio = { "function!" = '''
@@ -25,7 +25,9 @@ create_from = { property = "region" }
 relation_type = "HOSTED_ON"
 name = "{{- origin_resource.name -}}_{{- origin_resource.site -}}"
 [create_resource.properties]
-function = "{{- origin_resource.site -}}"
+function = "cloud"
+provider = "{{- origin_resource.name -}}"
+site = "{{- origin_resource.site -}}"
 pid = "{{- property.value -}}"
 endpoint = "{{- service_portfolio -}}"
 availability_zone = ["a", "b", "c", "d", "e", "f"]

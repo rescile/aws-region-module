@@ -23,7 +23,7 @@ public = false
 description = "Subnet {{ property.value }} is a logical partition of the {{ origin_resource.function }} network — it carves up the cloud network into smaller blocks, each with its own IP range and running in a different availability zone."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
-# Join the login to the platform using the identity credentials.
+# Join the login to the subnet using the identity credentials.
 origin_resource = "subnet"
 
 [[link_resources]]
