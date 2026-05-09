@@ -13,8 +13,9 @@ block = { "template!" = '''
 
 subnets = { "template!" = '''
     {%- set segment = [] -%}
-    {%- if property.value == "management" -%}
-        {%- set_global segment = segment | concat(with=b_connect) -%}
+    {%- if property.value == "transit" -%}
+        {%- set_global segment = segment | concat(with="a") -%}
+        {%- set_global segment = segment | concat(with="b") -%}
     {%- endif -%}
     {{- segment | json_encode -}}
 '''}

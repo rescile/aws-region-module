@@ -4,13 +4,14 @@ origin_resource = "network"
 
 # Evaluated LOCALLY per iteration — origin_resource is the current network
 subnet_list = { "function!" = '''
-  {% set count = origin_resource.fault_domain | length %}
+  {% set count = origin_resource.subnet | length %}
   {% set range = origin_resource.cidr | default(value="10.0.0.0/8") | cidr_split_n(n=count) %}
   {{- range | json_encode | safe -}}
 ''' }
 
 # Create the resource type
 [[create_resource]]
+match_on = [{ property = "subnet", empty = false }]
 create_from = { property = "subnet" }
 relation_type = "CONNECTED_TO"
 name = "{{- origin_resource.function -}}_subnet_{{- property.value | lower-}}"
