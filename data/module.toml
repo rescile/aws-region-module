@@ -41,6 +41,14 @@ name = { type = "string", required = true }
 function = { type = "string", required = true }
 role = { type = "string", required = true }
 
+[assets."policy.csv"]
+resource_type = "policy"
+description = "tbd."
+name_template = "{{- name  | lower -}}_{{- function  | lower -}}_policy"
+[assets."policy.csv".columns]
+name = { type = "string", required = true }
+function = { type = "string", required = true }
+
 [generator.aws_region_endpoints]
 description = "Get AWS regional endpoints from AWS IP Ranges API."
 runner = "http"

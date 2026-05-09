@@ -32,6 +32,7 @@ cidr = "{{- cidr_block -}}"
 site = "{{- origin_resource.site -}}"
 fault_domain = ["a", "b"]
 gateway = "{{- gateways -}}"
+flow_logs = true
 enable_dns_support = true
 enable_dns_hostnames = true
 description = "The {{ property.value }} network is a virtualized network infrastructure that connects compute resources and services at {{ provider }}."

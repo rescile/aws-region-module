@@ -23,3 +23,10 @@ pid = "{{- cpe -}}"
 private_dns_enabled = true
 description = "The {{ origin_resource.function }} gateway is a network node that connects two different networks with dissimilar architectures and protocols so that data can flow between them."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+# Join the login to the provider using the identity credentials.
+origin_resource = "gateway"
+
+[[link_resources]]
+with = "policy"
+create_relation = { type = "GOVERNED_BY" }

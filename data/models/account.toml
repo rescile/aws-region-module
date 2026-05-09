@@ -17,8 +17,8 @@ description = "The {{ origin_resource.provider }} account is a secure digital id
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
 # Join the login to the provider using the identity credentials.
-origin_resource = "account"
+origin_resource = "login"
 
 [[link_resources]]
-with = "login"
+with = "account"
 create_relation = { type = "DEFINED_BY" }
