@@ -2,13 +2,21 @@
 # Specify the resource dependency for a network
 origin_resource = "router"
 
-cidr_block = { "template!" = '''
+block = { "template!" = '''
     {%- if property.value == "management" -%}
-        {%- set_global segment = "172.16.0.0/16" -%}
+        {%- set_global range = "172.16.0.0/16" -%}
     {%- else -%}
-        {%- set_global segment = "10.0.0.0/24" -%}
+        {%- set_global range = "10.0.0.0/24" -%}
     {%- endif -%}
-    {{- segment -}}
+    {{- range -}}
+'''}
+
+subnets = { "template!" = '''
+    {%- set segment = [] -%}
+    {%- if property.value == "management" -%}
+        {%- set_global segment = segment | concat(with=b_connect) -%}
+    {%- endif -%}
+    {{- segment | json_encode -}}
 '''}
 
 gateways = { "template!" = '''
@@ -28,9 +36,9 @@ relation_type = "CONNECTED_TO"
 name = "{{- origin_resource.site -}}_{{- property.value -}}"
 [create_resource.properties]
 function = "{{- property.value -}}"
-cidr = "{{- cidr_block -}}"
+cidr = "{{- block -}}"
 site = "{{- origin_resource.site -}}"
-fault_domain = ["a", "b"]
+subnet = "{{- subnets -}}"
 gateway = "{{- gateways -}}"
 flow_logs = true
 enable_dns_support = true

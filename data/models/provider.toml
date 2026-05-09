@@ -26,5 +26,5 @@ create_relation = { type = "PROVIDED_BY" }
 
 [[link_resources]]
 with = "login"
-match_with = [ { "property" = "function", "value" = "account" } ]
+match_with = [ { "property" = "function", "value" = "cloud" } ]
 create_relation = { type = "MANAGED_BY" }
