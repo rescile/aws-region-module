@@ -1,5 +1,5 @@
 name,function,scope,description
-cloud,administrator,account,"The cloud administrator creates a supueruser for a cloud account with full access to all settings."
+cloud,administrator,platform,"The cloud administrator creates a supueruser for a cloud account with full access to all settings."
 contract,manager,account,"The provider manager is a commercial contact at a cloud provider and responsible for billing and resource management."
 kubernetes,operator,service,"The Kubernetes operator has the necessary permissions to manage the Kubernetes resources at a cloud provider."
 compliance,auditor,account,"The cloud compliance auditor ensures that an organization’s cloud footprint follows specific regulatory frameworks like SOC2, HIPAA, GDPR, or PCI-DSS."

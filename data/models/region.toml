@@ -23,7 +23,7 @@ service_portfolio = { "function!" = '''
 [[create_resource]]
 create_from = { property = "region" }
 relation_type = "HOSTED_ON"
-name = "{{- origin_resource.name -}}_region"
+name = "{{- origin_resource.name -}}_{{- origin_resource.site -}}"
 [create_resource.properties]
 function = "{{- origin_resource.site -}}"
 pid = "{{- property.value -}}"

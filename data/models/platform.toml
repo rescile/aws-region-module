@@ -5,7 +5,7 @@ city = "{{- location | regexp(expr='s/.*\\((.*)\\)/\\1/') | lower | replace(from
 
 [[create_resource]]
 resource_type = "platform"
-name = "{{- provider | lower -}}_{{- city -}}"
+name = "{{- provider | lower -}}"
 [create_resource.properties]
 function = "cloud"
 region = "{{ regions[location].region_code }}"
@@ -13,3 +13,13 @@ site = "{{- city -}}"
 portfolio = "{{ regions[location].services }}"
 description = "Amazon Web Services (AWS) operates numberous scalable and integrated cloud services in {{ city | capitalize }}. The AWS platform distinguishes itself primarily through the breadth of its service portfolio, ranging from serverless functions to hardware accelerators."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+# Join the login to the platform using the identity credentials.
+origin_resource = "platform"
+
+[[link_resources]]
+with = "account"
+copy_properties = [
+  { from = "name", as = "provider" }
+]
+create_relation = { type = "GOVERNED_BY" }

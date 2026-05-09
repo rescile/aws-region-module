@@ -1,13 +1,37 @@
 # A account represents a secure digital identity.
-origin_resource = "platform"
+origin_resource = "subscription"
 
 [[create_resource]]
 resource_type = "account"
 relation_type = "DEFINED_BY"
-name = "{{- provider | lower -}}_{{- origin_resource.function | lower -}}_account"
+name = "{{- origin_resource.solution -}}_account"
 [create_resource.properties]
-function = "{{- origin_resource.function | lower -}}"
+function = "cloud"
 pid = "{{- provider | lower -}}_id"
 key = "{{- provider | lower -}}_key"
-description = "The {{ origin_resource.function }} account represents a secure digital identity that grants authorized access to {{ provider }}'s cloud resources. It enables a centralized management hub to automate {{ origin_resource.function }} service deployments and configurations."
+description = "The {{ provider }} account is a secure digital identity that grants authorized access to the {{ provider }} cloud platform. It enables a centralized management hub to automate cloud service deployments and configurations."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+# Join the login to the platform using the identity credentials.
+origin_resource = "account"
+
+[[link_resources]]
+with = "login"
+match_on = [ { property = "name", value = "contract_manager" } ]
+copy_properties = [
+  { from = "name", as = "commercial_contact" }
+]
+create_relation = { type = "RESPONSIBLE_FOR" }
+
+[[link_resources]]
+with = "login"
+match_on = [ { property = "name", value = "cloud_administrator" } ]
+copy_properties = [
+  { from = "name", as = "technical_contact" }
+]
+create_relation = { type = "RESPONSIBLE_FOR" }
+
+[[link_resources]]
+with = "login"
+match_on = [ { property = "name", not = "cloud_administrator" }, { property = "name", not = "contract_manager" } ]
+create_relation = { type = "DEFINED_BY" }

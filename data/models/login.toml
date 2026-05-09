@@ -3,33 +3,8 @@ origin_resource = "identity"
 
 [[create_resource]]
 resource_type = "login"
-name = " {{- origin_resource.original_name | lower -}}_{{- origin_resource.function | lower -}}_login"
+name = "{{- origin_resource.original_name | lower -}}_{{- origin_resource.function | lower -}}"
 [create_resource.properties]
 function = "{{- origin_resource.function | lower -}}"
-role = "{{- origin_resource.name | lower -}}"
 description = "{{- origin_resource.description -}}"
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
-
-# Join the login to the platform using the identity credentials.
-origin_resource = "login"
-
-[[link_resources]]
-with = "platform"
-match_on = [ { property = "name", value = "provider_management" } ]
-copy_properties = [
-  { from = "name", as = "commercial_contact" }
-]
-create_relation = { type = "RESPONSIBLE_FOR" }
-
-[[link_resources]]
-with = "platform"
-match_on = [ { property = "name", value = "cloud_administration" } ]
-copy_properties = [
-  { from = "name", as = "technical_contact" }
-]
-create_relation = { type = "RESPONSIBLE_FOR" }
-
-[[link_resources]]
-with = "platform"
-match_on = [ { property = "name", not = "cloud_administration" }, { property = "name", not = "provider_management" } ]
-create_relation = { type = "MANAGED_BY" }
