@@ -13,14 +13,3 @@ alias_target = "vpce-xxxxxxxxxxxx-xxxxx.vpce.us-east-1.vpce.amazonaws.com"
 traffic_type = "ALL"
 log_destination_type = "cloudwatch-logs"
 retention_in_days = 90
-
-[governance.endpoint_policy]
-version = "2012-10-17"
-statement = [
-    {
-        Action = "*",
-        Effect = "Allow",
-        Principal = "*",
-        Resource = "*"
-    }
-]

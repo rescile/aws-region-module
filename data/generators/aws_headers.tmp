@@ -1,25 +1,15 @@
-HTTP/2 200 
-cache-control: max-age=300
-content-security-policy: default-src 'none'; style-src 'unsafe-inline'; sandbox
-content-type: text/plain; charset=utf-8
-etag: "a9bc69acc39ce3b8a1133f531f9f787837c3d0530d2f7fcca1ee2f0917aae98a"
-strict-transport-security: max-age=31536000
-x-content-type-options: nosniff
-x-frame-options: deny
-x-xss-protection: 1; mode=block
-x-github-request-id: DC6C:29EF76:6EC47D:80287F:69FEC37D
-accept-ranges: bytes
-date: Sat, 09 May 2026 05:17:49 GMT
+HTTP/2 304 
+date: Sun, 10 May 2026 06:19:04 GMT
 via: 1.1 varnish
-x-served-by: cache-rtm-ehrd2290058-RTM
-x-cache: MISS
+cache-control: max-age=300
+etag: "a9bc69acc39ce3b8a1133f531f9f787837c3d0530d2f7fcca1ee2f0917aae98a"
+x-served-by: cache-rtm-ehrd2290037-RTM
+x-cache: HIT
 x-cache-hits: 0
-x-timer: S1778303869.225641,VS0,VE149
+x-timer: S1778393944.030371,VS0,VE102
 vary: Authorization,Accept-Encoding
 access-control-allow-origin: *
 cross-origin-resource-policy: cross-origin
-x-fastly-request-id: 8c64265240e7c5d1aba916047b4ed81aa430a598
-expires: Sat, 09 May 2026 05:22:49 GMT
-source-age: 0
-content-length: 1257216
+x-fastly-request-id: 522f87f29647c775a08e06c7ea79e1dbebc2a580
+expires: Sun, 10 May 2026 06:24:04 GMT
 

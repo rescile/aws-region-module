@@ -49,6 +49,14 @@ name_template = "{{- name  | lower -}}_{{- function  | lower -}}_policy"
 name = { type = "string", required = true }
 function = { type = "string", required = true }
 
+[assets."dns.csv"]
+resource_type = "record"
+description = "tbd."
+name_template = "{{- name  | lower -}}_zone_record"
+[assets."dns.csv".columns]
+name = { type = "string", required = true }
+function = { type = "string", required = true }
+
 [generator.aws_region_endpoints]
 description = "Get AWS regional endpoints from AWS IP Ranges API."
 runner = "http"
