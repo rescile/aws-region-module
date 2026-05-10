@@ -30,6 +30,15 @@ gateways = { "template!" = '''
     {{- interface | json_encode | safe -}}
 '''}
 
+telemetry = { "template!" = '''
+    {%- if property.value == "management" -%}
+        {%- set_global logging = false -%}
+    {%- else -%}
+        {%- set_global logging = true -%}
+    {%- endif -%}
+    {{- logging -}}
+'''}
+
 # Create the resource type
 [[create_resource]]
 create_from = { property = "network" }
@@ -41,7 +50,7 @@ cidr = "{{- block -}}"
 site = "{{- origin_resource.site -}}"
 subnet = "{{- subnets -}}"
 gateway = "{{- gateways -}}"
-flow_logs = true
+logging = "{{- telemetry -}}"
 enable_dns_support = true
 enable_dns_hostnames = true
 description = "The {{ property.value }} network is a virtualized network infrastructure that connects compute resources and services at {{ provider }}."
