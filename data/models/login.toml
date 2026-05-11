@@ -3,6 +3,7 @@ origin_resource = "identity"
 
 [[create_resource]]
 resource_type = "login"
+relation_type = "DERIVED_FROM"
 name = "{{- origin_resource.original_name | lower -}}_{{- origin_resource.role | lower -}}"
 [create_resource.properties]
 function = "{{- origin_resource.function | lower -}}"

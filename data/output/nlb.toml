@@ -1,5 +1,5 @@
 # Ressource
-origin_resource = "network"
+origin_resource = "nlb"
 
 # Oracle Cloud Infrastructure Output
 [[output]]
