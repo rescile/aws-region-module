@@ -1,0 +1,37 @@
+# Ressource
+origin_resource = "vse"
+
+# Oracle Cloud Infrastructure Output
+[[output]]
+resource_type = "aws_loadbalancer_template"
+name = "{{- origin_resource.name -}}_lb_template"
+filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}.py"
+mimetype = "text/x-python"
+
+template = '''
+{
+def create_nlb(name, subnet_ids):
+    elbv2 = boto3.client('elbv2')
+    response = elbv2.create_load_balancer(
+        Name=name,
+        Subnets=subnet_ids,
+        Type='network',
+        Scheme='internal'  # Use 'internal' for PrivateLink providers
+    )
+    nlb_arn = response['LoadBalancers'][0]['LoadBalancerArn']
+    print(f"Created NLB ARN: {nlb_arn}")
+    return nlb_arn
+
+if __name__ == "__main__":
+    # Configuration
+    name = "{{- origin_resource.name -}}"
+    subnet_ids = "{{- origin_resource.subnet -}}"
+
+    my_lb = create_nlb(name, subnet_ids)
+
+    if my_nic:
+        print(f"VPC ID: {my_lb.id}")
+        print(f"State: {my_lb.state}")
+
+}
+'''
