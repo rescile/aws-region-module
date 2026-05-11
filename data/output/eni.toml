@@ -22,7 +22,6 @@ def create_eni(subnet_id, security_group_ids, description):
     )
     print(f"Created ENI: {eni.id}")
     return eni
-}
 
 if __name__ == "__main__":
     # Configuration

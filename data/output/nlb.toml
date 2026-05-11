@@ -1,5 +1,5 @@
 # Ressource
-origin_resource = "subnet"
+origin_resource = "network"
 
 # Oracle Cloud Infrastructure Output
 [[output]]
@@ -21,5 +21,17 @@ def create_nlb(name, subnet_ids):
     nlb_arn = response['LoadBalancers'][0]['LoadBalancerArn']
     print(f"Created NLB ARN: {nlb_arn}")
     return nlb_arn
+
+if __name__ == "__main__":
+    # Configuration
+    name = "{{- origin_resource.name -}}"
+    subnet_ids = "{{- origin_resource.subnet -}}"
+
+    my_lb = create_nlb(name, subnet_ids)
+
+    if my_nic:
+        print(f"VPC ID: {my_lb.id}")
+        print(f"State: {my_lb.state}")
+
 }
 '''
