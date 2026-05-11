@@ -1,9 +1,9 @@
 # Ressource
-origin_resource = "network"
+origin_resource = "dns"
 
 # Oracle Cloud Infrastructure Output
 [[output]]
-resource_type = "aws_network_template"
+resource_type = "aws_dns_template"
 name = "{{- origin_resource.name -}}_template"
 filename = "{{- provider -}}_{{- origin_resource.name -}}.py"
 mimetype = "text/x-python"
