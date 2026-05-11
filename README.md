@@ -26,10 +26,14 @@ The specific resource depends on whether the traffic is coming *from* the servic
 * *VPC Endpoint Service:* This exposes your internal AWS service (like an API Gateway or a private application) to the service provider network.
 * *Network Load Balancer (NLB):* Required to sit in front of your application. The Endpoint Service points to this NLB, which then distributes traffic to your backend resources (EC2, Lambda, or ALB).
 
+### Name Resolution
+*Route 53 Private Hosted Zone (PHZ):* This allows your AWS resources to resolve the service provider DNS name (e.g., `your-org.my.saas.com`) to the *private IP addresses* of your VPC Endpoint instead of the public internet IPs.
+
 ### Security & Governance
 * *Security Groups:* Acts as a stateful firewall for the VPC Endpoint ENIs. You must explicitly allow inbound traffic on **Port 443** from the specific CIDR ranges of your application servers.
 * *VPC Endpoint Policy:* An IAM-style JSON policy attached directly to the Interface Endpoint to restrict which AWS principals can use the connection and which Salesforce actions they can perform.
 * *VPC Flow Logs:* For auditability, logs should be enabled to capture all IP traffic directed toward the Salesforce termination point.
 
-### Name Resolution
-*Route 53 Private Hosted Zone (PHZ):* This allows your AWS resources to resolve the service provider DNS name (e.g., `your-org.my.saas.com`) to the *private IP addresses* of your VPC Endpoint instead of the public internet IPs.
+## Implementation
+* **Permissions:** Ensure the IAM user running these scripts has the AdministratorAccess or specific permissions like ec2:CreateNetworkInterface, elasticloadbalancing:CreateLoadBalancer, and route53:CreateHostedZone.
+* **Dependency Order:** Create the Security Group and Subnets first, as the ENI and NLB require them to exist before they can be instantiated.

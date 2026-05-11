@@ -1,0 +1,26 @@
+# Ressource
+origin_resource = "network"
+
+# Oracle Cloud Infrastructure Output
+[[output]]
+resource_type = "aws_network_template"
+name = "{{- origin_resource.name -}}_template"
+filename = "{{- provider -}}_{{- origin_resource.name -}}.py"
+mimetype = "text/x-python"
+
+template = '''
+{
+import boto3
+from botocore.exceptions import ClientError
+
+def create_eni(subnet_id, security_group_ids, description):
+    ec2 = boto3.resource('ec2')
+    eni = ec2.create_network_interface(
+        SubnetId=subnet_id,
+        Groups=security_group_ids,
+        Description=description
+    )
+    print(f"Created ENI: {eni.id}")
+    return eni
+}
+'''

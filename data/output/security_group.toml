@@ -1,0 +1,35 @@
+# Ressource
+origin_resource = "network"
+
+# Oracle Cloud Infrastructure Output
+[[output]]
+resource_type = "aws_network_template"
+name = "{{- origin_resource.name -}}_template"
+filename = "{{- provider -}}_{{- origin_resource.name -}}.py"
+mimetype = "text/x-python"
+
+template = '''
+{
+import boto3
+from botocore.exceptions import ClientError
+
+def create_security_group(vpc_id, group_name, description):
+    ec2 = boto3.resource('ec2')
+    sg = ec2.create_security_group(
+        GroupName=group_name,
+        Description=description,
+        VpcId=vpc_id
+    )
+    # Example: Allow inbound HTTPS
+    sg.authorize_ingress(
+        IpPermissions=[{
+            'IpProtocol': 'tcp',
+            'FromPort': 443,
+            'ToPort': 443,
+            'IpRanges': [{'CidrIp': '0.0.0.0/0'}] # Restrict this in production
+        }]
+    )
+    print(f"Created Security Group: {sg.id}")
+    return sg
+}
+'''
