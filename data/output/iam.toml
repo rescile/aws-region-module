@@ -5,7 +5,7 @@ origin_resource = "login"
 [[output]]
 resource_type = "aws_login_template"
 name = "{{- origin_resource.name -}}_template"
-filename = "{{- provider -}}_{{- origin_resource.name -}}.py"
+filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}.py"
 mimetype = "text/x-python"
 
 template = '''

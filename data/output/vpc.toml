@@ -5,14 +5,13 @@ origin_resource = "network"
 [[output]]
 resource_type = "aws_network_template"
 name = "{{- origin_resource.name -}}_template"
-filename = "{{- provider -}}_{{- origin_resource.name -}}.py"
+filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}.py"
 mimetype = "text/x-python"
 
 template = '''
 {
 import boto3
 from botocore.exceptions import ClientError
-
 
 def create_vpc(cidr_block, vpc_name):
     # Initialize the EC2 resource
@@ -34,7 +33,6 @@ def create_vpc(cidr_block, vpc_name):
     except ClientError as e:
         print(f"Error creating VPC: {e}")
         return None
-
 
 if __name__ == "__main__":
     # Configuration

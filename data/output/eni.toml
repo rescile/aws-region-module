@@ -5,7 +5,7 @@ origin_resource = "subnet"
 [[output]]
 resource_type = "aws_nic_template"
 name = "{{- origin_resource.name -}}_nic_template"
-filename = "{{- provider -}}_{{- origin_resource.name -}}.py"
+filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}_nic.py"
 mimetype = "text/x-python"
 
 template = '''
@@ -22,5 +22,18 @@ def create_eni(subnet_id, security_group_ids, description):
     )
     print(f"Created ENI: {eni.id}")
     return eni
+}
+
+if __name__ == "__main__":
+    # Configuration
+    subnet_id = "{{- origin_resource.name -}}"
+    security_group_ids = "{{- origin_resource.name -}}"
+    description = "{{- origin_resource.description -}}"
+
+    my_nic = create_eni(subnet_id, security_group_ids, description)
+
+    if my_nic:
+        print(f"VPC ID: {my_nic.id}")
+        print(f"State: {my_nic.state}")
 }
 '''
