@@ -5,3 +5,7 @@
 
 # rescile
 .rescile/.bin/
+
+# aws
+.aws
+/.aws
