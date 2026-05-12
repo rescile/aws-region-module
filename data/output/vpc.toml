@@ -9,25 +9,24 @@ filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}_net.py
 mimetype = "text/x-python"
 
 template = '''
-{
 import boto3
 from botocore.exceptions import ClientError
 
-def create_vpc(cidr_block, vpc_name):
-    # Initialize the EC2 resource
-    ec2 = boto3.resource("ec2")
+def create_vpc(cidr_block, vpc_name, region):
+    # Initialisiere die EC2 Resource mit einer expliziten Region
+    ec2 = boto3.resource("ec2", region_name=region)
 
     try:
         # Create the VPC
         vpc = ec2.create_vpc(CidrBlock=cidr_block)
 
-        # We wait for the VPC to exist before tagging
+        # Warten, bis die VPC verfügbar ist
         vpc.wait_until_available()
 
-        # Tag the VPC with a Name
+        # VPC benennen
         vpc.create_tags(Tags=[{"Key": "Name", "Value": vpc_name}])
 
-        print(f"Successfully created VPC: {vpc.id}")
+        print(f"Successfully created VPC: {vpc.id} in {region}")
         return vpc
 
     except ClientError as e:
@@ -35,14 +34,17 @@ def create_vpc(cidr_block, vpc_name):
         return None
 
 if __name__ == "__main__":
-    # Configuration
+    # Konfiguration (Werte aus deinem Template/Variablen)
     CIDR = "{{- origin_resource.cidr -}}"
     NAME = "{{- origin_resource.name -}}"
+    REGION = "{{- origin_resource.region -}}"
 
-    my_vpc = create_vpc(CIDR, NAME)
+    my_vpc = create_vpc(CIDR, NAME, REGION)
 
     if my_vpc:
+        # State neu laden, damit er nicht auf 'pending' stehen bleibt
+        my_vpc.reload()
         print(f"VPC ID: {my_vpc.id}")
         print(f"State: {my_vpc.state}")
-}
+        print(f"Region: {REGION}")
 '''

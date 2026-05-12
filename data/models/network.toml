@@ -2,6 +2,8 @@
 # Specify the resource dependency for a network
 origin_resource = "router"
 
+regions = { "json!" = "aws_region_service.json" }
+
 block = { "template!" = '''
     {%- if property.value == "management" -%}
         {%- set_global range = "172.16.0.0/16" -%}
@@ -43,11 +45,11 @@ telemetry = { "template!" = '''
 [[create_resource]]
 create_from = { property = "network" }
 relation_type = "CONNECTED_TO"
-name = "{{- origin_resource.site -}}_{{- property.value -}}"
+name = "{{- origin_resource.region -}}_{{- property.value -}}"
 [create_resource.properties]
 function = "{{- property.value -}}"
+region = "{{ regions[location].region_code }}"
 cidr = "{{- block -}}"
-site = "{{- origin_resource.site -}}"
 subnet = "{{- subnets -}}"
 gateway = "{{- gateways -}}"
 logging = "{{- telemetry -}}"

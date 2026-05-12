@@ -18,7 +18,7 @@ created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 origin_resource = "dns"
 
 [[link_resources]]
-with = "region"
+with = "site"
 create_relation = { type = "COMPOSED_OF" }
 
 [[link_resources]]

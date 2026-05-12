@@ -9,7 +9,6 @@ filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}.py"
 mimetype = "text/x-python"
 
 template = '''
-{
 import boto3
 from botocore.exceptions import ClientError
 import time
@@ -33,12 +32,11 @@ if __name__ == "__main__":
     # Configuration
     vpc_id = {{ origin_resource.network | map(attribute='name') }}
     domain_name = {{ origin_resource.record | map(attribute='name') }}
-    region = {{ origin_resource.region | map(attribute='pid') }}
+    region = {{ origin_resource.site | map(attribute='pid') }}
 
     my_phz = create_phz(vpc_id, domain_name, region)
 
     if my_phz:
         print(f"VPC ID: {my_phz.id}")
         print(f"State: {my_phz.state}")
-}
 '''
