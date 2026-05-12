@@ -54,9 +54,9 @@ window.TOPOLOGY_VIEWS = {
       "Visualizes the structural transit zone bridging AWS providers, endpoint regions, subscriptions, and edge routers.",
     buildQuery: function () {
       return `{
-                provider { name function site }
+                provider { name function site { node { region } } }
                 router { name function network { node { cidr } } }
-                region { name function pid }
+                site { name function region }
                 subscription { name tenant stage }
             }`;
     },
