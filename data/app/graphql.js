@@ -5,9 +5,9 @@ window.VIEWS = {
   subscriptions: {
     title: "Subscription",
     icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
-    query: `{ subscription { name tenant stage } }`,
+    query: `{ subscription { tenant name stage } }`,
     node: "subscription",
-    columns: ["name", "tenant", "stage"],
+    columns: ["tenant", "name", "stage"],
   },
   accounts: {
     title: "Account",
