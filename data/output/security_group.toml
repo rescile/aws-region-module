@@ -34,7 +34,7 @@ def create_security_group(vpc_id, group_name, description):
 
 if __name__ == "__main__":
     # Configuration
-    vpc_id = {{ origin_resource.network | map(attribute='name') }}
+    vpc_id = "{% for net in origin_resource.network %}{% if net.name is containing('transit') %}{{ net.name }}{% endif %}{% endfor %}"
     group_name = "{{- origin_resource.name -}}"
     description = "{{- origin_resource.description -}}"
 

@@ -30,13 +30,13 @@ def create_phz(vpc_id, domain_name, region):
 
 if __name__ == "__main__":
     # Configuration
-    vpc_id = {{ origin_resource.network | map(attribute='name') }}
+    vpc_id = "{% for net in origin_resource.network %}{% if net.name is containing('transit') %}{{ net.name }}{% endif %}{% endfor %}"
     domain_name = {{ origin_resource.record | map(attribute='name') }}
-    region = {{ origin_resource.site | map(attribute='pid') }}
+    region = {{ origin_resource.site | map(attribute='region') }}
 
     my_phz = create_phz(vpc_id, domain_name, region)
 
     if my_phz:
-        print(f"VPC ID: {my_phz.id}")
+        print(f"DNS ID: {my_phz.id}")
         print(f"State: {my_phz.state}")
 '''
