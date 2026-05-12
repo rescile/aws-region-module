@@ -9,7 +9,6 @@ filename = "{{- origin_resource.name | lower -}}.py"
 mimetype = "text/x-python"
 
 template = '''
-{
 import boto3
 from botocore.exceptions import ClientError
 
@@ -44,6 +43,4 @@ if __name__ == "__main__":
     if my_sg:
         print(f"VPC ID: {my_sg.id}")
         print(f"State: {my_sg.state}")
-
-}
 '''

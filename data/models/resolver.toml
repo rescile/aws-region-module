@@ -4,23 +4,11 @@ origin_resource = "provider"
 solution = '{{- module.name | split(pat=" ") | slice(start=1) | join(sep="") | lower -}}'
 
 [[create_resource]]
-resource_type = "dns"
+resource_type = "resolver"
 relation_type = "DEFINED_BY"
-name = "{{- solution -}}_dns"
+name = "{{- solution -}}_resolver"
 [create_resource.properties]
-function = "resolver"
+function = "dns"
 public = false
-record = "{{- origin_resource.url -}}"
 description = "The {{ solution | capitalize }} DNS service is a managed, authoritative name server cluster that operates exclusively within the control plane of a Virtual Private Cloud (VPC) or Virtual Network (VNET)."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
-
-# Join the vse to the subnet using the network identifier.
-origin_resource = "dns"
-
-[[link_resources]]
-with = "site"
-create_relation = { type = "COMPOSED_OF" }
-
-[[link_resources]]
-with = "network"
-create_relation = { type = "COMPOSED_OF" }

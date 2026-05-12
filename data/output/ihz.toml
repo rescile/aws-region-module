@@ -1,5 +1,5 @@
 # Ressource
-origin_resource = "dns"
+origin_resource = "resolver"
 
 # Oracle Cloud Infrastructure Output
 [[output]]

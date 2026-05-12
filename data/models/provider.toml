@@ -5,8 +5,7 @@ resource_type = "provider"
 name = "{{- provider | lower -}}"
 [create_resource.properties]
 function = "cloud"
-url = ["my.salesforce.com"]
-description = "Amazon Web Services (AWS) operates numberous scalable and integrated cloud services. The AWS platform distinguishes itself primarily through the breadth of its service portfolio, ranging from serverless functions to hardware accelerators."
+description = "Amazon Web Services (AWS) operates numberous scalable and integrated cloud services. The platform distinguishes itself through the broad service portfolio, ranging from serverless functions to hardware accelerators."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
 # Join the login to the provider using the identity credentials.
@@ -21,5 +20,4 @@ create_relation = { type = "PROVIDED_BY" }
 
 [[link_resources]]
 with = "login"
-match_with = [ { "property" = "function", "value" = "cloud" } ]
 create_relation = { type = "MANAGED_BY" }

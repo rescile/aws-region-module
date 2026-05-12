@@ -5,11 +5,13 @@ origin_resource = "site"
 # Create the resource type
 [[create_resource]]
 resource_type = "router"
-name = "{{- provider | lower -}}_{{- origin_resource.function | lower -}}_router"
+name = "{{- origin_resource.name | lower -}}_router"
 relation_type = "CONNECTS_TO"
 [create_resource.properties]
 function = "connectivity"
 region = "{{- origin_resource.region -}}"
+provider = "{{- provider | lower -}}"
+site = "{{- origin_resource.name -}}"
 network = [ "transit", "management" ]
 description = "The cloud router in {{ origin_resource.function | capitalize }} is a network function, operated by {{ provider }}, that analyzes incoming data packets, determines the best path for them to travel across interconnected networks, and forwards them toward their intended destination."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

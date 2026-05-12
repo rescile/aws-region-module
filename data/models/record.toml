@@ -1,15 +1,16 @@
 # This model represents a third tier model of a cloud network.
 # Specify the resource dependency for a network
-origin_resource = "dns"
+origin_resource = "resolver"
 
 # Create the resource type
 [[create_resource]]
-create_from = { property = "record" }
+resource_type = "record"
+name = "my.salesforce.com"
 relation_type = "DEFINED_BY"
 [create_resource.properties]
 function = "resolver"
 entry = "{{- tenant -}}"
 type = "A"
 alias_target = "vpce-xxxxxxxxxxxx-xxxxx.vpce.us-east-1.vpce.amazonaws.com"
-description = "The global {{ provider }} DNS resolver intercepts {{ property.value }} traffic for private routing."
+description = "tbd."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

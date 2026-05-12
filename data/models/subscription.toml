@@ -3,7 +3,6 @@ solution = '{{- module.name | split(pat=" ") | slice(start=1) | join(sep="") | l
 
 [[create_resource]]
 resource_type = "subscription"
-relation_type = "BASELINE_TEMPLATE"
 name = "{{- solution -}}"
 [create_resource.properties]
 tenant = "{{- tenant | lower -}}"
@@ -11,3 +10,12 @@ stage = "{{- stage | lower -}}"
 #cost_center = "{{- solutions[solution].cost_center -}}"
 description = "This subscription defines the cloud environment for the resident rescile and captures the dependencies for the solution deployment."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+origin_resource = "subscription"
+
+[[link_resources]]
+with = "provider"
+copy_properties = [
+  { from = "name", as = "subscription" }
+]
+create_relation = { type = "PROVIDED_BY" }
