@@ -63,8 +63,8 @@ window.TOPOLOGY_VIEWS = {
     buildDiagram: function (data) {
       let lines = ["graph LR"];
       const providers = data?.provider || [];
-      const routers = data?.router || [];
-      const regions = data?.region || [];
+      const gateways = data?.gateway || [];
+      const sites = data?.site || [];
       const subscriptions = data?.subscription || [];
 
       lines.push('  subgraph AWS["☁️ Cloud Provider Ecosystem"]');
@@ -94,9 +94,9 @@ window.TOPOLOGY_VIEWS = {
         });
       }
 
-      if (routers.length > 0) {
+      if (gateways.length > 0) {
         lines.push('  subgraph TransitZone["🔀 Network Transit Zone"]');
-        routers.forEach((r) => {
+        gateways.forEach((r) => {
           const id = sanitizeId("rtr_" + (r?.name || "unknown"));
           let nets = (r?.network || [])
             .map((n) => n?.node?.cidr)
@@ -109,7 +109,7 @@ window.TOPOLOGY_VIEWS = {
         });
         lines.push("  end");
 
-        routers.forEach((r) => {
+        gateways.forEach((r) => {
           const rId = sanitizeId("rtr_" + (r?.name || "unknown"));
           const platformName = r?.provider?.[0]?.node?.name;
           if (platformName) {
@@ -126,9 +126,9 @@ window.TOPOLOGY_VIEWS = {
         });
       }
 
-      if (regions.length > 0) {
+      if (sites.length > 0) {
         lines.push('  subgraph Endpoints["🌍 Region Endpoints"]');
-        regions.forEach((r) => {
+        sites.forEach((r) => {
           const id = sanitizeId("reg_" + (r?.pid || "unknown"));
           lines.push(`    ${id}[/"Region: ${esc(r?.pid)}"\\]`);
         });
@@ -136,7 +136,7 @@ window.TOPOLOGY_VIEWS = {
 
         providers.forEach((p) => {
           const pId = sanitizeId("prov_" + (p?.name || "unknown"));
-          regions.forEach((r) => {
+          sites.forEach((r) => {
             lines.push(
               `  ${pId} -->|MANAGED_BY| ${sanitizeId("reg_" + (r?.pid || "unknown"))}`,
             );
@@ -167,12 +167,12 @@ window.TOPOLOGY_VIEWS = {
           `  class ${sanitizeId("sub_" + (s?.name || "unknown"))} subStyle`,
         ),
       );
-      routers.forEach((r) =>
+      gateways.forEach((r) =>
         lines.push(
           `  class ${sanitizeId("rtr_" + (r?.name || "unknown"))} routerStyle`,
         ),
       );
-      regions.forEach((r) =>
+      sites.forEach((r) =>
         lines.push(
           `  class ${sanitizeId("reg_" + (r?.pid || "unknown"))} regStyle`,
         ),
