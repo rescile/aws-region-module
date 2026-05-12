@@ -4,7 +4,7 @@
 window.VIEWS = {
   subscriptions: {
     title: "Subscription",
-    icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+    icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
     query: `{ subscription { name tenant stage } }`,
     node: "subscription",
     columns: ["name", "tenant", "stage"],
@@ -32,7 +32,7 @@ window.VIEWS = {
   },
   regions: {
     title: "Endpoint Regions",
-    icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
+    icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
     query: `{ region { name function pid endpoint } }`,
     node: "region",
     columns: ["name", "function", "pid", "endpoint"],
