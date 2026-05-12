@@ -11,7 +11,7 @@ window.VIEWS = {
   },
   providers: {
     title: "Region",
-    icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
+    icon: "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9",
     query: `{ site { location region endpoint availability_zone } }`,
     node: "site",
     columns: ["name", "region", "endpoints", "availability zones"],
@@ -32,7 +32,7 @@ window.VIEWS = {
   },
   regions: {
     title: "Endpoint Regions",
-    icon: "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9",
+    icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
     query: `{ region { name function pid endpoint } }`,
     node: "region",
     columns: ["name", "function", "pid", "endpoint"],
