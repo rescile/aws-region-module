@@ -55,7 +55,7 @@ window.TOPOLOGY_VIEWS = {
     buildQuery: function () {
       return `{
                 provider { name function site { node { region } } }
-                router { name function network { node { cidr } } }
+                gateway { name function network { node { cidr } } }
                 site { name function region }
                 subscription { name tenant stage }
             }`;
