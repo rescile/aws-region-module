@@ -25,7 +25,7 @@ window.VIEWS = {
   },
   routers: {
     title: "Gateway",
-    icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+    icon: "M12 2v4m0 12v4M4.22 4.22l2.83 2.83m9.9 9.9l2.83 2.83M2 12h4m12 0h4M4.22 19.78l2.83-2.83m9.9-9.9l2.83-2.83M16 12a4 4 0 11-8 0 4 4 0 018 0z",
     query: `{ gateway { original_name function network{node{cidr}} } }`,
     node: "router",
     columns: ["name", "function", "network"],
