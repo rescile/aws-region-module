@@ -1,0 +1,38 @@
+# This model represents a third tier model of a cloud domain and defines locations where provider resources can be consumed.
+origin_resource = "provider"
+
+regions = { "json!" = "aws_region_service.json" }
+region_endpoints = { "json!" = "aws_region_endpoint.json" }
+city = "{{- location | regexp(expr='s/.*\\((.*)\\)/\\1/') | lower | replace(from=' ', to='') -}}"
+
+endpoints = { "function!" = '''
+    {% set unique_services = [] %}
+    {% set regionid = regions[location].region_code %}
+    {% for e in region_endpoints.prefixes %}
+        {% if e.region == regionid %}
+            {# Check if the service is already in the list #}
+            {% if e.service in unique_services %}
+                {# Do nothing #}
+            {% else %}
+                {# Wrap e.service in [] to make it a list for concat #}
+                {% set_global unique_services = unique_services | concat(with=[e.service]) %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    {{ unique_services | json_encode() }}
+''' }
+
+# Create the resource type
+[[create_resource]]
+resource_type = "site"
+relation_type = "PROVIDED_BY"
+name = "{{- origin_resource.name -}}_{{- city -}}"
+[create_resource.properties]
+function = "platform"
+provider = "{{- origin_resource.name -}}"
+region = "{{ regions[location].region_code }}"
+portfolio = "{{ regions[location].services }}"
+endpoint = "{{- endpoints -}}"
+availability_zone = ["a", "b", "c", "d", "e", "f"]
+description = "The region describes a physical, geographical location where data is stored, and applications run, managed by {{ provider }}."
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
