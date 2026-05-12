@@ -6,7 +6,7 @@ resource_type = "subscription"
 name = "{{- solution -}}"
 [create_resource.properties]
 tenant = "{{- tenant | lower -}}"
-location = "{{- module.location -}}"
+location = "{{- location -}}"
 stage = "{{- stage | lower -}}"
 #cost_center = "{{- solutions[solution].cost_center -}}"
 description = "This subscription defines the cloud environment for the resident rescile and captures the dependencies for the solution deployment."
