@@ -25,11 +25,11 @@ def create_nlb(name, subnet_ids):
 if __name__ == "__main__":
     # Configuration
     name = "{{- origin_resource.name -}}"
-    subnet_ids = "{{- origin_resource.subnet -}}"
+    subnet_ids = {{ origin_resource.subnet | map(attribute='name') }}
 
     my_lb = create_nlb(name, subnet_ids)
 
-    if my_nic:
+    if my_lb:
         print(f"VPC ID: {my_lb.id}")
         print(f"State: {my_lb.state}")
 

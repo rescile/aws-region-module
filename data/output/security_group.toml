@@ -5,7 +5,7 @@ origin_resource = "port_filter"
 [[output]]
 resource_type = "aws_security_group_template"
 name = "{{- origin_resource.name -}}_template"
-filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}.py"
+filename = "{{- origin_resource.name | lower -}}.py"
 mimetype = "text/x-python"
 
 template = '''
@@ -31,5 +31,19 @@ def create_security_group(vpc_id, group_name, description):
     )
     print(f"Created Security Group: {sg.id}")
     return sg
+}
+
+if __name__ == "__main__":
+    # Configuration
+    vpc_id = {{ origin_resource.network | map(attribute='name') }}
+    group_name = "{{- origin_resource.name -}}"
+    description = "{{- origin_resource.description -}}"
+
+    my_sg = create_security_group(vpc_id, group_name, description)
+
+    if my_sg:
+        print(f"VPC ID: {my_sg.id}")
+        print(f"State: {my_sg.state}")
+
 }
 '''

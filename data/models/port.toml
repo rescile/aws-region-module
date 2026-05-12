@@ -10,7 +10,8 @@ pointer = { "function!" = "{{- property.value -}}/tcp" }
 create_from = { property = "port" }
 relation_type = "COMPOSED_OF"
 [create_resource.properties]
-function = "tcp"
+function = "security"
+protocol = "tcp"
 service = "{{- ports[pointer].service -}}"
 description = "{{- ports[pointer].description -}}"
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

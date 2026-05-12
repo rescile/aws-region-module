@@ -5,7 +5,7 @@ origin_resource = "network"
 [[output]]
 resource_type = "aws_network_template"
 name = "{{- origin_resource.name -}}_template"
-filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}.py"
+filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}_net.py"
 mimetype = "text/x-python"
 
 template = '''

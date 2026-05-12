@@ -42,4 +42,17 @@ def create_iam_role(role_name):
         AssumeRolePolicyDocument=json.dumps(trust_relationship)
     )
     return role
+
+if __name__ == "__main__":
+    # Configuration
+    role_name = "{{- origin_resource.name -}}"
+
+    iam_policy = create_endpoint_policy()
+    my_iam = create_iam_role(role_name)
+
+
+    if my_iam:
+        print(f"Role ID: {my_iam.id}")
+        print(f"State: {my_iam.state}")
+}
 '''

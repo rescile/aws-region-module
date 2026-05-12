@@ -26,7 +26,7 @@ def create_eni(subnet_id, security_group_ids, description):
 if __name__ == "__main__":
     # Configuration
     subnet_id = "{{- origin_resource.name -}}"
-    security_group_ids = "{{- origin_resource.name -}}"
+    security_group_ids = {{ origin_resource.port_filter | map(attribute='name') }}
     description = "{{- origin_resource.description -}}"
 
     my_nic = create_eni(subnet_id, security_group_ids, description)

@@ -14,6 +14,9 @@ origin_resource = "port_filter"
 
 [[link_resources]]
 with = "network"
+match_with = [
+    { expression = "{% if target_resource.function != 'management' %}true{% endif %}" }
+]
 create_relation = { type = "PROTECTS" }
 
 [[link_resources]]

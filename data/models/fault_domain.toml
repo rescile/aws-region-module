@@ -7,7 +7,7 @@ create_from = { property = "availability_zone", as = "fault_domain" }
 relation_type = "CONNECTED_TO"
 name = "{{ provider | lower }}_{{- origin_resource.function | lower -}}_{{- property.value | lower -}}"
 [create_resource.properties]
-function = "availability_zone"
+function = "continuity"
 scope = "{{- origin_resource.function -}}"
 original_name = "{{- property.value -}}"
 pid = "{{- origin_resource.pid -}}{{- property.value -}}"
