@@ -31,6 +31,7 @@ name = "{{- origin_resource.name -}}_{{- city -}}"
 function = "platform"
 provider = "{{- origin_resource.name -}}"
 region = "{{ regions[location].region_code }}"
+location = "{{- location -}}"
 portfolio = "{{ regions[location].services }}"
 endpoint = "{{- endpoints -}}"
 availability_zone = ["a", "b", "c", "d", "e", "f"]

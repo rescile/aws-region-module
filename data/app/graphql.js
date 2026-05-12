@@ -3,11 +3,11 @@
 
 window.VIEWS = {
   providers: {
-    title: "Cloud Region",
+    title: "Region",
     icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
-    query: `{ provider { location region endpoint availability_zone } }`,
-    node: "provider",
-    columns: ["name", "region", "endpoints", "Availability Zones"],
+    query: `{ site { location region endpoint availability_zone } }`,
+    node: "site",
+    columns: ["Name", "Region", "Endpoints", "Availability Zones"],
   },
   subscriptions: {
     title: "Subscriptions",
