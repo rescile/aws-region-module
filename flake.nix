@@ -23,7 +23,7 @@
 
         # 2. Automation: Set environment variables or aliases upon entry
         shellHook = ''
-          echo "☁️  AWS Deployment Environment Loaded"
+          echo "☁️  AWS Python SDK Loaded"
           echo "Python version: $(python --version)"
           export AWS_DEFAULT_REGION="us-east-1"
           # Optional: Create a local venv if you need to pip install extra things
