@@ -5,7 +5,7 @@ window.VIEWS = {
   subscriptions: {
     title: "Subscription",
     icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
-    query: `{ subscription { tenant location name stage } }`,
+    query: `{ subscription { organisation: tenant location solution: name stage } }`,
     node: "subscription",
     columns: ["organisation", "location", "solution", "stage"],
   },
@@ -19,14 +19,14 @@ window.VIEWS = {
   providers: {
     title: "Region",
     icon: "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9",
-    query: `{ site { location region endpoint availability_zone } }`,
+    query: `{ site { name: location region endpoints: endpoint availability_zones: availability_zone } }`,
     node: "site",
-    columns: ["name", "region", "endpoints", "availability zones"],
+    columns: ["name", "region", "endpoints", "availability_zones"],
   },
   routers: {
     title: "Gateway",
     icon: "M12 2v4m0 12v4M4.22 4.22l2.83 2.83m9.9 9.9l2.83 2.83M2 12h4m12 0h4M4.22 19.78l2.83-2.83m9.9-9.9l2.83-2.83M16 12a4 4 0 11-8 0 4 4 0 018 0z",
-    query: `{ gateway { original_name function network{node{cidr}} } }`,
+    query: `{ gateway { name: original_name function network{node{cidr}} } }`,
     node: "router",
     columns: ["name", "function", "network"],
   },
@@ -40,7 +40,7 @@ window.VIEWS = {
   regions: {
     title: "DNS",
     icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
-    query: `{ record { name function alias } }`,
+    query: `{ record { name function endpoint: alias } }`,
     node: "region",
     columns: ["name", "function", "endpoint"],
   },
