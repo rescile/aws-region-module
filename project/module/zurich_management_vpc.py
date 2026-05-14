@@ -69,7 +69,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # 2. Variablen aus deinem Tera-Kontext
-    NAME = "zurich_region_management"
+    NAME = "zurich_management"
     CIDR = "172.16.0.0/16"
     REGION = "eu-central-2"
 

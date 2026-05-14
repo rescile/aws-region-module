@@ -1,14 +1,3 @@
-# Ressource
-origin_resource = "port_filter"
-
-# Oracle Cloud Infrastructure Output
-[[output]]
-resource_type = "python"
-name = "{{- origin_resource.name -}}_script"
-filename = "{{- origin_resource.name | lower -}}.py"
-mimetype = "text/x-python"
-
-template = '''
 import boto3
 import argparse
 from botocore.exceptions import ClientError
@@ -93,14 +82,14 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # 1. Konfiguration aus Tera (mit .strip() um Leerzeichen zu vermeiden)
-    VPC_SEARCH_NAME = "{% for net in origin_resource.network %}{% if net.name is containing('transit') %}{{ net.name }}{% endif %}{% endfor %}".strip()
+    VPC_SEARCH_NAME = "zurich_transit".strip()
 
-    GROUP_NAME = "{{- origin_resource.name -}}".strip()
-    DESCRIPTION = "{{- origin_resource.description -}}"
+    GROUP_NAME = "https_ingress_filter".strip()
+    DESCRIPTION = "Inbound HTTPS from internal application CIDR"
 
     # 2. Region explizit setzen (Da Zürich eu-central-2 ist)
     # Wir nehmen den Wert aus dem Template, falls vorhanden, sonst Hardcode für den Test
-    REGION_HINT = "{{- origin_resource.region | default(value='eu-central-2') -}}".strip()
+    REGION_HINT = "eu-central-2".strip()
 
     # Kleiner Debug-Print (hilft enorm bei der Fehlersuche offline)
     print(f"--- Starte Script ---")
@@ -129,4 +118,3 @@ if __name__ == "__main__":
     except Exception as e:
         # Das fängt nun auch den "VPC nicht gefunden" Fehler ab
         print(f"FATAL: {e}")
-'''

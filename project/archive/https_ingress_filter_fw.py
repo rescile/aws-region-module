@@ -1,32 +1,26 @@
-# Ressource
-origin_resource = "port_filter"
-
-# Oracle Cloud Infrastructure Output
-[[output]]
-resource_type = "python"
-name = "{{- origin_resource.name -}}_script"
-filename = "{{- origin_resource.name | lower -}}.py"
-mimetype = "text/x-python"
-
-template = '''
 import boto3
 import argparse
 from botocore.exceptions import ClientError
 
-def get_vpc_details(vpc_name_query, region):
-    # WICHTIG: Der Client MUSS die Region wissen, in der die VPC liegt
-    ec2_client = boto3.client("ec2", region_name=region)
+def get_vpc_details(vpc_name_query, region_fallback="eu-north-1"):
+    """Findet die VPC-ID und die tatsächliche Region basierend auf dem Namen."""
+    # Wir müssen eine Session starten, um zu suchen.
+    # Da wir die Region noch nicht sicher wissen, nutzen wir den Fallback für den ersten Call.
+    ec2_client = boto3.client("ec2", region_name=region_fallback)
 
-    clean_name = vpc_name_query.strip()
-    print(f"DEBUG: Suche in Region '{region}' nach VPC: '{clean_name}'")
-
-    filters = [{'Name': 'tag:Name', 'Values': [f"*{clean_name}*"]}]
-    vpcs = ec2_client.describe_vpcs(Filters=filters).get('Vpcs', [])
+    vpcs = ec2_client.describe_vpcs(
+        Filters=[{'Name': 'tag:Name', 'Values': [f"*{vpc_name_query}*"]}]
+    ).get('Vpcs', [])
 
     if not vpcs:
-        raise Exception(f"VPC '{clean_name}' wurde in der Region '{region}' nicht gefunden!")
+        # Falls in der ersten Region nichts gefunden wurde, könnte man hier
+        # durch alle Regionen iterieren, aber meist reicht der Fallback.
+        raise Exception(f"VPC mit Namen enthaltend '{vpc_name_query}' nicht gefunden.")
 
-    return vpcs[0]['VpcId'], region
+    # Wir nehmen die erste gefundene VPC
+    vpc_id = vpcs[0]['VpcId']
+    # Die Region ziehen wir aus der ARN oder wir bleiben beim Fallback/Session Context
+    return vpc_id, region_fallback
 
 def get_existing_sg(ec2_resource, vpc_id, group_name):
     """Prüft, ob die Security Group in der VPC bereits existiert."""
@@ -92,41 +86,24 @@ if __name__ == "__main__":
     parser.add_argument("--delete", action="store_true")
     args = parser.parse_args()
 
-    # 1. Konfiguration aus Tera (mit .strip() um Leerzeichen zu vermeiden)
-    VPC_SEARCH_NAME = "{% for net in origin_resource.network %}{% if net.name is containing('transit') %}{{ net.name }}{% endif %}{% endfor %}".strip()
-
-    GROUP_NAME = "{{- origin_resource.name -}}".strip()
-    DESCRIPTION = "{{- origin_resource.description -}}"
-
-    # 2. Region explizit setzen (Da Zürich eu-central-2 ist)
-    # Wir nehmen den Wert aus dem Template, falls vorhanden, sonst Hardcode für den Test
-    REGION_HINT = "{{- origin_resource.region | default(value='eu-central-2') -}}".strip()
-
-    # Kleiner Debug-Print (hilft enorm bei der Fehlersuche offline)
-    print(f"--- Starte Script ---")
-    print(f"Suche VPC: '{VPC_SEARCH_NAME}' in Region: '{REGION_HINT}'")
+    # Konfiguration aus Tera
+    VPC_SEARCH_NAME = "zurich_transit"
+    GROUP_NAME = "https_ingress_filter"
+    DESCRIPTION = "Inbound HTTPS from internal application CIDR"
+    REGION_HINT = "eu-north-1"
 
     try:
-        # Falls VPC_SEARCH_NAME leer ist (Loop hat nichts gefunden), abbrechen
-        if not VPC_SEARCH_NAME:
-            raise Exception("VPC_SEARCH_NAME konnte über das Tera-Template nicht ermittelt werden!")
-
-        # 3. VPC ID und Region dynamisch ermitteln
-        # actual_region wird hier auf REGION_HINT gesetzt, damit der Client weiß, wo er suchen muss
+        # 1. & 2. VPC ID und Region dynamisch ermitteln
         vpc_id, actual_region = get_vpc_details(VPC_SEARCH_NAME, REGION_HINT)
 
         if args.delete:
             # 4. Löschfunktion
             delete_security_group(vpc_id, GROUP_NAME, actual_region)
         else:
-            # 5. Check exist & Create
+            # 3. Check exist & Create
             my_sg = create_security_group(vpc_id, GROUP_NAME, DESCRIPTION, actual_region)
             if my_sg:
-                # reload() ist wichtig, um den aktuellen Status von AWS zu ziehen
-                my_sg.load()
-                print(f"SG ID: {my_sg.id} | VPC: {vpc_id} | Region: {actual_region}")
+                print(f"SG ID: {my_sg.id} in Region: {actual_region}")
 
     except Exception as e:
-        # Das fängt nun auch den "VPC nicht gefunden" Fehler ab
         print(f"FATAL: {e}")
-'''

@@ -13,7 +13,7 @@ def create_nlb(name, subnet_ids):
 
 if __name__ == "__main__":
     # Configuration
-    name = "zurich_region_transit_vse"
+    name = "zurich_transit_lb"
     subnet_ids = [transit_subnet_a, transit_subnet_b]
 
     my_lb = create_nlb(name, subnet_ids)
