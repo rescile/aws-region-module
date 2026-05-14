@@ -26,8 +26,8 @@ window.VIEWS = {
   providers: {
     title: "Region",
     icon: "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9",
-    query: `{ site { name: location region endpoints: endpoint availability_zones: availability_zone } }`,
-    node: "site",
+    query: `{ location { name: city region endpoints: endpoint availability_zones: availability_zone } }`,
+    node: "location",
     columns: ["name", "region", "endpoints", "availability_zones"],
   },
   routers: {
@@ -54,9 +54,9 @@ window.TOPOLOGY_VIEWS = {
       "Visualizes the structural transit zone bridging AWS providers, endpoint regions, subscriptions, and edge routers.",
     buildQuery: function () {
       return `{
-                provider { name function site { node { region } } }
+                provider { name function location { node { region } } }
                 gateway { name function network { node { cidr } } }
-                site { name function region }
+                location { name function region }
                 subscription { name tenant stage }
             }`;
     },
@@ -64,7 +64,7 @@ window.TOPOLOGY_VIEWS = {
       let lines = ["graph LR"];
       const providers = data?.provider || [];
       const gateways = data?.gateway || [];
-      const sites = data?.site || [];
+      const location = data?.location || [];
       const subscriptions = data?.subscription || [];
 
       lines.push('  subgraph AWS["☁️ Cloud Provider Ecosystem"]');
@@ -126,9 +126,9 @@ window.TOPOLOGY_VIEWS = {
         });
       }
 
-      if (sites.length > 0) {
+      if (locations.length > 0) {
         lines.push('  subgraph Endpoints["🌍 Region Endpoints"]');
-        sites.forEach((r) => {
+        locations.forEach((r) => {
           const id = sanitizeId("reg_" + (r?.pid || "unknown"));
           lines.push(`    ${id}[/"Region: ${esc(r?.pid)}"\\]`);
         });
@@ -136,7 +136,7 @@ window.TOPOLOGY_VIEWS = {
 
         providers.forEach((p) => {
           const pId = sanitizeId("prov_" + (p?.name || "unknown"));
-          sites.forEach((r) => {
+          locations.forEach((r) => {
             lines.push(
               `  ${pId} -->|MANAGED_BY| ${sanitizeId("reg_" + (r?.pid || "unknown"))}`,
             );
@@ -172,7 +172,7 @@ window.TOPOLOGY_VIEWS = {
           `  class ${sanitizeId("rtr_" + (r?.name || "unknown"))} routerStyle`,
         ),
       );
-      sites.forEach((r) =>
+      locations.forEach((r) =>
         lines.push(
           `  class ${sanitizeId("reg_" + (r?.pid || "unknown"))} regStyle`,
         ),

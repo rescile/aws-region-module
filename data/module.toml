@@ -16,7 +16,7 @@ description = "The entity operating the platform."
 required = true
 default = "AWS"
 
-[params.location]
+[params.city]
 description = "The geographical region where solutions are deployed."
 required = true
 default = "Europe (Zurich)"

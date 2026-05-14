@@ -45,10 +45,10 @@ telemetry = { "template!" = '''
 [[create_resource]]
 create_from = { property = "network" }
 relation_type = "CONNECTED_TO"
-name = "{{- origin_resource.site -}}_{{- property.value -}}"
+name = "{{- origin_resource.location -}}_{{- property.value -}}"
 [create_resource.properties]
 function = "{{- property.value -}}"
-region = "{{ regions[location].region_code }}"
+region = "{{ regions[city].region_code }}"
 cidr = "{{- block -}}"
 subnet = "{{- subnets -}}"
 gateway = "{{- gateways -}}"
