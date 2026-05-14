@@ -3,9 +3,9 @@ origin_resource = "resolver"
 
 # Oracle Cloud Infrastructure Output
 [[output]]
-resource_type = "{{- origin_resource.function -}}"
-name = "{{- origin_resource.name -}}_template"
-filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}.py"
+resource_type = "python"
+name = "{{- origin_resource.name -}}_script"
+filename = "{{- origin_resource.name | lower -}}_dns.py"
 mimetype = "text/x-python"
 
 template = '''
