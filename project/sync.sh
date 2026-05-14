@@ -63,7 +63,7 @@ while IFS=$'\t' read -r o_type o_name o_filename o_hash o_url origin_name; do
         origin_name="global"
     fi
 
-    TARGET_DIR="$OUTPUT_DIR/$origin_name"
+    TARGET_DIR="$OUTPUT_DIR"
     TARGET_FILE="$TARGET_DIR/$o_filename"
     echo "$TARGET_FILE" >> "$EXPECTED_FILES"
 
