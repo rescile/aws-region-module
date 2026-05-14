@@ -1,14 +1,3 @@
-# Ressource
-origin_resource = "port_filter"
-
-# Oracle Cloud Infrastructure Output
-[[output]]
-resource_type = "{{- origin_resource.function -}}"
-name = "{{- origin_resource.name -}}_template"
-filename = "{{- origin_resource.name | lower -}}.py"
-mimetype = "text/x-python"
-
-template = '''
 import boto3
 from botocore.exceptions import ClientError
 
@@ -34,13 +23,12 @@ def create_security_group(vpc_id, group_name, description):
 
 if __name__ == "__main__":
     # Configuration
-    vpc_id = "{% for net in origin_resource.network %}{% if net.name is containing('transit') %}{{ net.name }}{% endif %}{% endfor %}"
-    group_name = "{{- origin_resource.name -}}"
-    description = "{{- origin_resource.description -}}"
+    vpc_id = "aws_zurich_transit"
+    group_name = "https_ingress_filter"
+    description = "Inbound HTTPS from internal application CIDR"
 
     my_sg = create_security_group(vpc_id, group_name, description)
 
     if my_sg:
         print(f"VPC ID: {my_sg.id}")
         print(f"State: {my_sg.state}")
-'''

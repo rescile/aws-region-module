@@ -1,14 +1,3 @@
-# Ressource
-origin_resource = "resolver"
-
-# Oracle Cloud Infrastructure Output
-[[output]]
-resource_type = "{{- origin_resource.function -}}"
-name = "{{- origin_resource.name -}}_template"
-filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}.py"
-mimetype = "text/x-python"
-
-template = '''
 import boto3
 from botocore.exceptions import ClientError
 import time
@@ -30,13 +19,12 @@ def create_phz(vpc_id, domain_name, region):
 
 if __name__ == "__main__":
     # Configuration
-    vpc_id = "{% for net in origin_resource.network %}{% if net.name is containing('transit') %}{{ net.name }}{% endif %}{% endfor %}"
-    domain_name = {{ origin_resource.record | map(attribute='name') }}
-    region = {{ origin_resource.site | map(attribute='region') }}
+    vpc_id = "aws_zurich_transit"
+    domain_name = [my.salesforce.com]
+    region = [eu-central-2]
 
     my_phz = create_phz(vpc_id, domain_name, region)
 
     if my_phz:
         print(f"DNS ID: {my_phz.id}")
         print(f"State: {my_phz.state}")
-'''
