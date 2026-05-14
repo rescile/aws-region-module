@@ -5,7 +5,7 @@ origin_resource = "vse"
 [[output]]
 resource_type = "{{- origin_resource.function -}}"
 name = "{{- origin_resource.name -}}_lb_template"
-filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}.py"
+filename = "{{- origin_resource.name | lower -}}.py"
 mimetype = "text/x-python"
 
 template = '''
