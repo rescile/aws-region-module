@@ -1,14 +1,3 @@
-# Ressource
-origin_resource = "subnet"
-
-# Oracle Cloud Infrastructure Output
-[[output]]
-resource_type = "{{- origin_resource.function -}}"
-name = "{{- origin_resource.name -}}_nic_template"
-filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}_nic.py"
-mimetype = "text/x-python"
-
-template = '''
 {
 import boto3
 from botocore.exceptions import ClientError
@@ -25,9 +14,9 @@ def create_eni(subnet_id, security_group_ids, description):
 
 if __name__ == "__main__":
     # Configuration
-    subnet_id = "{{- origin_resource.name -}}"
-    security_group_ids = {{ origin_resource.port_filter | map(attribute='name') }}
-    description = "{{- origin_resource.description -}}"
+    subnet_id = "transit_subnet_a"
+    security_group_ids = [https_ingress_filter]
+    description = "Subnet a is a logical partition of the transit network, it carves up the cloud network into smaller blocks, each with its own IP range and running in a different availability zone."
 
     my_nic = create_eni(subnet_id, security_group_ids, description)
 
@@ -35,4 +24,3 @@ if __name__ == "__main__":
         print(f"VPC ID: {my_nic.id}")
         print(f"State: {my_nic.state}")
 }
-'''

@@ -1,14 +1,3 @@
-# Ressource
-origin_resource = "login"
-
-# Oracle Cloud Infrastructure Output
-[[output]]
-resource_type = "{{- origin_resource.function -}}"
-name = "{{- origin_resource.name -}}_template"
-filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}.py"
-mimetype = "text/x-python"
-
-template = '''
 {
 import boto3
 from botocore.exceptions import ClientError
@@ -45,7 +34,7 @@ def create_iam_role(role_name):
 
 if __name__ == "__main__":
     # Configuration
-    role_name = "{{- origin_resource.name -}}"
+    role_name = "contract_manager"
 
     iam_policy = create_endpoint_policy()
     my_iam = create_iam_role(role_name)
@@ -55,4 +44,3 @@ if __name__ == "__main__":
         print(f"Role ID: {my_iam.id}")
         print(f"State: {my_iam.state}")
 }
-'''

@@ -1,14 +1,3 @@
-# Ressource
-origin_resource = "network"
-
-# Oracle Cloud Infrastructure Output
-[[output]]
-resource_type = "{{- origin_resource.function -}}"
-name = "{{- origin_resource.name -}}_template"
-filename = "{{- origin_resource.name | lower -}}_net.py"
-mimetype = "text/x-python"
-
-template = '''
 import boto3
 from botocore.exceptions import ClientError
 
@@ -35,9 +24,9 @@ def create_vpc(cidr_block, vpc_name, region):
 
 if __name__ == "__main__":
     # Konfiguration (Werte aus deinem Template/Variablen)
-    NAME = "{{- origin_resource.name -}}"
-    CIDR = "{{- origin_resource.cidr -}}"
-    REGION = "{{- origin_resource.region -}}"
+    NAME = "aws_zurich_management"
+    CIDR = "172.16.0.0/16"
+    REGION = "eu-central-2"
 
     my_vpc = create_vpc(CIDR, NAME, REGION)
 
@@ -47,4 +36,3 @@ if __name__ == "__main__":
         print(f"VPC ID: {my_vpc.id}")
         print(f"State: {my_vpc.state}")
         print(f"Region: {REGION}")
-'''

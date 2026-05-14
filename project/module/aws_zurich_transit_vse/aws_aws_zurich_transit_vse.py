@@ -1,14 +1,3 @@
-# Ressource
-origin_resource = "vse"
-
-# Oracle Cloud Infrastructure Output
-[[output]]
-resource_type = "{{- origin_resource.function -}}"
-name = "{{- origin_resource.name -}}_lb_template"
-filename = "{{- provider | lower -}}_{{- origin_resource.name | lower -}}.py"
-mimetype = "text/x-python"
-
-template = '''
 {
 def create_nlb(name, subnet_ids):
     elbv2 = boto3.client('elbv2')
@@ -24,8 +13,8 @@ def create_nlb(name, subnet_ids):
 
 if __name__ == "__main__":
     # Configuration
-    name = "{{- origin_resource.name -}}"
-    subnet_ids = {{ origin_resource.subnet | map(attribute='name') }}
+    name = "aws_zurich_transit_vse"
+    subnet_ids = [transit_subnet_b, transit_subnet_a]
 
     my_lb = create_nlb(name, subnet_ids)
 
@@ -34,4 +23,3 @@ if __name__ == "__main__":
         print(f"State: {my_lb.state}")
 
 }
-'''
