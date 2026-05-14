@@ -3,13 +3,13 @@ name = "AWS Transit Hub"
 url = "https://github.com/rescile/aws_network_hub"
 version = "0.0.1"
 description = "The AWS Transit Hub deploys a transit network for SaaS provider in an AWS region to enable private connectivity to an onprem location. The transit network routes traffic between application VPCs and customer networks to allow operators creating a wide area cross-connect and manage security inspections and inter-service communication without the complexity of individual peering connections."
-rescile_version = ">=0.1.159"
+rescile_version = ">=0.1.165"
 
 # dependencies: Optional list of other modules this module depends on.
 [dependencies]
 graphviewer = "https://github.com/rescile/graphviewer"
 graml-module =  "https://github.com/rescile/graphml-module"
-rescile-graphiql-module = "https://github.com/rescile/rescile-graphiql-module/releases/download/v0.0.3/graphiql-module-offline.zip"
+rescile-graphiql-module = "https://github.com/rescile/rescile-graphiql-module/releases/download/v{version}/graphiql-module-offline.zip"
 
 [params.provider]
 description = "The entity operating the platform."
@@ -59,6 +59,7 @@ function = { type = "string", required = true }
 
 [generator.aws_region_endpoints]
 description = "Get AWS regional endpoints from AWS IP Ranges API."
+ttl = "72h"
 runner = "http"
 target_input = "aws_region_endpoint.json"
 method = "GET"
@@ -67,6 +68,7 @@ abort_on_failure = true
 
 [generator.aws_price_index]
 description = "Get AWS service index from AWS Pricing API."
+ttl = "72h"
 runner = "http"
 target_input = "aws_price_index.json"
 method = "GET"
@@ -75,14 +77,73 @@ abort_on_failure = false
 
 [generator.aws_region_service]
 description = "Fetch AWS regional endpoints from GitHub."
-runner = "exec"
+ttl = "72h"
+runner = "http"
 target_input = "aws_region_service.json"
-command = ["aws_region_service.sh"]
-from_stdout = false
+method = "GET"
+url = "https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json"
+abort_on_failure = true
+
+[generator.aws_region_service.response_filter]
+"tera!" = '''
+{
+{% set_global first = true %}
+{% for region_code, region in response.partitions[0].regions %}
+  {% if not first %},{% endif %}
+  {{ region.description | json_encode | safe }}: {
+    "region_code": {{ region_code | json_encode | safe }},
+    "services": [
+      {% set_global first_svc = true %}
+      {% for service_name, service in response.partitions[0].services %}
+        {% set_global has_endpoint = false %}
+        {% if service.endpoints is defined %}
+          {% for ep_name, ep_val in service.endpoints %}
+            {% if ep_name == region_code %}
+              {% set_global has_endpoint = true %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        {% if has_endpoint %}
+          {% if not first_svc %},{% endif %}
+          {{ service_name | json_encode | safe }}
+          {% set_global first_svc = false %}
+        {% endif %}
+      {% endfor %}
+    ]
+  }
+  {% set_global first = false %}
+{% endfor %}
+}
+'''
 
 [generator.iana_port_registry]
 description = "Fetch IANA system port list."
-runner = "exec"
+ttl = "72h"
+runner = "http"
 target_input = "iana_port_registry.json"
-command = ["fetch_RFC_6335.sh"]
-from_stdout = false
+method = "GET"
+url = "https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.csv"
+abort_on_failure = true
+
+[generator.iana_port_registry.response_filter]
+"tera!" = '''
+{
+{% set_global first = true %}
+{% for row in response %}
+  {% set port_str = row["Port Number"] | default(value="") | trim %}
+  {% if port_str is matching("^[0-9]+$") %}
+    {% set port = port_str | int %}
+    {% if (port > 0 and port <= 1023) or port == 1433 or port == 3000 or port == 3306 or port == 5432 or port == 6379 or port == 8080 or port == 27017 %}
+      {% if not first %},{% endif %}
+      "{{ port }}/{{ row['Transport Protocol'] }}": {
+        "service": {{ row["Service Name"] | default(value="") | json_encode | safe }},
+        "port": {{ port }},
+        "protocol": {{ row["Transport Protocol"] | default(value="") | json_encode | safe }},
+        "description": {{ row["Description"] | default(value="") | json_encode | safe }}
+      }
+      {% set_global first = false %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+}
+'''
