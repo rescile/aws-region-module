@@ -26,7 +26,7 @@ endpoints = { "function!" = '''
 [[create_resource]]
 resource_type = "location"
 relation_type = "PROVIDED_BY"
-name = "{{- city -}}_region"
+name = "{{- site -}}_region"
 [create_resource.properties]
 function = "platform"
 provider = "{{- origin_resource.name -}}"
@@ -43,5 +43,5 @@ created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 origin_resource = "location"
 
 [[link_resources]]
-with = "resolver"
-create_relation = { type = "DEPENDS_ON" }
+with = "network"
+create_relation = { type = "DERIVED_FROM" }

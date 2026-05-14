@@ -12,3 +12,14 @@ function = "dns"
 public = false
 description = "The {{ solution | capitalize }} DNS service is a managed, authoritative name server cluster that operates exclusively within the control plane of a Virtual Private Cloud (VPC) or Virtual Network (VNET)."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+# Join the global dns resolver to the network.
+origin_resource = "resolver"
+
+[[link_resources]]
+with = "network"
+create_relation = { type = "SATISFIES" }
+
+[[link_resources]]
+with = "location"
+create_relation = { type = "SATISFIES" }
