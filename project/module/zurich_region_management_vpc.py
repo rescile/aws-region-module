@@ -1,14 +1,3 @@
-# Ressource
-origin_resource = "network"
-
-# Oracle Cloud Infrastructure Output
-[[output]]
-resource_type = "python"
-name = "{{- origin_resource.name -}}_script"
-filename = "{{- origin_resource.name | lower -}}_vpc.py"
-mimetype = "text/x-python"
-
-template = '''
 import boto3
 import sys
 import argparse
@@ -80,9 +69,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # 2. Variablen aus deinem Tera-Kontext
-    NAME = "{{- origin_resource.name -}}"
-    CIDR = "{{- origin_resource.cidr -}}"
-    REGION = "{{- origin_resource.region | default(value='eu-central-2') -}}"
+    NAME = "zurich_region_management"
+    CIDR = "172.16.0.0/16"
+    REGION = "eu-central-2"
 
     # 3. Entscheidung basierend auf dem Kommandozeilen-Flag
     if args.delete:
@@ -92,4 +81,3 @@ if __name__ == "__main__":
         if my_vpc:
             my_vpc.reload()
             print(f"STATUS: {my_vpc.id} ist {my_vpc.state}")
-'''

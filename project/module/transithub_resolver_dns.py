@@ -19,7 +19,7 @@ def create_phz(vpc_id, domain_name, region):
 
 if __name__ == "__main__":
     # Configuration
-    vpc_id = "aws_zurich_transit"
+    vpc_id = "zurich_region_transit"
     domain_name = [my.salesforce.com]
     region = [eu-central-2]
 

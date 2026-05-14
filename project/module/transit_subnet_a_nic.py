@@ -1,4 +1,3 @@
-{
 import boto3
 from botocore.exceptions import ClientError
 
@@ -23,4 +22,3 @@ if __name__ == "__main__":
     if my_nic:
         print(f"VPC ID: {my_nic.id}")
         print(f"State: {my_nic.state}")
-}

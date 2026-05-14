@@ -19,11 +19,10 @@ def create_security_group(vpc_id, group_name, description):
     )
     print(f"Created Security Group: {sg.id}")
     return sg
-}
 
 if __name__ == "__main__":
     # Configuration
-    vpc_id = "aws_zurich_transit"
+    vpc_id = "zurich_region_transit"
     group_name = "https_ingress_filter"
     description = "Inbound HTTPS from internal application CIDR"
 

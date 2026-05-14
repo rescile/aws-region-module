@@ -30,7 +30,6 @@ def create_security_group(vpc_id, group_name, description):
     )
     print(f"Created Security Group: {sg.id}")
     return sg
-}
 
 if __name__ == "__main__":
     # Configuration
