@@ -60,7 +60,6 @@ function = { type = "string", required = true }
 [generator.aws_region_endpoints]
 description = "Get AWS regional endpoints from AWS IP Ranges API."
 ttl = "72h"
-runner = "http"
 target_input = "aws_region_endpoint.json"
 method = "GET"
 url = "https://ip-ranges.amazonaws.com/ip-ranges.json"
@@ -69,7 +68,6 @@ abort_on_failure = true
 [generator.aws_price_index]
 description = "Get AWS service index from AWS Pricing API."
 ttl = "72h"
-runner = "http"
 target_input = "aws_price_index.json"
 method = "GET"
 url = "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/index.json"
@@ -78,7 +76,6 @@ abort_on_failure = false
 [generator.aws_region_service]
 description = "Fetch AWS regional endpoints from GitHub."
 ttl = "72h"
-runner = "http"
 target_input = "aws_region_service.json"
 method = "GET"
 url = "https://raw.githubusercontent.com/boto/botocore/develop/botocore/data/endpoints.json"
@@ -119,7 +116,6 @@ abort_on_failure = true
 [generator.iana_port_registry]
 description = "Fetch IANA system port list."
 ttl = "72h"
-runner = "http"
 target_input = "iana_port_registry.json"
 method = "GET"
 url = "https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.csv"
