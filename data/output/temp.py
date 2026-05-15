@@ -1,14 +1,3 @@
-# Ressource
-origin_resource = "network"
-
-# Oracle Cloud Infrastructure Output
-[[output]]
-resource_type = "python"
-name = "{{- origin_resource.name -}}_script"
-filename = "{{- origin_resource.name | lower -}}_vpc.py"
-mimetype = "text/x-python"
-
-template = '''
 import argparse
 import sys
 
@@ -101,4 +90,3 @@ if __name__ == "__main__":
         if my_vpc:
             my_vpc.reload()
             print(f"STATUS: {my_vpc.id} ist {my_vpc.state}")
-'''
