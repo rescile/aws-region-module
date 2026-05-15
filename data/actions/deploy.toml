@@ -1,0 +1,33 @@
+name = "deploy_aws_hub"
+description = "Orchestrates the deployment of the AWS Zurich Transit VPC and Ingress Filters"
+
+exec = [
+    ["sh", "-c", "if [ '{{ input.dry_run | default(value=false) }}' = 'true' ]; then python3 orchestrator.py --dry-run; else python3 orchestrator.py; fi"]
+]
+
+[input]
+properties = { dry_run = { type = "boolean", default = false, description = "Check state and log intended actions without calling AWS" } }
+
+[runtime]
+engine = "nix"
+flake = "./flake.nix"
+files = ["./orchestrator.py", "./state_manager.py"]
+
+[[mount]]
+resource_type = "python"
+origin_resource = "network"
+filename = "zurich_transit_vpc.py"
+mount_path = "module/zurich_transit_vpc.py"
+
+[[mount]]
+resource_type = "python"
+origin_resource = "port_filter"
+filename = "https_ingress_filter.py"
+mount_path = "module/https_ingress_filter.py"
+
+[env]
+AWS_ACCESS_KEY_ID = "${secrets.aws.access_key}"
+AWS_SECRET_ACCESS_KEY = "${secrets.aws.secret_key}"
+AWS_DEFAULT_REGION = "us-east-1"
+VAULT_COLLECTION = "aws_network_hub_state"
+
