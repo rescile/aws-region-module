@@ -11,7 +11,7 @@ if __name__ == "__main__":
     parser.add_argument("--delete", action="store_true", help="Tears down all infrastructure blocks across all domains")
     args = parser.parse_args()
 
-    # Tera/Jinja2 array compilation template engine block
+    # Tera array compilation template engine block
     # This transforms your template context values straight into structured inputs
     COMPILED_NETWORK_STACK = [
         {% for net in origin_resource.network %}
@@ -44,7 +44,7 @@ if __name__ == "__main__":
         # storage_orch.teardown(COMPILED_STORAGE_STACK)
 
         print("-> Initiating Core Network Domain Teardown...")
-        network_orch.teardown(COMPILED_NETWORK_STACK)
+        network.teardown(COMPILED_NETWORK_STACK)
 
         print("\n=== GLOBAL TEARDOWN ACTIONS COMPLETED ===")
 
@@ -56,7 +56,7 @@ if __name__ == "__main__":
         # DEPLOYMENT ORDER: Network -> Storage -> Compute (Foundation Layers First)
 
         # 1. Fire Network Orchestration
-        active_network_state = network_orch.deploy(COMPILED_NETWORK_STACK)
+        active_network_state = network.deploy(COMPILED_NETWORK_STACK)
 
         # 2. Example of Dependency Injection for future domains:
         # If your Compute Engine needs to know which VPC or Subnet ID was just built,

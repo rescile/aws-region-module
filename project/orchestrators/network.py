@@ -6,7 +6,7 @@ from core.state_manager import get_domain_state, update_domain_state
 from modules.port_filter import create_security_group, delete_security_group
 from modules.subnet_builder import create_subnet, delete_subnet
 
-# Import your atomic AWS resource module drivers
+# Import atomic AWS resource module drivers
 from modules.vpc_builder import create_vpc, delete_vpc, get_vpc_by_name
 
 DOMAIN = "network"
