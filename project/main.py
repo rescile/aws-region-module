@@ -1,10 +1,10 @@
 import argparse
 import sys
 
-# Import our Domain Controllers
+# Import domain controllers
 from orchestrators import network
 # Future Imports:
-# from orchestrators import storage_orch, compute_orch
+# from orchestrators import storage, compute
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Enterprise AWS Infrastructure Stack Orchestrator")
@@ -12,7 +12,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Tera array compilation template engine block
-    # This transforms your template context values straight into structured inputs
+    # This transforms the template context values into structured inputs
     COMPILED_NETWORK_STACK = [
         {% for net in origin_resource.network %}
         {
@@ -38,10 +38,10 @@ if __name__ == "__main__":
 
         # TEARDOWN ORDER: Compute -> Storage -> Network (Downstream Dependencies First)
         # print("-> Initiating Compute Domain Teardown...")
-        # compute_orch.teardown(COMPILED_COMPUTE_STACK)
+        # compute.teardown(COMPILED_COMPUTE_STACK)
 
         # print("-> Initiating Storage Domain Teardown...")
-        # storage_orch.teardown(COMPILED_STORAGE_STACK)
+        # storage.teardown(COMPILED_STORAGE_STACK)
 
         print("-> Initiating Core Network Domain Teardown...")
         network.teardown(COMPILED_NETWORK_STACK)
@@ -59,10 +59,10 @@ if __name__ == "__main__":
         active_network_state = network.deploy(COMPILED_NETWORK_STACK)
 
         # 2. Example of Dependency Injection for future domains:
-        # If your Compute Engine needs to know which VPC or Subnet ID was just built,
+        # If the Compute Engine needs to know which VPC or Subnet ID was just built,
         # main.py passes the active_network_state directly into the next engine:
         #
         # print("-> Initiating Compute Domain Provisioning Engine...")
-        # compute_orch.deploy(COMPILED_COMPUTE_STACK, network_context=active_network_state)
+        # compute.deploy(COMPILED_COMPUTE_STACK, network_context=active_network_state)
 
         print("\n=== GLOBAL DEPLOYMENT PIPELINE SCRIPT COMPLETE ===")
