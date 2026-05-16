@@ -15,3 +15,10 @@
 /.venv
 __pycache__
 /__pycache__
+
+
+# development
+archive
+/.archive
+temp
+/.temp
