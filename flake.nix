@@ -1,5 +1,5 @@
 {
-  description = "AWS Deployment Environment";
+  description = "AWS Deployment & Pulumi Graph Orchestration Environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -7,28 +7,35 @@
 
   outputs = { self, nixpkgs }:
     let
-      system = "x86_64-linux"; # Adjust to "aarch64-darwin" for Apple Silicon
+      system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
       devShells.${system}.default = pkgs.mkShell {
-        # 1. Packages to stay in the PATH
         buildInputs = [
           pkgs.awscli2
+          # 1. The Pulumi CLI system tool binary
+          pkgs.pulumi
+          
+          # 2. Python environment bundling both AWS SDKs and Pulumi SDKs
           (pkgs.python3.withPackages (ps: [
             ps.boto3
             ps.botocore
+            ps.pulumi
+            ps.pulumi-aws
           ]))
         ];
 
-        # 2. Automation: Set environment variables or aliases upon entry
         shellHook = ''
-          echo "☁️  AWS Python SDK Loaded"
+          echo "☁️  AWS Python SDK & Pulumi Execution Layer Loaded"
           echo "Python version: $(python --version)"
           export AWS_DEFAULT_REGION="us-east-1"
-          # Optional: Create a local venv if you need to pip install extra things
+          
+          # NOTE ON VENV: If you use a local .venv, it will isolate itself 
+          # from the Nix-provided python packages unless explicitly told to look outside.
           if [ ! -d ".venv" ]; then
-            python -m venv .venv
+            # --system-site-packages ensures it can see the Nix packages (pulumi, boto3)
+            python -m venv --system-site-packages .venv
           fi
         '';
       };
