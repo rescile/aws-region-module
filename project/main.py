@@ -1,68 +1,65 @@
+# project/main.py
 import argparse
 import sys
 
-# Import domain controllers
-from orchestrators import network
-# Future Imports:
-# from orchestrators import storage, compute
+import requests
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Enterprise AWS Infrastructure Stack Orchestrator")
-    parser.add_argument("--delete", action="store_true", help="Tears down all infrastructure blocks across all domains")
+from core.state_manager import StateManager
+from orchestrators.network_orch import NetworkOrchestrator
+
+GRAPHQL_URL = "http://localhost:7600/graphql"
+
+
+def fetch_network_blueprint() -> list:
+    """Queries the graph for all declared network targets."""
+    query = """
+    query GetNetworkBlueprint {
+        network {
+            name
+            cidr
+            region
+            description
+        }
+    }
+    """
+    try:
+        response = requests.post(GRAPHQL_URL, json={"query": query})
+        response.raise_for_status()
+        return response.json().get("data", {}).get("network", [])
+    except Exception as e:
+        print(f"[GRAPHQL ERROR] Failed to fetch topology requirements: {e}")
+        sys.exit(1)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Rescile NextGen Automation Engine")
+    parser.add_argument(
+        "action",
+        choices=["create", "update", "destroy"],
+        help="Lifecycle action to execute against target infrastructure.",
+    )
     args = parser.parse_args()
 
-    # Tera array compilation template engine block
-    # This transforms the template context values into structured inputs
-    COMPILED_NETWORK_STACK = [
-        {% for net in origin_resource.network %}
-        {
-            "name": "{{ net.name }}".strip(),
-            "cidr": "{{ net.cidr }}".strip(),
-            "region": "{{ net.region | default(value='eu-central-2') }}".strip(),
-            "subnet_name": "{{ net.name }}_public_subnet".strip(),
-            "subnet_cidr": "{{ net.subnet_cidr | default(value='10.0.1.0/24') }}".strip(),
-            "sg_name": "{{ net.name }}_https_filter".strip(),
-            "sg_desc": "HTTPS ingress filter managed by automation for {{ net.name }}"
-        },
-        {% endfor %}
-    ]
+    # Initialize our state manager
+    state = StateManager()
+    network_orch = NetworkOrchestrator(graphql_url=GRAPHQL_URL, state_manager=state)
 
-    # Future Domain Context Blocks (Storage, Compute, etc.) will be parsed here:
-    # COMPILED_STORAGE_STACK = [ ... ]
-    # COMPILED_COMPUTE_STACK = [ ... ]
+    if args.action == "create":
+        networks = fetch_network_blueprint()
+        if not networks:
+            print("No network configurations found in the knowledge graph blueprint.")
+            return
+        print(f"Found {len(networks)} topologies. Initiating Provisioning Sequence...")
+        network_orch.run(target_networks=networks)
 
-    if args.delete:
-        print("====================================================")
-        print("!!! GLOBAL COMMAND INITIATED: TEARDOWN PIPELINE !!!")
-        print("====================================================\n")
+    elif args.action == "update":
+        print("Initiating State Drift Synchronization Layer...")
+        network_orch.update_state()
 
-        # TEARDOWN ORDER: Compute -> Storage -> Network (Downstream Dependencies First)
-        # print("-> Initiating Compute Domain Teardown...")
-        # compute.teardown(COMPILED_COMPUTE_STACK)
+    elif args.action == "destroy":
+        print("Initiating Reverse Lifecycle Teardown Sequence...")
+        network_orch.destroy()
 
-        # print("-> Initiating Storage Domain Teardown...")
-        # storage.teardown(COMPILED_STORAGE_STACK)
 
-        print("-> Initiating Core Network Domain Teardown...")
-        network.teardown(COMPILED_NETWORK_STACK)
-
-        print("\n=== GLOBAL TEARDOWN ACTIONS COMPLETED ===")
-
-    else:
-        print("====================================================")
-        print("!!! GLOBAL COMMAND INITIATED: DEPLOYMENT PIPELINE !!!")
-        print("====================================================\n")
-
-        # DEPLOYMENT ORDER: Network -> Storage -> Compute (Foundation Layers First)
-
-        # 1. Fire Network Orchestration
-        active_network_state = network.deploy(COMPILED_NETWORK_STACK)
-
-        # 2. Example of Dependency Injection for future domains:
-        # If the Compute Engine needs to know which VPC or Subnet ID was just built,
-        # main.py passes the active_network_state directly into the next engine:
-        #
-        # print("-> Initiating Compute Domain Provisioning Engine...")
-        # compute.deploy(COMPILED_COMPUTE_STACK, network_context=active_network_state)
-
-        print("\n=== GLOBAL DEPLOYMENT PIPELINE SCRIPT COMPLETE ===")
+if __name__ == "__main__":
+    main()

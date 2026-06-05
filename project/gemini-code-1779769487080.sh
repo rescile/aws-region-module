@@ -1,1 +1,0 @@
-python3 -c "import importlib, sys; from pulumi import automation as auto; import pulumi; print('Imports successful!')"
