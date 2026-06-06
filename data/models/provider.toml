@@ -20,10 +20,6 @@ created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 origin_resource = "provider"
 
 [[link_resources]]
-with = "login"
-create_relation = { type = "MANAGED_BY" }
-
-[[link_resources]]
 with = "network"
 join = { local = "name", remote = "provider" }
 create_relation = { type = "PROVIDED_BY" }

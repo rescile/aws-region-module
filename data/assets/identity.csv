@@ -1,6 +1,6 @@
 name,function,role,description
-account,cloud,administrator,"The cloud administrator creates a supueruser for a cloud account with full access to all settings."
-contract,cloud,manager,"The provider manager is a commercial contact at a cloud provider and responsible for billing and resource management."
+account,provider,administrator,"The cloud administrator creates a supueruser for a cloud account with full access to all settings."
+contract,provider,manager,"The provider manager is a commercial contact at a cloud provider and responsible for billing and resource management."
 kubernetes,service,operator,"The Kubernetes operator has the necessary permissions to manage the Kubernetes resources at a cloud provider."
 cloud,compliance,auditor,"The cloud compliance auditor ensures that an organization’s cloud footprint follows specific regulatory frameworks like SOC2, HIPAA, GDPR, or PCI-DSS."
 observability,service,manager,"A log manager the observability platform and collects disparate streams of operational data into one place."

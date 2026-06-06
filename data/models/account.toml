@@ -1,24 +1,16 @@
-# A account represents a secure digital identity.
-origin_resource = "subscription"
+# A account represents a secure digital identity that provides access to cloud provider resources.
+origin_resource = "provider"
 
 solution = '{{- module.name | split(pat=" ") | slice(start=1) | join(sep="") | lower -}}'
 
 [[create_resource]]
 resource_type = "account"
 relation_type = "DEFINED_BY"
-name = "{{- origin_resource.name -}}_{{- origin_resource.stage | lower -}}"
+name = "{{- origin_resource.name -}}_account"
 [create_resource.properties]
-function = "{{- origin_resource.stage | lower -}}"
-tenant = "{{- origin_resource.tenant | lower -}}"
-solution = "{{- origin_resource.name | lower -}}"
-pid = "{{- origin_resource.provider[0].name | lower -}}_id"
-key = "{{- origin_resource.provider[0].name | lower -}}_key"
-description = "The {{ origin_resource.provider[0].name  }} account is a secure digital identity that grants authorized access to the {{ origin_resource.provider[0].name  }} cloud platform. It enables a centralized management hub to automate cloud service deployments and configurations."
+function = "auhtorization"
+provider = "{{- origin_resource.name | lower -}}"
+pid = "{{- origin_resource.name | lower -}}_id"
+key = "{{- origin_resource.name | lower -}}_key"
+description = "The {{ origin_resource.name  }} account is a secure digital identity that grants authorized access to {{ origin_resource.name | capitalize }}'s cloud resources and enables a centralized management hub to automate cloud service deployments and configurations."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
-
-# Join the login to the provider using the identity credentials.
-origin_resource = "login"
-
-[[link_resources]]
-with = "account"
-create_relation = { type = "VERIFIED_BY" }
