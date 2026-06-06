@@ -1,19 +1,28 @@
-# project/main.py
-import argparse
-import sys
+# Ressource
+origin_resource = "network"
 
+# Oracle Cloud Infrastructure Output
+[[output]]
+resource_type = "python"
+name = "project"
+filename = "main_new.py"
+mimetype = "text/x-python"
+
+template = '''
+# project/main.py
+import sys
+import argparse
 from core.state_manager import StateManager
 from orchestrators.network_orch import NetworkOrchestrator
 
-GRAPHQL_URL = "http://localhost:7600/graphql"  # Updated to your running graph port
-
+GRAPHQL_URL = "http://localhost:7600/graphql" # Updated to your running graph port
 
 def main():
     parser = argparse.ArgumentParser(description="Rescile NextGen Automation Engine")
     parser.add_argument(
         "action",
         choices=["create", "update", "destroy"],
-        help="Lifecycle action to execute against target infrastructure.",
+        help="Lifecycle action to execute against target infrastructure."
     )
     args = parser.parse_args()
 
@@ -37,6 +46,6 @@ def main():
         elif args.action == "destroy":
             orchestrator.destroy()
 
-
 if __name__ == "__main__":
     main()
+'''

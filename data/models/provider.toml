@@ -1,11 +1,19 @@
-# A cloud provider owns and operates data centers to "rent out" computing power, storage, and/or software.
+# A cloud provider owns and operates infrastructure, platforms and /or application as services, accessible over the internet.
 
 [[create_resource]]
 resource_type = "provider"
-name = "{{- provider | lower -}}"
+name = "{{- operator | lower -}}"
 [create_resource.properties]
-function = "cloud"
-description = "Amazon Web Services (AWS) operates numberous scalable and integrated cloud services. The platform distinguishes itself through the broad service portfolio, ranging from serverless functions to hardware accelerators."
+function = "platform"
+description = "Amazon Web Services (AWS) operates data centers to rent out computing power, storage, and/or software. The operator distinguishes itself through the broad service portfolio of platform services, ranging from serverless functions to hardware accelerators."
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+[[create_resource]]
+resource_type = "provider"
+name = "salesforce"
+[create_resource.properties]
+function = "application"
+description = "Salesforce is a cloud-based customer relationship management (CRM) platform that helps organizations manage sales, marketing, customer service, commerce, and analytics from a unified system. It also provides a broad application platform for workflow automation, integration, artificial intelligence, and custom business applications, making it a central component of many enterprises' digital operating model."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
 # Join the login to the provider using the identity credentials.
@@ -17,4 +25,5 @@ create_relation = { type = "MANAGED_BY" }
 
 [[link_resources]]
 with = "network"
+join = { local = "name", remote = "provider" }
 create_relation = { type = "PROVIDED_BY" }

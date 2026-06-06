@@ -1,14 +1,18 @@
 # This model represents a second tier model of a cloud platform that is defined based on a router.
 # Specify the resource dependency for a network
+# Application Networks can expand from 10.10.0.0/16 to 10.90.0.0/16
+
 origin_resource = "router"
 
 regions = { "json!" = "aws_region_service.json" }
 
 block = { "template!" = '''
     {%- if property.value == "management" -%}
-        {%- set_global range = "172.16.0.0/16" -%}
+        {%- set_global range = "10.101.0.0/16" -%}
+    {%- elif property.value == "transfer" -%}
+        {%- set_global range = "10.100.0.0/16" -%}
     {%- else -%}
-        {%- set_global range = "10.0.0.0/24" -%}
+        {%- set_global range = "10.10.0.0/16" -%}
     {%- endif -%}
     {{- range -}}
 '''}
@@ -24,12 +28,14 @@ subnets = { "template!" = '''
 
 gateways = { "template!" = '''
     {%- if property.value == "transit" -%}
-        {%- set_global interface = ["Salesforce"] -%}
+        {%- set_global list = [
+          "vpn",
+          "salesforce"
+        ] -%}
     {%- else -%}
-        {#- Fixed the typo from .vaule to .value -#}
-        {%- set_global interface = [property.value] -%}
+        {%- set_global list = [] -%}
     {%- endif -%}
-    {{- interface | json_encode | safe -}}
+    {{- list | json_encode | safe -}}
 '''}
 
 telemetry = { "template!" = '''
@@ -49,11 +55,13 @@ name = "{{- origin_resource.location[0].site -}}_{{- property.value -}}"
 [create_resource.properties]
 function = "{{- property.value -}}"
 region = "{{ regions[city].region_code }}"
+provider = "{{- operator | lower -}}"
 cidr = "{{- block -}}"
 subnet = "{{- subnets -}}"
 gateway = "{{- gateways -}}"
+
 logging = "{{- telemetry -}}"
 enable_dns_support = true
 enable_dns_hostnames = true
-description = "The {{ property.value }} network is a virtualized network infrastructure that connects compute resources and services at {{ provider }}."
+description = "The {{ property.value }} network is a virtualized network infrastructure that connects compute resources and services at {{ operator }}."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

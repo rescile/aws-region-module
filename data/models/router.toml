@@ -11,6 +11,6 @@ relation_type = "CONNECTS_TO"
 function = "connectivity"
 region = "{{- origin_resource.region -}}"
 location = "{{- origin_resource.name -}}"
-network = [ "transit", "management" ]
-description = "The cloud router in {{ origin_resource.function | capitalize }} is a regional network function, operated by {{ provider }}, that analyzes incoming data packets, determines the best path for them to travel across interconnected networks, and forwards them toward their intended destination."
+network = [ "transit", "management", "salesforce" ]
+description = "The cloud router in {{ origin_resource.function | capitalize }} is a regional network function, operated by {{ operator }}, that analyzes incoming data packets, determines the best path for them to travel across interconnected networks, and forwards them toward their intended destination."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

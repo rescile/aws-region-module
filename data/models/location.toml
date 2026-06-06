@@ -29,14 +29,14 @@ relation_type = "PROVIDED_BY"
 name = "{{- site -}}"
 [create_resource.properties]
 function = "platform"
-provider = "{{- origin_resource.name -}}"
+provider = "{{- operator | lower -}}"
 region = "{{ regions[city].region_code }}"
 site = "{{- site -}}"
 original_name = "{{- city -}}"
 portfolio = "{{ regions[city].services }}"
 endpoint = "{{- endpoints -}}"
 availability_zone = ["a", "b", "c", "d", "e", "f"]
-description = "The region describes a physical, geographical location where data is stored, and applications run, managed by {{ provider }}."
+description = "The region describes a physical, geographical location where data is stored, and applications run, managed by {{ operator }}."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
 # Join the global dns resolver to the location.

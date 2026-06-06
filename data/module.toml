@@ -11,7 +11,7 @@ graphviewer = "https://github.com/rescile/graphviewer"
 graml-module =  "https://github.com/rescile/graphml-module"
 rescile-graphiql-module = "https://github.com/rescile/rescile-graphiql-module/releases/download/v{version}/graphiql-module-offline.zip"
 
-[params.provider]
+[params.operator]
 description = "The entity operating the platform."
 required = true
 default = "AWS"

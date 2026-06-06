@@ -15,13 +15,12 @@ cpe = { "template!" = '''
 [[create_resource]]
 create_from = { property = "gateway" }
 relation_type = "CONNECTS_TO"
-name = "{{- provider | lower -}}_{{- property.value | lower -}}_gateway"
+name = "{{- operator | lower -}}_{{- property.value | lower -}}_gateway"
 [create_resource.properties]
-function = "interface"
-original_name = "{{- property.value | lower -}}"
+function = "{{- property.value | lower -}}"
 pid = "{{- cpe -}}"
 private_dns_enabled = true
-description = "The {{ origin_resource.function }} gateway is a network node that connects two different networks with dissimilar architectures and protocols so that data can flow between them."
+description = "The {{ property.value | capitalize }} gateway is a network node that connects two different networks with dissimilar architectures and protocols so that data can flow between them."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
 # Join the login to the provider using the identity credentials.

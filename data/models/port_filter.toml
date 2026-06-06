@@ -9,6 +9,15 @@ port = [443]
 description = "Inbound HTTPS from internal application CIDR"
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
+[[create_resource]]
+resource_type = "port_filter"
+name = "salesforce_inbound_filter"
+[create_resource.properties]
+function = "security"
+port = [443]
+description = "Inbound Saelsforce from application CIDR"
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
 # Specify the resource dependency for a network
 origin_resource = "port_filter"
 
