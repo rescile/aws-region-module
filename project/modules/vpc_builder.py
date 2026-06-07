@@ -46,9 +46,7 @@ class VPCBuilder:
             }
 
         try:
-            print(
-                f"    [AWS API] Target missing. Creating VPC '{self.name}' ({self.cidr})..."
-            )
+            print(f"    [AWS API] Creating VPC ... '{self.name}' ({self.cidr})...")
             response = self.ec2_client.create_vpc(CidrBlock=self.cidr)
             vpc_id = response["Vpc"]["VpcId"]
 

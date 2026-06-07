@@ -20,6 +20,6 @@ function = "{{- origin_resource.function -}}"
 original_name = "{{ property.value }}"
 cidr = "{{ subnet_list | nth(n=property.index) }}"
 public = false
-fault_domain = "{{- operator | lower -}}_{{- origin_resource.region | lower -}}_{{- property.value | lower -}}"
+fault_domain = "{{- origin_resource.region | lower -}}{{- property.value | lower -}}"
 description = "Subnet {{ property.value }} is a logical partition of the {{ origin_resource.function }} network, it carves up the cloud network into smaller blocks, each with its own IP range and running in a different availability zone."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

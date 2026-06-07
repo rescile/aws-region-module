@@ -1,6 +1,5 @@
 # project/main.py
 import argparse
-import sys
 
 from core.state_manager import StateManager
 from orchestrators.network_orch import NetworkOrchestrator
