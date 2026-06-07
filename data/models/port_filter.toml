@@ -4,11 +4,11 @@
 resource_type = "port_filter"
 name = "general_outbound_filter"
 [create_resource.properties]
-function = "egress"
-protocol = "https"
-from_port = 443
-to_port = 443
-cidr_blocks = ["0.0.0.0/0"]
+function = "ingress"
+protocol = "-1"
+from_port = 0
+to_port = 0
+cidr_blocks = []
 description = "Allows unrestricted outbound traffic to assigned network zones."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
@@ -16,11 +16,11 @@ created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 resource_type = "port_filter"
 name = "https_inbound_filter"
 [create_resource.properties]
-function = "ingress"
-protocol = "-1"
-from_port = 0
-to_port = 0
-cidr_blocks = []
+function = "egress"
+protocol = "tcp"
+from_port = 443
+to_port = 443
+cidr_blocks = ["0.0.0.0/0"]
 description = "Restricts inbound traffic from assigned network segments to https."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
