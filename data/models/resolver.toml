@@ -10,6 +10,7 @@ name = "{{- solution -}}_resolver"
 [create_resource.properties]
 function = "dns"
 public = false
+zone = ["my.salesforce.com"]
 description = "The {{ solution | capitalize }} DNS service is a managed, authoritative name server cluster that operates exclusively within the control plane of a Virtual Private Cloud (VPC) or Virtual Network (VNET)."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 

@@ -1,16 +1,15 @@
 # This model represents a third tier model of a cloud network.
 # Specify the resource dependency for a network
-origin_resource = "resolver"
+origin_resource = "zone"
 
 # Create the resource type
 [[create_resource]]
-resource_type = "record"
-name = "my.salesforce.com"
-relation_type = "DEFINED_BY"
+create_from = { property = "record" }
+name = "{{- property.value | lower -}}.{{- origin_resource.name -}}"
+relation_type = "DERIVED_FROM"
 [create_resource.properties]
-function = "resolver"
-entry = "{{- tenant -}}"
+function = "dns"
 type = "A"
-alias = "vpce-xxxxxxxxxxxx-xxxxx.vpce.us-east-1.vpce.amazonaws.com"
-description = "tbd."
+is_alias = true
+description = "A DNS zone record (or resource record) is a single entry within a DNS zone that maps a specific name to a value — for example, linking a hostname to an IP address or a domain to a mail server. Each record has a type (A, AAAA, MX, CNAME, TXT, etc.), a TTL, and the data relevant to that type."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

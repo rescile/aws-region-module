@@ -59,8 +59,8 @@ provider = "{{- operator | lower -}}"
 cidr = "{{- block -}}"
 subnet = "{{- subnets -}}"
 gateway = "{{- gateways -}}"
-
 logging = "{{- telemetry -}}"
+firewall = ["default"]
 enable_dns_support = true
 enable_dns_hostnames = true
 description = "The {{ property.value }} network is a virtualized network infrastructure that connects compute resources and services at {{ operator }}."

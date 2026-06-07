@@ -1,39 +1,25 @@
 # This model configures a port filter for in- and outbound traffic.
 
 [[create_resource]]
-resource_type = "port_filter"
+resource_type = "filter"
 name = "general_outbound_filter"
 [create_resource.properties]
 function = "ingress"
 protocol = "-1"
 from_port = 0
 to_port = 0
-cidr_blocks = []
+cidr = []
 description = "Allows unrestricted outbound traffic to assigned network zones."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
 [[create_resource]]
-resource_type = "port_filter"
+resource_type = "filter"
 name = "https_inbound_filter"
 [create_resource.properties]
 function = "egress"
 protocol = "tcp"
 from_port = 443
 to_port = 443
-cidr_blocks = ["0.0.0.0/0"]
+cidr = []
 description = "Restricts inbound traffic from assigned network segments to https."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
-
-# Specify the resource dependency for a network
-origin_resource = "port_filter"
-
-[[link_resources]]
-with = "network"
-match_with = [
-    { expression = "{% if target_resource.function != 'management' %}true{% endif %}" }
-]
-create_relation = { type = "PROTECTS" }
-
-[[link_resources]]
-with = "subnet"
-create_relation = { type = "PROTECTS" }
