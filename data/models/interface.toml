@@ -13,5 +13,5 @@ name = "{{- origin_resource.name -}}_{{- site -}}_interface"
 [create_resource.properties]
 function = "endpoint"
 address = "com.amazonaws.vpce.eu-central-2.vpce-svc-xxxxxxxxxxxxxxxxx" # Obtained from Salesforce Org
-port_filter = ["salesforce_inbound_filter"]
+port_filter = ["general_outbound_filter", "https_inbound_filter"]
 private_dns_enabled = false

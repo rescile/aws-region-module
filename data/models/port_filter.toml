@@ -1,21 +1,27 @@
-# This model represents a third tier model of a cloud network.
+# This model configures a port filter for in- and outbound traffic.
 
 [[create_resource]]
 resource_type = "port_filter"
-name = "https_ingress_filter"
+name = "general_outbound_filter"
 [create_resource.properties]
-function = "security"
-port = [443]
-description = "Inbound HTTPS from internal application CIDR"
+function = "egress"
+protocol = "https"
+from_port = 443
+to_port = 443
+cidr_blocks = ["0.0.0.0/0"]
+description = "Allows unrestricted outbound traffic to assigned network zones."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
 [[create_resource]]
 resource_type = "port_filter"
-name = "salesforce_inbound_filter"
+name = "https_inbound_filter"
 [create_resource.properties]
-function = "security"
-port = [443]
-description = "Inbound Saelsforce from application CIDR"
+function = "ingress"
+protocol = "-1"
+from_port = 0
+to_port = 0
+cidr_blocks = []
+description = "Restricts inbound traffic from assigned network segments to https."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
 # Specify the resource dependency for a network
