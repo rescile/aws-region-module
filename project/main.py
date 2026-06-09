@@ -1,40 +1,58 @@
 # project/main.py
-import argparse
+import os
+import sys
+
+# Force Python to look inside the 'project' folder for modules and orchestrators
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from core.state_manager import StateManager
 from orchestrators.network_orch import NetworkOrchestrator
-
-GRAPHQL_URL = "http://localhost:7600/graphql"  # Updated to your running graph port
+from orchestrators.salesforce_sync_orch import SalesforceSyncOrchestrator
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Rescile NextGen Automation Engine")
-    parser.add_argument(
-        "action",
-        choices=["create", "update", "destroy"],
-        help="Lifecycle action to execute against target infrastructure.",
-    )
-    args = parser.parse_args()
+    # Capture the operational intent, default to 'create' if unassigned
+    action = sys.argv[1] if len(sys.argv) > 1 else "create"
 
-    # Pure State Engine Initialization
     state = StateManager()
+    graphql_url = "http://localhost:7600/graphql"
+    region = "eu-central-2"
 
-    # Core Domain Router Mapping
-    # (As you add Storage and Compute, you simply instantiate them here)
-    domains = {
-        "network": NetworkOrchestrator(graphql_url=GRAPHQL_URL, state_manager=state)
-    }
+    # Instantiate the domain orchestrators
+    net_orch = NetworkOrchestrator(graphql_url, state, region=region)
+    sf_orch = SalesforceSyncOrchestrator(state, region=region)
 
-    print(f"Executing '{args.action}' lifecycle across active resource domains...")
+    if action == "create":
+        # 1. Converge full AWS Network stack and capture the resulting PrivateLink Service Name string
+        aws_service_name = net_orch.run()
 
-    # Route execution down to the domain orchestrators sequentially
-    for domain_name, orchestrator in domains.items():
-        if args.action == "create":
-            orchestrator.run()
-        elif args.action == "update":
-            orchestrator.update_state()
-        elif args.action == "destroy":
-            orchestrator.destroy()
+        # 2. Handoff the authentic cloud token directly to the Salesforce Tooling API session
+        if aws_service_name:
+            sf_orch.run(
+                aws_service_name=aws_service_name
+            )  # <-- Clean, direct string handoff
+        else:
+            print(
+                "❌ [ORCHESTRATION BLOCKER] Network phase failed to yield a valid ServiceName. Skipping Salesforce sync."
+            )
+
+    elif action == "update_state":
+        print(f"\n=== [LIFECYCLE: RECONCILE DRIFT] RE-EVALUATING GRAPH STATE ===")
+        net_orch.update_state()
+        sf_orch.update_state()
+
+    elif action == "destroy":
+        print("\n=== [LIFECYCLE: TEARDOWN] INITIATING CASCADING DESTRUCTION ===")
+        # 1. Tear down the Salesforce Sync context first (releases dependencies)
+        sf_orch.destroy()
+        # 2. Drop the core network fabrics (NLBs, Services, Subnets, VPCs)
+        net_orch.destroy()
+        print("\n⚡ Cascading teardown complete. Environment is clean. ⚡")
+
+    else:
+        print(f"❌ Unknown action lifecycle token: '{action}'")
+        print("Usage: python main.py [create|update_state|destroy]")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
