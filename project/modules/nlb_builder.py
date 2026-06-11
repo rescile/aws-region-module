@@ -21,7 +21,10 @@ class NetworkLoadBalancerBuilder:
 
     def _ensure_target_group(self, name: str, vpc_id: str) -> str:
         """Ensures a TCP target group exists for the inbound Salesforce routing.
-        Validates that any existing group is explicitly mapped to the active VPC."""
+
+        Validates that any existing group is explicitly mapped to the active
+        VPC.
+        """
         tg_name = f"{name}-tg"[:32]  # AWS limits Target Group names to 32 chars
         try:
             response = self.elbv2.describe_target_groups(Names=[tg_name])
@@ -69,9 +72,12 @@ class NetworkLoadBalancerBuilder:
         if existing_nlb:
             nlb_arn = existing_nlb["LoadBalancerArn"]
             print(f"    [AWS API] Network Load Balancer '{name}' already exists.")
+
+            # --- UPDATED RETURN DICTIONARY TO INCLUDE HOSTED ZONE ID ---
             return {
                 "LoadBalancerArn": nlb_arn,
                 "DNSName": existing_nlb["DNSName"],
+                "CanonicalHostedZoneNameID": existing_nlb.get("CanonicalHostedZoneId"),
                 "Status": "EXISTING",
             }
 
@@ -104,9 +110,11 @@ class NetworkLoadBalancerBuilder:
                 ],
             )
 
+            # --- UPDATED RETURN DICTIONARY TO INCLUDE HOSTED ZONE ID ---
             return {
                 "LoadBalancerArn": nlb_arn,
                 "DNSName": nlb_meta["DNSName"],
+                "CanonicalHostedZoneNameID": nlb_meta.get("CanonicalHostedZoneId"),
                 "Status": "PROVISIONED",
             }
 

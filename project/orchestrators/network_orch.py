@@ -26,50 +26,44 @@ class NetworkOrchestrator:
         query = """
         query GetCompleteNetworkAndDNSBlueprint {
             network {
-                name
-                cidr
                 description
-                region
+                name
+                function
+                cidr
+                created
                 subnet {
                     node {
+                        public
                         name
                         cidr
                         fault_domain
+                        description
+                        original_name
+                        function
+                        created
                     }
                 }
-                firewall {
+                load_balancer {
                     node {
-                        name
                         description
-                        filter {
-                            node {
-                                name
-                                protocol
-                                from_port
-                                to_port
-                                description
-                            }
-                        }
+                        name
+                        function
+                        created
                     }
                 }
             }
+            firewall {
+                function
+                description
+                created
+                name
+            }
             resolver {
                 name
+                created
+                public
+                function
                 description
-                zone {
-                    node {
-                        name
-                        description
-                        record {
-                            node {
-                                name
-                                type
-                                is_alias
-                                description
-                            }
-                        }
-                    }
-                }
             }
         }
         """
@@ -146,8 +140,16 @@ class NetworkOrchestrator:
                         region=global_region,
                     )
                     sub_meta = sub_builder.build()
+
+                    # Merge existing metadata with custom tracking attributes
                     self.state.record_resource(
-                        self.domain, sub_meta["SubnetId"], sub_meta
+                        self.domain,
+                        sub_meta["SubnetId"],
+                        {
+                            **sub_meta,  # Unpacks existing AWS attributes safely
+                            "Type": "Subnet",  # Required for Phase 3 filtering
+                            "Name": sub_node["name"],
+                        },
                     )
 
             fw_relations = net.get("firewall", []) or []
@@ -235,79 +237,190 @@ class NetworkOrchestrator:
                                 "Type": "PrivateHostedZone",
                             },
                         )
+                # --- Phase 3: Ingress Delivery Plumbing (Graph-Driven) ---
+                print(
+                    f"\n=== [DOMAIN: {self.domain.upper()}] PROVISIONING INGRESS ROUTE PLANE ==="
+                )
 
-        # --- Phase 3: Ingress Delivery Plumbing ---
-        print(
-            f"\n=== [DOMAIN: {self.domain.upper()}] PROVISIONING INGRESS ROUTE PLANE ==="
-        )
+                live_service_name = None
 
-        # 1. Pull the live tracking state dictionary for the network domain
-        network_state = self.state.get_domain_state(self.domain) or {}
+                # 1. Outer Loop: Iterate through your target networks defined by the GraphQL blueprint query
+                for net in target_networks:
+                    # Fetch relations for the *current* network iteration
+                    lb_relations = net.get("load_balancer", []) or []
+                    if not lb_relations:
+                        continue
 
-        transit_vpc_id = None
-        subnet_a = None
-        subnet_b = None
+                    # Force a fresh state lookup so subnets built in Phase 1 are visible right now
+                    network_state = self.state.get_domain_state(self.domain) or {}
 
-        # 2. Map physical AWS tokens back to their logical configuration names
-        for res_id, meta in network_state.items():
-            meta_name = meta.get("Name")
-            if (
-                meta_name == "zurich_transit"
-                and "VpcId" in meta
-                and "SubnetId" not in meta
-            ):
-                transit_vpc_id = res_id
-            elif meta_name == "transit_subnet_a":
-                subnet_a = res_id
-            elif meta_name == "transit_subnet_b":
-                subnet_b = res_id
+                    # 2. Look up the live physical AWS resource token for this specific network node
+                    current_vpc_id = None
+                    for res_id, meta in network_state.items():
+                        if (
+                            meta.get("Name") == net["name"]
+                            and "VpcId" in meta
+                            and "SubnetId" not in meta
+                            and "SecurityGroupId" not in meta
+                        ):
+                            current_vpc_id = res_id
+                            break
 
-        # 3. Defensive guard validation check
-        if not transit_vpc_id or not subnet_a or not subnet_b:
-            print(
-                "❌ [ORCHESTRATION ERROR] Cannot provision Ingress Plane: Missing structural state definitions."
-            )
-            print(f"    -> Found Transit VPC: {transit_vpc_id}")
-            print(f"    -> Found Subnet A:    {subnet_a}")
-            print(f"    -> Found Subnet B:    {subnet_b}")
-            return None
+                    if not current_vpc_id:
+                        print(
+                            f"⚠️  [ORCHESTRATION SKIP] Cannot verify live VPC state for network configuration: '{net['name']}'"
+                        )
+                        continue
 
-        # Execute NLB Allocation pass
-        nlb_builder = NetworkLoadBalancerBuilder(region=global_region)
-        nlb_meta = nlb_builder.build(
-            name="sf-ingress-nlb",
-            vpc_id=transit_vpc_id,
-            subnet_ids=[subnet_a, subnet_b],
-        )
-        self.state.record_resource(
-            self.domain,
-            nlb_meta["LoadBalancerArn"],
-            {
-                "LoadBalancerArn": nlb_meta["LoadBalancerArn"],
-                "DNSName": nlb_meta["DNSName"],
-                "Region": global_region,
-                "Type": "NetworkLoadBalancer",
-            },
-        )
+                    # 3. Dynamic Subnet Aggregation Block
+                    assigned_subnet_ids = []
+                    for res_id, meta in network_state.items():
+                        if (
+                            meta.get("Type") == "Subnet"
+                            and meta.get("VpcId") == current_vpc_id
+                        ):
+                            assigned_subnet_ids.append(res_id)
 
-        # Execute Endpoint Service Generation pass
-        service_builder = VPCEndpointServiceBuilder(
-            service_name_tag="sf-inbound-service", region=global_region
-        )
-        service_meta = service_builder.build(nlb_arns=[nlb_meta["LoadBalancerArn"]])
+                    if len(assigned_subnet_ids) < 2:
+                        print(
+                            f"❌ [ORCHESTRATION ERROR] Skipping Load Balancer allocation for {net['name']}: "
+                            f"Insufficient subnets found in tracked state context (Found: {len(assigned_subnet_ids)}/2 required)."
+                        )
+                        continue
 
-        self.state.record_resource(
-            self.domain,
-            service_meta["ServiceId"],
-            {
-                "ServiceId": service_meta["ServiceId"],
-                "ServiceName": service_meta["ServiceName"],
-                "Region": global_region,
-                "Type": "VpcEndpointServiceConfiguration",
-            },
-        )
+                    # 4. Inner Loop: Process all load balancers configured for this network profile inside the graph
+                    for lb_relation in lb_relations:
+                        lb_node = lb_relation.get("node")
+                        if not lb_node:
+                            continue
 
-        return service_meta["ServiceName"]
+                        raw_lb_name = lb_node["name"]
+                        lb_name = raw_lb_name.replace("_", "-")
+
+                        print(
+                            f"\n--> Carving Graph-Defined Load Balancer: '{lb_name}' (Source Token: '{raw_lb_name}', Scope: {lb_node.get('scope', 'internal')})"
+                        )
+
+                        nlb_builder = NetworkLoadBalancerBuilder(region=global_region)
+                        nlb_meta = nlb_builder.build(
+                            name=lb_name,
+                            vpc_id=current_vpc_id,
+                            subnet_ids=assigned_subnet_ids,
+                        )
+
+                        self.state.record_resource(
+                            self.domain,
+                            nlb_meta["LoadBalancerArn"],
+                            {
+                                "LoadBalancerArn": nlb_meta["LoadBalancerArn"],
+                                "DNSName": nlb_meta.get("DNSName")
+                                or nlb_meta.get("DnsName"),
+                                # Try both variations of the Hosted Zone ID token safely:
+                                "CanonicalHostedZoneNameID": (
+                                    nlb_meta.get("CanonicalHostedZoneId")
+                                    or nlb_meta.get("CanonicalHostedZoneNameID")
+                                ),
+                                "Region": global_region,
+                                "Type": "NetworkLoadBalancer",
+                                "Name": lb_name,
+                            },
+                        )
+
+                        # ─── PROVISION PRIVATE DNS ALIAS POINTING TO NLB (INDENT 24 SPACES) ───
+                        # Extract the target DNS routing metadata directly out of your fresh nlb_meta instance
+                        target_dns = nlb_meta.get("DNSName") or nlb_meta.get("DnsName")
+                        nlb_canonical_zone_id = nlb_meta.get(
+                            "CanonicalHostedZoneId"
+                        ) or nlb_meta.get("CanonicalHostedZoneNameID")
+
+                        if target_dns and nlb_canonical_zone_id:
+                            print(
+                                "\n=== [DOMAIN: NETWORK] PROVISIONING PRIVATE DNS ENDPOINT RECORD ==="
+                            )
+                            target_private_fqdn = (
+                                "salesforce-ingress.internal.rescile.ch"
+                            )
+
+                            # Pull active zones mapped in current network domain state context
+                            zones = {
+                                k: v
+                                for k, v in network_state.items()
+                                if "HostedZoneId" in v
+                            }
+
+                            for zone_id, zone_meta in zones.items():
+                                print(
+                                    f"    [AWS API] Mapping Inbound Route 53 Alias -> NLB Plane ({target_dns})"
+                                )
+                                zone_manager = DNSZoneBuilder(
+                                    zone_name=zone_meta["Name"],
+                                    region=zone_meta["Region"],
+                                )
+
+                                # Map the custom record directly to the NLB Core Ingress target
+                                zone_manager.upsert_alias_record(
+                                    zone_id=zone_id,
+                                    record_name=target_private_fqdn,
+                                    target_dns=target_dns,
+                                    hosted_zone_id=nlb_canonical_zone_id,
+                                )
+
+                                # Record tracking to state cache so destroy handles it cleanly
+                                self.state.record_resource(
+                                    self.domain,
+                                    f"dns-rec-{target_private_fqdn}",
+                                    {
+                                        "Type": "DnsRecordSet",
+                                        "Name": target_private_fqdn,
+                                        "ZoneId": zone_id,
+                                        "Region": zone_meta["Region"],
+                                        "Target": target_dns,
+                                    },
+                                )
+
+                        # 5. Graph-Driven PrivateLink Ingress Service Plane Provisioning
+                        network_function = net.get("function")
+                        lb_function = lb_node.get("function")
+
+                        if (
+                            (
+                                lb_function
+                                and network_function
+                                and lb_function == network_function
+                            )
+                            or lb_function == "ingress"
+                            or "ingress" in lb_name.lower()
+                        ):
+                            print(
+                                f"    [AWS API] Initializing PrivateLink Service Endpoint Configuration for {lb_name}..."
+                            )
+
+                            fresh_vpc_id = current_vpc_id
+
+                            service_builder = VPCEndpointServiceBuilder(
+                                service_name_tag=f"{lb_name}-service",
+                                region=global_region,
+                            )
+                            service_meta = service_builder.build(
+                                nlb_arns=[nlb_meta["LoadBalancerArn"]]
+                            )
+
+                            self.state.record_resource(
+                                self.domain,
+                                service_meta["ServiceId"],
+                                {
+                                    "ServiceId": service_meta["ServiceId"],
+                                    "ServiceName": service_meta["ServiceName"],
+                                    "Region": global_region,
+                                    "Type": "VpcEndpointServiceConfiguration",
+                                },
+                            )
+
+                            # Cleanly return the live identifier out to the master engine loop
+                            return service_meta["ServiceName"]
+
+                # Fallback exit point if loops run empty without initializing an Ingress target line
+                return None
 
     def update_state(self):
         """[UPDATE] Dynamically reconciles live state status for all components including routing endpoints."""
@@ -444,7 +557,6 @@ class NetworkOrchestrator:
                     try:
                         desc = elbv2.describe_load_balancers(LoadBalancerArns=[nlb_arn])
                         state = desc["LoadBalancers"][0].get("State", {}).get("Code")
-                        # State options include: 'active', 'provisioning', 'failed', 'deleting'
                         if state == "deleting":
                             time.sleep(10)
                     except botocore.exceptions.ClientError as e:
@@ -452,9 +564,88 @@ class NetworkOrchestrator:
                             print(
                                 "✅ NLB carrier completely evaporated from infrastructure plane."
                             )
-                            # Defensive 10s cooldown padding block allowing AWS internal ENIs to cleanly detach from subnets
-                            print("⏳ Cooling down to allow ENIs to drop completely...")
-                            time.sleep(10)
+
+                            # ─── DETERMINISTIC DYNAMIC ENI WAITER BLOCK ───
+                            print(
+                                "⏳ Polling subnet attachments for lingering ELB network interfaces..."
+                            )
+                            ec2 = boto3.client("ec2", region_name=metadata["Region"])
+
+                            network_state = (
+                                self.state.get_domain_state(self.domain) or {}
+                            )
+
+                            # Method A: Match subnets directly tracking the "salesforce" scope name string
+                            vpc_subnets = [
+                                k
+                                for k, v in network_state.items()
+                                if v.get("Type") == "Subnet"
+                                and (
+                                    "salesforce" in v.get("Name", "").lower()
+                                    or "salesforce" in str(v.get("VpcId", "")).lower()
+                                )
+                            ]
+
+                            # Fallback Method B: Trace the VPC via string key to grab its ID if name matching missed
+                            if not vpc_subnets:
+                                target_vpc_id = None
+                                for res_id, v_meta in network_state.items():
+                                    if v_meta.get("Name") == "zurich_salesforce":
+                                        target_vpc_id = res_id
+                                        break
+                                if target_vpc_id:
+                                    vpc_subnets = [
+                                        k
+                                        for k, v in network_state.items()
+                                        if v.get("Type") == "Subnet"
+                                        and v.get("VpcId") == target_vpc_id
+                                    ]
+
+                            if vpc_subnets:
+                                start_time = time.time()
+                                timeout = 120  # 2-minute safety ceiling
+
+                                while time.time() - start_time < timeout:
+                                    # Filter interfaces matching our specific subnets and owned by ELB
+                                    interfaces = ec2.describe_network_interfaces(
+                                        Filters=[
+                                            {
+                                                "Name": "subnet-id",
+                                                "Values": vpc_subnets,
+                                            },
+                                            {
+                                                "Name": "attachment.status",
+                                                "Values": [
+                                                    "attaching",
+                                                    "attached",
+                                                    "detaching",
+                                                ],
+                                            },
+                                        ]
+                                    ).get("NetworkInterfaces", [])
+
+                                    # Double check description tokens to ensure we don't block on unrelated ENIs
+                                    elb_enis = [
+                                        eni
+                                        for eni in interfaces
+                                        if "ELB" in eni.get("Description", "")
+                                        or eni.get("RequesterId") == "amazon-elb"
+                                    ]
+
+                                    if not elb_enis:
+                                        print(
+                                            "✅ All network attachments successfully dropped by AWS."
+                                        )
+                                        break
+
+                                    print(
+                                        f"   [Asynchronous AWS Delay] {len(elb_enis)} ENI(s) still clearing... Retrying in 10s."
+                                    )
+                                    time.sleep(10)
+                                else:
+                                    print(
+                                        "⚠️ [TIMEOUT] Moving to next phase. Some ENIs may require manual scavenging."
+                                    )
                             break
                         raise e
 
@@ -464,6 +655,57 @@ class NetworkOrchestrator:
 
         # Step 3: Wipe DNS Zones
         for zone_id, metadata in zones.items():
+            print(
+                f"\n--> Purging custom managed DNS records from Hosted Zone: {zone_id}"
+            )
+            route53 = boto3.client("route53", region_name=metadata["Region"])
+
+            # Scan state for any records bound to this zone
+            custom_records = {
+                k: v
+                for k, v in network_state.items()
+                if v.get("Type") == "DnsRecordSet" and v.get("ZoneId") == zone_id
+            }
+
+            for rec_id, rec_meta in custom_records.items():
+                print(
+                    f"    [AWS API] Stripping active Alias Record: {rec_meta['Name']}"
+                )
+                try:
+                    # To delete an Alias record, we have to pass the exact matching block architecture
+                    # We can fetch the live record data or pass an matching inverse target payload
+                    # For maximum resilience, we fetch the current record sets to match values precisely
+                    rrsets = route53.list_resource_record_sets(HostedZoneId=zone_id)[
+                        "ResourceRecordSets"
+                    ]
+                    target_set = next(
+                        (
+                            r
+                            for r in rrsets
+                            if r["Name"].rstrip(".") == rec_meta["Name"].rstrip(".")
+                        ),
+                        None,
+                    )
+
+                    if target_set:
+                        route53.change_resource_record_sets(
+                            HostedZoneId=zone_id,
+                            ChangeBatch={
+                                "Changes": [
+                                    {
+                                        "Action": "DELETE",
+                                        "ResourceRecordSet": target_set,
+                                    }
+                                ]
+                            },
+                        )
+                    self.state.purge_resource(self.domain, rec_id)
+                except Exception as dns_err:
+                    print(
+                        f"    ⚠️ Failed to drop record context {rec_meta['Name']}: {dns_err}"
+                    )
+
+            # ─── CONTINUATION OF YOUR EXISTING CODE ───
             print(
                 f"\n--> Terminating DNS Hosted Zone: '{metadata['Name']}' ({zone_id})"
             )

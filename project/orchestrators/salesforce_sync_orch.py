@@ -33,13 +33,13 @@ class SalesforceSyncOrchestrator:
                 return sf
             except Exception as e:
                 print(
-                    f"❌ [AUTH ERROR] Failed to initialize Salesforce client: {e}",
+                    f"[AUTH ERROR] Failed to initialize Salesforce client: {e}",
                     file=sys.stderr,
                 )
                 return None
 
         print(
-            "❌ [AUTH ERROR] Target coordinates missing in active shell environment.\n"
+            "[AUTH ERROR] Target coordinates missing in active shell environment.\n"
             "   Please export SF_INSTANCE_URL and SF_ACCESS_TOKEN before running.",
             file=sys.stderr,
         )
@@ -54,7 +54,7 @@ class SalesforceSyncOrchestrator:
         sf_client = self._init_salesforce_client()
         if not sf_client:
             print(
-                "❌ [ORCHESTRATION BLOCKER] Skipping Salesforce staging due to authentication failure."
+                "[ORCHESTRATION BLOCKER] Skipping Salesforce staging due to authentication failure."
             )
             return
 
@@ -105,7 +105,7 @@ class SalesforceSyncOrchestrator:
 
             result = response.json()
             connection_id = result.get("id")
-            print("🚀 Private Connect object successfully staged in Salesforce!")
+            print("Private Connect object successfully staged in Salesforce!")
             print(f"  -> Connection Record ID: {connection_id}")
             print(f"  -> Success Status: {result.get('success')}")
 
@@ -128,7 +128,7 @@ class SalesforceSyncOrchestrator:
                     "  -> [OK] Private Connect link already registered in Salesforce. Skipping duplicate staging."
                 )
             else:
-                print(f"❌ [SALESFORCE ERROR] Tooling API execution failed: {e}")
+                print(f"[SALESFORCE ERROR] Tooling API execution failed: {e}")
 
     def update_state(self):
         """Reconciles internal tracking caches against real-world state definitions."""

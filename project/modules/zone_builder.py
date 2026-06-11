@@ -94,3 +94,34 @@ class DNSZoneBuilder:
                 f"    [AWS ERROR] Failed to terminate hosted zone {clean_zone_id}: {e}"
             )
             return False
+
+    def upsert_alias_record(
+        self, zone_id: str, record_name: str, target_dns: str, hosted_zone_id: str
+    ):
+        """Upserts a Route 53 private Alias record pointing to a VPC Endpoint or NLB."""
+        route53 = boto3.client("route53", region_name=self.region)
+        try:
+            response = route53.change_resource_record_sets(
+                HostedZoneId=zone_id,
+                ChangeBatch={
+                    "Comment": "Managed by Rescile: Ingress Route Plane Private Link Binding",
+                    "Changes": [
+                        {
+                            "Action": "UPSERT",
+                            "ResourceRecordSet": {
+                                "Name": record_name,
+                                "Type": "A",
+                                "AliasTarget": {
+                                    "HostedZoneId": hosted_zone_id,  # For vpce, this is region-specific (e.g. Z123456789)
+                                    "DNSName": target_dns,
+                                    "EvaluateTargetHealth": False,
+                                },
+                            },
+                        }
+                    ],
+                },
+            )
+            return response
+        except Exception as e:
+            print(f"    [AWS API ERROR] Failed to upsert DNS Alias record: {e}")
+            raise e

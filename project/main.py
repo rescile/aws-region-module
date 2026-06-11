@@ -33,7 +33,7 @@ def main():
             )  # <-- Clean, direct string handoff
         else:
             print(
-                "❌ [ORCHESTRATION BLOCKER] Network phase failed to yield a valid ServiceName. Skipping Salesforce sync."
+                "[ORCHESTRATION BLOCKER] Network phase failed to yield a valid ServiceName. Skipping Salesforce sync."
             )
 
     elif action == "update_state":
@@ -50,7 +50,7 @@ def main():
         print("\n⚡ Cascading teardown complete. Environment is clean. ⚡")
 
     else:
-        print(f"❌ Unknown action lifecycle token: '{action}'")
+        print(f"Unknown action lifecycle token: '{action}'")
         print("Usage: python main.py [create|update_state|destroy]")
         sys.exit(1)
 
