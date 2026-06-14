@@ -1,23 +1,19 @@
 {
-  description = "AWS Deployment & Pulumi Graph Orchestration Environment";
+  description = "AWS Deployment Framework";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    sfdx-nix.url = "github:rfaulhaber/sfdx-nix";
   };
 
-  outputs = { self, nixpkgs, sfdx-nix }:
+  outputs = { self, nixpkgs }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      sf-cli = sfdx-nix.packages.${system}.default;
     in
     {
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = [
           pkgs.awscli2
-          #pkgs.pulumi
-          sf-cli
 
           (pkgs.python3.withPackages (ps: [
             ps.boto3
@@ -26,12 +22,11 @@
             #ps.pulumi-aws
             ps.gql
             ps.requests
-            ps.simple-salesforce
           ]))
         ];
 
         shellHook = ''
-          echo "AWS and Salesforce Python SDK Loaded"
+          echo "AWS SDK Loaded"
           echo "Python version: $(python --version)"
 
           export AWS_DEFAULT_REGION="eu-central-2"

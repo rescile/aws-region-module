@@ -11,8 +11,6 @@ block = { "template!" = '''
         {%- set_global range = "10.101.0.0/16" -%}
     {%- elif property.value == "transit" -%}
         {%- set_global range = "10.100.0.0/16" -%}
-    {%- elif property.value == "salesforce" -%}
-            {%- set_global range = "10.37.194.0/27" -%}
     {%- else -%}
         {%- set_global range = "10.10.0.0/16" -%}
     {%- endif -%}
@@ -21,7 +19,7 @@ block = { "template!" = '''
 
 subnets = { "template!" = '''
     {%- set segment = [] -%}
-    {%- if property.value == "salesforce" -%}
+    {%- if property.value == "management" -%}
         {%- set_global segment = segment | concat(with="a") -%}
         {%- set_global segment = segment | concat(with="b") -%}
     {%- endif -%}
@@ -31,8 +29,7 @@ subnets = { "template!" = '''
 gateways = { "template!" = '''
     {%- if property.value == "transit" -%}
         {%- set_global list = [
-          "vpn",
-          "salesforce"
+          "vpn"
         ] -%}
     {%- else -%}
         {%- set_global list = [] -%}

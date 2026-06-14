@@ -12,6 +12,6 @@ relation_type = "EXCHANGES_DATA"
 name = "{{- origin_resource.name -}}_{{- site -}}_interface"
 [create_resource.properties]
 function = "endpoint"
-address = "com.amazonaws.vpce.eu-central-2.vpce-svc-xxxxxxxxxxxxxxxxx" # Obtained from Salesforce Org
+address = "com.amazonaws.vpce.eu-central-2.vpce-svc-xxxxxxxxxxxxxxxxx"
 port_filter = ["general_outbound_filter", "https_inbound_filter"]
 private_dns_enabled = false

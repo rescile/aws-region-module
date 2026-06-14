@@ -1,6 +1,6 @@
 # Rescile Project
 
-This repository provides a blueprint for domain-driven, multi-tier infrastructure provisioning processes using Rescile's UCS. This is useful for hybrid cloud services with infrastructure growing beyond the scope of a single provider. The blueprint structures projects into common domain groups, like internet perimeter, cloud platform, cross-connect and private infrastructure. Domain groups decouple the state engine from the deployment code, collect the state from a cloud controller and integrate state signals from multiple providers. Python is used as a generic runtime to rely on provider SDK or the pulumi operator.
+This repository provides a blueprint for an AWS Transit Hub using Rescile's UCS. The blueprint structures projects into common domain groups, like internet perimeter, cloud platform, cross-connect and private infrastructure. Domain groups decouple the state engine from the deployment code, collect the state from a cloud controller and integrate state signals from multiple providers. Python is used as a generic runtime to rely on provider SDK.
 
 ## Directory Structure
 
@@ -15,9 +15,7 @@ aws_network_hub/
 │   │   └── state_manager.py     # Pure State Engine (Agnostic of AWS logic)
 │   │
 │   ├── orchestrators/           # Tier 1: Domain Controllers
-│   │   ├── network_orch.py      # Sequences VPC -> Subnet -> Security Group
-│   │   ├── storage_orch.py      # Sequences S3 Buckets -> KMS Keys -> IAM
-│   │   └── compute_orch.py      # Sequences Keypairs -> EC2 Instances / ASGs
+│   │   └── network_orch.py      # Sequences VPC -> Subnet -> Security Group
 │   │
 │   └── modules/                 # Tier 2: Atomic AWS Resource Builders
 │       ├── vpc_builder.py
