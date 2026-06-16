@@ -17,6 +17,15 @@ block = { "template!" = '''
     {{- range -}}
 '''}
 
+functions = { "template!" = '''
+    {%- if property.value == "management" -%}
+        {%- set_global funct = "transit" -%}
+    {%- else -%}
+        {%- set_global funct = property.value -%}
+    {%- endif -%}
+    {{- funct -}}
+'''}
+
 subnets = { "template!" = '''
     {%- set segment = [] -%}
     {%- if property.value == "management" -%}
@@ -50,9 +59,9 @@ telemetry = { "template!" = '''
 [[create_resource]]
 create_from = { property = "network" }
 relation_type = "CONNECTED_TO"
-name = "{{- origin_resource.location[0].site -}}_{{- property.value -}}"
+name = "{{- origin_resource.location[0].name -}}_{{- property.value -}}"
 [create_resource.properties]
-function = "{{- property.value -}}"
+function = "{{- functions -}}"
 region = "{{ regions[city].region_code }}"
 provider = "{{- operator | lower -}}"
 cidr = "{{- block -}}"

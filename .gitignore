@@ -257,7 +257,5 @@ archive
 temp
 /.temp
 infra_state.json
-vault.token
-dev.json
-devsec.json
-settings.json
+vault.json
+secret.json

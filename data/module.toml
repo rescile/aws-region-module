@@ -31,7 +31,7 @@ allowed_values = ["DEV", "TEST", "PROD"]
 [params.tenant]
 description = "The tenant name identifiers the organization that uses the service."
 required = true
-default = "Org"
+default = "kpt"
 
 [assets."identity.csv"]
 resource_type = "identity"

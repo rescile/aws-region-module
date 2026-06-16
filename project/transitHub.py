@@ -16,9 +16,10 @@ def main():
     state = StateManager()
     graphql_url = "http://localhost:7600/graphql"
     region = "eu-central-2"
+    scope = "transit"
 
     # Instantiate the domain orchestrators
-    net_orch = NetworkOrchestrator(graphql_url, state, region=region)
+    net_orch = NetworkOrchestrator(graphql_url, state, region=region, scope=scope)
 
     if action == "create":
         # 1. Converge full AWS Network stack and capture the resulting PrivateLink Service Name string

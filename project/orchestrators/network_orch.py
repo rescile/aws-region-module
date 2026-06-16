@@ -15,17 +15,24 @@ from modules.zone_builder import DNSZoneBuilder
 
 
 class NetworkOrchestrator:
-    def __init__(self, graphql_url: str, state_manager, region: str = "eu-central-2"):
+    def __init__(
+        self,
+        graphql_url: str,
+        state_manager,
+        region: str = "eu-central-2",
+        scope: str = "transit",
+    ):
         self.url = graphql_url
         self.state = state_manager
         self.domain = "network"
         self.region = region
+        self.scope = scope
 
     def _fetch_topology_blueprint(self) -> dict:
         """Queries the graph for the multi-layer setup including 3-tier DNS architectures."""
         query = """
-        query GetCompleteNetworkAndDNSBlueprint {
-            network {
+        query {
+          network (filter: { function: "transit" }) {
                 description
                 name
                 function
