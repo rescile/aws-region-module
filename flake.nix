@@ -18,10 +18,9 @@
           (pkgs.python3.withPackages (ps: [
             ps.boto3
             ps.botocore
-            #ps.pulumi
-            #ps.pulumi-aws
             ps.gql
             ps.requests
+            ps.requests-toolbelt
           ]))
         ];
 

@@ -4,7 +4,7 @@ origin_resource = "network"
 [[create_resource]]
 create_from = { property = "firewall" }
 relation_type = "PROTECTED_BY"
-name = "{{- origin_resource.function -}}_{{- property.value -}}_sg"
+name = "{{- origin_resource.name -}}_{{- property.value -}}_sg"
 [create_resource.properties]
 function = "{{ property.value }}"
 filter = ["general_outbound_filter","https_inbound_filter"]

@@ -1,9 +1,14 @@
 # project/orchestrators/network_orch.py
+
 import time
 
 import boto3
 import botocore.exceptions
-import requests
+
+# 1. Update these specific imports:
+from gql import Client, gql
+from gql.transport.exceptions import TransportError  # For connection/HTTP errors
+from gql.transport.requests import RequestsHTTPTransport
 
 # from core.state_manager import StateManager
 from modules.firewall_builder import FirewallBuilder
@@ -28,11 +33,15 @@ class NetworkOrchestrator:
         self.region = region
         self.scope = scope
 
+        # 2. Initialize the permanent GQL client transport layer
+        transport = RequestsHTTPTransport(url=self.url, verify=True, retries=3)
+        self.gql_client = Client(transport=transport, fetch_schema_from_transport=False)
+
     def _fetch_topology_blueprint(self) -> dict:
-        """Queries the graph for the multi-layer setup including 3-tier DNS architectures."""
-        query = """
-        query {
-          network (filter: { function: "transit" }) {
+        # 3. Parse your query using the gql template literal function
+        query = gql("""
+        query GetTopology($scope: String!) {
+            network(filter: { function: $scope }) {
                 description
                 name
                 function
@@ -58,12 +67,14 @@ class NetworkOrchestrator:
                         created
                     }
                 }
-            }
-            firewall {
-                function
-                description
-                created
-                name
+                firewall {
+                    node {
+                        function
+                        description
+                        created
+                        name
+                    }
+                }
             }
             resolver {
                 name
@@ -73,22 +84,27 @@ class NetworkOrchestrator:
                 description
             }
         }
-        """
+        """)
+
+        # 4. Define your payload variables cleanly
+        params = {"scope": self.scope}
+
         try:
-            response = requests.post(self.url, json={"query": query})
-            response.raise_for_status()
-            payload = response.json()
+            # Execute the query
+            result = self.gql_client.execute(query, variable_values=params)
+            return result if result is not None else {}
 
-            if "errors" in payload:
-                print(f"\n[GRAPHQL SCHEMA ERROR] Server returned execution faults:")
-                for err in payload["errors"]:
-                    print(f"  -> {err.get('message')}")
-
-            data_content = payload.get("data")
-            return data_content if data_content is not None else {}
-        except Exception as e:
+        except TransportError as te:
+            # Catches connection failures, 404s, 500s, etc.
             print(
-                f"[{self.domain.upper()} TRANSPORT ERROR] Failed to pull graph properties: {e}"
+                f"[{self.domain.upper()} TRANSPORT ERROR] Failed to pull graph properties: {te}"
+            )
+            return {}
+
+        except Exception as e:
+            # Catches GraphQL syntax errors or internal server execution faults
+            print(
+                f"\n[GRAPHQL EXECUTION ERROR] Server returned execution faults or bad query: {e}"
             )
             return {}
 
