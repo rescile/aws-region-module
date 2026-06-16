@@ -3,13 +3,14 @@ origin_resource = "network"
 
 # Oracle Cloud Infrastructure Output
 [[output]]
+match_on = [{property = "function", value = "transit"}]
 resource_type = "python"
-name = "{{- origin_resource.name -}}"
-filename = "transitHub.py"
+name = "{{- origin_resource.subscription[0].name -}}"
+filename = "transitNet.py"
 mimetype = "text/x-python"
 
 template = '''
-# project/transitHub.py
+# {{- origin_resource.subscription[0].name -}}/transitNet.py
 import os
 import sys
 

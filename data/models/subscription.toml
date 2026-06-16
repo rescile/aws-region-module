@@ -21,3 +21,7 @@ create_relation = { type = "SUBSCRIBED_TO" }
 [[link_resources]]
 with = "login"
 create_relation = { type = "DERIVED_FROM" }
+
+[[link_resources]]
+with = "network"
+create_relation = { type = "SATISFIES" }
