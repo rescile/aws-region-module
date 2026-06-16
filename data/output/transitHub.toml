@@ -1,3 +1,14 @@
+# Ressource
+origin_resource = "network"
+
+# Oracle Cloud Infrastructure Output
+[[output]]
+resource_type = "python"
+name = "{{- origin_resource.name -}}"
+filename = "transitHub.py"
+mimetype = "text/x-python"
+
+template = '''
 # project/transitHub.py
 import os
 import sys
@@ -15,8 +26,8 @@ def main():
 
     state = StateManager()
     graphql_url = "http://localhost:7600/graphql"
-    region = "eu-central-2"
-    scope = "transit"
+    region = "{{- origin_resource.region -}}"
+    scope = "{{- origin_resource.function -}}"
 
     # Instantiate the domain orchestrators
     net_orch = NetworkOrchestrator(graphql_url, state, region=region, scope=scope)
@@ -55,3 +66,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+'''

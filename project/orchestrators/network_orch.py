@@ -110,6 +110,9 @@ class NetworkOrchestrator:
 
     def run(self) -> str:
         """[CREATE] Graph-driven loop mapping network primitives followed by DNS layers."""
+        # GROUND THE VARIABLE AT THE ROOT LEVEL OF THE METHOD FRAME
+        discovered_services = {}
+
         blueprint_data = self._fetch_topology_blueprint()
 
         target_networks = blueprint_data.get("network", []) or []
@@ -117,7 +120,7 @@ class NetworkOrchestrator:
 
         if not target_networks and not target_resolvers:
             print(f"No configurations discovered for domain: {self.domain}")
-            return None
+            return "ConfigSkippedOrNotRequired"  # Safe string token
 
         print(
             f"\n=== [DOMAIN: {self.domain.upper()}] PROVISIONING MULTI-LAYER TOPOLOGY ==="
@@ -260,187 +263,201 @@ class NetworkOrchestrator:
                                 "Type": "PrivateHostedZone",
                             },
                         )
-                # --- Phase 3: Ingress Delivery Plumbing (Graph-Driven) ---
-                print(
-                    f"\n=== [DOMAIN: {self.domain.upper()}] PROVISIONING INGRESS ROUTE PLANE ==="
-                )
-
-                live_service_name = None
-
-                # 1. Outer Loop: Iterate through your target networks defined by the GraphQL blueprint query
-                for net in target_networks:
-                    # Fetch relations for the *current* network iteration
-                    lb_relations = net.get("load_balancer", []) or []
-                    if not lb_relations:
-                        continue
-
-                    # Force a fresh state lookup so subnets built in Phase 1 are visible right now
-                    network_state = self.state.get_domain_state(self.domain) or {}
-
-                    # 2. Look up the live physical AWS resource token for this specific network node
-                    current_vpc_id = None
-                    for res_id, meta in network_state.items():
-                        if (
-                            meta.get("Name") == net["name"]
-                            and "VpcId" in meta
-                            and "SubnetId" not in meta
-                            and "SecurityGroupId" not in meta
-                        ):
-                            current_vpc_id = res_id
-                            break
-
-                    if not current_vpc_id:
+                        # --- Phase 3: Ingress Delivery Plumbing (Graph-Driven) ---
                         print(
-                            f"⚠️  [ORCHESTRATION SKIP] Cannot verify live VPC state for network configuration: '{net['name']}'"
-                        )
-                        continue
-
-                    # 3. Dynamic Subnet Aggregation Block
-                    assigned_subnet_ids = []
-                    for res_id, meta in network_state.items():
-                        if (
-                            meta.get("Type") == "Subnet"
-                            and meta.get("VpcId") == current_vpc_id
-                        ):
-                            assigned_subnet_ids.append(res_id)
-
-                    if len(assigned_subnet_ids) < 2:
-                        print(
-                            f"❌ [ORCHESTRATION ERROR] Skipping Load Balancer allocation for {net['name']}: "
-                            f"Insufficient subnets found in tracked state context (Found: {len(assigned_subnet_ids)}/2 required)."
-                        )
-                        continue
-
-                    # 4. Inner Loop: Process all load balancers configured for this network profile inside the graph
-                    for lb_relation in lb_relations:
-                        lb_node = lb_relation.get("node")
-                        if not lb_node:
-                            continue
-
-                        raw_lb_name = lb_node["name"]
-                        lb_name = raw_lb_name.replace("_", "-")
-
-                        print(
-                            f"\n--> Carving Graph-Defined Load Balancer: '{lb_name}' (Source Token: '{raw_lb_name}', Scope: {lb_node.get('scope', 'internal')})"
+                            f"\n=== [DOMAIN: {self.domain.upper()}] PROVISIONING INGRESS ROUTE PLANE ==="
                         )
 
-                        nlb_builder = NetworkLoadBalancerBuilder(region=global_region)
-                        nlb_meta = nlb_builder.build(
-                            name=lb_name,
-                            vpc_id=current_vpc_id,
-                            subnet_ids=assigned_subnet_ids,
-                        )
+                        # FIRST CLASS INITIALIZATION: Ground the variable here at the phase root level
+                        discovered_services = {}
 
-                        self.state.record_resource(
-                            self.domain,
-                            nlb_meta["LoadBalancerArn"],
-                            {
-                                "LoadBalancerArn": nlb_meta["LoadBalancerArn"],
-                                "DNSName": nlb_meta.get("DNSName")
-                                or nlb_meta.get("DnsName"),
-                                # Try both variations of the Hosted Zone ID token safely:
-                                "CanonicalHostedZoneNameID": (
-                                    nlb_meta.get("CanonicalHostedZoneId")
-                                    or nlb_meta.get("CanonicalHostedZoneNameID")
-                                ),
-                                "Region": global_region,
-                                "Type": "NetworkLoadBalancer",
-                                "Name": lb_name,
-                            },
-                        )
+                        # 1. Outer Loop: Iterate through your target networks defined by the GraphQL blueprint query
+                        for net in target_networks:
+                            lb_relations = net.get("load_balancer", []) or []
+                            if not lb_relations:
+                                continue
 
-                        # ─── PROVISION PRIVATE DNS ALIAS POINTING TO NLB (INDENT 24 SPACES) ───
-                        # Extract the target DNS routing metadata directly out of your fresh nlb_meta instance
-                        target_dns = nlb_meta.get("DNSName") or nlb_meta.get("DnsName")
-                        nlb_canonical_zone_id = nlb_meta.get(
-                            "CanonicalHostedZoneId"
-                        ) or nlb_meta.get("CanonicalHostedZoneNameID")
-
-                        if target_dns and nlb_canonical_zone_id:
-                            print(
-                                "\n=== [DOMAIN: NETWORK] PROVISIONING PRIVATE DNS ENDPOINT RECORD ==="
-                            )
-                            target_private_fqdn = (
-                                "salesforce-ingress.internal.rescile.ch"
+                            # Force a fresh state lookup so subnets built in Phase 1 are visible right now
+                            network_state = (
+                                self.state.get_domain_state(self.domain) or {}
                             )
 
-                            # Pull active zones mapped in current network domain state context
-                            zones = {
-                                k: v
-                                for k, v in network_state.items()
-                                if "HostedZoneId" in v
-                            }
+                            # 2. Look up the live physical AWS resource token for this specific network node
+                            current_vpc_id = None
+                            for res_id, meta in network_state.items():
+                                if (
+                                    meta.get("Name") == net["name"]
+                                    and "VpcId" in meta
+                                    and "SubnetId" not in meta
+                                    and "SecurityGroupId" not in meta
+                                ):
+                                    current_vpc_id = res_id
+                                    break
 
-                            for zone_id, zone_meta in zones.items():
+                            if not current_vpc_id:
                                 print(
-                                    f"    [AWS API] Mapping Inbound Route 53 Alias -> NLB Plane ({target_dns})"
+                                    f"⚠️  [ORCHESTRATION SKIP] Cannot verify live VPC state for network configuration: '{net['name']}'"
                                 )
-                                zone_manager = DNSZoneBuilder(
-                                    zone_name=zone_meta["Name"],
-                                    region=zone_meta["Region"],
+                                continue
+
+                            # 3. Dynamic Subnet Aggregation Block
+                            assigned_subnet_ids = []
+                            for res_id, meta in network_state.items():
+                                if (
+                                    meta.get("Type") == "Subnet"
+                                    and meta.get("VpcId") == current_vpc_id
+                                ):
+                                    assigned_subnet_ids.append(res_id)
+
+                            if len(assigned_subnet_ids) < 2:
+                                print(
+                                    f"❌ [ORCHESTRATION ERROR] Skipping Load Balancer allocation for {net['name']}: "
+                                    f"Insufficient subnets found in tracked state context (Found: {len(assigned_subnet_ids)}/2 required)."
+                                )
+                                continue
+
+                            # 4. Inner Loop: Process all load balancers configured for this network profile inside the graph
+                            for lb_relation in lb_relations:
+                                lb_node = lb_relation.get("node")
+                                if not lb_node:
+                                    continue
+
+                                raw_lb_name = lb_node["name"]
+                                lb_name = raw_lb_name.replace("_", "-")
+
+                                print(
+                                    f"\n--> Carving Graph-Defined Load Balancer: '{lb_name}' (Source Token: '{raw_lb_name}', Scope: {lb_node.get('scope', 'internal')})"
                                 )
 
-                                # Map the custom record directly to the NLB Core Ingress target
-                                zone_manager.upsert_alias_record(
-                                    zone_id=zone_id,
-                                    record_name=target_private_fqdn,
-                                    target_dns=target_dns,
-                                    hosted_zone_id=nlb_canonical_zone_id,
+                                nlb_builder = NetworkLoadBalancerBuilder(
+                                    region=global_region
+                                )
+                                nlb_meta = nlb_builder.build(
+                                    name=lb_name,
+                                    vpc_id=current_vpc_id,
+                                    subnet_ids=assigned_subnet_ids,
                                 )
 
-                                # Record tracking to state cache so destroy handles it cleanly
                                 self.state.record_resource(
                                     self.domain,
-                                    f"dns-rec-{target_private_fqdn}",
+                                    nlb_meta["LoadBalancerArn"],
                                     {
-                                        "Type": "DnsRecordSet",
-                                        "Name": target_private_fqdn,
-                                        "ZoneId": zone_id,
-                                        "Region": zone_meta["Region"],
-                                        "Target": target_dns,
+                                        "LoadBalancerArn": nlb_meta["LoadBalancerArn"],
+                                        "DNSName": nlb_meta.get("DNSName")
+                                        or nlb_meta.get("DnsName"),
+                                        "CanonicalHostedZoneNameID": (
+                                            nlb_meta.get("CanonicalHostedZoneId")
+                                            or nlb_meta.get("CanonicalHostedZoneNameID")
+                                        ),
+                                        "Region": global_region,
+                                        "Type": "NetworkLoadBalancer",
+                                        "Name": lb_name,
                                     },
                                 )
 
-                        # 5. Graph-Driven PrivateLink Ingress Service Plane Provisioning
-                        network_function = net.get("function")
-                        lb_function = lb_node.get("function")
+                                # ─── PROVISION PRIVATE DNS ALIAS POINTING TO NLB ───
+                                target_dns = nlb_meta.get("DNSName") or nlb_meta.get(
+                                    "DnsName"
+                                )
+                                nlb_canonical_zone_id = nlb_meta.get(
+                                    "CanonicalHostedZoneId"
+                                ) or nlb_meta.get("CanonicalHostedZoneNameID")
 
-                        if (
-                            (
-                                lb_function
-                                and network_function
-                                and lb_function == network_function
-                            )
-                            or lb_function == "ingress"
-                            or "ingress" in lb_name.lower()
-                        ):
-                            print(
-                                f"    [AWS API] Initializing PrivateLink Service Endpoint Configuration for {lb_name}..."
-                            )
+                                if target_dns and nlb_canonical_zone_id:
+                                    print(
+                                        "\n=== [DOMAIN: NETWORK] PROVISIONING PRIVATE DNS ENDPOINT RECORD ==="
+                                    )
+                                    target_private_fqdn = (
+                                        "salesforce-ingress.internal.rescile.ch"
+                                    )
 
-                            fresh_vpc_id = current_vpc_id
+                                    zones = {
+                                        k: v
+                                        for k, v in network_state.items()
+                                        if "HostedZoneId" in v
+                                    }
 
-                            service_builder = VPCEndpointServiceBuilder(
-                                service_name_tag=f"{lb_name}-service",
-                                region=global_region,
-                            )
-                            service_meta = service_builder.build(
-                                nlb_arns=[nlb_meta["LoadBalancerArn"]]
-                            )
+                                    for zone_id, zone_meta in zones.items():
+                                        print(
+                                            f"    [AWS API] Mapping Inbound Route 53 Alias -> NLB Plane ({target_dns})"
+                                        )
+                                        zone_manager = DNSZoneBuilder(
+                                            zone_name=zone_meta["Name"],
+                                            region=zone_meta["Region"],
+                                        )
 
-                            self.state.record_resource(
-                                self.domain,
-                                service_meta["ServiceId"],
-                                {
-                                    "ServiceId": service_meta["ServiceId"],
-                                    "ServiceName": service_meta["ServiceName"],
-                                    "Region": global_region,
-                                    "Type": "VpcEndpointServiceConfiguration",
-                                },
-                            )
+                                        zone_manager.upsert_alias_record(
+                                            zone_id=zone_id,
+                                            record_name=target_private_fqdn,
+                                            target_dns=target_dns,
+                                            hosted_zone_id=nlb_canonical_zone_id,
+                                        )
 
-                            # Cleanly return the live identifier out to the master engine loop
-                            return service_meta["ServiceName"]
+                                        self.state.record_resource(
+                                            self.domain,
+                                            f"dns-rec-{target_private_fqdn}",
+                                            {
+                                                "Type": "DnsRecordSet",
+                                                "Name": target_private_fqdn,
+                                                "ZoneId": zone_id,
+                                                "Region": zone_meta["Region"],
+                                                "Target": target_dns,
+                                            },
+                                        )
+
+                                # 5. Graph-Driven PrivateLink Ingress Service Plane Provisioning
+                                network_function = net.get("function")
+                                lb_function = lb_node.get("function")
+
+                                if (
+                                    (
+                                        lb_function
+                                        and network_function
+                                        and lb_function == network_function
+                                    )
+                                    or lb_function == "ingress"
+                                    or "ingress" in lb_name.lower()
+                                ):
+                                    print(
+                                        f"    [AWS API] Initializing PrivateLink Service Endpoint Configuration for {lb_name}..."
+                                    )
+
+                                    service_builder = VPCEndpointServiceBuilder(
+                                        service_name_tag=f"{lb_name}-service",
+                                        region=global_region,
+                                    )
+                                    service_meta = service_builder.build(
+                                        nlb_arns=[nlb_meta["LoadBalancerArn"]]
+                                    )
+
+                                    self.state.record_resource(
+                                        self.domain,
+                                        service_meta["ServiceId"],
+                                        {
+                                            "ServiceId": service_meta["ServiceId"],
+                                            "ServiceName": service_meta["ServiceName"],
+                                            "Region": global_region,
+                                            "Type": "VpcEndpointServiceConfiguration",
+                                        },
+                                    )
+
+                            # SAVE STATE TO DICTIONARY INSTEAD OF RETURNING EARLY
+                            discovered_services[net["name"]] = service_meta[
+                                "ServiceName"
+                            ]
+
+                # ─── SAFELY RESOLVE THE PHASE OUTPUT AT THE BOTTOM OF THE FUNCTION ───
+                # If your master loop expects a single string back, give it the first found,
+                # or return a clean string token if none were required.
+                if discovered_services:
+                    # Return the primary service name string back to the coordinator
+                    return list(discovered_services.values())[0]
+
+                # SAFE FALLBACK: Tell the orchestration layer that skipping was completely intentional
+                print(
+                    "--> [INFO] No live PrivateLink service allocations were triggered in this scope."
+                )
+                return "ConfigSkippedOrNotRequired"
 
                 # Fallback exit point if loops run empty without initializing an Ingress target line
                 return None
