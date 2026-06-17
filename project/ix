@@ -43,7 +43,7 @@ if curl -s -m 1 http://localhost:7600/vault/ > /dev/null; then
     # -----------------------------------------------------------------
     # List of Python programs to execute
     PYTHON_SCRIPTS=(
-        "transitHub.py"
+        "transit.py"
     )
 
     echo "Starting Python automation sequence for action: $ACTION..." >&2

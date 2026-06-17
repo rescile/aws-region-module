@@ -11,7 +11,8 @@ class FirewallBuilder:
         self.name = name
         self.description = description
         self.region = region
-        self.ec2_client = boto3.client("ec2", region_name=self.region)
+        # Bound as self.ec2 to support core_fabric orchestrator passthrough
+        self.ec2 = boto3.client("ec2", region_name=self.region)
 
     def _find_existing_sg(self) -> str | None:
         """Scans the parent VPC for a security group matching this name."""
@@ -20,7 +21,7 @@ class FirewallBuilder:
                 {"Name": "vpc-id", "Values": [self.vpc_id]},
                 {"Name": "group-name", "Values": [self.name]},
             ]
-            response = self.ec2_client.describe_security_groups(Filters=filters)
+            response = self.ec2.describe_security_groups(Filters=filters)
             groups = response.get("SecurityGroups", [])
             if groups:
                 return groups[0]["GroupId"]
@@ -49,12 +50,12 @@ class FirewallBuilder:
             print(
                 f"    [AWS API] Target missing. Creating Firewall Container '{self.name}' in VPC {self.vpc_id}..."
             )
-            response = self.ec2_client.create_security_group(
+            response = self.ec2.create_security_group(
                 GroupName=self.name, Description=self.description, VpcId=self.vpc_id
             )
             sg_id = response["GroupId"]
 
-            self.ec2_client.create_tags(
+            self.ec2.create_tags(
                 Resources=[sg_id], Tags=[{"Key": "Name", "Value": self.name}]
             )
             return {
@@ -76,7 +77,7 @@ class FirewallBuilder:
             print(
                 f"    [AWS API] Authorizing {len(ip_permissions)} filter policy rule(s) inside {sg_id}..."
             )
-            self.ec2_client.authorize_security_group_ingress(
+            self.ec2.authorize_security_group_ingress(
                 GroupId=sg_id, IpPermissions=ip_permissions
             )
         except ClientError as e:
@@ -91,19 +92,27 @@ class FirewallBuilder:
     def exists(self, sg_id: str) -> bool:
         """Checks AWS API to verify if the explicit group ID is live."""
         try:
-            self.ec2_client.describe_security_groups(GroupIds=[sg_id])
+            self.ec2.describe_security_groups(GroupIds=[sg_id])
             return True
         except ClientError as e:
             if e.response["Error"]["Code"] == "InvalidGroup.NotFound":
                 return False
             raise e
 
-    def destroy(self, sg_id: str) -> bool:
+    def destroy(self, sg_id: str = None) -> bool:
         """Drops the explicit security group from AWS."""
+        target_id = sg_id or self._find_existing_sg()
+
+        if not target_id:
+            print(
+                f"    [AWS SKIPPED] No live Security Group found matching context '{self.name}' to drop."
+            )
+            return True
+
         try:
-            print(f"    [AWS API] Terminating Security Group context {sg_id}...")
-            self.ec2_client.delete_security_group(GroupId=sg_id)
+            print(f"    [AWS API] Terminating Security Group context {target_id}...")
+            self.ec2.delete_security_group(GroupId=target_id)
             return True
         except ClientError as e:
-            print(f"    [AWS ERROR] Failed to drop Security Group {sg_id}: {e}")
+            print(f"    [AWS ERROR] Failed to drop Security Group {target_id}: {e}")
             return False

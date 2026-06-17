@@ -17,7 +17,8 @@ class SubnetBuilder:
         self.name = name
         self.az = az  # Maps to your graph's fault_domain field if specified
         self.region = region
-        self.ec2_client = boto3.client("ec2", region_name=self.region)
+        # Bound as self.ec2 to support core_fabric orchestrator passthrough
+        self.ec2 = boto3.client("ec2", region_name=self.region)
 
     def _find_existing_subnet(self) -> str | None:
         """Scans AWS within the parent VPC for a subnet matching this structural name tag."""
@@ -27,7 +28,7 @@ class SubnetBuilder:
                 {"Name": "tag:Name", "Values": [self.name]},
                 {"Name": "state", "Values": ["pending", "available"]},
             ]
-            response = self.ec2_client.describe_subnets(Filters=filters)
+            response = self.ec2.describe_subnets(Filters=filters)
             subnets = response.get("Subnets", [])
             if subnets:
                 return subnets[0]["SubnetId"]
@@ -62,11 +63,11 @@ class SubnetBuilder:
             if self.az:
                 kwargs["AvailabilityZone"] = self.az
 
-            response = self.ec2_client.create_subnet(**kwargs)
+            response = self.ec2.create_subnet(**kwargs)
             subnet_id = response["Subnet"]["SubnetId"]
 
             # Tag the resource for future convergence passes
-            self.ec2_client.create_tags(
+            self.ec2.create_tags(
                 Resources=[subnet_id], Tags=[{"Key": "Name", "Value": self.name}]
             )
 
@@ -85,19 +86,27 @@ class SubnetBuilder:
     def exists(self, subnet_id: str) -> bool:
         """Checks AWS API to ensure the explicit subnet target actually exists."""
         try:
-            self.ec2_client.describe_subnets(SubnetIds=[subnet_id])
+            self.ec2.describe_subnets(SubnetIds=[subnet_id])
             return True
         except ClientError as e:
             if e.response["Error"]["Code"] == "InvalidSubnetID.NotFound":
                 return False
             raise e
 
-    def destroy(self, subnet_id: str) -> bool:
+    def destroy(self, subnet_id: str = None) -> bool:
         """Drops the explicit subnet target from AWS."""
+        target_id = subnet_id or self._find_existing_subnet()
+
+        if not target_id:
+            print(
+                f"    [AWS SKIPPED] No live Subnet found matching context '{self.name}' to drop."
+            )
+            return True
+
         try:
-            print(f"    [AWS API] Deleting Subnet context {subnet_id}...")
-            self.ec2_client.delete_subnet(SubnetId=subnet_id)
+            print(f"    [AWS API] Deleting Subnet context {target_id}...")
+            self.ec2.delete_subnet(SubnetId=target_id)
             return True
         except ClientError as e:
-            print(f"    [AWS ERROR] Failed to drop Subnet {subnet_id}: {e}")
+            print(f"    [AWS ERROR] Failed to drop Subnet {target_id}: {e}")
             return False
