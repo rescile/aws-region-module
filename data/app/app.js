@@ -133,6 +133,16 @@ function setupNavigation() {
         });
     }
 
+    const pendingBtn = document.createElement('button');
+    pendingBtn.className = `w-full text-left px-6 py-3 flex items-center text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white text-slate-300 nav-btn`;
+    pendingBtn.id = `nav-pending-changes`;
+    pendingBtn.innerHTML = `
+        <svg class="w-5 h-5 mr-3 text-slate-500 group-hover:text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        Pending Changes
+    `;
+    pendingBtn.onclick = () => loadPendingChangesView();
+    navMenu.appendChild(pendingBtn);
+
     if (window.TOPOLOGY_VIEWS) {
         const sep = document.createElement('span');
         sep.className = 'nav-separator text-slate-500 mt-4';
@@ -252,6 +262,56 @@ window.loadView = async function(viewKey) {
         container.innerHTML = `<div class="p-6 text-red-600 bg-red-50 m-4 rounded border border-red-200">
             <strong>Error fetching data:</strong> ${error.message}
             ${error.query ? `<pre class="mt-2 text-xs bg-white p-2 rounded overflow-auto max-h-48 text-slate-700 font-mono">${esc(error.query)}</pre>` : ''}
+        </div>`;
+    } finally {
+        loader?.classList.add('hidden');
+    }
+};
+
+window.loadPendingChangesView = async function() {
+    currentViewKey = 'pending-changes';
+    currentTopoKey = null;
+    
+    document.getElementById('view-title').innerText = "Pending Changes";
+    setActiveNav('nav-pending-changes');
+    
+    const loader = document.getElementById('loader');
+    const container = document.getElementById('content-container');
+    
+    loader?.classList.remove('hidden');
+    
+    try {
+        // Fetch declared state from GraphQL
+        const data = await fetchGraphQL(`{ gateway { name pid private_dns_enabled } }`);
+        const gateways = data.gateway || [];
+        
+        // Fetch live state from provider APIs via our proxy
+        let liveState = [];
+        try {
+            const res = await fetch('api/provider/state');
+            if (res.ok) {
+                liveState = await res.json();
+            } else {
+                console.warn("Could not fetch live state, using empty state");
+            }
+        } catch (e) {
+            console.warn("Provider API error:", e);
+        }
+
+        // Combine for table
+        const rows = gateways.map(g => {
+            const live = liveState.find(l => l.id === g.pid) || {};
+            return {
+                resource: g.name || "Unknown",
+                declared_state: JSON.stringify({ pid: g.pid, private_dns_enabled: g.private_dns_enabled }),
+                live_state: Object.keys(live).length ? JSON.stringify(live) : "-"
+            };
+        });
+
+        container.innerHTML = renderTable(rows, ["resource", "declared_state", "live_state"]);
+    } catch (error) {
+        container.innerHTML = `<div class="p-6 text-red-600 bg-red-50 m-4 rounded border border-red-200">
+            <strong>Error fetching data:</strong> ${error.message}
         </div>`;
     } finally {
         loader?.classList.add('hidden');
@@ -643,6 +703,8 @@ async function updateGraphStats() {
 window.showBuildModal = function() {
     const logsEl = document.getElementById('buildLogs');
     const closeBtn = document.getElementById('buildCloseBtn');
+    const titleEl = document.getElementById('modalTitleText');
+    if (titleEl) titleEl.textContent = 'Building Graph...';
     if (!logsEl || !closeBtn) return;
     
     logsEl.textContent = '';
@@ -682,6 +744,118 @@ window.showBuildModal = function() {
 window.closeBuildModal = function() {
     document.getElementById('buildModal')?.classList.add('hidden');
     window.refreshCurrentView();
+};
+
+// ======================== BROWSER SIDE EXECUTION ENGINE ========================
+// Replaces previous JS simulator with actual Rescile Action API calls using rescile-runner
+
+window.executeEngine = async function(action) {
+    const logsEl = document.getElementById('buildLogs');
+    const closeBtn = document.getElementById('buildCloseBtn');
+    const titleEl = document.getElementById('modalTitleText');
+    if (titleEl) titleEl.textContent = 'Executing Action...';
+    
+    document.getElementById('buildModal')?.classList.remove('hidden');
+    if (logsEl) logsEl.textContent = `=== STARTING ACTION: ${action.toUpperCase()} ===\nRequesting execution bundle from Rescile Engine...\n`;
+    if (closeBtn) {
+        closeBtn.disabled = true;
+        closeBtn.textContent = 'Running...';
+        closeBtn.classList.remove('text-white', 'bg-amber-600', 'hover:bg-amber-700', 'cursor-pointer');
+        closeBtn.classList.add('text-slate-400', 'bg-slate-100', 'cursor-not-allowed');
+    }
+
+    try {
+        // 1. Fetch the execution bundle from Rescile Engine
+        const bundleResponse = await fetch(`/api/actions/aws-transit-hub/${action}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({})
+        });
+
+        if (!bundleResponse.ok) {
+            throw new Error(`Failed to fetch action bundle: ${bundleResponse.status} ${bundleResponse.statusText}`);
+        }
+
+        const blob = await bundleResponse.blob();
+        if (logsEl) logsEl.textContent += `Bundle downloaded. Starting rescile-runner daemon...\n`;
+
+        // 2. Post the artifact to the daemon runner
+        const formData = new FormData();
+        formData.append('bundle', blob, `${action}.tar.gz`);
+        formData.append('inputs', JSON.stringify({}));
+
+        const runnerResponse = await fetch('api/runner/execute', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!runnerResponse.ok) {
+            let errorText = await runnerResponse.text();
+            throw new Error(`Runner failed to execute: ${runnerResponse.status} ${errorText}`);
+        }
+
+        const data = await runnerResponse.json();
+        const executionId = data.execution_id;
+        
+        if (!executionId) {
+            throw new Error('No execution ID returned from the runner.');
+        }
+
+        if (logsEl) logsEl.textContent += `Runner accepted execution. Execution ID: ${executionId}\nStreaming logs...\n\n`;
+
+        // 3. Listen to execution stream
+        if (buildEventSource) buildEventSource.close();
+        buildEventSource = new EventSource(`api/runner/execute/${executionId}`);
+
+        buildEventSource.onmessage = function (event) {
+            const msg = event.data;
+            if (msg === 'Execution completed successfully' || msg.includes('EXECUTION_COMPLETE')) {
+                // Keep the stream open just to receive any trailing events, 
+                // but we know it's done. The runner should close it automatically.
+                if (closeBtn) {
+                    closeBtn.disabled = false;
+                    closeBtn.textContent = 'Close & Refresh';
+                    closeBtn.classList.remove('text-slate-400', 'bg-slate-100', 'cursor-not-allowed');
+                    closeBtn.classList.add('text-white', 'bg-amber-600', 'hover:bg-amber-700', 'cursor-pointer');
+                }
+            }
+            if (logsEl) {
+                logsEl.textContent += msg + '\n';
+                logsEl.scrollTop = logsEl.scrollHeight;
+            }
+        };
+
+        buildEventSource.onerror = function () {
+            buildEventSource.close();
+            if (closeBtn && closeBtn.disabled) {
+                closeBtn.disabled = false;
+                closeBtn.textContent = 'Close (Stream ended)';
+                closeBtn.classList.remove('text-slate-400', 'bg-slate-100', 'cursor-not-allowed');
+                closeBtn.classList.add('text-white', 'bg-blue-600', 'hover:bg-blue-700', 'cursor-pointer');
+            }
+        };
+
+    } catch (e) {
+        if (logsEl) {
+            logsEl.textContent += `\n[ERROR] Execution failed: ${e.message}\n`;
+        }
+        if (closeBtn) {
+            closeBtn.disabled = false;
+            closeBtn.textContent = 'Close (Error)';
+            closeBtn.classList.remove('text-slate-400', 'bg-slate-100', 'cursor-not-allowed');
+            closeBtn.classList.add('text-white', 'bg-red-600', 'hover:bg-red-700', 'cursor-pointer');
+            closeBtn.onclick = () => {
+                document.getElementById('buildModal')?.classList.add('hidden');
+            };
+        }
+    } finally {
+        if (closeBtn) {
+            closeBtn.onclick = () => {
+                document.getElementById('buildModal')?.classList.add('hidden');
+                refreshCurrentView();
+            };
+        }
+    }
 };
 
 // ======================== INITIALIZATION ========================

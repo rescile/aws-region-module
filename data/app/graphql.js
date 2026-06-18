@@ -33,15 +33,15 @@ window.VIEWS = {
   routers: {
     title: "Gateway",
     icon: "M12 2v4m0 12v4M4.22 4.22l2.83 2.83m9.9 9.9l2.83 2.83M2 12h4m12 0h4M4.22 19.78l2.83-2.83m9.9-9.9l2.83-2.83M16 12a4 4 0 11-8 0 4 4 0 018 0z",
-    query: `{ gateway { name: original_name private: private_dns_enabled pid description } }`,
+    query: `{ gateway { name private: private_dns_enabled pid description } }`,
     node: "gateway",
     columns: ["name", "private", "pid", "description"],
   },
   regions: {
     title: "Port Filter",
     icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
-    query: `{ port_filter { name function description } }`,
-    node: "port_filter",
+    query: `{ filter { name function description } }`,
+    node: "filter",
     columns: ["name", "function", "description"],
   },
 };
@@ -64,7 +64,7 @@ window.TOPOLOGY_VIEWS = {
       let lines = ["graph LR"];
       const providers = data?.provider || [];
       const gateways = data?.gateway || [];
-      const location = data?.location || [];
+      const locations = data?.location || [];
       const subscriptions = data?.subscription || [];
 
       lines.push('  subgraph AWS["☁️ Cloud Provider Ecosystem"]');
