@@ -1,0 +1,16 @@
+name = "update_state"
+description = "Update State of AWS Transit Hub"
+
+exec = [
+    ["python3", "transit.py", "update_state"]
+]
+
+[runtime]
+engine = "nix"
+flake = "./flake.nix"
+files = ["./transit.py", "./core", "./modules", "./orchestrators"]
+
+[env]
+AWS_ACCESS_KEY_ID = "${secrets.aws.access_key}"
+AWS_SECRET_ACCESS_KEY = "${secrets.aws.secret_key}"
+VAULT_COLLECTION = "aws_network_hub_state"
