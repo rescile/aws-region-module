@@ -27,7 +27,7 @@ class FirewallBuilder:
                 return groups[0]["GroupId"]
             return None
         except ClientError as e:
-            print(f"    [AWS ERROR] Failed searching for security group: {e}")
+            print(f"    [FIREWALL: AWS ERROR] Failed searching for security group: {e}")
             return None
 
     def build(self) -> dict:
@@ -36,7 +36,7 @@ class FirewallBuilder:
 
         if sg_id:
             print(
-                f"    [DECLARATIVE MATCH] Firewall container '{self.name}' already exists ({sg_id})."
+                f"    [FIREWALL: DECLARATIVE MATCH] Firewall container '{self.name}' already exists ({sg_id})."
             )
             return {
                 "SecurityGroupId": sg_id,
@@ -48,7 +48,7 @@ class FirewallBuilder:
 
         try:
             print(
-                f"    [AWS API] Target missing. Creating Firewall Container '{self.name}' in VPC {self.vpc_id}..."
+                f"    [FIREWALL: AWS API] Target missing. Creating Firewall Container '{self.name}' in VPC {self.vpc_id}..."
             )
             response = self.ec2.create_security_group(
                 GroupName=self.name, Description=self.description, VpcId=self.vpc_id
@@ -66,7 +66,9 @@ class FirewallBuilder:
                 "Status": "newly_provisioned",
             }
         except ClientError as e:
-            print(f"    [AWS ERROR] Failed to provision firewall container: {e}")
+            print(
+                f"    [FIREWALL: AWS ERROR] Failed to provision firewall container: {e}"
+            )
             raise e
 
     def authorize_filters(self, sg_id: str, ip_permissions: list) -> None:
@@ -75,7 +77,7 @@ class FirewallBuilder:
             return
         try:
             print(
-                f"    [AWS API] Authorizing {len(ip_permissions)} filter policy rule(s) inside {sg_id}..."
+                f"    [FIREWALL: AWS API] Authorizing {len(ip_permissions)} filter policy rule(s) inside {sg_id}..."
             )
             self.ec2.authorize_security_group_ingress(
                 GroupId=sg_id, IpPermissions=ip_permissions
@@ -84,10 +86,10 @@ class FirewallBuilder:
             # Catch duplicate rule errors gracefully for declarative idempotency
             if e.response["Error"]["Code"] == "InvalidPermission.Duplicate":
                 print(
-                    f"    [DECLARATIVE MATCH] Filter rules already applied to {sg_id}. Skipping rule mutations."
+                    f"    [FIREWALL: DECLARATIVE MATCH] Filter rules already applied to {sg_id}. Skipping rule mutations."
                 )
             else:
-                print(f"    [AWS ERROR] Failed to apply filter policies: {e}")
+                print(f"    [FIREWALL: AWS ERROR] Failed to apply filter policies: {e}")
 
     def exists(self, sg_id: str) -> bool:
         """Checks AWS API to verify if the explicit group ID is live."""
@@ -105,14 +107,18 @@ class FirewallBuilder:
 
         if not target_id:
             print(
-                f"    [AWS SKIPPED] No live Security Group found matching context '{self.name}' to drop."
+                f"    [FIREWALL: AWS SKIPPED] No live Security Group found matching context '{self.name}' to drop."
             )
             return True
 
         try:
-            print(f"    [AWS API] Terminating Security Group context {target_id}...")
+            print(
+                f"    [FIREWALL: AWS API] Terminating Security Group context {target_id}..."
+            )
             self.ec2.delete_security_group(GroupId=target_id)
             return True
         except ClientError as e:
-            print(f"    [AWS ERROR] Failed to drop Security Group {target_id}: {e}")
+            print(
+                f"    [FIREWALL: AWS ERROR] Failed to drop Security Group {target_id}: {e}"
+            )
             return False

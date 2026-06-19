@@ -34,7 +34,9 @@ class SubnetBuilder:
                 return subnets[0]["SubnetId"]
             return None
         except ClientError as e:
-            print(f"    [AWS ERROR] Failed while scanning for existing subnets: {e}")
+            print(
+                f"    [SUBNET: AWS ERROR] Failed while scanning for existing subnets: {e}"
+            )
             return None
 
     def build(self) -> dict:
@@ -42,7 +44,7 @@ class SubnetBuilder:
         existing_id = self._find_existing_subnet()
         if existing_id:
             print(
-                f"    [DECLARATIVE MATCH] Subnet '{self.name}' already exists ({existing_id}). Skipping creation."
+                f"    [SUBNET: DECLARATIVE MATCH] Subnet '{self.name}' already exists ({existing_id}). Skipping creation."
             )
             return {
                 "SubnetId": existing_id,
@@ -55,7 +57,7 @@ class SubnetBuilder:
 
         try:
             print(
-                f"    [AWS API] Target missing. Carving Subnet '{self.name}' ({self.cidr}) inside VPC {self.vpc_id}..."
+                f"    [SUBNET: AWS API] Target missing. Carving Subnet '{self.name}' ({self.cidr}) inside VPC {self.vpc_id}..."
             )
 
             # Map parameters dynamically
@@ -80,7 +82,9 @@ class SubnetBuilder:
                 "Status": "newly_provisioned",
             }
         except ClientError as e:
-            print(f"    [AWS ERROR] Failed to allocate Subnet resource context: {e}")
+            print(
+                f"    [SUBNET: AWS ERROR] Failed to allocate Subnet resource context: {e}"
+            )
             raise e
 
     def exists(self, subnet_id: str) -> bool:
@@ -99,14 +103,14 @@ class SubnetBuilder:
 
         if not target_id:
             print(
-                f"    [AWS SKIPPED] No live Subnet found matching context '{self.name}' to drop."
+                f"    [SUBNET: AWS SKIPPED] No live Subnet found matching context '{self.name}' to drop."
             )
             return True
 
         try:
-            print(f"    [AWS API] Deleting Subnet context {target_id}...")
+            print(f"    [SUBNET: AWS API] Deleting Subnet context {target_id}...")
             self.ec2.delete_subnet(SubnetId=target_id)
             return True
         except ClientError as e:
-            print(f"    [AWS ERROR] Failed to drop Subnet {target_id}: {e}")
+            print(f"    [SUBNET: AWS ERROR] Failed to drop Subnet {target_id}: {e}")
             return False

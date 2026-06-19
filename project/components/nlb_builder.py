@@ -35,7 +35,7 @@ class NetworkLoadBalancerBuilder:
                 return existing_tg["TargetGroupArn"]
 
             print(
-                f"    ⚠️ [VPC MISMATCH] Found Target Group '{tg_name}' but it is bound to old VPC: {existing_tg['VpcId']}."
+                f"    ⚠️ [NLB: VPC MISMATCH] Found Target Group '{tg_name}' but it is bound to old VPC: {existing_tg['VpcId']}."
             )
             print("    -> Purging mismatched infrastructure anchor...")
             self.elbv2.delete_target_group(TargetGroupArn=existing_tg["TargetGroupArn"])
@@ -53,7 +53,7 @@ class NetworkLoadBalancerBuilder:
                 raise e
 
             print(
-                f"    [AWS API] Creating TCP Target Group '{tg_name}' inside VPC {vpc_id}..."
+                f"    [NLB: AWS API] Creating TCP Target Group '{tg_name}' inside VPC {vpc_id}..."
             )
             tg_response = self.elbv2.create_target_group(
                 Name=tg_name,
@@ -71,7 +71,7 @@ class NetworkLoadBalancerBuilder:
         existing_nlb = self._find_existing_nlb(name)
         if existing_nlb:
             nlb_arn = existing_nlb["LoadBalancerArn"]
-            print(f"    [AWS API] Network Load Balancer '{name}' already exists.")
+            print(f"    [NLB: AWS API] Network Load Balancer '{name}' already exists.")
 
             # --- UPDATED RETURN DICTIONARY TO INCLUDE HOSTED ZONE ID ---
             return {
@@ -86,7 +86,7 @@ class NetworkLoadBalancerBuilder:
 
         # 3. Provision the physical NLB container
         print(
-            f"    [AWS API] Target missing. Carving Network Load Balancer '{name}' across subnets..."
+            f"    [NLB: AWS API] Target missing. Carving Network Load Balancer '{name}' across subnets..."
         )
         try:
             lb_response = self.elbv2.create_load_balancer(
@@ -100,7 +100,7 @@ class NetworkLoadBalancerBuilder:
             nlb_arn = nlb_meta["LoadBalancerArn"]
 
             # 4. Bind a TCP Listener to route port 443 traffic straight into our Target Group
-            print(f"    [AWS API] Attaching TCP Port 443 Listener to NLB...")
+            print(f"    [NLB: AWS API] Attaching TCP Port 443 Listener to NLB...")
             self.elbv2.create_listener(
                 LoadBalancerArn=nlb_arn,
                 Protocol="TCP",
@@ -120,6 +120,6 @@ class NetworkLoadBalancerBuilder:
 
         except Exception as e:
             print(
-                f"    [AWS ERROR] Failed to provision Network Load Balancer setup: {e}"
+                f"    [NLB: AWS ERROR] Failed to provision Network Load Balancer setup: {e}"
             )
             raise e

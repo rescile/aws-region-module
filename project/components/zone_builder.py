@@ -32,7 +32,7 @@ class DNSZoneBuilder:
                         return zone_id
             return None
         except Exception as e:
-            print(f"    [AWS LOOKUP ERROR] Failed to scan zones: {e}")
+            print(f"    [DNS: AWS LOOKUP ERROR] Failed to scan zones: {e}")
             return None
 
     def build(self, vpc_id: str, comment: str = "") -> dict:
@@ -45,7 +45,7 @@ class DNSZoneBuilder:
         existing_id = self._find_existing_zone(vpc_id)
         if existing_id:
             print(
-                f"    [AWS API] Private Hosted Zone '{self.zone_name}' already exists ({existing_id}). Match found."
+                f"    [DNS: AWS API] Private Hosted Zone '{self.zone_name}' already exists ({existing_id}). Match found."
             )
             return {
                 "HostedZoneId": existing_id,
@@ -54,7 +54,7 @@ class DNSZoneBuilder:
             }
 
         print(
-            f"    [AWS API] Target missing. Creating Private DNS Zone '{self.zone_name}' linked to VPC {vpc_id}..."
+            f"    [DNS: AWS API] Target missing. Creating Private DNS Zone '{self.zone_name}' linked to VPC {vpc_id}..."
         )
         try:
             caller_ref = f"{self.zone_name.replace('.', '-')}-{int(time.time())}"
@@ -76,7 +76,7 @@ class DNSZoneBuilder:
             }
         except Exception as e:
             print(
-                f"    [AWS ERROR] Route53 zone creation failed for {self.zone_name}: {e}"
+                f"    [DNS: AWS ERROR] Route53 zone creation failed for {self.zone_name}: {e}"
             )
             raise e
 
@@ -87,11 +87,11 @@ class DNSZoneBuilder:
             # Note: Route 53 requires a zone to be empty of custom records before deletion.
             # We will handle clearing records during the inverse dependency teardown phase.
             self.route53.delete_hosted_zone(Id=clean_zone_id)
-            print(f"    [AWS API] Purged Private Hosted Zone: {clean_zone_id}")
+            print(f"    [DNS: AWS API] Purged Private Hosted Zone: {clean_zone_id}")
             return True
         except Exception as e:
             print(
-                f"    [AWS ERROR] Failed to terminate hosted zone {clean_zone_id}: {e}"
+                f"    [DNS: AWS ERROR] Failed to terminate hosted zone {clean_zone_id}: {e}"
             )
             return False
 
@@ -123,5 +123,5 @@ class DNSZoneBuilder:
             )
             return response
         except Exception as e:
-            print(f"    [AWS API ERROR] Failed to upsert DNS Alias record: {e}")
+            print(f"    [DNS: AWS API ERROR] Failed to upsert DNS Alias record: {e}")
             raise e

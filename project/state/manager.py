@@ -4,8 +4,8 @@ import os
 
 
 class StateManager:
-    def __init__(self, state_file: str = "infra_state.json"):
-        self.state_file = state_file
+    def __init__(self, filename: str = "infra_state.json"):
+        self.state_file = filename
         # Hydrate the in-memory state snapshot once on initialization
         self._state = self._load_state()
 

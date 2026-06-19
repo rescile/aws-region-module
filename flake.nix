@@ -21,6 +21,9 @@
             ps.gql
             ps.requests
             ps.requests-toolbelt
+            ps.pyjwt
+            ps.simple-salesforce
+            ps.cryptography
           ]))
         ];
 

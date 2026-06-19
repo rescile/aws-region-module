@@ -4,14 +4,14 @@ import time
 
 import boto3
 import botocore.exceptions
+from components.nlb_builder import NetworkLoadBalancerBuilder
+from components.vpc_endpoint_builder import VPCEndpointServiceBuilder
+from components.zone_builder import (
+    DNSZoneBuilder,  # For configuring local zone alias records
+)
 from gql import Client, gql
 from gql.transport.exceptions import TransportError
 from gql.transport.requests import RequestsHTTPTransport
-from modules.nlb_builder import NetworkLoadBalancerBuilder
-from modules.vpc_endpoint_builder import VPCEndpointServiceBuilder
-from modules.zone_builder import (
-    DNSZoneBuilder,  # For configuring local zone alias records
-)
 
 
 class IngressFabricController:
@@ -60,11 +60,13 @@ class IngressFabricController:
             return result if result is not None else {}
         except TransportError as te:
             print(
-                f"[INGRESS TRANSPORT ERROR] Failed to pull edge graph properties: {te}"
+                f"[{self.domain.upper()} SERVICE] ERROR: Failed to pull edge graph properties: {te}"
             )
             return {}
         except Exception as e:
-            print(f"[GRAPHQL EXECUTION ERROR] Bad intent syntax or query error: {e}")
+            print(
+                f"[{self.domain.upper()} SERVICE] GRAPHQL EXECUTION ERROR: Bad intent syntax or query error: {e}"
+            )
             return {}
 
     def run(self) -> str:
@@ -77,7 +79,9 @@ class IngressFabricController:
             print(f"No explicit ingress targets discovered for scope: {self.scope}")
             return "ConfigSkippedOrNotRequired"
 
-        print(f"\n=== [INGRESS FABRIC] CONVERGING EDGE DELIVERY ROUTE PLANE ===")
+        print(
+            f"\n=== [{self.domain.upper()} SERVICE] CONVERGING EDGE DELIVERY ROUTE PLANE ==="
+        )
         global_region = self.region
 
         for net in target_networks:
@@ -104,7 +108,7 @@ class IngressFabricController:
 
             if not current_vpc_id:
                 print(
-                    f"⚠️  [INGRESS SKIP] Underlying Core VPC state not yet discovered/created for: '{net['name']}'"
+                    f"⚠️  [{self.domain.upper()} SERVICE: SKIP] Underlying Core VPC state not yet discovered/created for: '{net['name']}'"
                 )
                 continue
 
@@ -116,7 +120,7 @@ class IngressFabricController:
 
             if len(assigned_subnet_ids) < 2:
                 print(
-                    f"❌ [INGRESS ERROR] Cannot safely bind multi-AZ load balancers in {net['name']}. "
+                    f"❌ [{self.domain.upper()} SERVICE: ERROR] Cannot safely bind multi-AZ load balancers in {net['name']}. "
                     f"Insufficient subnets found in current state (Found: {len(assigned_subnet_ids)}/2 required)."
                 )
                 continue
@@ -168,7 +172,7 @@ class IngressFabricController:
 
                     for zone_id, zone_meta in zones.items():
                         print(
-                            f"   [AWS API] Mapping Route 53 Intent Endpoint Alias -> NLB Plane ({target_dns})"
+                            f"   [{self.domain.upper()} SERVICE CONTROLLER: AWS API] Mapping Route 53 Intent Endpoint Alias -> NLB Plane ({target_dns})"
                         )
                         zone_manager = DNSZoneBuilder(
                             zone_name=zone_meta["Name"], region=zone_meta["Region"]
@@ -194,7 +198,7 @@ class IngressFabricController:
 
                 # Establish PrivateLink Ingress Service configurations
                 print(
-                    f"   [AWS API] Binding PrivateLink Service Endpoint Architecture for {lb_name}..."
+                    f"   [{self.domain.upper()} SERVICE: AWS API] Binding PrivateLink Service Endpoint Architecture for {lb_name}..."
                 )
                 service_builder = VPCEndpointServiceBuilder(
                     service_name_tag=f"{lb_name}-service",
@@ -228,7 +232,7 @@ class IngressFabricController:
         if not network_state:
             return
 
-        print(f"\n=== [INGRESS FABRIC] RUNNING DRIFT DISCOVERY ===")
+        print(f"\n=== [{self.domain.upper()} SERVICE] RUNNING DRIFT DISCOVERY ===")
         for res_id, metadata in list(network_state.items()):
             # Only handle ingress primitives owned explicitly by this controller sub-scope
             if metadata.get("Type") in [
@@ -245,7 +249,9 @@ class IngressFabricController:
         if not network_state:
             return
 
-        print(f"\n=== [INGRESS FABRIC] TEARING DOWN CONNECTIVITY FABRICS ===")
+        print(
+            f"\n=== [{self.domain.upper()} SERVICE] TEARING DOWN CONNECTIVITY FABRICS ==="
+        )
 
         services = {
             k: v
@@ -289,7 +295,7 @@ class IngressFabricController:
                 self.state.purge_resource(self.domain, svc_id)
             except Exception as e:
                 print(
-                    f"    [AWS TEARDOWN FAILURE] Could not drop endpoint configuration: {e}"
+                    f"    [{self.domain.upper()} SERVICE: AWS TEARDOWN FAILURE] Could not drop endpoint configuration: {e}"
                 )
 
         # Step 2: Clear Carrier Load Balancers
@@ -366,5 +372,5 @@ class IngressFabricController:
                 self.state.purge_resource(self.domain, nlb_arn)
             except Exception as e:
                 print(
-                    f"    [AWS TEARDOWN FAILURE] Could not detach NLB fabric gateway: {e}"
+                    f"    [{self.domain.upper()} SERVICE: AWS TEARDOWN FAILURE] Could not detach NLB fabric gateway: {e}"
                 )

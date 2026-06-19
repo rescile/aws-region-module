@@ -19,7 +19,9 @@ class VPCEndpointServiceBuilder:
             configs = response.get("ServiceConfigurations", [])
             return configs[0] if configs else None
         except Exception as e:
-            print(f"    [AWS LOOKUP ERROR] Failed to scan endpoint services: {e}")
+            print(
+                f"    [ENDPOINT: AWS LOOKUP ERROR] Failed to scan endpoint services: {e}"
+            )
             return None
 
     def build(self, nlb_arns: list) -> dict:
@@ -31,7 +33,7 @@ class VPCEndpointServiceBuilder:
             service_id = existing_config["ServiceId"]
             service_name = existing_config["ServiceName"]
             print(
-                f"    [AWS API] Endpoint Service '{self.service_name_tag}' already exists ({service_id})."
+                f"    [ENDPOINT: AWS API] Endpoint Service '{self.service_name_tag}' already exists ({service_id})."
             )
             return {
                 "ServiceId": service_id,
@@ -44,7 +46,7 @@ class VPCEndpointServiceBuilder:
         # ==============================================================================
         if nlb_arns:
             print(
-                "⏳ [AWS API] Waiting for Network Load Balancer to become 'active'..."
+                "⏳ [ENDPOINT: AWS API] Waiting for Network Load Balancer to become 'active'..."
             )
             elbv2 = boto3.client("elbv2", region_name=self.region)
 
@@ -56,11 +58,13 @@ class VPCEndpointServiceBuilder:
                     lb_state = lb_description["LoadBalancers"][0]["State"]["Code"]
 
                     if lb_state == "active":
-                        print("✅ [AWS API] Network Load Balancer is now ACTIVE.")
+                        print(
+                            "✅ [ENDPOINT: AWS API] Network Load Balancer is now ACTIVE."
+                        )
                         break
                     elif lb_state == "failed":
                         raise RuntimeError(
-                            "❌ [AWS API] NLB provisioning transitioned to FAILED status."
+                            "❌ [ENDPOINT: AWS API] NLB provisioning transitioned to FAILED status."
                         )
 
                     print(
@@ -69,13 +73,13 @@ class VPCEndpointServiceBuilder:
                     time.sleep(10)
                 except Exception as wait_err:
                     print(
-                        f"  -> [POLL WARNING] Waiting for target state synchronization: {wait_err}"
+                        f"  -> [ENDPOINT: POLL WARNING] Waiting for target state synchronization: {wait_err}"
                     )
                     time.sleep(10)
         # ==============================================================================
 
         print(
-            f"    [AWS API] Target missing. Creating Endpoint Service Configuration for NLBs..."
+            f"    [ENDPOINT: AWS API] Target missing. Creating Endpoint Service Configuration for NLBs..."
         )
         try:
             response = self.ec2.create_vpc_endpoint_service_configuration(
@@ -99,7 +103,7 @@ class VPCEndpointServiceBuilder:
                 "Status": "PROVISIONED",
             }
         except Exception as e:
-            print(f"    [AWS ERROR] Endpoint Service creation failed: {e}")
+            print(f"    [ENDPOINT: AWS ERROR] Endpoint Service creation failed: {e}")
             raise e
 
     def accept_inbound_connection(self, service_id: str, vpc_endpoint_id: str) -> bool:
@@ -109,9 +113,11 @@ class VPCEndpointServiceBuilder:
                 ServiceId=service_id, VpcEndpointIds=[vpc_endpoint_id]
             )
             print(
-                f"    [AWS API] Accepted connection request from endpoint {vpc_endpoint_id}"
+                f"    [ENDPOINT: AWS API] Accepted connection request from endpoint {vpc_endpoint_id}"
             )
             return True
         except Exception as e:
-            print(f"    [AWS ERROR] Failed to accept connection handshake: {e}")
+            print(
+                f"    [ENDPOINT: AWS ERROR] Failed to accept connection handshake: {e}"
+            )
             return False

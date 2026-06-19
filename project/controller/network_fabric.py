@@ -3,12 +3,12 @@
 import time
 
 import boto3
+from components.firewall_builder import FirewallBuilder
+from components.subnet_builder import SubnetBuilder
+from components.vpc_builder import VPCBuilder
 from gql import Client, gql
 from gql.transport.exceptions import TransportError
 from gql.transport.requests import RequestsHTTPTransport
-from modules.firewall_builder import FirewallBuilder
-from modules.subnet_builder import SubnetBuilder
-from modules.vpc_builder import VPCBuilder
 
 
 class NetworkOrchestrator:
@@ -73,7 +73,7 @@ class NetworkOrchestrator:
             return {}
         except Exception as e:
             print(
-                f"\n[GRAPHQL EXECUTION ERROR] Server returned execution faults or bad query: {e}"
+                f"\n[{self.domain.upper()} CONTROLLER: GRAPHQL EXECUTION ERROR] Server returned execution faults or bad query: {e}"
             )
             return {}
 
@@ -87,7 +87,7 @@ class NetworkOrchestrator:
             return "ConfigSkippedOrNotRequired"
 
         print(
-            f"\n=== [DOMAIN: {self.domain.upper()}] PROVISIONING CORE VIRTUAL FABRIC ==="
+            f"\n=== [{self.domain.upper()} CONTROLLER: PROVISIONING CORE VIRTUAL FABRIC ==="
         )
 
         primary_vpc_id = None
@@ -188,7 +188,7 @@ class NetworkOrchestrator:
         if not network_state:
             return
 
-        print(f"\n=== [DOMAIN: {self.domain.upper()}] RUNNING DRIFT DISCOVERY ===")
+        print(f"\n=== [{self.domain.upper()} CONTROLLER: RUNNING DRIFT DISCOVERY ===")
         for res_id, metadata in list(network_state.items()):
             if metadata.get("Type") in [
                 "NetworkLoadBalancer",
@@ -220,7 +220,7 @@ class NetworkOrchestrator:
 
             if not builder.exists(res_id):
                 print(
-                    f"    [DRIFT DETECTED] {res_id} vanished from AWS. Purging token."
+                    f"    [{self.domain.upper()} CONTROLLER: DRIFT DETECTED] {res_id} vanished from AWS. Purging token."
                 )
                 self.state.purge_resource(self.domain, res_id)
             else:
@@ -234,7 +234,7 @@ class NetworkOrchestrator:
             return
 
         print(
-            f"\n=== [DOMAIN: {self.domain.upper()}] INITIALIZING COMPONENT TEARDOWN ==="
+            f"\n=== [{self.domain.upper()} CONTROLLER: INITIALIZING COMPONENT TEARDOWN ==="
         )
 
         # Categorize resources present in our localized tracking layer
@@ -269,7 +269,9 @@ class NetworkOrchestrator:
                 self.state.purge_resource(self.domain, sg_id)
                 print(f"✅ Security Group {sg_id} deleted.")
             except Exception as e:
-                print(f"    [AWS TEARDOWN FAILURE] Could not drop security group: {e}")
+                print(
+                    f"    [{self.domain.upper()} CONTROLLER: AWS TEARDOWN FAILURE] Could not drop security group: {e}"
+                )
 
         # Step 2: Clear Subnet Fabrics with Attachment Safety Waiter
         for subnet_id, metadata in subnets.items():
@@ -304,7 +306,7 @@ class NetworkOrchestrator:
                 print(f"✅ Subnet {subnet_id} deleted.")
             except Exception as e:
                 print(
-                    f"    [AWS TEARDOWN FAILURE] Could not drop subnet {subnet_id}: {e}"
+                    f"    [{self.domain.upper()} CONTROLLER: AWS TEARDOWN FAILURE] Could not drop subnet {subnet_id}: {e}"
                 )
 
         # Step 3: Dissolve Base VPC Structures
@@ -320,4 +322,6 @@ class NetworkOrchestrator:
                 self.state.purge_resource(self.domain, vpc_id)
                 print(f"✅ VPC {vpc_id} completely dissolved.")
             except Exception as e:
-                print(f"    [AWS TEARDOWN FAILURE] Could not drop VPC: {e}")
+                print(
+                    f"    [{self.domain.upper()} CONTROLLER: AWS TEARDOWN FAILURE] Could not drop VPC: {e}"
+                )

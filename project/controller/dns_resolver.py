@@ -1,7 +1,7 @@
 # project/orchestrators/dns_resolver.py
+from components.zone_builder import DNSZoneBuilder
 from gql import Client, gql
 from gql.transport.requests import RequestsHTTPTransport
-from modules.zone_builder import DNSZoneBuilder
 
 
 class ResolverOrchestrator:
@@ -71,13 +71,11 @@ class ResolverOrchestrator:
 
         if not primary_vpc_id:
             print(
-                f"[{self.domain.upper()} ERROR] Primary VPC not found in network state. Cannot bind DNS zones."
+                f"[DNS {self.domain.upper()} ERROR] Primary VPC not found in network state. Cannot bind DNS zones."
             )
             return "DependencyMissing"
 
-        print(
-            f"\n=== [DOMAIN: {self.domain.upper()}] INITIALIZING PRIVATE DNS LAYER ==="
-        )
+        print(f"\n=== [DNS {self.domain.upper()}] INITIALIZING PRIVATE DNS LAYER ===")
 
         for resolver in target_resolvers:
             # 1. 'zone' is a list of node containers
