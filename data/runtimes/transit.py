@@ -5,8 +5,8 @@ import sys
 # Force Python to look inside the 'project' folder for modules and orchestrators
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from controller.dns_resolver import ResolverOrchestrator
-from controller.network_fabric import NetworkOrchestrator
+from controller.dns_resolver import ResolverController
+from controller.network_fabric import NetworkController
 from state.manager import StateManager
 
 
@@ -18,37 +18,37 @@ def main():
     scope = "transit"
 
     # Initialize Core Orchestrators
-    net_orch = NetworkOrchestrator(
+    net_orch = NetworkController(
         graphql_url=gql_endpoint, state_manager=state_mgr, region=region, scope=scope
     )
-    res_orch = ResolverOrchestrator(
+    res_orch = ResolverController(
         graphql_url=gql_endpoint, state_manager=state_mgr, region=region
     )
 
     if action == "create":
-        print("=== [TRANSIT] CONVERGING BASE NETWORK FABRIC ===")
+        print("=== [TRANSIT HUB] CONVERGING NETWORK FABRIC ===")
         aws_service_name = net_orch.run()
 
         if aws_service_name and aws_service_name != "ConfigSkippedOrNotRequired":
-            print(f"[TRANSIT] Base Network build succeeded: {aws_service_name}")
+            print(f"[TRANSIT HUB] Base Network build succeeded: {aws_service_name}")
         elif aws_service_name == "ConfigSkippedOrNotRequired":
-            print("[TRANSIT] Base Network configuration up-to-date.")
+            print("[TRANSIT HUB] Base Network configuration up-to-date.")
         else:
-            print("[TRANSIT] ERROR: Base Network phase failed.")
+            print("[TRANSIT HUB] ERROR: Base Network phase failed.")
             sys.exit(1)
 
         print("\n--> Mapping Core DNS Layers and Route53 Resolver Rules...")
         dns_status = res_orch.run()
-        print(f"[ORCHESTRATION] Core DNS Convergence complete. Status: {dns_status}")
+        print(f"[TRANSIT HUB] Core DNS Convergence complete. Status: {dns_status}")
 
     elif action == "update_state":
-        print(f"\n=== [TRANSIT: RECONCILE] RE-EVALUATING GRAPH STATE ===")
+        print(f"\n=== [TRANSIT HUB] RE-EVALUATING GRAPH STATE ===")
         net_orch.update_state()
         if hasattr(res_orch, "update_state"):
             res_orch.update_state()
 
     elif action == "destroy":
-        print("\n=== [TRANSIT: TEARDOWN] INITIATING DESTRUCTION ===")
+        print("\n=== [TRANSIT HUB] INITIATING TEARDOWN ===")
         print("\n--> Evicting Core DNS Zones and Resolver rules...")
         if hasattr(res_orch, "destroy"):
             res_orch.destroy()

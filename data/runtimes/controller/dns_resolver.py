@@ -4,7 +4,7 @@ from gql import Client, gql
 from gql.transport.requests import RequestsHTTPTransport
 
 
-class ResolverOrchestrator:
+class ResolverController:
     def __init__(
         self,
         graphql_url: str,

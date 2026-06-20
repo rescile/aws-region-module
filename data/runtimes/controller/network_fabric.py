@@ -11,7 +11,7 @@ from gql.transport.exceptions import TransportError
 from gql.transport.requests import RequestsHTTPTransport
 
 
-class NetworkOrchestrator:
+class NetworkController:
     def __init__(
         self,
         graphql_url: str,

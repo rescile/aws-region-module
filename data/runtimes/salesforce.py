@@ -5,9 +5,9 @@ import sys
 # Force Python to look inside the 'project' folder for modules and orchestrators
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from controller.dns_resolver import ResolverOrchestrator
+from controller.dns_resolver import ResolverController
 from controller.ingress_service import IngressFabricController
-from controller.network_fabric import NetworkOrchestrator
+from controller.network_fabric import NetworkController
 
 # The specialized Salesforce PrivateLink controller
 from controller.salesforce_endpoint import SalesforceSyncOrchestrator
@@ -22,7 +22,7 @@ def main():
     scope = "salesforce"
 
     # Initialize Orchestrators
-    sf_net_orch = NetworkOrchestrator(
+    sf_net_orch = NetworkController(
         graphql_url=gql_endpoint, state_manager=state_mgr, region=region, scope=scope
     )
 
@@ -34,7 +34,7 @@ def main():
     sf_ingress_orch = IngressFabricController(
         graphql_url=gql_endpoint, state_manager=state_mgr, region=region, scope=scope
     )
-    sf_dns_orch = ResolverOrchestrator(
+    sf_dns_orch = ResolverController(
         graphql_url=gql_endpoint, state_manager=state_mgr, region=region, scope=scope
     )
 
