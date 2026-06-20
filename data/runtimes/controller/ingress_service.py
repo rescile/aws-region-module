@@ -4,14 +4,14 @@ import time
 
 import boto3
 import botocore.exceptions
-from components.nlb_builder import NetworkLoadBalancerBuilder
-from components.vpc_endpoint_builder import VPCEndpointServiceBuilder
-from components.zone_builder import (
-    DNSZoneBuilder,  # For configuring local zone alias records
-)
 from gql import Client, gql
 from gql.transport.exceptions import TransportError
 from gql.transport.requests import RequestsHTTPTransport
+from modules.nlb_builder import NetworkLoadBalancerBuilder
+from modules.vpc_endpoint_builder import VPCEndpointServiceBuilder
+from modules.zone_builder import (
+    DNSZoneBuilder,  # For configuring local zone alias records
+)
 
 
 class IngressFabricController:

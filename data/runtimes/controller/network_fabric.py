@@ -3,12 +3,12 @@
 import time
 
 import boto3
-from components.firewall_builder import FirewallBuilder
-from components.subnet_builder import SubnetBuilder
-from components.vpc_builder import VPCBuilder
 from gql import Client, gql
 from gql.transport.exceptions import TransportError
 from gql.transport.requests import RequestsHTTPTransport
+from modules.firewall_builder import FirewallBuilder
+from modules.subnet_builder import SubnetBuilder
+from modules.vpc_builder import VPCBuilder
 
 
 class NetworkController:

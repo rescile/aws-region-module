@@ -8,7 +8,7 @@ exec = [
 [runtime]
 engine = "nix"
 flake = "./flake.nix"
-files = ["./transit.py", "./core", "./modules", "./orchestrators"]
+files = ["./transit.py", "./state", "./modules", "./controller"]
 
 [env]
 AWS_ACCESS_KEY_ID = "${secrets.aws.access_key}"

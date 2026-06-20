@@ -3,7 +3,7 @@ import os
 import sys
 
 import requests
-from components.salesforce_client import SalesforceJwtClient
+from modules.salesforce_client import SalesforceJwtClient
 from simple_salesforce import Salesforce
 
 

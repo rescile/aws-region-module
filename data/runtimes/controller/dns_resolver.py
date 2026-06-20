@@ -1,7 +1,7 @@
 # project/orchestrators/dns_resolver.py
-from components.zone_builder import DNSZoneBuilder
 from gql import Client, gql
 from gql.transport.requests import RequestsHTTPTransport
+from modules.zone_builder import DNSZoneBuilder
 
 
 class ResolverController:
