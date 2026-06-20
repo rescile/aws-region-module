@@ -7,7 +7,7 @@ exec = [
 
 [runtime]
 engine = "nix"
-flake = "./flake.nix"
+flake = "../../flake.nix"
 files = ["./transit.py", "./state", "./modules", "./controller"]
 
 [env]

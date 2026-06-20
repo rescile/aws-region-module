@@ -1,0 +1,155 @@
+origin_resource = "offering"
+
+[[create_resource]]
+match_on = [{property = "name", value = "compute"}]
+resource_type = "article"
+relation_type = "DEFINED_BY"
+name = "vm"
+[create_resource.properties]
+function = "infrastructure"
+display = "Virtual Machine",
+uid = "ART-CMP-001"
+sla = "99.9%"
+sla_type = "uptime"
+active = true
+support_tier = 2
+cost_model = "Monthly fixed per vCPU/RAM"
+features = [
+    "Linux/Windows base OS",
+    "Automated backups",
+    "Firewall protection"
+]
+description = "tbd"
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+[[create_resource]]
+match_on = [{property = "name", value = "compute"}]
+resource_type = "article"
+relation_type = "DEFINED_BY"
+name = "vm"
+[create_resource.properties]
+function = "infrastructure"
+display = "Bare Metal Server",
+uid = "ART-CMP-002"
+sla = "99.95%"
+sla_type = "uptime"
+active = true
+support_tier = 3
+cost_model = "Monthly fixed per physical node"
+features = [
+    "Dedicated hardware",
+    "Out-of-band management",
+    "Redundant power supply"
+]
+description = "tbd"
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+[[create_resource]]
+match_on = [{property = "name", value = "storage"}]
+resource_type = "article"
+relation_type = "DEFINED_BY"
+name = "san"
+[create_resource.properties]
+function = "infrastructure"
+display = "SAN Storage Allocation",
+uid = "ART-STG-001"
+sla = "99.99%"
+sla_type = "uptime"
+active = true
+support_tier = 2
+cost_model = "Per TB provisioned"
+features = [
+    "RAID protection",
+    "Snapshots",
+    "Compression"
+]
+description = "tbd"
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+[[create_resource]]
+match_on = [{property = "name", value = "storage"}]
+resource_type = "article"
+relation_type = "DEFINED_BY"
+name = "nas"
+[create_resource.properties]
+function = "infrastructure"
+display = "NAS Storage Allocation",
+uid = "ART-STG-002"
+sla = "99.99%"
+sla_type = "uptime"
+active = true
+support_tier = 2
+cost_model = "Per TB provisioned"
+features = [
+    "RAID protection",
+    "Snapshots",
+    "Compression"
+]
+description = "tbd"
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+[[create_resource]]
+match_on = [{property = "name", value = "storage"}]
+resource_type = "article"
+relation_type = "DEFINED_BY"
+name = "nas"
+[create_resource.properties]
+function = "infrastructure"
+display = "Disaster Recovery & Backup",
+uid = "ART-STG-003"
+sla = "RTO: 4 hours, RPO: 1 hour"
+sla_type = "recovery"
+active = true
+support_tier = 2
+cost_model = "Per GB protected"
+features = [
+    "Immutable backups",
+    "Offsite vaulting",
+    "Automated restores"
+]
+description = "tbd"
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+[[create_resource]]
+match_on = [{property = "name", value = "database"}]
+resource_type = "article"
+relation_type = "DEFINED_BY"
+name = "nas"
+[create_resource.properties]
+function = "infrastructure"
+display = "Managed Relational DB (SQL/PostgreSQL)",
+uid = "ART-DBS-001"
+sla = "99.9%"
+sla_type = "uptime"
+active = true
+support_tier = 3
+cost_model = "Per database instance + usage"
+features = [
+    "Automated patching",
+    "Active-passive clustering",
+    "Performance tuning"
+]
+description = "tbd"
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+[[create_resource]]
+match_on = [{property = "name", value = "container"}]
+resource_type = "article"
+relation_type = "DEFINED_BY"
+name = "k8s"
+[create_resource.properties]
+function = "platform"
+display = "Managed Kubernetes Engine",
+uid = "ART-CON-001"
+sla = "99.9%"
+sla_type = "uptime"
+active = true
+support_tier = 3
+cost_model = "Resource pool allocation"
+features = [
+    "Auto-scaling",
+    "Internal ingress controller",
+    "CI/CD pipeline integrations"
+]
+description = "tbd"
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

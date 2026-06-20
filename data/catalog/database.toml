@@ -1,0 +1,23 @@
+origin_resource = "offering"
+
+[[create_resource]]
+match_on = [{property = "name", value = "database"}]
+resource_type = "article"
+relation_type = "DEFINED_BY"
+name = "nas"
+[create_resource.properties]
+function = "infrastructure"
+display = "Managed Relational DB (SQL/PostgreSQL)",
+uid = "ART-DBS-001"
+sla = "99.9%"
+sla_type = "uptime"
+active = true
+support_tier = 3
+cost_model = "Per database instance + usage"
+features = [
+    "Automated patching",
+    "Active-passive clustering",
+    "Performance tuning"
+]
+description = "tbd"
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

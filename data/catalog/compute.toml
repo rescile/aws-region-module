@@ -1,0 +1,45 @@
+origin_resource = "offering"
+
+[[create_resource]]
+match_on = [{property = "name", value = "compute"}]
+resource_type = "article"
+relation_type = "DEFINED_BY"
+name = "vm"
+[create_resource.properties]
+function = "infrastructure"
+display = "Virtual Machine",
+uid = "ART-CMP-001"
+sla = "99.9%"
+sla_type = "uptime"
+active = true
+support_tier = 2
+cost_model = "Monthly fixed per vCPU/RAM"
+features = [
+    "Linux/Windows base OS",
+    "Automated backups",
+    "Firewall protection"
+]
+description = "tbd"
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+[[create_resource]]
+match_on = [{property = "name", value = "compute"}]
+resource_type = "article"
+relation_type = "DEFINED_BY"
+name = "vm"
+[create_resource.properties]
+function = "infrastructure"
+display = "Bare Metal Server",
+uid = "ART-CMP-002"
+sla = "99.95%"
+sla_type = "uptime"
+active = true
+support_tier = 3
+cost_model = "Monthly fixed per physical node"
+features = [
+    "Dedicated hardware",
+    "Out-of-band management",
+    "Redundant power supply"
+]
+description = "tbd"
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

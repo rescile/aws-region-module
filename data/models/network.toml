@@ -63,7 +63,6 @@ name = "{{- origin_resource.location[0].name -}}_{{- property.value -}}"
 [create_resource.properties]
 function = "{{- functions -}}"
 region = "{{ regions[city].region_code }}"
-provider = "{{- operator | lower -}}"
 cidr = "{{- block -}}"
 subnet = "{{- subnets -}}"
 gateway = "{{- gateways -}}"

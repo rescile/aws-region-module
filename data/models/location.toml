@@ -24,12 +24,12 @@ endpoints = { "function!" = '''
 
 # Create the resource type
 [[create_resource]]
-resource_type = "location"
+resource_type = "region"
 relation_type = "PROVIDED_BY"
-name = "{{- tenant -}}_{{- site -}}"
+name = "{{- tenant | lower -}}_{{- origin_resource.name | lower -}}_{{- site | lower -}}"
 [create_resource.properties]
-function = "platform"
-provider = "{{- operator | lower -}}"
+function = "{{- origin_resource.function | lower -}}"
+provider = "{{- origin_resource.name | lower -}}"
 region = "{{ regions[city].region_code }}"
 site = "{{- site -}}"
 original_name = "{{- city -}}"
