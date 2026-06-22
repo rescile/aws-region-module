@@ -1,3 +1,3 @@
-name, function, certification, description
-AWS, platform, "[ISAE,ISO27001, SOC2]", "Amazon Web Services operates data centers to rent out computing power, storage, and/or software. The operator distinguishes itself through the broad service portfolio of platform services, ranging from serverless functions to hardware accelerators."
-Megaport, network, "[ISAE,ISO27001]", "Megaport is a network service provider offering on-demand layer two connectivity between data centers, cloud providers, and managed networks worldwide. Through a centralized portal or API, users can provision point-to-point connections and adjust bandwidth in real time, bypassing traditional telecom infrastructure."
+name,function,certification,description
+AWS,platform,"[ISAE,ISO27001, SOC2]","Amazon Web Services operates data centers to rent out computing power, storage, and/or software. The operator distinguishes itself through the broad service portfolio of platform services, ranging from serverless functions to hardware accelerators."
+Megaport,network,"[ISAE,ISO27001]","Megaport is a network service provider offering on-demand layer two connectivity between data centers, cloud providers, and managed networks worldwide. Through a centralized portal or API, users can provision point-to-point connections and adjust bandwidth in real time, bypassing traditional telecom infrastructure."

@@ -1,6 +1,6 @@
 # This model represents a third tier model of a cloud domain and defines routers where provider resources become accessible.
 # Specify the resource dependency for a router
-origin_resource = "location"
+origin_resource = "region"
 
 # Create the resource type
 [[create_resource]]
@@ -9,8 +9,8 @@ name = "{{- origin_resource.name | lower -}}_router"
 relation_type = "CONNECTS_TO"
 [create_resource.properties]
 function = "connectivity"
-region = "{{- origin_resource.region -}}"
-location = "{{- origin_resource.name -}}"
+region = "{{- origin_resource.name -}}"
+region_id = "{{- origin_resource.pid -}}"
 network = [ "transit", "management", "salesforce" ]
 description = "The cloud router in {{ origin_resource.function | capitalize }} is a regional network function, operated by {{ operator }}, that analyzes incoming data packets, determines the best path for them to travel across interconnected networks, and forwards them toward their intended destination."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

@@ -3,11 +3,11 @@ origin_resource = "provider"
 
 regions = { "json!" = "aws_region_service.json" }
 region_endpoints = { "json!" = "aws_region_endpoint.json" }
-site = "{{- city | regexp(expr='s/.*\\((.*)\\)/\\1/') | lower | replace(from=' ', to='') -}}"
+site = "{{- location | regexp(expr='s/.*\\((.*)\\)/\\1/') | lower | replace(from=' ', to='') -}}"
 
 endpoints = { "function!" = '''
     {% set unique_services = [] %}
-    {% set regionid = regions[city].region_code %}
+    {% set regionid = regions[location].region_code %}
     {% for e in region_endpoints.prefixes %}
         {% if e.region == regionid %}
             {# Check if the service is already in the list #}
@@ -29,18 +29,18 @@ relation_type = "PROVIDED_BY"
 name = "{{- tenant | lower -}}_{{- origin_resource.name | lower -}}_{{- site | lower -}}"
 [create_resource.properties]
 function = "{{- origin_resource.function | lower -}}"
-provider = "{{- origin_resource.name | lower -}}"
-region = "{{ regions[city].region_code }}"
+provider = "{{- origin_resource.name -}}"
+pid = "{{ regions[location].region_code }}"
+location = "{{- location -}}"
 site = "{{- site -}}"
-original_name = "{{- city -}}"
-portfolio = "{{ regions[city].services }}"
+portfolio = "{{ regions[location].services }}"
 endpoint = "{{- endpoints -}}"
 availability_zone = ["a", "b", "c", "d", "e", "f"]
 description = "The region describes a physical, geographical location where data is stored, and applications run, managed by {{ operator }}."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
 # Join the global dns resolver to the location.
-origin_resource = "location"
+origin_resource = "region"
 
 [[link_resources]]
 with = "network"

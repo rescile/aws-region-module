@@ -5,6 +5,7 @@
 origin_resource = "router"
 
 regions = { "json!" = "aws_region_service.json" }
+site = "{{- location | regexp(expr='s/.*\\((.*)\\)/\\1/') | lower | replace(from=' ', to='') -}}"
 
 block = { "template!" = '''
     {%- if property.value == "management" -%}
@@ -59,10 +60,10 @@ telemetry = { "template!" = '''
 [[create_resource]]
 create_from = { property = "network" }
 relation_type = "CONNECTED_TO"
-name = "{{- origin_resource.location[0].name -}}_{{- property.value -}}"
+name = "{{- origin_resource.region[0].name -}}_{{- property.value -}}"
 [create_resource.properties]
 function = "{{- functions -}}"
-region = "{{ regions[city].region_code }}"
+region_id = "{{ regions[location].region_code }}"
 cidr = "{{- block -}}"
 subnet = "{{- subnets -}}"
 gateway = "{{- gateways -}}"

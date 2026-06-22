@@ -1,7 +1,7 @@
 # This model represents a second tier model of a cloud platform that extends a network with service endpoints.
 origin_resource = "provider"
 
-site = "{{- city | regexp(expr='s/.*\\((.*)\\)/\\1/') | lower | replace(from=' ', to='') -}}"
+site = "{{- location | regexp(expr='s/.*\\((.*)\\)/\\1/') | lower | replace(from=' ', to='') -}}"
 
 [[create_resource]]
 match_on = [

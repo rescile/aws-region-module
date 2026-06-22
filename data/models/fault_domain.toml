@@ -5,12 +5,10 @@ origin_resource = "region"
 [[create_resource]]
 create_from = { property = "availability_zone", as = "fault_domain" }
 relation_type = "CONNECTED_TO"
-name = "{{- origin_resource.function | lower -}}{{- property.value | lower -}}"
+name = "{{- origin_resource.pid | lower -}}{{- property.value | lower -}}"
 [create_resource.properties]
-function = "continuity"
-scope = "{{- origin_resource.function -}}"
-original_name = "{{- property.value -}}"
-pid = "{{- origin_resource.pid -}}{{- property.value -}}"
-site = "{{- origin_resource.function -}}"
+function = "network"
+#scope = "{{- origin_resource.function -}}"
+site = "{{- location | regexp(expr='s/.*\\((.*)\\)/\\1/') | lower | replace(from=' ', to='') -}}"
 description = "AWS's availability zones spread your resources across AZs to achieve high availability. These are geographically separated but close enough for low-latency connections between them, each has independent power, cooling, and networking."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
