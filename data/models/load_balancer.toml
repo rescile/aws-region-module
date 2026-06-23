@@ -7,7 +7,7 @@ resource_type = "load_balancer"
 relation_type = "DERIVED_FROM"
 name = "{{- origin_resource.name | lower -}}_lb"
 [create_resource.properties]
-function = "{{- origin_resource.function -}}"
+function = "{{ origin_resource._type }}"
 description = "The {{ origin_resource.function | capitalize }} load balancer is a network service that takes incoming traffic and distributes it across multiple backend servers. This Virtual Service Engine (VSE) is a virtual instance where the traffic actually flows. It does SSL termination, packet inspection, and server routing. Unlike traditional hardware appliances, VSEs work together to support a Load Balancer service."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 

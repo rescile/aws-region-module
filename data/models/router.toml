@@ -8,7 +8,7 @@ match_on = [{ property = "region_code", exists = true }]
 name = "{{- origin_resource.name | lower -}}_router"
 relation_type = "COMPOSED_OF"
 [create_resource.properties]
-function = "connectivity"
+function = "{{ origin_resource._type }}"
 region = "{{- origin_resource.name -}}"
 region_code = "{{- origin_resource.region_code -}}"
 provider = "{{- origin_resource.provider[0].name -}}"

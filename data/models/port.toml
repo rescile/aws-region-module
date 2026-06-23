@@ -10,7 +10,7 @@ pointer = { "function!" = "{{- property.value -}}/tcp" }
 create_from = { property = "port" }
 relation_type = "COMPOSED_OF"
 [create_resource.properties]
-function = "security"
+function = "{{ origin_resource._type }}"
 protocol = "tcp"
 service = "{{- ports[pointer].service -}}"
 description = "{{- ports[pointer].description -}}"

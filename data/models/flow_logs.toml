@@ -7,7 +7,7 @@ resource_type = "flow_logs"
 relation_type = "MONITORED_BY"
 name = "{{- origin_resource.name -}}_telemetry"
 [create_resource.properties]
-function = "monitoring"
+function = "{{ origin_resource._type }}"
 traffic_type = "ALL"
 destination_type = "cloudwatch-logs"
 retention_in_days = 90

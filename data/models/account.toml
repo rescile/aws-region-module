@@ -6,7 +6,7 @@ resource_type = "account"
 relation_type = "DEFINED_BY"
 name = "{{- origin_resource.name | lower -}}_account"
 [create_resource.properties]
-function = "auhtorization"
+function = "{{ origin_resource._type }}"
 provider = "{{- origin_resource.name -}}"
 pid = "{{- origin_resource.name | lower -}}_id"
 key = "{{- origin_resource.name | lower -}}_key"

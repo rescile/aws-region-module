@@ -8,7 +8,7 @@ create_from = { property = "record" }
 name = "{{- property.value | lower -}}.{{- origin_resource.name -}}"
 relation_type = "DERIVED_FROM"
 [create_resource.properties]
-function = "dns"
+function = "{{ origin_resource._type }}"
 type = "A"
 is_alias = true
 description = "A DNS zone record (or resource record) is a single entry within a DNS zone that maps a specific name to a value — for example, linking a hostname to an IP address or a domain to a mail server. Each record has a type (A, AAAA, MX, CNAME, TXT, etc.), a TTL, and the data relevant to that type."

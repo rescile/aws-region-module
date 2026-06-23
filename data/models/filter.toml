@@ -4,7 +4,7 @@
 resource_type = "filter"
 name = "general_outbound_filter"
 [create_resource.properties]
-function = "ingress"
+function = "egress"
 protocol = "-1"
 from_port = 0
 to_port = 0
@@ -16,7 +16,7 @@ created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 resource_type = "filter"
 name = "https_inbound_filter"
 [create_resource.properties]
-function = "egress"
+function = "ingress"
 protocol = "tcp"
 from_port = 443
 to_port = 443

@@ -7,7 +7,7 @@ relation_type = "DEFINED_BY"
 match_on = [{ property = "function", not = "network" }]
 name = "{{- origin_resource.name | lower -}}_resolver"
 [create_resource.properties]
-function = "dns"
+function = "{{ origin_resource._type }}"
 public = false
 zone = ["my.salesforce.com"]
 description = "The {{ origin_resource.name | capitalize }} DNS service is a managed, authoritative name server cluster that operates exclusively within the control plane of a Virtual Private Cloud (VPC) or Virtual Network (VNET)."
