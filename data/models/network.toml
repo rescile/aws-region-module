@@ -1,6 +1,4 @@
 # This model represents a second tier model of a cloud platform that is defined based on a router.
-# Specify the resource dependency for a network
-# Application Networks can expand from 10.10.0.0/16 to 10.90.0.0/16
 
 origin_resource = "router"
 

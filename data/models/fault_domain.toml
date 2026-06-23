@@ -5,7 +5,7 @@ origin_resource = "region"
 [[create_resource]]
 create_from = { property = "availability_zone", as = "fault_domain" }
 relation_type = "CONNECTED_TO"
-name = "{{- origin_resource.pid | lower -}}{{- property.value | lower -}}"
+name = "{{- origin_resource.region_code | lower -}}{{- property.value | lower -}}"
 [create_resource.properties]
 function = "network"
 #scope = "{{- origin_resource.function -}}"

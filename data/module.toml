@@ -7,11 +7,12 @@ rescile_version = ">=0.1.165"
 
 # List of other modules this module depends on.
 [dependencies]
-catalog = "https://github.com/rescile/catalog"
-graphviewer = "https://github.com/rescile/graphviewer"
-graml-module =  "https://github.com/rescile/graphml-module"
-rescile-graphiql-module = "https://github.com/rescile/rescile-graphiql-module/releases/download/v{version}/graphiql-module-offline.zip"
-asset-editor = "https://github.com/rescile/asset-editor-module/releases/download/v{version}/asset-editor.zip"
+graphviewer          = "https://github.com/rescile/graphviewer"
+#graml-module         = "https://github.com/rescile/graphml-module"
+service-catalog      = "https://github.com/rescile/module-service-catalog"
+hyperforce-connector = "https://github.com/rescile/module-hyperforce-connector"
+#rescile-graphiql-module = "https://github.com/rescile/rescile-graphiql-module/releases/download/v{version}/graphiql-module-offline.zip"
+#asset-editor         = "https://github.com/rescile/asset-editor-module/releases/download/v{version}/asset-editor.zip"
 
 [params.operator]
 description = "The entity operating the platform."
@@ -56,6 +57,14 @@ resource_type = "record"
 description = "tbd."
 name_template = "{{- name  | lower -}}_zone_record"
 [assets."dns.csv".columns]
+name = { type = "string", required = true }
+function = { type = "string", required = true }
+
+[assets."solution.csv"]
+resource_type = "solution"
+description = "tbd"
+name_template = "{{- name | lower -}}_{{- function | lower -}}"
+[assets."solution.csv".columns]
 name = { type = "string", required = true }
 function = { type = "string", required = true }
 

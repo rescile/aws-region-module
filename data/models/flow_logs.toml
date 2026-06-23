@@ -1,8 +1,6 @@
 # A account represents a secure digital identity.
 origin_resource = "network"
 
-solution = '{{- module.name | split(pat=" ") | slice(start=1) | join(sep="") | lower -}}'
-
 [[create_resource]]
 match_on = [{ property = "logging", value = true }]
 resource_type = "flow_logs"

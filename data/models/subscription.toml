@@ -1,10 +1,9 @@
 # A subscription is an active contract that grants permission to use the resources at a cloud provider. It acts as the bridge between an identity and a provider's billing system.
-solution = '{{- module.name | split(pat=" ") | slice(start=1) | join(sep="") | lower -}}'
 site = "{{- location | regexp(expr='s/.*\\((.*)\\)/\\1/') | lower | replace(from=' ', to='') -}}"
 
 [[create_resource]]
 resource_type = "subscription"
-name = "{{- solution -}}"
+name = '{{- module.name | split(pat=" ") | slice(start=1) | join(sep="") | lower -}}'
 [create_resource.properties]
 tenant = "{{- tenant | lower -}}"
 location = "{{- location -}}"
@@ -27,3 +26,9 @@ create_relation = { type = "DERIVED_FROM" }
 [[link_resources]]
 with = "network"
 create_relation = { type = "SATISFIES" }
+
+origin_resource = "subscription"
+
+[[link_resources]]
+with = "solution"
+create_relation = { type = "DERIVED_FROM" }

@@ -1,8 +1,6 @@
 # A account represents a secure digital identity that provides access to cloud provider resources.
 origin_resource = "provider"
 
-solution = '{{- module.name | split(pat=" ") | slice(start=1) | join(sep="") | lower -}}'
-
 [[create_resource]]
 resource_type = "account"
 relation_type = "DEFINED_BY"

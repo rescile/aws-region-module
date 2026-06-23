@@ -5,7 +5,7 @@ site = "{{- location | regexp(expr='s/.*\\((.*)\\)/\\1/') | lower | replace(from
 
 [[create_resource]]
 match_on = [
-  { property = "name", not = "{{- operator | lower -}}" }
+  { property = "name", value = "AWS" }
 ]
 resource_type = "interface"
 relation_type = "EXCHANGES_DATA"
