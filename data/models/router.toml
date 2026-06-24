@@ -12,6 +12,6 @@ function = "{{ origin_resource._type }}"
 region = "{{- origin_resource.name -}}"
 region_code = "{{- origin_resource.region_code -}}"
 provider = "{{- origin_resource.provider[0].name -}}"
-network = [ "transit", "management", "salesforce" ]
-description = "The cloud router in {{ origin_resource.function | capitalize }} is a regional network function, operated by {{ operator }}, that analyzes incoming data packets, determines the best path for them to travel across interconnected networks, and forwards them toward their intended destination."
+network = [ "transit", "management", "salesforce", "application" ]
+description = "The cloud router in {{ origin_resource.function | capitalize }} is a regional network function, operated by {{ origin_resource.provider }}, that analyzes incoming data packets, determines the best path for them to travel across interconnected networks, and forwards them toward their intended destination."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

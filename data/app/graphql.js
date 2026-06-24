@@ -1,48 +1,27 @@
 // ======================== GRAPHQL CONFIGURATION ========================
-// Maps UI views to GraphQL queries based on AWS Network Hub models
+// Maps UI views to GraphQL queries based on Salesforce Hyperforce Connect models
 
 window.VIEWS = {
   subscriptions: {
-    title: "Subscription",
+    title: "Management Domains",
     icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
-    query: `{ subscription { name tenant city description stage } }`,
-    node: "subscription",
-    columns: ["name", "tenant", "city", "description", "stage"],
+    query: `{ network(filter: { function: "transit" }) { name description function } }`,
+    node: "network",
+    columns: ["name", "description"],
   },
-  accounts: {
-    title: "Account",
-    icon: "M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z",
-    query: `{ account { name function pid key description } }`,
-    node: "account",
-    columns: ["name", "function", "pid", "key", "description"],
-  },
-  logins: {
-    title: "Identity",
-    icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
-    query: `{ login { name function description } }`,
-    node: "login",
-    columns: ["name", "function", "description"],
-  },
-  providers: {
-    title: "Location",
-    icon: "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9",
-    query: `{ location { name region endpoints: endpoint availability_zones: availability_zone } }`,
-    node: "location",
-    columns: ["name", "region", "endpoints", "availability_zones"],
-  },
-  routers: {
-    title: "Gateway",
-    icon: "M12 2v4m0 12v4M4.22 4.22l2.83 2.83m9.9 9.9l2.83 2.83M2 12h4m12 0h4M4.22 19.78l2.83-2.83m9.9-9.9l2.83-2.83M16 12a4 4 0 11-8 0 4 4 0 018 0z",
-    query: `{ gateway { name private: private_dns_enabled pid description } }`,
-    node: "gateway",
-    columns: ["name", "private", "pid", "description"],
-  },
-  regions: {
-    title: "Port Filter",
+  applications: {
+    title: "Application Domains",
     icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
-    query: `{ filter { name function description } }`,
-    node: "filter",
+    query: `{ network(filter: { function: "application" }) { name description function } }`,
+    node: "network",
     columns: ["name", "function", "description"],
+  },
+  solutions: {
+    title: "Salesforce Environments",
+    icon: "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9",
+    query: `{ solution { name owner active description } }`,
+    node: "solution",
+    columns: ["name", "owner", "active", "description"],
   },
 };
 
@@ -51,130 +30,63 @@ window.TOPOLOGY_VIEWS = {
     title: "Network Hub Architecture",
     icon: "M13 10V3L4 14h7v7l9-11h-7z",
     description:
-      "Visualizes the structural transit zone bridging AWS providers, endpoint regions, subscriptions, and edge routers.",
+      "Visualizes the structural private connect pathways mapping networks to logical cloud solutions.",
     buildQuery: function () {
       return `{
-                provider { name function location { node { region } } }
-                gateway { name function network { node { cidr } } }
-                location { name function region }
-                subscription { name tenant stage }
+                network { name function description }
+                solution { name description }
             }`;
     },
     buildDiagram: function (data) {
       let lines = ["graph LR"];
-      const providers = data?.provider || [];
-      const gateways = data?.gateway || [];
-      const locations = data?.location || [];
-      const subscriptions = data?.subscription || [];
+      const networks = data?.network || [];
+      const solutions = data?.solution || [];
 
-      lines.push('  subgraph AWS["☁️ Cloud Provider Ecosystem"]');
-      providers.forEach((p) => {
-        const id = sanitizeId("prov_" + (p?.name || "unknown"));
-        lines.push(`    ${id}["${esc(p?.function)}\\n<i>${esc(p?.name)}</i>"]`);
+      // Subgraph 1: Core Transit Layer
+      lines.push('  subgraph Transit["🔀 Network Transit Hubs"]');
+      networks.forEach((n) => {
+        const id = sanitizeId("net_" + (n?.name || "unknown"));
+        lines.push(
+          `    ${id}["${esc(n?.function || "Transit Edge")}\\n<i>${esc(n?.name)}</i>"]`,
+        );
       });
       lines.push("  end");
 
-      if (subscriptions.length > 0) {
-        lines.push('  subgraph Subs["📦 Customer Subscriptions"]');
-        subscriptions.forEach((s) => {
-          const id = sanitizeId("sub_" + (s?.name || "unknown"));
-          lines.push(
-            `    ${id}("Tenant: ${esc(s?.tenant)}\\n[Stage: ${esc(s?.stage)}]")`,
-          );
+      // Subgraph 2: Target Cloud Infrastructure
+      if (solutions.length > 0) {
+        lines.push('  subgraph CloudSols["☁️ Salesforce Solutions"]');
+        solutions.forEach((s) => {
+          const id = sanitizeId("sol_" + (s?.name || "unknown"));
+          lines.push(`    ${id}("[Platform: ${esc(s?.name)}]")`);
         });
         lines.push("  end");
 
-        subscriptions.forEach((s) => {
-          const sId = sanitizeId("sub_" + (s?.name || "unknown"));
-          providers.forEach((p) => {
-            lines.push(
-              `  ${sId} -.->|BASELINE_TEMPLATE| ${sanitizeId("prov_" + (p?.name || "unknown"))}`,
-            );
+        // Establish relationships between networks and targets
+        networks.forEach((n) => {
+          const nId = sanitizeId("net_" + (n?.name || "unknown"));
+          solutions.forEach((s) => {
+            const sId = sanitizeId("sol_" + (s?.name || "unknown"));
+            lines.push(`  ${nId} -->|ROUTES_TO| ${sId}`);
           });
         });
       }
 
-      if (gateways.length > 0) {
-        lines.push('  subgraph TransitZone["🔀 Network Transit Zone"]');
-        gateways.forEach((r) => {
-          const id = sanitizeId("rtr_" + (r?.name || "unknown"));
-          let nets = (r?.network || [])
-            .map((n) => n?.node?.cidr)
-            .filter(Boolean)
-            .join(", ");
-          const netText = nets ? `\nNet: ${esc(nets)}` : "";
-          lines.push(
-            `    ${id}{{"${esc(r?.name)}\\nFn: ${esc(r?.function)}${netText}"}}`,
-          );
-        });
-        lines.push("  end");
-
-        gateways.forEach((r) => {
-          const rId = sanitizeId("rtr_" + (r?.name || "unknown"));
-          const platformName = r?.provider?.[0]?.node?.name;
-          if (platformName) {
-            lines.push(
-              `  ${sanitizeId("prov_" + platformName)} -->|PROVIDED_BY| ${rId}`,
-            );
-          } else {
-            providers.forEach((p) =>
-              lines.push(
-                `  ${sanitizeId("prov_" + (p?.name || "unknown"))} -->|PROVIDED_BY| ${rId}`,
-              ),
-            );
-          }
-        });
-      }
-
-      if (locations.length > 0) {
-        lines.push('  subgraph Endpoints["🌍 Region Endpoints"]');
-        locations.forEach((r) => {
-          const id = sanitizeId("reg_" + (r?.pid || "unknown"));
-          lines.push(`    ${id}[/"Region: ${esc(r?.pid)}"\\]`);
-        });
-        lines.push("  end");
-
-        providers.forEach((p) => {
-          const pId = sanitizeId("prov_" + (p?.name || "unknown"));
-          locations.forEach((r) => {
-            lines.push(
-              `  ${pId} -->|MANAGED_BY| ${sanitizeId("reg_" + (r?.pid || "unknown"))}`,
-            );
-          });
-        });
-      }
-
+      // Salesforce-focused color palette
       lines.push(
-        "  classDef provStyle fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#9a3412",
+        "  classDef netStyle fill:#f0f9ff,stroke:#0176d3,stroke-width:2px,color:#082f49",
       );
       lines.push(
-        "  classDef subStyle fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#166534",
-      );
-      lines.push(
-        "  classDef routerStyle fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e40af",
-      );
-      lines.push(
-        "  classDef regStyle fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87",
+        "  classDef solStyle fill:#ecfeff,stroke:#0891b2,stroke-width:2px,color:#083344",
       );
 
-      providers.forEach((p) =>
+      networks.forEach((n) =>
         lines.push(
-          `  class ${sanitizeId("prov_" + (p?.name || "unknown"))} provStyle`,
+          `  class ${sanitizeId("net_" + (n?.name || "unknown"))} netStyle`,
         ),
       );
-      subscriptions.forEach((s) =>
+      solutions.forEach((s) =>
         lines.push(
-          `  class ${sanitizeId("sub_" + (s?.name || "unknown"))} subStyle`,
-        ),
-      );
-      gateways.forEach((r) =>
-        lines.push(
-          `  class ${sanitizeId("rtr_" + (r?.name || "unknown"))} routerStyle`,
-        ),
-      );
-      locations.forEach((r) =>
-        lines.push(
-          `  class ${sanitizeId("reg_" + (r?.pid || "unknown"))} regStyle`,
+          `  class ${sanitizeId("sol_" + (s?.name || "unknown"))} solStyle`,
         ),
       );
 
@@ -185,26 +97,17 @@ window.TOPOLOGY_VIEWS = {
     title: "Identity & Access Governance",
     icon: "M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z",
     description:
-      "Security model linking logical commercial/technical accounts to virtual identity logins handling the provider.",
+      "Security boundaries demonstrating logical IAM logins overseeing operational transits.",
     buildQuery: function () {
       return `{
-                account { name function }
                 login { name function description }
-                provider { name function }
+                network { name function }
             }`;
     },
     buildDiagram: function (data) {
       let lines = ["graph TB"];
-      const accounts = data?.account || [];
       const logins = data?.login || [];
-      const providers = data?.provider || [];
-
-      lines.push('  subgraph Orgs["🏢 Base Accounts"]');
-      accounts.forEach((a) => {
-        const id = sanitizeId("acc_" + (a?.name || "unknown"));
-        lines.push(`    ${id}["${esc(a?.name)}\\nFn: ${esc(a?.function)}"]`);
-      });
-      lines.push("  end");
+      const networks = data?.network || [];
 
       lines.push('  subgraph Logins["🔑 Virtual IAM Logins"]');
       logins.forEach((l) => {
@@ -213,85 +116,43 @@ window.TOPOLOGY_VIEWS = {
       });
       lines.push("  end");
 
-      lines.push('  subgraph Provs["☁️ Managed Providers"]');
-      providers.forEach((p) => {
-        const id = sanitizeId("prov_" + (p?.name || "unknown"));
-        lines.push(`    ${id}{{"${esc(p?.function)}\\n(${esc(p?.name)})"}}`);
+      lines.push('  subgraph Hubs["🔀 Monitored Infrastructure"]');
+      networks.forEach((n) => {
+        const id = sanitizeId("net_" + (n?.name || "unknown"));
+        lines.push(
+          `    ${id}{{"${esc(n?.function || "Network Context")}\\n(${esc(n?.name)})"}}`,
+        );
       });
       lines.push("  end");
 
-      accounts.forEach((a) => {
-        const aId = sanitizeId("acc_" + (a?.name || "unknown"));
-        providers.forEach((p) => {
-          lines.push(
-            `  ${aId} -->|DEFINED_BY| ${sanitizeId("prov_" + (p?.name || "unknown"))}`,
-          );
-        });
-      });
-
       logins.forEach((l) => {
         const lId = sanitizeId("log_" + (l?.name || "unknown"));
-        providers.forEach((p) => {
-          const pId = sanitizeId("prov_" + (p?.name || "unknown"));
-          let linked = false;
-          const lFullName = `${l?.function}_${l?.name}`;
+        networks.forEach((n) => {
+          const nId = sanitizeId("net_" + (n?.name || "unknown"));
 
-          if (
-            p?.commercial_contact === l?.name ||
-            p?.commercial_contact === l?.function ||
-            p?.commercial_contact === lFullName ||
-            l?.name?.includes("manager") ||
-            l?.name?.includes("account")
-          ) {
-            lines.push(`  ${lId} -.->|RESPONSIBLE_FOR| ${pId}`);
-            linked = true;
-          }
-          if (
-            p?.technical_contact === l?.name ||
-            p?.technical_contact === l?.function ||
-            p?.technical_contact === lFullName ||
-            l?.name?.includes("admin") ||
-            l?.name?.includes("cloud")
-          ) {
-            lines.push(`  ${lId} -.->|MANAGED_BY| ${pId}`);
-            linked = true;
-          }
-
-          if (
-            !linked &&
-            (l?.name?.includes("audit") ||
-              l?.name?.includes("operator") ||
-              l?.name?.includes("network") ||
-              l?.name?.includes("platform"))
-          ) {
-            lines.push(`  ${lId} -.->|OPERATES| ${pId}`);
+          if (l?.name?.includes("admin") || l?.function?.includes("network")) {
+            lines.push(`  ${lId} -.->|MANAGES| ${nId}`);
+          } else {
+            lines.push(`  ${lId} -.->|AUDITS| ${nId}`);
           }
         });
       });
 
       lines.push(
-        "  classDef accStyle fill:#e2e8f0,stroke:#475569,stroke-width:2px,color:#0f172a",
+        "  classDef logStyle fill:#faf5ff,stroke:#7e22ce,stroke-width:2px,color:#3b0764",
       );
       lines.push(
-        "  classDef logStyle fill:#fef08a,stroke:#ca8a04,stroke-width:2px,color:#713f12",
-      );
-      lines.push(
-        "  classDef provStyle fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#9a3412",
+        "  classDef netStyle fill:#f0f9ff,stroke:#0176d3,stroke-width:2px,color:#082f49",
       );
 
-      accounts.forEach((a) =>
-        lines.push(
-          `  class ${sanitizeId("acc_" + (a?.name || "unknown"))} accStyle`,
-        ),
-      );
       logins.forEach((l) =>
         lines.push(
           `  class ${sanitizeId("log_" + (l?.name || "unknown"))} logStyle`,
         ),
       );
-      providers.forEach((p) =>
+      networks.forEach((n) =>
         lines.push(
-          `  class ${sanitizeId("prov_" + (p?.name || "unknown"))} provStyle`,
+          `  class ${sanitizeId("net_" + (n?.name || "unknown"))} netStyle`,
         ),
       );
 

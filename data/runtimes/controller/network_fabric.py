@@ -42,7 +42,15 @@ class NetworkController:
                         public
                         name
                         cidr
-                        fault_domain
+                        fault_domain {
+                          node {
+                            site
+                            name
+                            created
+                            function
+                            description
+                          }
+                        }
                         description
                         original_name
                         function

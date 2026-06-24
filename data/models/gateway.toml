@@ -14,7 +14,7 @@ cpe = { "template!" = '''
 [[create_resource]]
 create_from = { property = "gateway" }
 relation_type = "CONNECTS_TO"
-name = "{{- operator | lower -}}_{{- property.value | lower -}}_gateway"
+name = "{{- origin_resource.provider[0].name | lower -}}_{{- property.value | lower -}}_gateway"
 [create_resource.properties]
 function = "{{- property.value | lower -}}"
 pid = "{{- cpe -}}"

@@ -8,7 +8,6 @@ name = '{{- module.name | split(pat=" ") | slice(start=1) | join(sep="") | lower
 tenant = "{{- tenant | lower -}}"
 location = "{{- location -}}"
 site = "{{- site -}}"
-stage = "{{- stage | lower -}}"
 #cost_center = "{{- solutions[solution].cost_center -}}"
 description = "This subscription defines the cloud environment for the resident rescile and captures the dependencies for the solution deployment."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

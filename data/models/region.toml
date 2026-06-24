@@ -36,7 +36,7 @@ site = "{{- site -}}"
 portfolio = "{{ aws_regions[location].services }}"
 endpoint = "{{- aws_endpoints -}}"
 availability_zone = ["a", "b", "c", "d", "e", "f"]
-description = "The region describes a physical, geographical location where data is stored, and applications run, managed by {{ operator }}."
+description = "The region describes a physical, geographical location where data is stored, and applications run, managed by {{ origin_resource.name | capitalize }}."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
 
 [[create_resource]]
@@ -50,5 +50,5 @@ provider = "{{- origin_resource.name -}}"
 location = "{{- location -}}"
 site = "{{- site -}}"
 portfolio = []
-description = "The region describes a physical, geographical location where data is stored, and applications run, managed by {{ operator }}."
+description = "The region describes a physical, geographical location where data is stored, and applications run, managed by {{ origin_resource.name | capitalize }}."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

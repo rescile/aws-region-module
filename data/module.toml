@@ -8,27 +8,17 @@ rescile_version = ">=0.1.165"
 # List of other modules this module depends on.
 [dependencies]
 graphviewer          = "https://github.com/rescile/graphviewer"
-#graml-module         = "https://github.com/rescile/graphml-module"
 service-catalog      = "https://github.com/rescile/module-service-catalog"
+compliance           = "https://github.com/rescile/rescile-ccm-lite-module"
 hyperforce-connector = "https://github.com/rescile/module-hyperforce-connector"
+asset-editor         = "https://github.com/rescile/asset-editor-module/releases/download/v{version}/asset-editor.zip"
+graml-module         = "https://github.com/rescile/graphml-module"
 #rescile-graphiql-module = "https://github.com/rescile/rescile-graphiql-module/releases/download/v{version}/graphiql-module-offline.zip"
-#asset-editor         = "https://github.com/rescile/asset-editor-module/releases/download/v{version}/asset-editor.zip"
-
-[params.operator]
-description = "The entity operating the platform."
-required = true
-default = "AWS"
 
 [params.location]
 description = "The geographical region where solutions are deployed."
 required = true
 default = "Europe (Zurich)"
-
-[params.stage]
-description = "The lifecycle stage of the solution."
-required = true
-default = "DEV"
-allowed_values = ["DEV", "TEST", "PROD"]
 
 [params.tenant]
 description = "The tenant name identifiers the organization that uses the service."

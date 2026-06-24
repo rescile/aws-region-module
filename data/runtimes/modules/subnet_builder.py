@@ -9,14 +9,26 @@ class SubnetBuilder:
         vpc_id: str,
         cidr: str,
         name: str,
-        az: str = None,
+        az: any = None,  # Switched to 'any' to accept graph payloads cleanly
         region: str = "eu-central-2",
     ):
         self.vpc_id = vpc_id
         self.cidr = cidr
         self.name = name
-        self.az = az  # Maps to your graph's fault_domain field if specified
         self.region = region
+
+        # --- DEFENSIVE GRAPHRAG DATA UNPACKING ---
+        # Checks if 'az' is a nested Graph array structure like:
+        # [{'node': {'name': 'eu-central-2a', ...}}]
+        if isinstance(az, list) and len(az) > 0:
+            node_data = az[0].get("node", {})
+            self.az = node_data.get("name")
+        elif isinstance(az, dict):
+            self.az = az.get("node", {}).get("name")
+        else:
+            self.az = az  # Falls back to standard plain string or None
+        # -----------------------------------------
+
         # Bound as self.ec2 to support core_fabric orchestrator passthrough
         self.ec2 = boto3.client("ec2", region_name=self.region)
 
