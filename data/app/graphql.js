@@ -5,16 +5,16 @@ window.VIEWS = {
   subscriptions: {
     title: "Management Domains",
     icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
-    query: `{ network(filter: { function: "transit" }) { name description function } }`,
+    query: `{ network(filter: { function: "transit" }) { function name region_code cidr description } }`,
     node: "network",
-    columns: ["name", "description"],
+    columns: ["function", "name", "region_code", "cidr", "description"],
   },
   applications: {
     title: "Application Domains",
     icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
-    query: `{ network(filter: { function: "application" }) { name description function } }`,
+    query: `{ network(filter: { function: "application" }) { function name region_code cidr description } }`,
     node: "network",
-    columns: ["name", "function", "description"],
+    columns: ["function", "name", "region_code", "cidr", "description"],
   },
   solutions: {
     title: "Salesforce Environments",
