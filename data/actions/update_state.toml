@@ -2,13 +2,13 @@ name = "update_state"
 description = "Update State of AWS Transit Hub"
 
 exec = [
-    ["python3", "transit.py", "update_state"]
+    ["./ix", "update_state"]
 ]
 
 [runtime]
 engine = "nix"
-flake = "../../flake.nix"
-files = ["./transit.py", "./state", "./modules", "./controller"]
+flake = "flake.nix"
+files = ["./ix", "./transit.py", "./salesforce.py", "./state", "./modules", "./controller"]
 
 [env]
 AWS_ACCESS_KEY_ID = "${secrets.aws.access_key}"
