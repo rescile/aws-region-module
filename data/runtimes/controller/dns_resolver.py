@@ -34,7 +34,8 @@ class ResolverController:
                 zone {
                     node {
                         name
-                        region
+                        function
+                        region_code
                         description
                     }
                 }

@@ -1,14 +1,12 @@
 name = "create"
 description = "Create AWS Transit Hub"
 
-exec = [
-    ["python3", "transit.py", "create"]
-]
+exec = [["./ix", "create"]]
 
 [runtime]
 engine = "nix"
-flake = "../../flake.nix"
-files = ["./transit.py", "./state", "./modules", "./controller"]
+flake = "flake.nix"
+files = ["ix", "./transit.py", "./state", "./modules", "./controller"]
 
 [env]
 AWS_ACCESS_KEY_ID = "${secrets.aws.access_key}"
