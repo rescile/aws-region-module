@@ -12,3 +12,9 @@ pid = "{{- origin_resource.name | lower -}}_id"
 key = "{{- origin_resource.name | lower -}}_key"
 description = "The {{ origin_resource.name  }} account is a secure digital identity that grants authorized access to {{ origin_resource.name | capitalize }}'s cloud resources and enables a centralized management hub to automate cloud service deployments and configurations."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+
+origin_resource = "account"
+
+[[link_resources]]
+with = "instance"
+create_relation = { type = "SATISFIES" }

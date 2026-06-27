@@ -3,7 +3,7 @@ site = "{{- location | regexp(expr='s/.*\\((.*)\\)/\\1/') | lower | replace(from
 
 [[create_resource]]
 resource_type = "subscription"
-name = '{{- module.name | split(pat=" ") | slice(start=1) | join(sep="") | lower -}}'
+name = '{{- module.name | split(pat=" ") | slice(start=-1) | join(sep="") | lower -}}'
 [create_resource.properties]
 tenant = "{{- tenant | lower -}}"
 location = "{{- location -}}"

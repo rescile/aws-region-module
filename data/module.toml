@@ -50,11 +50,11 @@ name_template = "{{- name  | lower -}}_zone_record"
 name = { type = "string", required = true }
 function = { type = "string", required = true }
 
-[assets."solution.csv"]
+[assets."salesforce.csv"]
 resource_type = "solution"
 description = "tbd"
 name_template = "{{- name | lower -}}_{{- function | lower -}}"
-[assets."solution.csv".columns]
+[assets."salesforce.csv".columns]
 name = { type = "string", required = true }
 function = { type = "string", required = true }
 

@@ -26,7 +26,7 @@ aws_endpoints = { "function!" = '''
 resource_type = "region"
 match_on = [{ property = "name", value = "AWS" }]
 relation_type = "PROVIDED_BY"
-name = "{{- tenant | lower -}}_{{- origin_resource.name | lower -}}_{{- site | lower -}}"
+name = "{{- origin_resource.name | lower -}}_{{- site | lower -}}_{{- origin_resource.subscription[0].name | lower -}}"
 [create_resource.properties]
 function = "{{- origin_resource.function | lower -}}"
 provider = "{{- origin_resource.name -}}"
