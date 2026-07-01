@@ -62,11 +62,11 @@ if curl -s -m 1 http://localhost:7600/vault/ > /dev/null; then
                 return 1 2>/dev/null || exit 1
             fi
         else
-            echo "⚠️  Warning: Script not found: $script" >&2
+            echo "Warning: Script not found: $script" >&2
         fi
     done
 
 else
-    echo "⚠️  Local rescile server is not running." >&2
+    echo "Local rescile server is not running." >&2
     echo "Run 'rescile-ce serve' to load the rescile vault." >&2
 fi

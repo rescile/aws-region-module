@@ -76,12 +76,12 @@ class NetworkController:
             return result if result is not None else {}
         except TransportError as te:
             print(
-                f"[{self.domain.upper()} TRANSPORT ERROR] Failed to pull graph properties: {te}"
+                f"[{self.domain.upper()} CONTROLLER] ERROR: Failed to pull graph properties: {te}"
             )
             return {}
         except Exception as e:
             print(
-                f"\n[{self.domain.upper()} CONTROLLER: GRAPHQL EXECUTION ERROR] Server returned execution faults or bad query: {e}"
+                f"\n[{self.domain.upper()} CONTROLLER] GRAPHQL EXECUTION ERROR: Server returned execution faults or bad query: {e}"
             )
             return {}
 
@@ -95,7 +95,7 @@ class NetworkController:
             return "ConfigSkippedOrNotRequired"
 
         print(
-            f"\n=== [{self.domain.upper()} CONTROLLER: PROVISIONING CORE VIRTUAL FABRIC ==="
+            f"\n=== [{self.domain.upper()} CONTROLLER] PROVISIONING VIRTUAL NETWORK FABRIC ==="
         )
 
         primary_vpc_id = None
@@ -196,7 +196,7 @@ class NetworkController:
         if not network_state:
             return
 
-        print(f"\n=== [{self.domain.upper()} CONTROLLER: RUNNING DRIFT DISCOVERY ===")
+        print(f"\n=== [{self.domain.upper()} CONTROLLER] RUNNING DRIFT DISCOVERY ===")
         for res_id, metadata in list(network_state.items()):
             if metadata.get("Type") in [
                 "NetworkLoadBalancer",
@@ -228,7 +228,7 @@ class NetworkController:
 
             if not builder.exists(res_id):
                 print(
-                    f"    [{self.domain.upper()} CONTROLLER: DRIFT DETECTED] {res_id} vanished from AWS. Purging token."
+                    f"    [{self.domain.upper()} CONTROLLER] DRIFT DETECTED: {res_id} vanished from AWS. Purging token."
                 )
                 self.state.purge_resource(self.domain, res_id)
             else:
@@ -242,7 +242,7 @@ class NetworkController:
             return
 
         print(
-            f"\n=== [{self.domain.upper()} CONTROLLER: INITIALIZING COMPONENT TEARDOWN ==="
+            f"\n=== [{self.domain.upper()} CONTROLLER] INITIALIZING COMPONENT TEARDOWN ==="
         )
 
         # Categorize resources present in our localized tracking layer
@@ -275,10 +275,10 @@ class NetworkController:
             try:
                 builder.ec2.delete_security_group(GroupId=sg_id)
                 self.state.purge_resource(self.domain, sg_id)
-                print(f"✅ Security Group {sg_id} deleted.")
+                print(f"Security Group {sg_id} deleted.")
             except Exception as e:
                 print(
-                    f"    [{self.domain.upper()} CONTROLLER: AWS TEARDOWN FAILURE] Could not drop security group: {e}"
+                    f"    [{self.domain.upper()} CONTROLLER] TEARDOWN FAILURE: Could not drop security group: {e}"
                 )
 
         # Step 2: Clear Subnet Fabrics with Attachment Safety Waiter
@@ -311,10 +311,10 @@ class NetworkController:
             try:
                 builder.ec2.delete_subnet(SubnetId=subnet_id)
                 self.state.purge_resource(self.domain, subnet_id)
-                print(f"✅ Subnet {subnet_id} deleted.")
+                print(f"Subnet {subnet_id} deleted.")
             except Exception as e:
                 print(
-                    f"    [{self.domain.upper()} CONTROLLER: AWS TEARDOWN FAILURE] Could not drop subnet {subnet_id}: {e}"
+                    f"    [{self.domain.upper()} CONTROLLER] TEARDOWN FAILURE: Could not drop subnet {subnet_id}: {e}"
                 )
 
         # Step 3: Dissolve Base VPC Structures
@@ -328,8 +328,8 @@ class NetworkController:
             try:
                 builder.ec2.delete_vpc(VpcId=vpc_id)
                 self.state.purge_resource(self.domain, vpc_id)
-                print(f"✅ VPC {vpc_id} completely dissolved.")
+                print(f"VPC {vpc_id} completely dissolved.")
             except Exception as e:
                 print(
-                    f"    [{self.domain.upper()} CONTROLLER: AWS TEARDOWN FAILURE] Could not drop VPC: {e}"
+                    f"    [{self.domain.upper()} CONTROLLER] TEARDOWN FAILURE: Could not drop VPC: {e}"
                 )

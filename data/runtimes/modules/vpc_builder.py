@@ -26,7 +26,7 @@ class VPCBuilder:
             return None
         except ClientError as e:
             print(
-                f"    [VPC: AWS ERROR] Failed while scanning for existing infrastructure: {e}"
+                f"    [VPC] ERROR: Failed while scanning for existing infrastructure: {e}"
             )
             return None
 
@@ -36,7 +36,7 @@ class VPCBuilder:
 
         if existing_vpc_id:
             print(
-                f"    [VPC: DECLARATIVE MATCH] VPC '{self.name}' already exists on AWS ({existing_vpc_id}). Skipping creation."
+                f"    [VPC] MATCH: VPC '{self.name}' already exists on AWS ({existing_vpc_id}). Skipping creation."
             )
             return {
                 "VpcId": existing_vpc_id,
@@ -47,7 +47,7 @@ class VPCBuilder:
             }
 
         try:
-            print(f"    [VPC: AWS API] Creating VPC ... '{self.name}' ({self.cidr})...")
+            print(f"    [VPC] Creating VPC ... '{self.name}' ({self.cidr})...")
             response = self.ec2.create_vpc(CidrBlock=self.cidr)
             vpc_id = response["Vpc"]["VpcId"]
 
@@ -62,7 +62,7 @@ class VPCBuilder:
                 "Status": "newly_provisioned",
             }
         except ClientError as e:
-            print(f"    [VPC: AWS ERROR] Failed to build VPC: {e}")
+            print(f"    [VPC] ERROR: Failed to build VPC {e}")
             raise e
 
     def exists(self, vpc_id: str) -> bool:
@@ -83,14 +83,14 @@ class VPCBuilder:
 
         if not target_id:
             print(
-                f"    [VPC: AWS SKIPPED] No live VPC found matching context '{self.name}' to drop."
+                f"    [VPC] SKIPPED: No live VPC found matching context '{self.name}' to drop."
             )
             return True
 
         try:
-            print(f"    [VPC: AWS API] Terminating VPC context {target_id}...")
+            print(f"    [VPC] Terminating VPC context {target_id}...")
             self.ec2.delete_vpc(VpcId=target_id)
             return True
         except ClientError as e:
-            print(f"    [VPC: AWS ERROR] Failed to drop VPC {target_id}: {e}")
+            print(f"    [VPC] ERROR: Failed to drop VPC {target_id}: {e}")
             return False

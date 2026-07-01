@@ -1,19 +1,14 @@
 version = 1
 
 [[module]]
+name = "asset-editor"
+source = "https://github.com/rescile/asset-editor-module/releases/download/v0.5.0/asset-editor.zip"
+checksum = "sha256-eb4654cfc25983cf9d01eac20bc5a9b88adf17a22de6f948dcb456622f3e1461"
+
+[[module]]
 name = "compliance"
 source = "https://github.com/rescile/rescile-ccm-lite-module"
 commit = "1f7360d857f8506bcd41eeb17f5f1f7a928b743c"
-
-[[module]]
-name = "graphviewer"
-source = "https://github.com/rescile/graphviewer"
-commit = "f56b760949b845d9f971746edb5f1768fa8fe082"
-
-[[module]]
-name = "service-catalog"
-source = "https://github.com/rescile/module-service-catalog"
-commit = "3e4cccf5519959846597f22b4a66887c12bdbcfd"
 
 [[module]]
 name = "graml-module"
@@ -21,11 +16,16 @@ source = "https://github.com/rescile/graphml-module"
 commit = "899b4a84c71c89ead5f995715beb21eca07327d7"
 
 [[module]]
-name = "hyperforce-connector"
-source = "https://github.com/rescile/module-hyperforce-connector"
-commit = "67dd9a138ad422c4cf95a9ea40495288303d96ce"
+name = "service-catalog"
+source = "https://github.com/rescile/module-service-catalog"
+commit = "3e4cccf5519959846597f22b4a66887c12bdbcfd"
 
 [[module]]
-name = "asset-editor"
-source = "https://github.com/rescile/asset-editor-module/releases/download/v0.5.0/asset-editor.zip"
-checksum = "sha256-eb4654cfc25983cf9d01eac20bc5a9b88adf17a22de6f948dcb456622f3e1461"
+name = "graphviewer"
+source = "https://github.com/rescile/graphviewer"
+commit = "f56b760949b845d9f971746edb5f1768fa8fe082"
+
+[[module]]
+name = "hyperforce-connector"
+source = "https://github.com/rescile/module-hyperforce-connector"
+commit = "031187859d1a28bbe63a970ed2a13b5d1c999b5b"

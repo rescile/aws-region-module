@@ -7,12 +7,12 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from controller.dns_resolver import ResolverController
 from controller.network_fabric import NetworkController
-from state.manager import StateManager
+from core.statemanager import StateManager
 
 
 def main():
     action = sys.argv[1] if len(sys.argv) > 1 else "create"
-    state_mgr = StateManager(filename="state/transit.json")
+    state_mgr = StateManager(filename="core/transithub_state.json")
     gql_endpoint = "http://localhost:7600/graphql"
     region = "eu-central-2"
     scope = "transit"
@@ -26,7 +26,7 @@ def main():
     )
 
     if action == "create":
-        print("=== [TRANSIT HUB] CONVERGING NETWORK FABRIC ===")
+        print("=== [TRANSIT HUB] BUILDING NETWORK FABRIC ===")
         aws_service_name = net_orch.run()
 
         if aws_service_name and aws_service_name != "ConfigSkippedOrNotRequired":
@@ -48,7 +48,7 @@ def main():
             res_orch.update_state()
 
     elif action == "destroy":
-        print("\n=== [TRANSIT HUB] INITIATING TEARDOWN ===")
+        print("\n=== [TRANSIT HUB] TEARING DOWN NETWORK FABRIC ===")
         print("\n--> Evicting Core DNS Zones and Resolver rules...")
         if hasattr(res_orch, "destroy"):
             res_orch.destroy()

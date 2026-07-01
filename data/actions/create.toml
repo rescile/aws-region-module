@@ -6,7 +6,7 @@ exec = [["./ix", "create"]]
 [runtime]
 engine = "nix"
 flake = "flake.nix"
-files = ["ix", "./transit.py", "./salesforce.py", "./state", "./modules", "./controller"]
+files = ["ix", "./transit.py", "./salesforce.py", "./core", "./modules", "./controller"]
 
 [env]
 AWS_ACCESS_KEY_ID = "${secrets.aws.access_key}"
