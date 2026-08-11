@@ -1,0 +1,13 @@
+{
+  "schema_id": "rescile/provider",
+  "version": "20260729",
+  "resources": {
+    "identity": {
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "function": { "type": "string" }
+      }
+    }
+  }
+}
