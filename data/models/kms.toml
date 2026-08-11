@@ -1,0 +1,10 @@
+origin_resource = "region"
+
+[[create_resource]]
+create_from = { property = "vault"}
+relation_type = "OPERATED_BY"
+[create_resource.properties]
+function = "kms"
+location = "{{- origin_resource.location[0].name -}}"
+description = "{{ origin_resource.provider | capitalize }}'s kms represents a vault designed to protect sensitive information like passwords, encryption keys, and API tokens. It manages the lifecycle of these secrets, enforcing strict access control and encrypting the data at rest and in transit to mitigate the risk of data breaches."
+created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

@@ -3,15 +3,11 @@ origin_resource = "region"
 
 # Create the resource type
 [[create_resource]]
-resource_type = "router"
-match_on = [{ property = "region_code", exists = true }]
-name = "{{- origin_resource.name | lower -}}_router"
-relation_type = "COMPOSED_OF"
+create_from = { property = "router" }
+relation_type = "CONNECTS_TO"
 [create_resource.properties]
-function = "{{ origin_resource._type }}"
+function = "connectivity"
 region = "{{- origin_resource.name -}}"
-region_code = "{{- origin_resource.region_code -}}"
-provider = "{{- origin_resource.provider[0].name -}}"
-network = [ "transit", "management", "salesforce", "application" ]
-description = "The cloud router in {{ origin_resource.function | capitalize }} is a regional network function, operated by {{ origin_resource.provider }}, that analyzes incoming data packets, determines the best path for them to travel across interconnected networks, and forwards them toward their intended destination."
+ipv6 = false
+description = "{{ origin_resource.provider | capitalize }}'s  transit router in {{ origin_resource.location[0].name | capitalize }} is a regional network function that analyzes incoming data packets and forwards them toward their intended destination."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"

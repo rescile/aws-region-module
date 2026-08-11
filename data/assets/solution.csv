@@ -1,4 +1,0 @@
-name,function,owner,active,description
-salesforce,DEV,tbd,true,"The development environment enables engineers to write, test, and break things freely — unstable by design, with relaxed security controls and no SLA expectations."
-salesforce,INSP,tbd,false,"The staging environment where components from multiple teams or services are assembled and validated together — stable enough to test end-to-end flows, but not exposed to real users or production data."
-salesforce,PROD,tbd,false,"The production environment serving real users and workloads — governed by strict change management, SLAs, monitoring, and access controls, where stability and security are paramount."

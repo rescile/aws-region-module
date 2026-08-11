@@ -1,54 +1,18 @@
-# This model represents a third tier model of a cloud domain and defines locations where provider resources can be consumed.
-origin_resource = "provider"
+origin_resource = "location"
 
-aws_regions = { "json!" = "aws_region_service.json" }
-aws_region_endpoints = { "json!" = "aws_region_endpoint.json" }
-site = "{{- location | regexp(expr='s/.*\\((.*)\\)/\\1/') | lower | replace(from=' ', to='') -}}"
-
-aws_endpoints = { "function!" = '''
-    {% set unique_services = [] %}
-    {% set regionid = aws_regions[location].region_code %}
-    {% for e in aws_region_endpoints.prefixes %}
-        {% if e.region == regionid %}
-            {# Check if the service is already in the list #}
-            {% if e.service in unique_services %}
-                {# Do nothing #}
-            {% else %}
-                {# Wrap e.service in [] to make it a list for concat #}
-                {% set_global unique_services = unique_services | concat(with=[e.service]) %}
-            {% endif %}
-        {% endif %}
-    {% endfor %}
-    {{ unique_services | json_encode() }}
-''' }
+provider = "aws"
+regions = { "json!" = "aws-regions.json"}
 
 [[create_resource]]
 resource_type = "region"
-match_on = [{ property = "name", value = "AWS" }]
-relation_type = "PROVIDED_BY"
-name = "{{- origin_resource.name | lower -}}_{{- site | lower -}}_{{- origin_resource.subscription[0].name | lower -}}"
+relation_type = "DERIVED_FROM"
+name = "{{- regions[origin_resource.name].aws_region_id -}}"
 [create_resource.properties]
-function = "{{- origin_resource.function | lower -}}"
-provider = "{{- origin_resource.name -}}"
-region_code = "{{ aws_regions[location].region_code }}"
-location = "{{- location -}}"
-site = "{{- site -}}"
-portfolio = "{{ aws_regions[location].services }}"
-endpoint = "{{- aws_endpoints -}}"
-availability_zone = ["a", "b", "c", "d", "e", "f"]
-description = "The region describes a physical, geographical location where data is stored, and applications run, managed by {{ origin_resource.name | capitalize }}."
-created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
-
-[[create_resource]]
-resource_type = "region"
-match_on = [{ property = "name", value = "Megaport" }]
-relation_type = "PROVIDED_BY"
-name = "{{- tenant | lower -}}_{{- origin_resource.name | lower -}}_{{- site | lower -}}"
-[create_resource.properties]
-function = "{{- origin_resource.function | lower -}}"
-provider = "{{- origin_resource.name -}}"
-location = "{{- location -}}"
-site = "{{- site -}}"
-portfolio = []
-description = "The region describes a physical, geographical location where data is stored, and applications run, managed by {{ origin_resource.name | capitalize }}."
+function = "{{- origin_resource.function -}}"
+provider = "{{- provider -}}"
+availability_zone = ["a","b"]
+api = "https://service-code.region-code.amazonaws.com"
+router = "{{- provider | lower -}}-{{- origin_resource.code | lower -}}-transit-router"
+kms = "{{- provider | lower -}}-{{- origin_resource.code | lower -}}-vault"
+description = "The region describes a physical, geographical location where data is stored, and applications run, managed by {{ provider }}."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
