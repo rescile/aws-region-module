@@ -10,7 +10,7 @@ name = "{{- regions[origin_resource.name].aws_region_id -}}"
 [create_resource.properties]
 function = "{{- origin_resource.function -}}"
 provider = "{{- provider -}}"
-availability_zone = ["a","b"]
+availability_zones = ["a","b"]
 api = "https://service-code.region-code.amazonaws.com"
 router = "{{- provider | lower -}}-{{- origin_resource.code | lower -}}-transit-router"
 kms = "{{- provider | lower -}}-{{- origin_resource.code | lower -}}-vault"
