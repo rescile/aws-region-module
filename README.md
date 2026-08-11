@@ -219,25 +219,6 @@ The module should expose AWS capabilities without unnecessarily hiding important
 
 The resource catalog should evolve based on real-world requirements and contributions from the community.
 
-## Roadmap
-
-Potential future resources include:
-
-* [ ] AWS VPC
-* [ ] AWS Subnet
-* [ ] AWS Route Table
-* [ ] AWS Security Group
-* [ ] AWS Internet Gateway
-* [ ] AWS NAT Gateway
-* [ ] AWS EC2
-* [ ] AWS Load Balancer
-* [ ] AWS IAM resources
-* [ ] AWS VPC Endpoints
-* [ ] AWS Transit Gateway
-* [ ] Additional AWS networking and compute resources
-
-The roadmap is intentionally open to community contributions.
-
 ## License
 
 This project is licensed under the **Apache License 2.0**.
