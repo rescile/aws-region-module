@@ -1,8 +1,8 @@
 origin_resource = "region"
 
 [[create_resource]]
-create_from = { property = "vault"}
-relation_type = "OPERATED_BY"
+create_from = { property = "vault", as = "kms"}
+relation_type = "PROTECTS"
 [create_resource.properties]
 function = "kms"
 location = "{{- origin_resource.location[0].name -}}"
