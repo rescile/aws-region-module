@@ -161,39 +161,16 @@ output/
 
 Contributors should avoid introducing provider-specific assumptions where the resource can be expressed through the common Rescile UCS infrastructure model.
 
-## Design Principles
-
-The module follows a few basic principles:
-
-### Declarative
-
-Resources describe the desired infrastructure state rather than prescribing an imperative sequence of operations.
-
-### Composable
-
-Resources should be usable as building blocks for larger infrastructure configurations.
-
-### Dependency-aware
-
-Relationships between resources should be explicitly represented so that Rescile UCS can construct and evaluate the resulting infrastructure dependency graph.
-
-### Cloud-native
-
-The module should expose AWS capabilities without unnecessarily hiding important AWS-specific configuration.
-
-### Community-driven
-
-The resource catalog should evolve based on real-world requirements and contributions from the community.
+* **Design Principles**: The module follows a few basic principles:
+* **Declarative**: Resources describe the desired infrastructure state rather than prescribing an imperative sequence of operations.
+* **Composable**: Resources should be usable as building blocks for larger infrastructure configurations.
+* **Dependency-aware**: Relationships between resources should be explicitly represented so that Rescile UCS can construct and evaluate the resulting infrastructure dependency graph.
+* **Cloud-native**: The module should expose AWS capabilities without unnecessarily hiding important AWS-specific configuration.
+* **Community-driven**: The resource catalog should evolve based on real-world requirements and contributions from the community.
 
 ## License
 
-This project is licensed under the **Apache License 2.0**.
-
-The Apache-2.0 license is a permissive open-source license that allows use, modification and redistribution while providing an explicit patent license to contributors.
-
-See [`LICENSE`](LICENSE) for the complete license text.
-
-Unless required by applicable law or agreed to in writing, software distributed under this license is provided **"AS IS"**, without warranties or conditions of any kind.
+This project is licensed under the *Apache License 2.0*. The Apache-2.0 license is a permissive open-source license that allows use, modification and redistribution while providing an explicit patent license to contributors. See [`LICENSE`](LICENSE) for the complete license text. Unless required by applicable law or agreed to in writing, software distributed under this license is provided **"AS IS"**, without warranties or conditions of any kind.
 
 ## Copyright
 
