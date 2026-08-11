@@ -126,33 +126,13 @@ Useful contributions include:
 
 ### Contribution Workflow
 
-1. **Open an issue**
-
-   Describe the resource or improvement you would like to contribute.
-
-2. **Discuss the design**
-
-   For new resources, agree on the resource model, attributes and dependencies before implementing larger changes.
-
-3. **Fork the repository**
-
-   Create your own fork and work in a dedicated branch.
-
-4. **Implement the change**
-
-   Follow the existing resource structure and include tests and documentation where appropriate.
-
-5. **Submit a pull request**
-
-   Clearly describe what has changed and why.
-
-6. **Review**
-
-   Maintainers and community members review the implementation, resource model and compatibility with Rescile UCS.
-
-7. **Merge**
-
-   Once approved, the contribution becomes part of the shared module ecosystem.
+1. **Open an issue**: Describe the resource or improvement you would like to contribute.
+2. **Discuss the design**: For new resources, agree on the resource model, attributes and dependencies before implementing larger changes.
+3. **Fork the repository**: Create your own fork and work in a dedicated branch.
+4. **Implement the change**: Follow the existing resource structure and include tests and documentation where appropriate.
+5. **Submit a pull request**: Clearly describe what has changed and why.
+6. **Review**: Maintainers and community members review the implementation, resource model and compatibility with Rescile UCS.
+7. **Merge**: Once approved, the contribution becomes part of the shared module ecosystem.
 
 ### Adding a New Resource
 
