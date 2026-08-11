@@ -256,9 +256,4 @@ archive
 /.archive
 temp
 /.temp
-infra_state.json
-vault.json
-dev_vault.json
-secret.json
-rescile-runner
-server.key
+
