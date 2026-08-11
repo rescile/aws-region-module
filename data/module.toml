@@ -4,3 +4,7 @@ url = "https://github.com/rescile/aws-region-module"
 version = "0.0.1"
 description = "Creates and configures an AWS region as a managed infrastructure target for subsequent resource deployments."
 rescile_version = ">=0.1.193"
+
+[assets."provider.csv"]
+resource_type = "provider"
+name_template = "{{- name | lower -}}"
