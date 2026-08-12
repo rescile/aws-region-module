@@ -6,6 +6,5 @@ relation_type = "PROTECTS"
 [create_resource.properties]
 function = "encryption"
 region = "{{- origin_resource.name -}}"
-location = "{{- origin_resource.location[0].name -}}"
 description = "{{ origin_resource.provider | capitalize }}'s kms represents a vault designed to protect sensitive information like passwords, encryption keys, and API tokens. It manages the lifecycle of these secrets, enforcing strict access control and encrypting the data at rest and in transit to mitigate the risk of data breaches."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
