@@ -1,7 +1,5 @@
-# This model represents a third tier model of a cloud domain and defines routers where provider resources become accessible.
 origin_resource = "region"
 
-# Create the resource type
 [[create_resource]]
 create_from = { property = "router" }
 relation_type = "CONNECTS_TO"
