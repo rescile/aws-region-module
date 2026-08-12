@@ -3,9 +3,9 @@ origin_resource = "region"
 [[create_resource]]
 create_from = { property = "kms" }
 relation_type = "PROTECTS"
-[create_resource.properties]
-function = "encryption"
-region = "{{- origin_resource.name -}}"
+#[create_resource.properties]
+#function = "encryption"
+#region = "{{- origin_resource.name -}}"
 #location = "{{- origin_resource.location[0].name -}}"
-description = "AWS's kms represents a vault designed to protect sensitive information like passwords, encryption keys, and API tokens. It manages the lifecycle of these secrets, enforcing strict access control and encrypting the data at rest and in transit to mitigate the risk of data breaches."
-created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
+#description = "{{ origin_resource.provider | upper }}'s KMS represents a vault designed to protect sensitive information like passwords, encryption keys, and API tokens. It manages the lifecycle of these secrets, enforcing strict access control and encrypting the data at rest and in transit to mitigate the risk of data breaches."
+#created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
