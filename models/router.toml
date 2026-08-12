@@ -7,5 +7,5 @@ relation_type = "CONNECTS_TO"
 function = "connectivity"
 region = "{{- origin_resource.name -}}"
 ipv6 = false
-description = "{{ origin_resource.provider | capitalize }}'s  transit router in {{ origin_resource.location[0].name | capitalize }} is a regional network function that analyzes incoming data packets and forwards them toward their intended destination."
+description = "{{ origin_resource.provider | upper }}'s  transit router in {{ origin_resource.location[0].name | capitalize }} is a regional network function that analyzes incoming data packets and forwards them toward their intended destination."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
