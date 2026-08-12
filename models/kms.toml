@@ -1,7 +1,7 @@
 origin_resource = "region"
 
 [[create_resource]]
-create_from = { property = "kms" }
+create_from = { property = "test" }
 relation_type = "PROTECTS"
 [create_resource.properties]
 function = "encryption"
