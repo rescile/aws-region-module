@@ -9,7 +9,7 @@ relation_type = "DERIVED_FROM"
 name = "{{- origin_resource.name -}}"
 [create_resource.properties]
 function = "{{- origin_resource.function -}}"
-code = "{{- regions[Zurich].aws_region_id -}}"
+code = "{{- regions['Zurich'].aws_region_id -}}"
 #provider = "{{- provider -}}"
 #availability_zone = ["a","b"]
 #api    = "https://service-code.region-code.amazonaws.com"
