@@ -6,5 +6,5 @@ relation_type = "PROTECTS"
 [create_resource.properties]
 function = "encryption"
 region = "{{- origin_resource.name -}}"
-description = "{{ origin_resource.provider | upper }}'s  key vault in {{ origin_resource.location[0].name | capitalize }} is a regional service, managing encryption keys and protecting sensitive data."
+description = "{{ origin_resource.provider[0].name | upper }}'s  's  key vault in {{ origin_resource.location[0].name | capitalize }} is a regional service, managing encryption keys and protecting sensitive data."
 created = "{{- now(utc=true) | date(format='%Y-%m-%dT%H:%M:%SZ') -}}"
