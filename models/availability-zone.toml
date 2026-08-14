@@ -1,7 +1,7 @@
 origin_resource = "region"
 
 [[create_resource]]
-resource_type = "availability_zone"
+create_from = { property = "availability_zone" }
 relation_type = "CONNECTED_TO"
 name = "{% for z in origin_resource.availability_zones %}{{- origin_resource.name | lower -}}{{- z | lower -}}{% endfor %}"
 [create_resource.properties]
