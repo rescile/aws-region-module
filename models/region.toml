@@ -7,9 +7,9 @@ regions = { "json!" = "aws-regions.json"}
 resource_type = "region"
 relation_type = "DERIVED_FROM"
 name = "{{- origin_resource.name -}}"
-#name = "{{- regions[Zurich].aws_region_id -}}"
 [create_resource.properties]
 function = "{{- origin_resource.function -}}"
+code = "{{- regions[Zurich].aws_region_id -}}"
 #provider = "{{- provider -}}"
 #availability_zone = ["a","b"]
 #api    = "https://service-code.region-code.amazonaws.com"
