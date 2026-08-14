@@ -6,11 +6,11 @@ regions = { "json!" = "aws-regions.json"}
 [[create_resource]]
 resource_type = "region"
 relation_type = "DERIVED_FROM"
-name = "{{- regions[Zurich].aws_region_id -}}"
+name = "{{- origin_resource.name -}}"
+#name = "{{- regions[Zurich].aws_region_id -}}"
 [create_resource.properties]
 function = "{{- origin_resource.function -}}"
 provider = "{{- provider -}}"
-location = "{{- origin_resource.name -}}"
 availability_zone = ["a","b"]
 api    = "https://service-code.region-code.amazonaws.com"
 kms    = "{{- provider[0].name | lower -}}-{{- origin_resource.code | lower -}}-vault"
